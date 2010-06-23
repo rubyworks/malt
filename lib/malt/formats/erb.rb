@@ -13,7 +13,7 @@ module Malt::Formats
     # Erb templates can be "precompiled" into Ruby templates.
     def ruby
       @ruby ||= (
-        source = engine.compile(text, file)
+        source = malt_engine.compile(text, file)
         Ruby.new(:text=>source, :file=>refile(:rb))
       )
     end
@@ -37,7 +37,7 @@ module Malt::Formats
     #
     def render(to, db, &yld)
       #if options[:recompile]
-        engine.render(text, file, db, &yld)
+        malt_engine.render(text, file, db, &yld)
       #else
       #  to_ruby.render(db, &yld)
       #end
@@ -46,8 +46,13 @@ module Malt::Formats
     ;;;; private ;;;;
 
     #
-    def engine
-      @engine ||= Malt::Engines::Erb.new(options)
+    def malt_engine
+      case options[:engine]
+      when :erubis
+        @malt_engine ||= Malt::Engines::Erubis.new(options)
+      else
+        @malt_engine ||= Malt::Engines::Erb.new(options)
+      end
     end
 
   end

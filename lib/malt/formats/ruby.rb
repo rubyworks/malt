@@ -16,9 +16,6 @@ module Malt::Formats
   # The Ruby type is also used for "precompiling" other
   # formats such as ERB.
   #
-  #--
-  # TODO: Use #method_missing is we get many more file types to support.
-  #++
   class Ruby < Abstract
 
     register('rb')

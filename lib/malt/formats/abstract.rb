@@ -69,7 +69,8 @@ module Formats
     end
 
     #
-    def convert(to, db={}, &yld)
+    def convert(to, *db, &yld)
+      db = db.first
       output = render(to, db, &yld)
       if subclass = Malt.registry[subtype]
         subclass.new(:text=>output, :file=>file.chomp(type)).convert(to, db, &yld)

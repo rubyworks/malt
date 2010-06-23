@@ -15,18 +15,22 @@ module Malt::Engines
 
     #
     def intermediate(text, file=nil)
-      ::Erubis.new(text, safe, trim)
+      if options.delete(:escape_html)
+        ::Erubis::EscapedEruby.new(text, options)
+      else
+        ::Erubis::Eruby.new(text, options)
+      end
     end
 
     # Compile template into Ruby source code.
     def compile(text, file)
-      intermediate.src
+      intermediate(text, file).src
     end
 
     # Render template.
     def render(text, file, db, &yld)
-      db = make_binding(db)
-      intermediate.result(db)
+      db = make_binding(db, &yld)
+      intermediate(text, file).result(db)
     end
 
     #

@@ -7,6 +7,7 @@ end
 
 require 'malt/engines/ruby'
 require 'malt/engines/erb'
+require 'malt/engines/erubis'
 require 'malt/engines/haml'
 require 'malt/engines/rdoc'
 require 'malt/engines/rdiscount'
