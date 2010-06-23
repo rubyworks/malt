@@ -1,0 +1,65 @@
+= Malt
+
+* home: http://rubyworks.github.com/malt
+
+
+== DESCRIPTION
+
+Malt provides a factory framework for rendering
+a variety of template and markup document formats.
+
+
+== RELEASE NOTES
+
+Please see HISTORY file.
+
+
+== SYNOPSIS
+
+Here's the idea:
+
+  Malt.file('foo.erb').compile(db).to_s
+
+Where +db+ is a data source of some type. Malt will see
+that the file is an Erb template and render it accordingly.
+
+Malt can also "double render".
+
+  Malt.file('foo.rdoc.erb').compile2(db).to_html
+
+How does malt know what to do with a file?
+
+  Malt.register('*.erb', :Erb)
+
+The first argument is a fnmatch string, the second is the name
+of the Malt::Template or Malt::Markup subclass.
+
+To render text via Malt you of course need to provide the
+template or markup type.
+
+  Malt.text(text, :erb).compile(db).to_s
+
+
+== INSTALATION
+
+To install with RubyGems simply open a console and type:
+
+  $ gem install  
+
+For a site install you will need Ruby Setup and the compressed
+packages (tar.gz or zip usually). Uncompress the package
+cd into it and run setup.rb, e.g.
+
+  $ tar -xvzf malt-x.y.z.tgz
+  $ cd malt-x.y.z.tgz
+  $ sudo setup.rb
+
+
+== LICENSE
+
+Copyright (c) 2010 Thomas Sawyer
+
+This program is ditributed unser the terms of the <%= ENV['DEFAULT_LICENSE'] %> license.
+
+See the LICENSE or COPYING file for details.
+

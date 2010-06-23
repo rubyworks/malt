@@ -1,0 +1,19 @@
+title  : Malt
+summary: Multi-template/multi-markup rendering engine
+contact: trans <transfire@gmail.com>
+created: 2010-06-22
+
+authors:
+  - Thomas Sawyer
+
+description:
+  Malt provides a factory framework for rendering
+  a variety of template and markup document formats.
+
+resources:
+  homepage  : http://rubyworks.github.com/malt
+  repository: http://github.com/rubywork/malt
+
+copyright:
+  Copyright (c) 2010 Thomas Sawyer
+
