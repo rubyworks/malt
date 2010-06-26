@@ -22,44 +22,19 @@ module Malt::Formats
 
     #
     #def ruby(db, &yld)
-    #  self #? db, &yld)
+    #  self
     #end
 
     #
-    #def txt(db, &yld)
-    #  convert(:txt, db, &yml)
-    #end
-
-    #
-    #def html(db, &yld)
-    #  convert(:html, db, &yld)
-    #end
-
-    #
-    #def latex(db, &yld)
-    #  convert(:latex, db, &yld)
-    #end
-
-    #
-    #def pdf(db, &yld)
-    #  convert(:pdf, db, &yld)
-    #end
-
-    #
-    #def rdoc(db, &yld)
-    #  convert(:rdoc, db, &yld)
-    #end
+    def render_to(to, db, &yld)
+      malt_engine.render(text, file, db, &yld)
+    end
 
     ;;;; private ;;;;
 
     #
-    def render(to, db, &yld)
-      engine.render(text, file, db, &yld)
-    end
-
-    #
-    def engine
-      @engine ||= Malt::Engines::Ruby.new(options)
+    def malt_engine
+      @malt_engine ||= Malt::Engines::Ruby.new(options)
     end
 
   end

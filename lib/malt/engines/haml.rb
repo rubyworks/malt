@@ -24,7 +24,7 @@ module Malt::Engines
       elsif db.respond_to?(:to_hash)
         html = engine.render(Object.new, db.to_hash, &block)
       else
-        html = engine.render(db, &block)
+        html = engine.render(db||Object.new, &block)
       end
       html
     end

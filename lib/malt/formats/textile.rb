@@ -13,23 +13,23 @@ module Malt::Formats
       convert(:html)
     end
 
-    ;;;; private ;;;;
-
     #
-    def render(to, *)
+    def render_to(to, *)
       case to
       when :textile, :tt
         self
       when :html
-        engine.render_html(text, file)
+        malt_engine.render_html(text, file)
       else
         raise "can't render textile to #{to} type" #?
       end
     end
 
+    ;;;; private ;;;;
+
     #
-    def engine
-      @engine ||= Malt::Engines::Redcloth.new(options)
+    def malt_engine
+      @malt_engine ||= Malt::Engines::Redcloth.new(options)
     end
 
   end

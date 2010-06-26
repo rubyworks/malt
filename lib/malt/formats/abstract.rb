@@ -29,6 +29,12 @@ module Formats
       @extensions
     end
 
+    #
+    def self.engine(set=nil)
+      @engine = set if set
+      @engine
+    end
+
     ;;;; private ;;;;
 
     #
@@ -55,12 +61,31 @@ module Formats
 
     # File name of document.
     def file
-      @file ||= options[:file]
+      @file ||= options[:file].to_s
     end
 
-    #
+    # File extension (with prefixed dot).
     def type
       @type ||= File.extname(file)
+    end
+
+    # Specified engine to use for rendering.
+    #
+    # Keep in mind tath the ability to sepcify the engine
+    # varies based on engine, format and output format.
+    def engine
+      options[:engine] || self.class.engine
+    end
+
+    # Render to default format.
+    def render(db=nil, &yml)
+      render_to(default, db, &yaml)
+    end
+
+    # Unless otherwise overridden, nothing happens and +text+
+    # is returned.
+    def render_to(to, db, &yld)
+      text
     end
 
     #
@@ -71,19 +96,13 @@ module Formats
     #
     def convert(to, *db, &yld)
       db = db.first
-      output = render(to, db, &yld)
+      output = render_to(to, db, &yld)
       if subclass = Malt.registry[subtype]
         subclass.new(:text=>output, :file=>file.chomp(type)).convert(to, db, &yld)
       else
         subclass = Malt.registry['.' + to.to_s]
         subclass.new(:text=>output, :file=>refile(to), :fallback=>true)
       end
-    end
-
-    # Unless otherwise overridden, nothing happens and +self+
-    # is returned.
-    def render(to, db, &yld)
-      self
     end
 
     # Produce a new filename replacing old extension with new
@@ -118,20 +137,11 @@ module Formats
       text
     end
 
-    #
-    #def to_html
-    #  raise "not implemented for #{self.class} markup format"
-    #end
-
-    #
-    #def to_latex
-    #  raise "not implemented for #{self.class} markup format"
-    #end
-
-    #
-    #def to_pdf
-    #  raise "not implemented for #{self.class} markup format"
-    #end
+    # Default rendering type is +:html+. Override if it
+    # differs for the subclassing format.
+    def default
+      :html
+    end
 
   end
 

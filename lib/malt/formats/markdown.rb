@@ -22,10 +22,8 @@ module Malt::Formats
       convert(:latex)
     end
 
-    ;;;; private ;;;;
-
     #
-    def render(to, *)
+    def render_to(to, *)
       case to
       when :markdown, :md
         text
@@ -36,10 +34,12 @@ module Malt::Formats
       end
     end
 
+    ;;;; private ;;;;
+
     #
     def malt_engine
       @malt_engine ||= (
-        case options[:engine]
+        case engine
         when :bluecloth
           Malt::Engines::BlueCloth.new(options)
         when :kramdown

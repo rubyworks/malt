@@ -8,14 +8,14 @@ module Malt::Formats
     register('pdf')
 
     #
-    def to_pdf
-      text
+    def pdf
+      self
     end
 
     ;;;; private ;;;;
 
     #
-    def engine
+    def malt_engine
     end
 
   end

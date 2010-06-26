@@ -1,15 +1,10 @@
 module Malt
-
-  module Templates
+  #
+  module Engines
   end
-
 end
 
-require 'malt/engines/ruby'
-require 'malt/engines/erb'
-require 'malt/engines/erubis'
-require 'malt/engines/haml'
-require 'malt/engines/rdoc'
-require 'malt/engines/rdiscount'
-require 'malt/engines/kramdown'
+Dir[File.dirname(__FILE__) + '/engines/*.rb'].each do |file|
+  require file
+end
 

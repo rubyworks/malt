@@ -8,14 +8,14 @@ module Malt::Formats
     register('html')
 
     # HTML is HTML ;)
-    def html
+    def html(*)
       self
     end
 
     ;;;; private ;;;;
 
     #
-    def engine
+    def malt_engine
     end
 
   end

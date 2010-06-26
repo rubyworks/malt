@@ -4,7 +4,7 @@ module Malt::Engines
 
   # Erubis template implementation.
   #
-  #   http://
+  #   http://www.kuwata-lab.com/erubis/
   #
   # Erubis is essentially compatibel with ERB, but it is faster.
   #

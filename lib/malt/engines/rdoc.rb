@@ -21,6 +21,7 @@ module Malt::Engines
     # Load rdoc makup library if not already loaded.
     def initialize_engine
       return if defined?(::RDoc::Markup)
+      require 'rubygems' # hack
       require_library 'rdoc/markup'
       require_library 'rdoc/markup/to_html'
     end

@@ -4,13 +4,7 @@ module Malt
   end
 end
 
-require 'malt/formats/text'
-require 'malt/formats/ruby'
-require 'malt/formats/erb'
-require 'malt/formats/html'
-require 'malt/formats/haml'
-require 'malt/formats/rdoc'
-require 'malt/formats/markdown'
-require 'malt/formats/latex'
-require 'malt/formats/pdf'
+Dir[File.dirname(__FILE__) + '/formats/*.rb'].each do |file|
+  require file
+end
 

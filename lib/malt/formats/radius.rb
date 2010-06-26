@@ -1,35 +1,29 @@
 require 'malt/formats/abstract'
 require 'malt/formats/html'
-require 'malt/engines/haml'
+require 'malt/engines/radius'
 
 module Malt::Formats
 
+  # Radius Template
   #
-  class Haml < Abstract
+  #   http://github.com/jlong/radius/
+  #
+  class Radius < Abstract
 
     register('haml')
 
     #
-    #def ruby(db, &yld)
-    #  @ruby ||= (
-    #    source = engine.compile(text, file)
-    #    Ruby.new(:text=>source, :file=>refile(:rb))
-    #  )
-    #end
-
     def html(db, &yml)
       convert(:html, db, &yml)
     end
 
     #
-    def render_to(to, db=nil, &yld)
+    def render_to(to, db, &yld)
       case to
-      when :haml
-        text
+      when :radius
+        text  # self ?
       when :html
         malt_engine.render_html(text, file, db, &yld)
-      when :txt  # THINK: Does this make sense?
-        text
       else
         raise UnspportedConversion.new(type, to)
       end
@@ -39,7 +33,7 @@ module Malt::Formats
 
     #
     def malt_engine
-      @malt_engine ||= Malt::Engines::Haml.new(options)
+      @malt_engine ||= Malt::Engines::Radius.new(options)
     end
 
   end

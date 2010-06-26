@@ -12,19 +12,15 @@ module Malt::Formats
     #
     def html(*)
       convert(:html)
-      #output = render(:html. text, file)
-      #HTML.new(:text=>output, :file=>refile('.html'))
     end
 
-    ;;;; private ;;;;
-
     #
-    def render(to, *)
+    def render_to(to, *)
       case to
       when :rdoc
         text
       when :html
-        engine.render_html(text, file)
+        malt_engine.render_html(text, file)
       when :txt  # THINK: Does this make sense?
         text
       else
@@ -32,9 +28,11 @@ module Malt::Formats
       end
     end
 
+    ;;;; private ;;;;
+
     #
-    def engine
-      @engine ||= Malt::Engines::RDoc.new(options)
+    def malt_engine
+      @malt_engine ||= Malt::Engines::RDoc.new(options)
     end
 
   end

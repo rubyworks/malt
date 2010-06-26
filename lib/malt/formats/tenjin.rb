@@ -1,14 +1,16 @@
 require 'malt/formats/abstract'
 require 'malt/formats/html'
-require 'malt/engines/erb'
+require 'malt/engines/tenjin'
 
 module Malt::Formats
 
-  # Erb files are really any kind of file,
-  # but they of course have <% %> slots.
-  class Erb < Abstract
+  # Tenjin
+  #
+  #   http://www.kuwata-lab.com/tenjin/
+  #
+  class Tenjin < Abstract
 
-    register('erb', 'rhtml')
+    register('rbhtml')
 
     # Erb templates can be "precompiled" into Ruby templates.
     def rb
@@ -39,12 +41,7 @@ module Malt::Formats
 
     #
     def malt_engine
-      case engine
-      when :erubis
-        @malt_engine ||= Malt::Engines::Erubis.new(options)
-      else
-        @malt_engine ||= Malt::Engines::Erb.new(options)
-      end
+      @malt_engine ||= Malt::Engines::Tenjin.new(options)
     end
 
   end

@@ -20,7 +20,12 @@ module Malt::Formats
     ;;;; private ;;;;
 
     #
-    def engine
+    def malt_engine
+    end
+
+    # Latext default output type is PDF.
+    def default
+      :pdf
     end
 
   end
