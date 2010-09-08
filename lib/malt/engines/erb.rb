@@ -11,38 +11,61 @@ module Malt::Engines
   # a few rendering options --it can be '%' and/or '>' or '<>'.
   class Erb < Abstract
 
+    default :erb, :rhtml
+
+    # Render ERB template.
     #
-    def intermediate(text,file=nil)
+    # The +params+ can be:
+    #
+    # * :text - 
+    # * :data - data source for template interpolation
+    # * :safe -
+    # * :trim -
+    #
+    def render(params={}, &yld)
+      text = params[:text]
+      data = params[:data]
+      data = make_binding(data, &yld)
+      intermediate(params).result(data)
+    end
+
+    # Compile ERB template into Ruby source code.
+    def compile(params={})
+      intermediate(params).src
+    end
+
+    #
+    def intermediate(params={})
+      text = params[:text]
+      opts = engine_options(params)
+      safe = opts[:safe]
+      trim = opts[:trim]
       ::ERB.new(text, safe, trim)
-    end
-
-    # Compile template into Ruby source code.
-    def compile(text, file)
-      intermediate(text,file).src
-    end
-
-    #
-    def render(text, file, db, &yld)
-      db = make_binding(db, &yld)
-      intermediate(text,file).result(db)
     end
 
     #
     def safe
-      options[:safe]
+      settings[:safe]
     end
 
     #
     def trim
-      options[:trim]
+      settings[:trim]
     end
 
-    ;;;; private ;;;;
+    private
 
     # Load ERB library if not already loaded.
     def initialize_engine
       return if defined? ::ERB
       require_library('erb')
+    end
+
+    def engine_options(params)
+      opts = {}
+      opts[:safe] = params[:safe] || settings[:safe]
+      opts[:trim] = params[:trim] || settings[:trim]
+      opts
     end
 
   end

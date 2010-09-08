@@ -8,14 +8,25 @@ module Malt::Engines
   #
   class Radius < Abstract
 
+    default :radius
+
     #
-    def render_html(text, file, db, &yld)
-      db = make_context(db, &yld)
-      parser = Radius::Parser.new(db, options)
-      parser.parse(text)
+    def render(params, &yld)
+      text   = params[:text]
+      data   = params[:data]
+      format = params[:format]
+      case format
+      when :html, :xml, nil
+        data = make_context(data, &yld)
+        opts = engine_options(params)
+        parser = ::Radius::Parser.new(data, opts)
+        parser.parse(text)
+      else
+        super(params, &yld)
+      end
     end
 
-    ;;;; private ;;;;
+    private
 
     # Load Radius library if not already loaded.
     def initialize_engine
@@ -24,7 +35,23 @@ module Malt::Engines
     end
 
     # Radius templates have a very special data source.
-    def make_context(db, &yld)
+    def make_context(data, &yld)
+      case data
+      when Hash
+        context = make_context_from_hash(data, &yld)
+      else
+        if data.respond_to(:to_hash)
+          data = data.to_hash
+          context = make_context_from_hash(data, &yld)
+        else
+          context = make_context_from_object(data, &yld)
+        end
+      end
+      context
+    end
+
+    #
+    def make_context_from_object(db, &yld)
       context = Class.new(::Radius::Context).new
       db = make_object(db)
       (class << context; self; end).class_eval do
@@ -38,14 +65,11 @@ module Malt::Engines
       context
     end
 
-    # This is alternative approach should the other
-    # prove problematic for some reason. This one is
-    # probably faster, but may be less capable b/c of
-    # the Hash conversion.
-    def make_context_from_hash(db, &yld)
+    #
+    def make_context_from_hash(data, &yld)
       context = Class.new(::Radius::Context).new
-      db = make_hash(db)
-      db.each do |tag, value|
+      #data = make_hash(data)
+      data.each do |tag, value|
         context.define_tag(tag){ value }
       end
       context.define_tag("yield") do
@@ -54,7 +78,13 @@ module Malt::Engines
       context
     end
 
+    #
+    def engine_options(params)
+      opts = {}
+      opts[:tag_prefix] = params[:tag_prefix] || settings[:tag_prefix]
+      opts
+    end
+
   end
 
 end
-

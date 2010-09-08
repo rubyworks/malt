@@ -10,30 +10,23 @@ module Malt::Formats
     register('rtal')
 
     #
-    def html(db, &yml)
-      convert(:html, db, &yml)
+    def compile(db, &yld)
+      result = render_engine.render(text, db, &yld)
+
+      fname = file.chomp('.rtal')
+      fname = fname + '.html' unless file.extname.downcase == '.html'
+
+      opts = options.merge(:text=>result, :file=>fname)
+
+      HTML.new(opts)
     end
 
-    #
-    def render_to(to, db=nil, &yld)
-      case to
-      when :rtal
-        text
-      when :html
-        malt_engine.render_html(text, file, db, &yld)
-      when :txt  # THINK: Does this make sense?
-        text
-      else
-        raise UnspportedConversion.new(type, to)
+    private
+
+      #
+      def render_engine
+        @render_engine ||= Malt::Engines::RTALS.new(options)
       end
-    end
-
-    ;;;; private ;;;;
-
-    #
-    def malt_engine
-      @malt_engine ||= Malt::Engines::RTALS.new(options)
-    end
 
   end
 

@@ -9,28 +9,49 @@ module Malt::Formats
     register('textile', 'tt')
 
     #
-    def html(*)
-      convert(:html)
+    def html
+      render_engine.render(:format=>:html, :text=>text, :file=>file)
     end
 
     #
-    def render_to(to, *)
-      case to
-      when :textile, :tt
-        self
-      when :html
-        malt_engine.render_html(text, file)
-      else
-        raise "can't render textile to #{to} type" #?
+    def textile
+      text
+    end
+
+    #
+    alias_method :tt, :textile
+
+    #
+    def to_html
+      opts = options.merge(:text=>html, :file=>refile(:html))
+      HTML.new(opts)
+    end
+
+    #
+    def to_textile
+      self
+    end
+
+    alias_method :to_tt, :to_textile
+
+    #
+    #def render_to(to, *)
+    #  case to
+    #  when :textile, :tt
+    #    self
+    #  when :html
+    #    malt_engine.render_html(text, file)
+    #  else
+    #    raise "can't render textile to #{to} type" #?
+    #  end
+    #end
+
+    private
+
+      #
+      def render_engine
+        @render_engine ||= Malt::Engines::RedCloth.new(options)
       end
-    end
-
-    ;;;; private ;;;;
-
-    #
-    def malt_engine
-      @malt_engine ||= Malt::Engines::Redcloth.new(options)
-    end
 
   end
 

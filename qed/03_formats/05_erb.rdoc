@@ -1,0 +1,31 @@
+= ERB Support
+
+Malt supports template engines as well as formats. 
+
+Lets say we have an ERB document called 'test.erb' containing ...
+
+  <h1>Example <%= title %></h1>
+
+  <p>This is an example of ERB template.</p>
+
+We can render erb documents to any format we wish.
+
+  erb = Malt.file('tmp/test.erb')
+
+  html = erb.to_html(:title=>"Document")
+
+We will notice that the output is an instance of Malt::Formats::HTML.
+
+  html.class.assert == Malt::Formats::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example Document</h1>')
+
+Or we can convert the document directly to HTML via the #html method.
+
+  out = erb.html(:title=>"Alternate")
+
+  out.assert.include?('<h1>Example Alternate</h1>')
+
+ERB doesn't actually care what format the document is rendered as.

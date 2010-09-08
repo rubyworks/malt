@@ -8,25 +8,36 @@ module Malt::Formats
     register('latex')
 
     #
-    def latex(*)
+    def latex
+      text
+    end
+
+    #
+    def to_latex
       self
     end
 
     # TODO
-    def pdf(*)
-      convert(:pdf)
+    def pdf
+      raise "not implemented yet"
     end
 
-    ;;;; private ;;;;
-
-    #
-    def malt_engine
+    # TODO
+    def to_pdf
+      opts = options.merge(:text=>pdf, :file=>refile(:pdf))
+      PDF.new(opts)
     end
 
-    # Latext default output type is PDF.
-    def default
-      :pdf
-    end
+    private
+
+      #
+      def render_engine
+      end
+
+      # Latext default output type is PDF.
+      def default
+        :pdf
+      end
 
   end
 

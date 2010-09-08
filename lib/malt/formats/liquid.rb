@@ -1,5 +1,5 @@
 require 'malt/formats/abstract'
-require 'malt/engines/redcloth'
+require 'malt/engines/liquid'
 
 module Malt::Formats
  
@@ -12,28 +12,45 @@ module Malt::Formats
     register('liquid')
 
     #
-    def html(db, &yld)
-      convert(:html, db, &yld)
+    def to(type, db=nil, &yld)
+      new_class   = Malt.registry[type.to_sym]
+      new_text    = render(db, &yld)
+      new_file    = refile(type)
+      new_options = options.merge(:text=>new_text, :file=>new_file)
+      new_class.new(new_options)
     end
 
     #
-    def render_to(to, db, &yld)
-      case to
-      when :liquid
-        text
-      when :html
-        malt_engine.render_html(text, file, db, &yld)
-      else
-        raise UnspportedConversion.new(type, to)
+    def render(data, &yld)
+      render_engine.render(:text=>text, :file=>file, :data=>data, &yld)
+      #opts = options.merge(:text=>result, :file=>refile)
+      #Malt.text(result, opts)
+    end
+
+    #
+    #def render(db=nil, &yld)
+    #  render_engine.render(default, text, file, db, &yld)
+    #end
+
+    # Liquid templates can be any type.
+    def method_missing(sym, *args, &yld)
+      if Malt.registry.key?(sym)
+        return to(sym, *args, &yld).to_s
+      elsif md = /^to_/.match(sym.to_s)
+        type = md.post_match.to_sym
+        if Malt.registry.key?(type)
+          return to(type, *args, &yld)
+        end
       end
+      super(sym, *args, &yld)
     end
 
-    ;;;; private ;;;;
+    private
 
-    #
-    def malt_engine
-      @malt_engine ||= Malt::Engines::Liquid.new(options)
-    end
+      #
+      def render_engine
+        @render_engine ||= Malt::Engines::Liquid.new(options)
+      end
 
   end
 

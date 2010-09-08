@@ -1,0 +1,18 @@
+== Haml Rendering
+
+Lets say we have a Haml document called 'test.haml' containing:
+
+  %h1== Example #{title}
+  %p This is an example of a Haml template.
+
+We can render Haml documents via the +render+ method, as we can any format.
+While it might not appear as such on first glance, Haml is actually a template
+format and not just a markup language, so we need to also provide the +render+
+function with data for interpolation into the Haml document. 
+
+  data = { :title=>"Document" }
+
+  html = Malt.render(:file=>'tmp/test.haml', :data=>data)
+
+  html.assert.include?('<h1>Example Document</h1>')
+

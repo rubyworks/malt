@@ -1,0 +1,6 @@
+= Rendering
+
+Malt provides a single interface by which all template rendering is handled.
+This is the `Malt.render' function. Malt's alternative object-oriented interface
+is in fact built on top of this single method.
+

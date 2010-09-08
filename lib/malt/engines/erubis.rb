@@ -10,27 +10,35 @@ module Malt::Engines
   #
   class Erubis < Abstract
 
-    # TODO: register this engine with the formats it supports.
-    #register(:erb)
+    register :erb, :rhtml
 
-    #
-    def intermediate(text, file=nil)
-      if options.delete(:escape_html)
-        ::Erubis::EscapedEruby.new(text, options)
-      else
-        ::Erubis::Eruby.new(text, options)
-      end
+    # Render template.
+    def render(params, &yld)
+      text = params[:text]
+      data = params[:data]
+      data = make_binding(data, &yld)
+      intermediate(params).result(data)
     end
 
     # Compile template into Ruby source code.
-    def compile(text, file)
+    def compile(params)
+      text = params[:text]
+      file = params[:file]
       intermediate(text, file).src
     end
 
-    # Render template.
-    def render(text, file, db, &yld)
-      db = make_binding(db, &yld)
-      intermediate(text, file).result(db)
+    #
+    def intermediate(params)
+      text = params[:text]
+      file = params[:file]
+
+      opts = {}
+
+      if params[:escape_html] || settings[:escape_html]
+        ::Erubis::EscapedEruby.new(text, settings)
+      else
+        ::Erubis::Eruby.new(text, settings)
+      end
     end
 
     #

@@ -5,17 +5,30 @@ module Malt::Engines
   #
   class RedCloth < Abstract
 
-    #
-    def intermediate(text, file=nil)
-      RedCloth.new(text)
-    end
+    default :tt, :textile
 
     # Convert textile text to html.
-    def render_html(text, file=nil)
-      intermediate(text, file).to_html
+    # 
+    # params:
+    #
+    #   :format => Symbol of the format to render [:html]
+    #
+    def render(params={})
+      case params[:format]
+      when :html, nil
+        intermediate(params).to_html
+      else
+        super(params)
+      end
     end
 
-    ;;;; private ;;;;
+    #
+    def intermediate(params={})
+      text = params[:text]
+      ::RedCloth.new(text)
+    end
+
+    private
 
     # Load redcloth library if not already loaded.
     def initialize_engine

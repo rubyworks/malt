@@ -8,18 +8,31 @@ module Malt::Engines
   #
   class RTALS < Abstract
 
+    default :rtal
+
     #
-    def intermediate(text, file=nil)
+    def render(params, &yld)
+      text   = params[:text]
+      file   = params[:file]
+      data   = params[:data]
+      format = params[:format]
+
+      case format
+      when :html, :xml, nil
+        data = make_binding(data, &yld)
+        intermediate(params).compile(data).to_s
+      else
+        super(params, &yld)
+      end
+    end
+
+    #
+    def intermediate(params)
+      text = params[:text]
       ::RTAL.new(text)
     end
 
-    #
-    def render_html(text, file, db, &yld)
-      db = make_binding(db, &yld)
-      intermediate(text, file).compile(db).to_s
-    end
-
-    ;;;; private ;;;;
+    private
 
     # Load Haml library if not already loaded.
     def initialize_engine

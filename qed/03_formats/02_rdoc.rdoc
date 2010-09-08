@@ -1,0 +1,28 @@
+= Malt RDoc Support
+
+Lets say we have an RDoc document called 'test.rdoc' containing ...
+
+  = Example
+
+  This is an example of RDOC rendering.
+
+We can convert rdoc documents to html very easily.
+
+  rdoc = Malt.file('tmp/test.rdoc')
+
+  html = rdoc.to_html
+
+First we will notice that the output is an instance of Malt::Formats::HTML.
+
+  html.class.assert == Malt::Formats::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example</h1>')
+
+Or we can convert the RDoc document directly to HTML via the #html method.
+
+  out = rdoc.html
+
+  out.assert.include?('<h1>Example</h1>')
+

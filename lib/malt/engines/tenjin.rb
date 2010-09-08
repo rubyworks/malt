@@ -11,33 +11,47 @@ module Malt::Engines
   #
   class Tenjin < Abstract
 
+    default :tenjin, :rbhtml
+
     #
-    def compile(text, file)
-      engine_template.convert(text, filename=file) 
+    def render(params, &yld)
+      text   = params[:text]
+      file   = params[:file]
+      data   = params[:data]
+      type   = params[:type]
+      format = params[:format] || :html
+
+      return super(params, &yld) if type == :rbhtml && format != :html
+
+      data = make_hash(data, &yld)
+      template = intermediate(params)
+      template.convert(text, file)
+      template.render(data)
     end
 
     #
-    #def intermediate(text, file=nil)
-    #  ::Tenjin::TemplEngine.parse(text)
-    #end
-
-    #
-    def render(text, file, db, &yld)
-      db = make_hash(db, &yld)
-      template.convert(input, filename)
-      template.render(db)
+    def compile(params)
+      text = params[:text]
+      file = params[:file]
+      intermediate(params).convert(text, file) 
     end
 
-    ;;;; private ;;;;
+    private
 
-    def engine_template
-      @engine_template ||= Tenjin::Template.new(options)
+    def intermediate(params)
+      ::Tenjin::Template.new(nil, engine_options(params))
     end
 
     # Load Liquid library if not already loaded.
     def initialize_engine
       return if defined? ::Tenjin::Engine
       require_library 'tenjin'
+    end
+
+    def engine_options(params)
+      opts = {}
+      opts[:escapefunc] = params[:escapefunc] || settings[:escapefunc]
+      opts
     end
 
   end

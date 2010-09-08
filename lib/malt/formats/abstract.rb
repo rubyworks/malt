@@ -12,16 +12,15 @@ module Formats
     # Register the class to an extension type.
     def self.register(*exts)
       @extensions = exts
-
       Malt.register(self, *exts)
 
-      exts.each do |ext|
-        Abstract.module_eval %{
-          def #{ext}(*db,&yld)
-            convert(:#{ext},*db,&yld)
-          end
-        }
-      end
+      #exts.each do |ext|
+      #  Abstract.module_eval %{
+      #    def to_#{ext}(*db,&yld)
+      #      convert(:#{ext},*db,&yld)
+      #    end
+      #  }
+      #end
     end
 
     #
@@ -40,7 +39,7 @@ module Formats
     #
     def initialize(options={})
       @options = options.rekey
-      @type = @options[:type]
+      @type    = @options[:type]
       initialize_engine
     end
 
@@ -71,27 +70,51 @@ module Formats
 
     # Specified engine to use for rendering.
     #
-    # Keep in mind tath the ability to sepcify the engine
+    # Keep in mind that the ability to specify the engine
     # varies based on engine, format and output format.
     def engine
       options[:engine] || self.class.engine
     end
 
-    # Render to default format.
-    def render(db=nil, &yml)
-      render_to(default, db, &yaml)
+    #
+    def to(type, db=nil, &yld)
+      __send__("to_#{type}", db, &yld)
     end
 
-    # Unless otherwise overridden, nothing happens and +text+
-    # is returned.
-    def render_to(to, db, &yld)
-      text
+    # Render to default or given format.
+    #
+    # If the first argument is a Symbol it is considered the format, otherwise
+    # it is taken to be the database for rendering template variables.
+    def render(*db, &yld)
+      case db.first
+      when Symbol 
+        to = db.shift
+        db = db.first
+      else
+        to = default
+        db = db.first
+      end
+      render_to(to, db, &yld)
     end
 
     #
-    def method_missing(s, *a, &b)
-      convert(s, *a, &b)
-    end
+    #def render_to(format, db=nil, &yld)
+    #  render_engine.render(format, text, file, db, &yld)
+    #end
+
+    #
+#    def method_missing(s, *a, &b)
+#      case s.to_s
+#      when /^to_/
+#        convert($', *a, &b)
+#      else
+#        convert(s, *a, &b).to_s
+#        #render_to(s, *a, &b)
+#      end
+#    #rescue
+#    #  super(s, *a, &b)
+#    #end
+#    end
 
     #
     def convert(to, *db, &yld)
@@ -100,7 +123,7 @@ module Formats
       if subclass = Malt.registry[subtype]
         subclass.new(:text=>output, :file=>file.chomp(type)).convert(to, db, &yld)
       else
-        subclass = Malt.registry['.' + to.to_s]
+        subclass = Malt.registry[".#{to}"]
         subclass.new(:text=>output, :file=>refile(to), :fallback=>true)
       end
     end
@@ -111,11 +134,16 @@ module Formats
     # type - Symbol representation of extension (e.g. :html).
     #
     # Returns a String of the new file name.
-    def refile(type)
-      type = type.to_s.sub(/^\./,'')
+    def refile(type=nil)
       if file
-        fext = self.class.extensions.find{|e| file.end_with?(e)}
-        new_file = file.chomp(fext) + type
+        if type
+          type = type.to_s.sub(/^\./,'')
+          fext = self.class.extensions.find{|e| file.end_with?(e)}
+          new_file = file.chomp(fext) + type
+        else
+          fext = self.class.extensions.find{|e| file.end_with?(e)}
+          new_file = file.chomp('.'+fext)
+        end
       else
         new_file = nil
       end

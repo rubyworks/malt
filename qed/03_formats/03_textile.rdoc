@@ -1,0 +1,33 @@
+= Malt Textile Support
+
+Malt supports Textile via either the RedCloth or the ___ backend.
+
+Lets say we have an Textile document called 'test.tt' containing ...
+
+  h1. Example
+
+  This is an example of Textile rendering.
+
+We can access the file via the +Malt.file+ method. Textile documents are
+recognized by the +.textile+ or +.tt+ extension.
+
+  tile = Malt.file('tmp/test.tt')
+
+We can the convert the document to a Malt Html object via the #to_html method.
+
+  html = tile.to_html
+
+Notice that the output is an instance of Malt::Formats::HTML.
+
+  html.class.assert == Malt::Formats::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example</h1>')
+
+Or we can convert the document directly to HTML via the #html method.
+
+  out = tile.html
+
+  out.assert.include?('<h1>Example</h1>')
+

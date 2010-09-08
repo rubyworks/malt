@@ -9,14 +9,19 @@ module Malt::Formats
 
     #
     def pdf
+      text
+    end
+
+    #
+    def to_pdf
       self
     end
 
-    ;;;; private ;;;;
+    private
 
-    #
-    def malt_engine
-    end
+      #
+      def render_engine
+      end
 
   end
 

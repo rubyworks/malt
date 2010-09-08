@@ -1,0 +1,21 @@
+== LESS Rendering
+
+Lets say we have a LESS document called 'test.less' containing:
+
+  @brand_color: #4D926F;
+  #header {
+    color: @brand_color;
+  }
+  h2 {
+    color: @brand_color;
+  }
+
+We can render it via Malt with #render.
+
+  @css = Malt.render(:file=>'tmp/test.less')
+
+And we can verify that @css is:
+
+  #header, h2 { color: #4d926f; }
+
+Look how concise that is. LESS is pretty slick.

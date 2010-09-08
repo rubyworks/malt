@@ -10,6 +10,25 @@ module Malt::Formats
 
     register('txt')
 
+    #
+    def txt
+      text
+    end
+
+    #
+    def to_txt
+      self
+    end
+
+    #
+    def method_missing(sym, *args, &block)
+      if md = /^to_/.match(sym.to_s)
+        opts = options.merge(:type=>md.post_match)
+        return Malt.text(text, opts)
+      end
+      super(sym, *args, &block)
+    end
+
     # Using #to_html in text doesn't actually transform
     # the source text in any way. Rather it simply "informs"
     # Malt to treat the text as HTML.
@@ -27,6 +46,11 @@ module Malt::Formats
     #def pdf
     #  PDF.new(:text=>text,:file=>refile('.pdf'))
     #end
+
+    private
+
+      def render_engine
+      end
 
   end
 

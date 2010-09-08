@@ -1,0 +1,17 @@
+== Textile Rendering
+
+Malt supports Textile via RedCloth.
+
+Lets say we have a Textile document called 'test.tt' containing ...
+
+  h1. Example
+
+  This is an example of Textile rendering.
+
+We can redner the textile document via the universal render function.
+Textile documents are recognized by the +.textile+ or +.tt+ extension.
+
+  html = Malt.render(:file=>'tmp/test.tt')
+
+  html.assert.include?('<h1>Example</h1>')
+

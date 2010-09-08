@@ -10,28 +10,36 @@ module Malt::Engines
   # to enable those flags on the underlying RDiscount object.
   class Kramdown < Abstract
 
+    register :markdown, :md
+
+    # Convert Markdown text to HTML text.
+    def render(params)
+      text   = params[:text]
+      format = params[:format]
+      case format
+      when :html, nil
+        intermediate(params).to_html
+      when :latex
+        intermediate(params).to_latex
+      else
+        super(params)
+      end
+    end
+
     # Convert Markdown text to intermediate object.
-    def intermediate(text, file=nil)
+    def intermediate(params)
+      text = params[:text]
       ::Kramdown::Document.new(text)
     end
 
-    # Convert Markdown text to HTML text.
-    def render_html(text, file=nil)
-      intermediate(text, file).to_html
-    end
 
-    # Convert Markdown text to Latex text.
-    def render_latex(text, file=nil)
-      intermediate(text, file).to_latex
-    end
+    private
 
-    ;;;; private ;;;;
-
-    # Load rdoc makup library if not already loaded.
-    def initialize_engine
-      return if defined? ::Kramdown
-      require_library 'kramdown'
-    end
+      # Load rdoc makup library if not already loaded.
+      def initialize_engine
+        return if defined? ::Kramdown
+        require_library 'kramdown'
+      end
 
   end
 

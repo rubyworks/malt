@@ -1,0 +1,35 @@
+= Liquid Support
+
+Lets say we have a Liquid document called 'test.liquid' containing ...
+
+  <h1>Example {{ title }}</h1>
+
+  <p>This is an example of a Liquid template.</p>
+
+We can render erb documents to any format we wish.
+
+  liq = Malt.file('tmp/test.liquid')
+
+  html = liq.to_html(:title=>"Document")
+
+We will notice that the output is an instance of Malt::Formats::HTML.
+
+  html.class.assert == Malt::Formats::HTML
+
+We will notice that the output is an instance of Malt::Formats::HTML.
+
+  html.class.assert == Malt::Formats::HTML
+
+Then by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example Document</h1>')
+
+Or we can convert the document directly to HTML via the #html method.
+
+  out = liq.html(:title=>"Alternate")
+
+  out.assert.include?('<h1>Example Alternate</h1>')
+
+Liquid doesn't actually care what format the document is rendered as, since it
+is purely a template engine that can be applied to any format.
+

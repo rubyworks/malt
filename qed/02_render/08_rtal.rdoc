@@ -1,0 +1,15 @@
+== Rtal Rendering
+
+Lets say we have a Rtals document called 'test.rtal' containing:
+
+  <h1>Example<span replace="title">DUMMY</span></h1>
+  <p>This is an example of a Rtals template.</p>
+
+We can render Rtal documents via the +render+ method, as we can any format.
+
+  data = { :title=>"Document" }
+
+  html = Malt.render(:file=>'tmp/test.rtal', :data=>data)
+
+  html.assert.include?('<h1>Example <span>Document</span></h1>')
+

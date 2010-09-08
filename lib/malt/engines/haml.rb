@@ -6,9 +6,40 @@ module Malt::Engines
   #
   class Haml < Abstract
 
+    default :haml
+
     #
-    def intermediate(text, file=nil)
-      ::Haml::Engine.new(text, :filename=>file)
+    def render(params, &yld)
+      format = params[:format]
+      case format
+      when :html, nil
+        render_html(params, &yld)
+      else
+        super(params, &yld)
+      end
+    end
+
+    #
+    def render_html(params, &yld)
+      text = params[:text]
+      file = params[:file]
+      data = params[:data]
+
+      engine = intermediate(params)
+      case data
+      when Binding
+        html = engine.render(make_object(data), &yld)
+      when Hash
+        html = engine.render(Object.new, data, &yld)
+      else
+        if data.respond_to?(:to_hash)
+          data = data.to_hash
+          html = engine.render(Object.new, data, &yld)
+        else
+          html = engine.render(data || Object.new, &yld)
+        end
+      end
+      html
     end
 
     #
@@ -17,19 +48,13 @@ module Malt::Engines
     #end
 
     #
-    def render_html(text, file, db, &block)
-      engine = intermediate(text, file)
-      if Binding === db
-        html = engine.render(make_object(db), &block)
-      elsif db.respond_to?(:to_hash)
-        html = engine.render(Object.new, db.to_hash, &block)
-      else
-        html = engine.render(db||Object.new, &block)
-      end
-      html
+    def intermediate(params)
+      text = params[:text]
+      file = params[:file]
+      ::Haml::Engine.new(text, :filename=>file)
     end
 
-    ;;;; private ;;;;
+    private
 
     # Load Haml library if not already loaded.
     def initialize_engine

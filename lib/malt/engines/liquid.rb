@@ -8,19 +8,25 @@ module Malt::Engines
   #
   class Liquid < Abstract
 
+    default :liquid
+
     #
-    def intermediate(text, file=nil)
+    def intermediate(params)
+      text = params[:text]
       ::Liquid::Template.parse(text)
     end
 
     #
-    def render_html(text, file, db, &yld)
-      engine = intermediate(text, file)
-      db = make_hash(db, &yld)
-      engine.render(db)
+    def render(params={}, &yld) #file, db, &yld)
+      text = params[:text]
+      data = params[:data]
+      data = make_hash(data, &yld)
+      data = data.rekey{ |k| k.to_s }
+      engine = intermediate(params)
+      engine.render(data)
     end
 
-    ;;;; private ;;;;
+    private
 
     # Load Liquid library if not already loaded.
     def initialize_engine

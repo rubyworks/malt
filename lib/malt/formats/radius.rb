@@ -10,31 +10,26 @@ module Malt::Formats
   #
   class Radius < Abstract
 
-    register('haml')
+    register('radius')
 
     #
-    def html(db, &yml)
-      convert(:html, db, &yml)
+    def compile(db, &yld)
+      result = render_engine.render(text, file, db, &yld)
+      opts   = options.merge(:text=>result, :file=>refile(:html))
+      HTML.new(opts)
     end
 
     #
-    def render_to(to, db, &yld)
-      case to
-      when :radius
-        text  # self ?
-      when :html
-        malt_engine.render_html(text, file, db, &yld)
-      else
-        raise UnspportedConversion.new(type, to)
+    #def to_html(db, &yld)
+    #  convert(:html, db, &yld)
+    #end
+
+    private
+
+      #
+      def render_engine
+        @render_engine ||= Malt::Engines::Radius.new(options)
       end
-    end
-
-    ;;;; private ;;;;
-
-    #
-    def malt_engine
-      @malt_engine ||= Malt::Engines::Radius.new(options)
-    end
 
   end
 

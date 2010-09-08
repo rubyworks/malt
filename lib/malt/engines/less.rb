@@ -7,11 +7,26 @@ module Malt::Engines
   #   http://lesscss.org/
   #
   # LESS is an extension of CSS. You can write LESS code just like you would write CSS,
-  # except you need to compile it to CSS. That's what this is class is for.
+  # except you need to compile it to CSS. That's what this class is for.
   class Less < Abstract
 
+    default :less
+
     #
-    def intermediate(text, file=nil)
+    def render(params)
+      text   = params[:text]
+      format = params[:format]
+      case format
+      when :css, nil
+        intermediate(params).to_css
+      else
+        super(params)
+      end
+    end
+
+    #
+    def intermediate(params)
+      text = params[:text]
       ::Less::Engine.new(text)
     end
 
@@ -20,18 +35,13 @@ module Malt::Engines
     #  intermediate # ??
     #end
 
-    #
-    def render_css(text, file, db, &block)
-      intermediate(text, file).to_css
-    end
+    private
 
-    ;;;; private ;;;;
-
-    # Load Less library if not already loaded.
-    def initialize_engine
-      return if defined? ::Less::Engine
-      require_library 'less'
-    end
+      # Load Less library if not already loaded.
+      def initialize_engine
+        return if defined? ::Less::Engine
+        require_library 'less'
+      end
 
   end
 

@@ -10,29 +10,44 @@ module Malt::Formats
     register('rdoc')
 
     #
-    def html(*)
-      convert(:html)
+    #def render(*)
+    #  to_html.to_s
+    #end
+
+    #
+    def html
+      render_engine.render(:format=>:html, :text=>text, :file=>file)
+      #malt_engine.html(text, file)
     end
 
     #
-    def render_to(to, *)
-      case to
-      when :rdoc
-        text
-      when :html
-        malt_engine.render_html(text, file)
-      when :txt  # THINK: Does this make sense?
-        text
-      else
-        raise UnsupportedConversion.new(type, to)
-      end
+    def rdoc
+      text
     end
+
+    # THINK: Does this make sense? if it does it is for all formats.
+    #def txt
+    #  text
+    #end
+
+    #
+    def to_rdoc
+      self
+    end
+
+    #
+    def to_html
+      opts = options.merge(:text=>html, :file=>refile(:html))
+      HTML.new(opts)
+    end
+
+    #raise UnsupportedConversion.new(type, to)
 
     ;;;; private ;;;;
 
     #
-    def malt_engine
-      @malt_engine ||= Malt::Engines::RDoc.new(options)
+    def render_engine
+      @render_engine ||= Malt::Engines::RDoc.new(options)
     end
 
   end

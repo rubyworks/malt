@@ -12,17 +12,25 @@ module Malt::Engines
   # to enable those flags on the underlying RDiscount object.
   class RDiscount < Abstract
 
+    default :markdown, :md
+
+    # Convert Markdown text to HTML text.
+    def render(params)
+      case params[:format]
+      when :html, nil
+        intermediate(params).to_html
+      else
+        super(params)
+      end
+    end
+
     # Convert Markdown text to intermediate engine object.
-    def intermediate(text, file=nil)
+    def intermediate(params)
+      text = params[:text]
       ::RDiscount.new(text, *flags)
     end
 
-    # Convert Markdown text to HTML text.
-    def render_html(text, file=nil)
-      intermediate(text, file).to_html
-    end
-
-    ;;;; private ;;;;
+    private
 
     # Load rdoc makup library if not already loaded.
     def initialize_engine
@@ -31,9 +39,10 @@ module Malt::Engines
     end
 
     #
-    def flags
-      [:smart, :filter_html].select{ |flag| options[flag] }
+    def flags(params={})
+      [:smart, :filter_html].select{ |flag| params[flag] || settings[flag] }
     end
+
   end
 
 end

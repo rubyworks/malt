@@ -1,11 +1,12 @@
 require 'ostruct'
+require 'facets/module/basename'
 
 class Hash
 
   #
   def to_hash
     dup
-  end
+  end unless method_defined?(:to_hash)
 
   #
   def rekey(&block)
@@ -16,7 +17,7 @@ class Hash
       each{|k,v| h[k.to_sym] = v }
     end
     h
-  end
+  end unless method_defined?(:rekey)
 
 end
 
@@ -25,6 +26,6 @@ class OpenStruct
   #
   def to_hash
     @table.dup
-  end
+  end unless method_defined?(:to_hash)
 
 end

@@ -7,16 +7,25 @@ module Malt::Formats
 
     register('html')
 
-    # HTML is HTML ;)
+    #def render(*)
+    #  text
+    #end
+
+    #
     def html(*)
+      text
+    end
+
+    # HTML is HTML ;)
+    def to_html(*)
       self
     end
 
-    ;;;; private ;;;;
+    private
 
-    #
-    def malt_engine
-    end
+      #
+      def render_engine
+      end
 
   end
 

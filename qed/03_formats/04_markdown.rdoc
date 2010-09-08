@@ -1,0 +1,33 @@
+= Malt Markdown Support
+
+Malt supports Markdown via either the RDiscount, BlueCloth or Kramdown backends.
+
+Lets say we have an Markdown document called 'test.md' containing ...
+
+  # Example
+
+  This is an example of Markdown rendering.
+
+We can access the file via the +Malt.file+ method. Markdown documents are
+recognized by the +.markdown+ or +.md+ file extensions.
+
+  mark = Malt.file('tmp/test.md')
+
+We can the convert the document to a Malt Html object via the #to_html method.
+
+  html = mark.to_html
+
+Notice that the output is an instance of Malt::Formats::HTML.
+
+  html.class.assert == Malt::Formats::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example</h1>')
+
+Or we can convert the document directly to HTML via the #html method.
+
+  out = mark.html
+
+  out.assert.include?('<h1>Example</h1>')
+

@@ -1,0 +1,21 @@
+== Ruby Rendering
+
+It may not seem obvious at first, but Ruby itself can be used as
+a template system.
+
+Lets say we have a Ruby document called 'test.rb' containing:
+
+  "<h1>Example #{ title }</h1>\n" +
+  "<p>This is an example of Ruby rendering.</p>"
+
+We can run this Ruby script thru Malt's +render+ function.
+
+  data = {:title => 'Document'}
+
+  html = Malt.render(:file=>'tmp/test.rb', :data=>data)
+
+Whatever was the final result of evaluating the Ruby script, converted to
+a string via #to_s, will be the result of the rendering.
+
+  html.assert.include?('<h1>Example Document</h1>')
+

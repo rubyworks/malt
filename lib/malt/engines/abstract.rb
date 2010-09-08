@@ -3,6 +3,26 @@ require 'malt/kernel'
 module Malt
 module Engines
 
+  class << self
+    include Malt::Kernel
+  end
+
+  #
+  def self.register(malt_class, *exts)
+    exts.each do |ext|
+      type = ext_to_type(ext)
+      registry[type] ||= []
+      registry[type] << malt_class
+      registry[type].uniq!
+    end
+  end
+
+  #
+  def self.registry
+    @registry ||= {}
+  end
+
+
   # Abstract Template class serves as the base
   # class for all other Template classes.
   #
@@ -11,18 +31,35 @@ module Engines
 
     # Register the class to an extension type.
     def self.register(*exts)
-      Malt.register(self, *exts)
+      Engines.register(self, *exts)
+    end
+
+    # Register and set as the default for given extensions.
+    def self.default(*exts)
+      register(*exts)
+      exts.each do |ext|
+        Malt.config.engine[ext.to_sym] = self
+      end
     end
 
     # Override this method to load rendering engine library.
-    def initialize(options={})
-      @options = options.rekey
+    def initialize(settings={})
+      @settings = settings.rekey
       initialize_engine
     end
 
     # Access to the options given to the initializer.
     # Returns an OpenStruct object.
-    attr :options
+    attr :settings
+
+    #
+    def render(text, options={}) #format, text, file, db, &yld)
+      if format = options[:format]
+        raise "unsupported rendering -- #{format}"
+      else
+        raise "unsupported rendering"
+      end
+    end
 
     #
     def compile(db, &yld)
@@ -58,8 +95,9 @@ module Engines
     # Convert a data source into an Object (aka a "scope").
     def make_object(db)
       if db.respond_to?(:to_hash)
-        hash = db.to_hash
-        return Struct.new(*hash.keys).new(*hash.values)
+        hash  = db.to_hash
+        attrs = hash.keys.map{ |k| k.to_sym }
+        return Struct.new(*attrs).new(*hash.values)
       end
 
       if Binding === db
@@ -70,26 +108,32 @@ module Engines
     end
 
     # Convert a data source into a Hash.
-    def make_hash(db)
+    def make_hash(db, &yld)
       if Binding === db
         db = make_object(db)
       end
 
       if db.respond_to?(:to_hash)
-        db.to_hash
+        db = db.to_hash
+        db[:yield] = yld.call if yld
+        return db
       end
 
       if db.respond_to?(:to_h)
-        return db.to_h
+        db = db.to_h
+        db[:yield] = yld.call if yld
+        return db
       end
 
       # last resort
-      db.instance_variables.inject({}) do |h, i|
+      db = db.instance_variables.inject({}) do |h, i|
         k = i.sub('@','').to_sym
         v = instance_variable_get(i)
         h[k] = v
         h
       end
+      db[:yield] = yld.call
+      return db
     end
 
   end

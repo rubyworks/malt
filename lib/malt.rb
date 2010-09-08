@@ -1,11 +1,17 @@
+require 'malt/kernel'
+require 'malt/render'
+
 module Malt
 
+  class << self
+    include Malt::Kernel
+  end
+
   #
-  def self.register(maltclass, *extnames)
-    extnames.each do |extname|
-      extname = extname.to_s 
-      extname = '.' + extname unless extname[0,1] == '.'
-      registry[extname] = maltclass
+  def self.register(malt_class, *exts)
+    exts.each do |ext|
+      type = ext_to_type(ext)
+      registry[type] = malt_class
     end
   end
 
@@ -14,21 +20,26 @@ module Malt
     @registry ||= {}
   end
 
+
   #
   def self.file(file, options={})
-    type  = File.extname(file)
+    type = options[:type] || options[:format] || File.extname(file)
+    type = ext_to_type(type)
     malt_class = registry[type]
+    raise "unkown type -- #{type}" unless malt_class
     malt_class.new(options.merge(:file=>file))
   end
 
   #
   def self.text(text, options={})
     if file = options[:file]
-      type = File.extname(file)
-      type = nil if type.empty?
+      ext = File.extname(file)
+      ext = nil if ext.empty?
     end
-    type ||= options[:type]
-    malt_class = registry[type]
+    type = options[:type] || options[:format] || ext
+    type = ext_to_type(type)
+    malt_class = registry[type] || Formats::Text
+    #raise "unkown type -- #{type}" unless malt_class
     malt_class.new(options.merge(:text=>text,:file=>file))
   end
 
@@ -41,16 +52,27 @@ module Malt
   end
 
   #
-  def self.main(*files)
+  def self.main(*args)
+    require 'optparse'
+    itype, otype = nil, nil
+    OptionParser.new{|o|
+      o.on('-t TYPE', 'input type'){  |t| itype  = t }
+      o.on('-o TYPE', 'output type'){ |t| otype = t }
+      o.on('--help', '-h'       , 'display this help message'){ puts o; exit }
+    }.parse!
+    db, files = *args.partition{ |x| x.index('=') }
+    db = db.inject({}){ |h,kv| k,v = kv.split('='); h[k] = v; h}
     files.each do |file|
-      puts Malt.file(file).render
+      file = itype ? Malt.file(file, :type=>itype) : Malt.file(file)
+      if otype
+        puts file.render_to(otype, db)
+      else
+        puts file.render(db)
+      end
     end
   end
 
 end
-
-#require 'malt/markup'
-#require 'malt/template'
 
 require 'malt/engines'
 require 'malt/formats'

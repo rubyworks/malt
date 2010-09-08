@@ -5,17 +5,27 @@ module Malt::Engines
   #
   class BlueCloth < Abstract
 
+    register :markdown, :md
+
+    # Convert Markdown text to HTML text.
+    def render(params)
+      text   = params[:text]
+      format = params[:format]
+      case format
+      when :html, nil
+        intermediate(params).to_html
+      else
+        super(params)
+      end
+    end
+
     # Convert Markdown text to intermediate object.
-    def intermediate(text, file=nil)
+    def intermediate(params)
+      text = params[:text]
       ::BlueCloth.new(text)
     end
 
-    # Convert Markdown text to HTML text.
-    def render_html(text, file=nil)
-      intermediate(text, file).to_html
-    end
-
-    ;;;; private ;;;;
+    private
 
     # Load bluecloth library if not already loaded.
     def initialize_engine

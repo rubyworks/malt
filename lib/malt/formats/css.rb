@@ -7,21 +7,26 @@ module Malt::Formats
 
     register('css')
 
-    # CSS is CSS ;)
+    #
     def css(*)
+      text
+    end
+
+    # CSS is CSS ;)
+    def to_css(*)
       self
     end
 
-    ;;;; private ;;;;
+    private
 
-    #
-    def malt_engine
-    end
+      #
+      def render_engine
+      end
 
-    # CSS default output type is itself.
-    def default
-      :css
-    end
+      # CSS default output type is itself.
+      def default
+        :css
+      end
 
   end
 
