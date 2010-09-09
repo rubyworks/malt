@@ -1,0 +1,8 @@
+= RDoc Format
+
+This is RDoc formatted markup.
+
+* one
+* two
+* three
+
