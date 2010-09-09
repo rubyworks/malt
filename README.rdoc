@@ -12,28 +12,36 @@ a variety of template and markup document formats.
 
 == SYNOPSIS
 
-Here's the idea:
+=== Functional API
 
-  Malt.file('foo.erb').compile(db).to_s
+  Malt.render(:file=>'foo.erb', :format=>:html, :data=>data)
 
-Where +db+ is a data source of some type. Malt will see
+Where +data+ is a data source of some type. Malt will see
 that the file is an ERB template and render it accordingly.
 
-Malt can also "double render".
+The output of this call will be the HTML String.
 
-  Malt.file('foo.rdoc.erb').compile2(db).to_html
+=== Object-oriented API
 
-How does malt know what to do with a file?
+  Malt.file('foo.erb').to_html(data).to_s
 
-  Malt.register('*.erb', :Erb)
+Where +data+ is a data source of some type. Malt will see
+that the file is an ERB template and render it accordingly.
 
-The first argument is a fnmatch string, the second is the name
-of the Malt::Template or Malt::Markup subclass.
+To get the render text you simple need to provide the template
+or markup type.
 
-To render text via Malt you of course need to provide the
-template or markup type.
+  Malt.text(text, :type=>:erb).to_html(data).to_s
 
-  Malt.text(text, :erb).compile(db).to_s
+Notice the #to_s. This is needed because #to_html returns an 
+Malt::Format::HTML object.
+
+
+== COMING SOON
+
+Malt can also "multi-render".
+
+  Malt.file('foo.rdoc.erb').to_html(data)   # ~> foo.html
 
 
 == INSTALATION
