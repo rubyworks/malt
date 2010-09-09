@@ -1,44 +1,8 @@
-= Malt
+= Introduction
 
-Malt is a multi-template rendering framework.
-
-  require 'malt'
-
-For example lets say we have a document called 'test.rdoc' containing ...
-
-  = Example
-
-  This is an example of RDOC rendering.
-
-We can convert RDoc documents to html using the universal, functional
-interface easily enough.
-
-  html = Malt.render(:file=>'tmp/test.rdoc')
-
-In this example, Malt recognizes the type of file by the '.rdoc' extension
-and renders it using the default redering engine (in this case RDoc itself).
-By default the engine renders to HTML, so we did not need to specify
-the output :format option to the +render+ method.
-
-Alternately we can use the object-oriented interface.
-
-  rdoc = Malt.file('tmp/test.rdoc')
-
-First we will notice that the output is an instance of Malt::Formats::HTML.
-
-  rdoc.class.assert == Malt::Formats::RDoc
-
-While we could have used `Malt::Formats::RDoc.new` to create the object directly,
-Malt provides the #file, as well as #text, methods for convience. We can convert
-the rdoc to html with the #to_html method.
-
-  html = rdoc.to_html
-
-Again notice that the output is an instance of Malt::Formats::HTML.
-
-  html.class.assert == Malt::Formats::HTML
-
-And that by calling #to_s we can get the rendered HTML document.
-
-  html.to_s.assert.include?('<h1>Example</h1>')
+Malt is a multi-template rendering framework. It provides two convenient
+interfaces for working with backend template systems. The first is 
+a functional interface via `Malt.render` method. And the second is an
+object-oriented interface that can be easily constructed via the 
+`Malt.file` or `Malt.text` methods.
 
