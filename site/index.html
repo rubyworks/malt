@@ -1,0 +1,67 @@
+<html>
+<head>
+  <title>Malt</title>
+  <link rel="SHORTCUT ICON" href="assets/icon.png" />
+  <style>
+    html { font-family: sans-serif; color: #71381b; }
+    body { margin: 0; padding: 0; background: url(assets/field.jpg) repeat-x bottom; font-size: 22px;
+      height: 100%;
+    }
+    a { text-decoration: none; color: black;  font-size: 0.7em; font-weight: bold; }
+    a:hover { background-color: black; color: white; }
+    h1 { font-size: 30px; color: #71381b; margin-bottom: 0px; }
+    h2 { font-size: 24px; color: #7e412e; margin-bottom: 10px; margin-top: 10px; }
+    code { color: #555; }
+    .desc { font-size: 12px; padding-top: 20px; font-weight: bold; text-align: justify; }
+    #head { margin: 0 auto; width: 630px; text-align: center; margin-top: 20px;
+      border: 6px solid #ececcc;
+      border-bottom: none;
+    }
+    #main { margin: 0 auto; width: 534px; background: url(assets/mainbg.jpg);
+      text-align: center; padding: 5px 20px 20px 20px; 
+      border-left: 6px solid #6e3a24;
+      border-right: 6px solid #6e3a24;
+    }
+    #foot { margin: 0 auto; width: 566px; text-align: center; font-size: 12px;
+      border-top: 6px solid #6e3a24;
+      padding: 10px;
+      color: #999;
+    }
+    #nav { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+
+<div id="head">
+  <img src="assets/malt.jpg" />
+</div>
+
+<div id="main">
+  <h1>Malt Ruby</h1>
+  <h2>Multi-Template Rendering Engine</h2>
+
+  <div id="nav">
+    <a href="docs/api">api</a> &middot;
+    <a href="docs/qed">qed</a> &middot;
+    <!-- <a href="http://wiki.github.com/rubyworks/malt">wiki</a> &middot; -->
+    <a href="http://github.com/rubyworks/malt">code</a> &middot;
+    <a href="http://github.com/rubyworks/malt/issues">bugs</a>
+  </div>
+
+  <p class="desc">
+    Malt provides a uniform front-end API to multiple backend template
+    engines. It provides this via wither of two interfaces. First, a singular 
+    universal rendering function, <code>Malt.render</code>. Second,
+    a set of object-oriented format classes, e.g. <code>Malt::Format::ERB</code>,
+    which are easily instantiated via the <code>Malt.file</code> and <code>Malt.text</code>
+    functions.
+  </p>
+
+</div>
+
+<div id="foot">
+  Copyright &copy; 2010 Thomas Sawyer
+</div>
+
+</body>
+</html>
