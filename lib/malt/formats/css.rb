@@ -1,6 +1,6 @@
 require 'malt/formats/abstract'
 
-module Malt::Formats
+module Malt::Format
 
   #
   class CSS < Abstract

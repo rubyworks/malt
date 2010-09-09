@@ -2,7 +2,7 @@ require 'malt/engines/abstract'
 require 'malt/formats/rdoc'
 require 'malt/formats/html'
 
-module Malt::Engines
+module Malt::Engine
 
   # Discount Markdown implementation.
   #

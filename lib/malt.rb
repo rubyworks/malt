@@ -38,7 +38,7 @@ module Malt
     end
     type = options[:type] || options[:format] || ext
     type = ext_to_type(type)
-    malt_class = registry[type] || Formats::Text
+    malt_class = registry[type] || Format::Text
     #raise "unkown type -- #{type}" unless malt_class
     malt_class.new(options.merge(:text=>text,:file=>file,:type=>type))
   end

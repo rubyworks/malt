@@ -2,7 +2,7 @@ require 'malt/formats/abstract'
 require 'malt/formats/html'
 require 'malt/engines/rdoc'
 
-module Malt::Formats
+module Malt::Format
 
   #
   class RDoc < Abstract
@@ -34,7 +34,7 @@ module Malt::Formats
 
     #
     def render_engine
-      @render_engine ||= Malt::Engines::RDoc.new(options)
+      @render_engine ||= Malt::Engine::RDoc.new(options)
     end
 
   end

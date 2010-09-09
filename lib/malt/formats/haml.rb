@@ -2,7 +2,7 @@ require 'malt/formats/abstract'
 require 'malt/formats/html'
 require 'malt/engines/haml'
 
-module Malt::Formats
+module Malt::Format
 
   # Haml looks like a Markup format, but it turns out to be
   # a template format too.
@@ -44,7 +44,7 @@ module Malt::Formats
 
       #
       def render_engine
-        @render_engine ||= Malt::Engines::Haml.new(options)
+        @render_engine ||= Malt::Engine::Haml.new(options)
       end
 
   end

@@ -22,7 +22,7 @@ We can get a OOP interface tothe Tenjin document via the Malt.file function.
 
   tenjin = Malt.file('tmp/test.tenjin')
 
-  tenjin.class.assert == Malt::Formats::Tenjin
+  tenjin.class.assert == Malt::Format::Tenjin
 
 Since Tenjin is aa general pupose template foramt, we can convert Tenjin
 documents to any format we wish. For instance we can convert our example
@@ -32,9 +32,9 @@ to a Text documents via #to_txt.
 
   text = tenjin.to_txt(data)
 
-First we will notice that the output is an instance of `Malt::Formats::Text`.
+First we will notice that the output is an instance of `Malt::Format::Text`.
 
-  text.class.assert == Malt::Formats::Text
+  text.class.assert == Malt::Format::Text
 
 And that by calling #to_s we can get the rendered Text document.
 

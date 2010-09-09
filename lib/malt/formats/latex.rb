@@ -1,7 +1,7 @@
 require 'malt/formats/abstract'
 require 'malt/formats/pdf'
 
-module Malt::Formats
+module Malt::Format
 
   #
   class Latex < Abstract

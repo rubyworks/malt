@@ -23,7 +23,7 @@ We can get a hold of the Ruby template via the Malt.file function.
 
   ruby = Malt.file('tmp/test.rb')
 
-  ruby.class.assert == Malt::Formats::Ruby
+  ruby.class.assert == Malt::Format::Ruby
 
 Ruby is a <i>universal template format</i>, so it can be converted to any other
 format (even if it is not really that format).
@@ -32,9 +32,9 @@ format (even if it is not really that format).
 
   html = ruby.to_html(data)
 
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 
 And that by calling #to_s we can get the rendered HTML document.
 

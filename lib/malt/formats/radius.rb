@@ -2,7 +2,7 @@ require 'malt/formats/abstract'
 require 'malt/formats/html'
 require 'malt/engines/radius'
 
-module Malt::Formats
+module Malt::Format
 
   # Radius Template
   #
@@ -38,7 +38,7 @@ module Malt::Formats
 
       #
       def render_engine
-        @render_engine ||= Malt::Engines::Radius.new(options)
+        @render_engine ||= Malt::Engine::Radius.new(options)
       end
 
   end

@@ -1,6 +1,6 @@
 module Malt
   #
-  module Formats
+  module Format
   end
 end
 

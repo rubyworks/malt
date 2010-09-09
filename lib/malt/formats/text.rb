@@ -2,7 +2,7 @@ require 'malt/formats/abstract'
 require 'malt/formats/html'
 require 'malt/formats/pdf'
 
-module Malt::Formats
+module Malt::Format
 
   # Plain text format. Plain text documents are uniqu in that they can
   # be transformed into any other type of document. For example, applying

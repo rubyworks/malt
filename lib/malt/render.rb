@@ -30,13 +30,13 @@ module Malt
     engine = engine || config.engine[type]
     case engine
     when Class
-      #raise unless Engines.registry[type].include?(engine)
+      #raise unless Engine.registry[type].include?(engine)
       engine
     when String, Symbol
       match = engine.to_s.downcase
-      Engines.registry[type].find{ |e| e.basename.downcase == match }
+      Engine.registry[type].find{ |e| e.basename.downcase == match }
     else
-      Engines.registry[type].first
+      Engine.registry[type].first
     end
   end
 

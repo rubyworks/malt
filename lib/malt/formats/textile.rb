@@ -1,7 +1,7 @@
 require 'malt/formats/abstract'
 require 'malt/engines/redcloth'
 
-module Malt::Formats
+module Malt::Format
  
   #
   class Textile < Abstract
@@ -50,7 +50,7 @@ module Malt::Formats
 
       #
       def render_engine
-        @render_engine ||= Malt::Engines::RedCloth.new(options)
+        @render_engine ||= Malt::Engine::RedCloth.new(options)
       end
 
   end

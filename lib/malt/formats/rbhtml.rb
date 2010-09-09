@@ -3,7 +3,7 @@ require 'malt/formats/html'
 require 'malt/engines/erb'
 require 'malt/engines/erubis'
 
-module Malt::Formats
+module Malt::Format
 
   # RBHTML is a variant of Tenjin, but limited to HTML conversion.
   class RBHTML < Abstract
@@ -43,7 +43,7 @@ module Malt::Formats
 
     #
     def render_engine
-      @render_engine ||= Malt::Engines::Tenjin.new(options)
+      @render_engine ||= Malt::Engine::Tenjin.new(options)
     end
 
   end

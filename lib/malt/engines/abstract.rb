@@ -1,7 +1,7 @@
 require 'malt/kernel'
 
 module Malt
-module Engines
+module Engine
 
   class << self
     include Malt::Kernel
@@ -31,7 +31,7 @@ module Engines
 
     # Register the class to an extension type.
     def self.register(*exts)
-      Engines.register(self, *exts)
+      Engine.register(self, *exts)
     end
 
     # Register and set as the default for given extensions.

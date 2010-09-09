@@ -2,7 +2,7 @@ require 'malt/formats/abstract_template'
 require 'malt/formats/html'
 require 'malt/engines/tenjin'
 
-module Malt::Formats
+module Malt::Format
 
   # Tenjin
   #
@@ -41,7 +41,7 @@ module Malt::Formats
 
     #
     def render_engine
-      @render_engine ||= Malt::Engines::Tenjin.new(options)
+      @render_engine ||= Malt::Engine::Tenjin.new(options)
     end
 
   end

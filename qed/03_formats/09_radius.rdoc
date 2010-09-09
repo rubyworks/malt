@@ -17,7 +17,7 @@ We can get a hold of the Radius document via the Malt.file function.
 
   radi = Malt.file('tmp/test.radius', :tag_prefix=>'r')
 
-  radi.class.assert == Malt::Formats::Radius
+  radi.class.assert == Malt::Format::Radius
 
 Notice here we have passed an option to the file constructor. This option
 is passed on the underlying Radius.new method. Now we can convert Radius
@@ -27,9 +27,9 @@ documents to HTML documents via #to_html.
 
   html = radi.to_html(data)
 
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 
 And that by calling #to_s we can get the rendered HTML document.
 

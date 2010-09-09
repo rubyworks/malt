@@ -2,7 +2,7 @@ require 'malt/formats/abstract'
 require 'malt/formats/html'
 require 'malt/engines/erb'
 
-module Malt::Formats
+module Malt::Format
 
   # Yes, pure Ruby as a template format.
   #
@@ -63,7 +63,7 @@ module Malt::Formats
 
     #
     def render_engine
-      @render_engine ||= Malt::Engines::Ruby.new(options)
+      @render_engine ||= Malt::Engine::Ruby.new(options)
     end
 
   end

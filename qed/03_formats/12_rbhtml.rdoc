@@ -32,7 +32,7 @@ We can get a hold of the RBHTML document via the Malt.file function.
 
   rbhtml = Malt.file('tmp/test.rbhtml')
 
-  rbhtml.class.assert == Malt::Formats::RBHTML
+  rbhtml.class.assert == Malt::Format::RBHTML
 
 We can convert RBHTML documents to HTML documents via #to_html.
 
@@ -40,9 +40,9 @@ We can convert RBHTML documents to HTML documents via #to_html.
 
   html = rbhtml.to_html(data)
 
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 
 And that by calling #to_s we can get the rendered HTML document.
 

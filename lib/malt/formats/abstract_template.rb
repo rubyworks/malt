@@ -1,7 +1,7 @@
 require 'malt/formats/abstract'
 
 module Malt
-module Formats
+module Format
 
   # An AbstractTemplate is a subclass of Abstract. It is used as the base class
   # for general purpose template formats which can be used to render any other

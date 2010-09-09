@@ -3,7 +3,7 @@ require 'malt/formats/html'
 require 'malt/engines/erb'
 require 'malt/engines/erubis'
 
-module Malt::Formats
+module Malt::Format
 
   #
   class Erb < AbstractTemplate
@@ -90,9 +90,9 @@ module Malt::Formats
       @render_engine ||= (
         case engine
         when :erubis
-          Malt::Engines::Erubis.new(options)
+          Malt::Engine::Erubis.new(options)
         else
-          Malt::Engines::Erb.new(options)
+          Malt::Engine::Erb.new(options)
         end
       )
     end

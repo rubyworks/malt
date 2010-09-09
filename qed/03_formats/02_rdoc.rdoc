@@ -45,7 +45,7 @@ Then we can use the `Malt.file` method to instantiate an RDoc object.
 
 We will notice that the output is an instance of Malt::Formats::HTML.
 
-  rdoc.class.assert == Malt::Formats::RDoc
+  rdoc.class.assert == Malt::Format::RDoc
 
 While we could have used `Malt::Formats::RDoc.new` to create the object directly,
 Malt provides the #file, as well as #text, methods for convience. We can convert
@@ -53,9 +53,9 @@ the rdoc to html with the #to_html method.
 
   html = rdoc.to_html
 
-Again notice that the output is an instance of Malt::Formats::HTML.
+Again notice that the output is an instance of Malt::Format::HTML.
 
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 
 And that by calling #to_s we can get the rendered HTML document.
 
@@ -67,9 +67,9 @@ We can convert rdoc documents to html very easily.
 
   html = rdoc.to_html
 
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 
 And that by calling #to_s we can get the rendered HTML document.
 

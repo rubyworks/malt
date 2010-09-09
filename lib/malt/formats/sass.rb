@@ -2,7 +2,7 @@ require 'malt/formats/abstract'
 require 'malt/formats/css'
 require 'malt/engines/sass'
 
-module Malt::Formats
+module Malt::Format
 
   # Sass Format
   #
@@ -42,7 +42,7 @@ module Malt::Formats
 
       #
       def render_engine
-        @render_engine ||= Malt::Engines::Sass.new(options)
+        @render_engine ||= Malt::Engine::Sass.new(options)
       end
 
       # Sass default output type is CSS.

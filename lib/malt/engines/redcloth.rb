@@ -1,6 +1,6 @@
 require 'malt/engines/abstract'
 
-module Malt::Engines
+module Malt::Engine
 
   #
   class RedCloth < Abstract

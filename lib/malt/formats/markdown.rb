@@ -4,7 +4,7 @@ require 'malt/formats/latex'
 require 'malt/engines/rdiscount'
 require 'malt/engines/bluecloth'
 
-module Malt::Formats
+module Malt::Format
  
   # If using the Kramdown engine, then Latex is also a supported output format.
   class Markdown < Abstract
@@ -68,11 +68,11 @@ module Malt::Formats
         @render_engine ||= (
           case engine
           when :bluecloth
-            Malt::Engines::BlueCloth.new(options)
+            Malt::Engine::BlueCloth.new(options)
           when :kramdown
-            Malt::Engines::Kramdown.new(options)
+            Malt::Engine::Kramdown.new(options)
           else
-            Malt::Engines::RDiscount.new(options)
+            Malt::Engine::RDiscount.new(options)
           end
         )
       end

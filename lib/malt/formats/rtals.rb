@@ -2,7 +2,7 @@ require 'malt/formats/abstract'
 require 'malt/formats/html'
 require 'malt/engines/rtals'
 
-module Malt::Formats
+module Malt::Format
 
   #
   class Rtals < Abstract
@@ -37,7 +37,7 @@ module Malt::Formats
 
       #
       def render_engine
-        @render_engine ||= Malt::Engines::RTALS.new(options)
+        @render_engine ||= Malt::Engine::RTALS.new(options)
       end
 
   end

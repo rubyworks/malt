@@ -1,7 +1,7 @@
 require 'malt/formats/abstract_template'
 require 'malt/engines/liquid'
 
-module Malt::Formats
+module Malt::Format
  
   # Liquid templates
   #
@@ -44,7 +44,7 @@ module Malt::Formats
 
       #
       def render_engine
-        @render_engine ||= Malt::Engines::Liquid.new(options)
+        @render_engine ||= Malt::Engine::Liquid.new(options)
       end
 
   end

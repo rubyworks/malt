@@ -20,7 +20,7 @@ We can get a hold of the Haml document via the Malt.file function.
 
   haml = Malt.file('tmp/test.haml')
 
-  haml.class.assert == Malt::Formats::Haml
+  haml.class.assert == Malt::Format::Haml
 
 We can convert Haml documents to html very easily.
 
@@ -28,9 +28,9 @@ We can convert Haml documents to html very easily.
 
   html = haml.to_html(data)
 
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 
 And that by calling #to_s we can get the rendered HTML document.
 

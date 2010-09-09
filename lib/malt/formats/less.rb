@@ -1,7 +1,7 @@
 require 'malt/formats/abstract'
 require 'malt/engines/less'
 
-module Malt::Formats
+module Malt::Format
 
   # = LESS
   #
@@ -37,7 +37,7 @@ module Malt::Formats
 
     #
     def render_engine
-      @render_engine ||= Malt::Engines::Less.new(options)
+      @render_engine ||= Malt::Engine::Less.new(options)
     end
 
     # LESS default output type is CSS.

@@ -1,7 +1,7 @@
 require 'malt/formats/abstract'
 require 'malt/formats/html'
 
-module Malt::Formats
+module Malt::Format
 
   # = YAML format
   #

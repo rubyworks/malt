@@ -1,7 +1,7 @@
 require 'malt/kernel'
 
 module Malt
-module Formats
+module Format
 
   # Abstract format class serves as the base
   # class for all other format classes.

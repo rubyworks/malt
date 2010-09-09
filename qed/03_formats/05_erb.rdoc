@@ -48,9 +48,9 @@ We can render erb documents to any format we wish.
 
   html = erb.to_html(:title=>"Document")
 
-We will notice that the output is an instance of Malt::Formats::HTML.
+We will notice that the output is an instance of Malt::Format::HTML.
 
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 
 And that by calling #to_s we can get the rendered HTML document.
 

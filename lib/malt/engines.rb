@@ -1,6 +1,6 @@
 module Malt
   #
-  module Engines
+  module Engine
   end
 end
 

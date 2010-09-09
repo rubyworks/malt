@@ -33,15 +33,15 @@ We can also get a hold of the Sass document via the Malt.file function.
 
   sass = Malt.file('tmp/test.sass')
 
-  sass.class.assert == Malt::Formats::Sass
+  sass.class.assert == Malt::Format::Sass
 
 We can convert the Sass document to a CSS document via the #to_css method.
 
   css = sass.to_css
 
-We can see that the output is an instance of Malt::Formats::HTML.
+We can see that the output is an instance of Malt::Format::HTML.
 
-  css.class.assert == Malt::Formats::CSS
+  css.class.assert == Malt::Format::CSS
 
 And that by calling #to_s we can get the rendered CSS document.
 

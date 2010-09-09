@@ -24,15 +24,15 @@ We can also get a hold of the LESS document via the Malt.file function.
 
   less = Malt.file('tmp/test.less')
 
-  less.class.assert == Malt::Formats::LESS
+  less.class.assert == Malt::Format::LESS
 
 We can convert the LESS document to a CSS document via the #to_css method.
 
   css = less.to_css
 
-We can see that the output is an instance of Malt::Formats::HTML.
+We can see that the output is an instance of Malt::Format::HTML.
 
-  css.class.assert == Malt::Formats::CSS
+  css.class.assert == Malt::Format::CSS
 
 And that by calling #to_s we can get the rendered CSS document.
 
