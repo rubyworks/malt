@@ -1,0 +1,1273 @@
+<html>
+<head>
+  <title>Malt Demonstrandum</title>
+
+  <!-- TODO: most of the css before the '*' can be removed. -->
+
+  <style>
+    #container{ margin: 0 auto; width: 800px; }
+
+    /* Debug borders */
+    /* p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 { border: 1px solid red; } */
+
+    body { font-size: 14px; line-height: 20px; margin: 1em 5% 1em 5%; font-family: Verdana, Arial, Helvetica, sans-serif; }
+    a { color: #336; text-decoration: underline; }
+    a:visited { color: #334; }
+    em { font-style: italic; }
+    strong { font-weight: bold; }
+    tt { color: navy; }
+
+    h1, h2, h3, h4, h5, h6 { color: #223; margin-top: 1.2em; margin-bottom: 0.5em; line-height: 1.3; }
+    h1 { border-bottom: 2px solid silver; }
+    h2 { border-bottom: 2px solid silver; padding-top: 0.5em; }
+
+    hr { color: #ccc; margin-top: 1.6em; }
+
+    p { color: #222; text-align: justify; margin-top: 0.5em; margin-bottom: 0.5em; line-height: 1.4em; }
+
+    /* pre { padding: 10; margin: 0; font-family: monospace; font-size: 0.9em; } */
+
+    pre.pass { color: green; }
+    pre.fail { color: red; }
+    pre.error { color: red; font-weight: bold; }
+
+    span#author { color: #527bbd; font-weight: bold; font-size: 1.1em; }
+    span#email { }
+    span#revision { }
+
+    div#footer { font-size: small; border-top: 2px solid silver; padding-top: 0.5em; margin-top: 4.0em; }
+    div#footer-text { float: left; padding-bottom: 0.5em; }
+    div#footer-badges { float: right; padding-bottom: 0.5em; }
+
+    /* Block element content. */
+    div.content { padding: 0; }
+
+    /* Block element titles. */
+    h1.title { font-weight: bold; text-align: left; font-size: 3em; margin-top: 1.0em; margin-bottom: 0.5em; }
+
+    /* Block element titles. */
+    div.title, caption.title { font-weight: bold; text-align: left; margin-top: 1.0em; margin-bottom: 0.5em; }
+    div.title + * { margin-top: 0; }
+    td div.title:first-child { margin-top: 0.0em; }
+    div.content div.title:first-child { margin-top: 0.0em; }
+    div.content + div.title { margin-top: 0.0em; }
+    div.sidebarblock > div.content { background: #ffffee; border: 1px solid silver; padding: 0.5em; }
+
+    img { border-style: none; }
+
+    dl { margin-top: 0.8em; margin-bottom: 0.8em; }
+    dt { margin-top: 0.5em; margin-bottom: 0; font-style: italic; }
+    dd > *:first-child { margin-top: 0; }
+    ul, ol { list-style-position: outside; }
+
+    thead { font-weight: bold; }
+    tfoot { font-weight: bold; }
+
+    *{margin:0;padding:0;}
+    html,body{height:100%;color:black;}
+    body{background-color:white;font:13.34px helvetica,arial,freesans,clean,sans-serif;*font-size:small;}
+    table{font-size:inherit;font:100%;}
+    select,input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+    select,option{padding:0 .25em;}
+    optgroup{margin-top:.5em;}
+    input.text{padding:1px 0;}
+    pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+    body *{line-height:1.4em;}
+    p{margin:1em 0;}
+    img{border:0;}
+    abbr{border-bottom:none;}
+
+    .wikistyle h1,.wikistyle h2,.wikistyle h3,.wikistyle h4,.wikistyle h5,.wikistyle h6{border:0!important;}
+    .wikistyle h1{font-size:170%!important;border-top:4px solid #aaa!important;padding-top:.5em!important;margin-top:1.5em!important;}
+    .wikistyle h1:first-child{margin-top:0!important;padding-top:.25em!important;border-top:none!important;}
+    .wikistyle h2{font-size:150%!important;margin-top:1.5em!important;border-top:4px solid #e0e0e0!important;padding-top:.5em!important;}
+    .wikistyle h3{margin-top:1em!important;}
+    .wikistyle p{margin:1em 0!important;line-height:1.5em!important;}
+    .wikistyle ul{margin:1em 0 1em 2em!important;}
+    .wikistyle ol{margin:1em 0 1em 2em!important;}
+    .wikistyle ul ul,.wikistyle ul ol,.wikistyle ol ol,.wikistyle ol ul{margin-top:0!important;margin-bottom:0!important;}
+    .wikistyle blockquote{margin:1em 0!important;border-left:5px solid #ddd!important;padding-left:.6em!important;color:#555!important;}
+    .wikistyle dt{font-weight:bold!important;margin-left:1em!important;}
+    .wikistyle dd{margin-left:2em!important;margin-bottom:1em!important;}
+    .wikistyle table{margin:1em 0!important;}
+    .wikistyle table th{border-bottom:1px solid #bbb!important;padding:.2em 1em!important;}
+    .wikistyle table td{border-bottom:1px solid #ddd!important;padding:.2em 1em!important;}
+    .wikistyle pre{margin:1em 0!important;font-size:90%!important;background-color:#f8f8ff!important;border:1px solid #dedede!important;padding:.5em!important;line-height:1.5em!important;color:#444!important;overflow:auto!important;}
+    .wikistyle pre code{padding:0!important;font-size:100%!important;background-color:#f8f8ff!important;border:none!important;}
+    .wikistyle code{font-size:90%!important;background-color:#f8f8ff!important;color:#444!important;padding:0 .2em!important;border:1px solid #dedede!important;}
+    .wikistyle pre.console{margin:1em 0!important;font-size:90%!important;background-color:black!important;padding:.5em!important;line-height:1.5em!important;color:white!important;}
+    .wikistyle pre.console code{padding:0!important;font-size:100%!important;background-color:black!important;border:none!important;color:white!important;}
+    .wikistyle pre.console span{color:#888!important;}
+    .wikistyle pre.console span.command{color:yellow!important;}
+
+    .title { font-size: 2em; }
+  </style>
+
+  <!-- TODO: only include if these files exists -->
+  <link href="../assets/styles/spec.css" type="text/css" rel="stylesheet">
+  <!-- spec.css might be a problem with clobber -->
+  <link href="spec.css" type="text/css" rel="stylesheet">
+
+  
+
+  <!-- JQuery is needed -->
+  <script src="jquery.js" type="text/javascript" language="javascript"></script>
+
+</head>
+
+<body class="wikistyle">
+
+  <!-- Side Table of Contents -->
+  <div id="sidebar" style="position: fixed; top: 10; right: 10; background: white;">
+    <a href="javascript: toc_toggle();">
+      <img src="img/icon/book.jpg" height="30px;" style="border: none;" alt="TOC" align="right"/>
+    </a>
+
+    <div id="toc_side" class="toc">
+    </div>
+  </div>
+
+  <div id="container">
+    <div id="header">
+      <img src="img/icon/book.jpg" align="left" style="padding-right: 10px;" alt=""/>
+
+      <div class="title">Malt Demonstrandum</div>
+
+      <h1>Table of Contents</h1>
+
+      <div class="toc">
+      </div>
+    </div>
+
+    <div id="content">
+      <h1>Malt</h1>
+<p>
+Malt is a multi-template rendering framework.
+</p>
+<pre>
+  require 'malt'
+</pre>
+<p>
+For example lets say we have a document called &#8216;test.rdoc&#8217;
+containing &#8230;
+</p>
+<pre>
+  = Example
+
+  This is an example of RDOC rendering.
+</pre>
+<p>
+We can convert RDoc documents to html using the universal, functional
+interface easily enough.
+</p>
+<pre>
+  html = Malt.render(:file=&gt;'tmp/test.rdoc')
+</pre>
+<p>
+In this example, Malt recognizes the type of file by the
+&#8217;.rdoc&#8217; extension and renders it using the default redering
+engine (in this case RDoc itself). By default the engine renders to HTML,
+so we did not need to specify the output :format option to the
+<tt>render</tt> method.
+</p>
+<p>
+Alternately we can use the object-oriented interface.
+</p>
+<pre>
+  rdoc = Malt.file('tmp/test.rdoc')
+</pre>
+<p>
+First we will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  rdoc.class.assert == Malt::Formats::RDoc
+</pre>
+<p>
+While we could have used `Malt::Formats::RDoc.new` to create the object
+directly, Malt provides the #file, as well as #text, methods for convience.
+We can convert the rdoc to html with the #to_html method.
+</p>
+<pre>
+  html = rdoc.to_html
+</pre>
+<p>
+Again notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+
+<h1>Formats</h1>
+<p>
+Malt support a wide variety of markup and template systems.
+</p>
+<p>
+Malt provides two distinct APIs for rendering each format &#8212;a
+single-point-of-entry functional interface, `Malt.render`, and an
+object-oriented interface where by each format is represented by a document
+class.
+</p>
+
+<h2>RDoc</h2>
+<p>
+Lets say we have a RDoc document called &#8216;test.rdoc&#8217; containing:
+</p>
+<pre>
+  = Example
+
+  This is an example of RDoc rendering.
+</pre>
+<p>
+We can convert rdoc documents to html easily via the univeral
+<tt>render</tt> function.
+</p>
+<pre>
+  html = Malt.render(:file=&gt;'tmp/test.rdoc')
+
+  html.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+Malt recognizes the file type by the  <tt>.rdoc</tt> extension. If we have
+a file that has a different extension, but is in fact an RDoc document, we
+can inform Malt.
+</p>
+<p>
+Lets say we have an RDoc document called &#8216;test.txt&#8217; containing:
+</p>
+<pre>
+  = Example
+
+  This is an example of RDoc rendering.
+</pre>
+<p>
+We can inform Malt as the actual type using the `:type` option.
+</p>
+<pre>
+  html = Malt.render(:file=&gt;'tmp/test.txt', :type=&gt;:rdoc)
+
+  html.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+Lets say we have an RDoc document called &#8216;test.rdoc&#8217; containing
+&#8230;
+</p>
+<pre>
+  = Example
+
+  This is an example of RDOC rendering.
+</pre>
+<p>
+We can convert rdoc documents to html very easily.
+</p>
+<pre>
+  rdoc = Malt.file('tmp/test.rdoc')
+
+  html = rdoc.to_html
+</pre>
+<p>
+First we will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the RDoc document directly to HTML via the #html method.
+</p>
+<pre>
+  out = rdoc.html
+
+  out.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+
+<h2>Textile</h2>
+<p>
+Malt supports Textile via RedCloth.
+</p>
+<p>
+Lets say we have a Textile document called &#8216;test.tt&#8217; containing
+&#8230;
+</p>
+<pre>
+  h1. Example
+
+  This is an example of Textile rendering.
+</pre>
+<p>
+We can redner the textile document via the universal render function.
+Textile documents are recognized by the <tt>.textile</tt> or <tt>.tt</tt>
+extension.
+</p>
+<pre>
+  html = Malt.render(:file=&gt;'tmp/test.tt')
+
+  html.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+Malt supports Textile via either the RedCloth or the <em>_</em> backend.
+</p>
+<p>
+Lets say we have an Textile document called &#8216;test.tt&#8217;
+containing &#8230;
+</p>
+<pre>
+  h1. Example
+
+  This is an example of Textile rendering.
+</pre>
+<p>
+We can access the file via the <tt>Malt.file</tt> method. Textile documents
+are recognized by the <tt>.textile</tt> or <tt>.tt</tt> extension.
+</p>
+<pre>
+  tile = Malt.file('tmp/test.tt')
+</pre>
+<p>
+We can the convert the document to a Malt Html object via the #to_html
+method.
+</p>
+<pre>
+  html = tile.to_html
+</pre>
+<p>
+Notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the document directly to HTML via the #html method.
+</p>
+<pre>
+  out = tile.html
+
+  out.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+
+<h2>Markdown</h2>
+<p>
+Malt supports Markdown via either the RDiscount, BlueCloth or Kramdown
+backends.
+</p>
+<p>
+Lets say we have a Markdown document called &#8216;test.md&#8217;
+containing &#8230;
+</p>
+<pre>
+  # Example
+
+  This is an example of Markdown rendering.
+</pre>
+<p>
+Markdown documents are recognized by the <tt>.markdown</tt> or <tt>.md</tt>
+file extensions.
+</p>
+<pre>
+  html = Malt.render(:file=&gt;'tmp/test.md')
+
+  html.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+By default teh RDiscount library is used to render markdown documents, but
+Malt supports BlueCloth and Kramdown as well. These case be used by setting
+the :engine option.
+</p>
+<pre>
+  html = Malt.render(:file=&gt;'tmp/test.md', :engine=&gt;:bluecloth)
+</pre>
+<p>
+And as we can see the document rendered as expected.
+</p>
+<pre>
+  html.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+And using the Kramdown library,
+</p>
+<pre>
+  html = Malt.render(:file=&gt;'tmp/test.md', :engine=&gt;:kramdown)
+</pre>
+<p>
+We can see the document rendered as well, though notice that Kramdown
+provides some bonus features compared to the other rendering engines.
+</p>
+<pre>
+  html.assert.include?('&lt;h1 id=&quot;example&quot;&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+Malt supports Markdown via either the RDiscount, BlueCloth or Kramdown
+backends.
+</p>
+<p>
+Lets say we have an Markdown document called &#8216;test.md&#8217;
+containing &#8230;
+</p>
+<pre>
+  # Example
+
+  This is an example of Markdown rendering.
+</pre>
+<p>
+We can access the file via the <tt>Malt.file</tt> method. Markdown
+documents are recognized by the <tt>.markdown</tt> or <tt>.md</tt> file
+extensions.
+</p>
+<pre>
+  mark = Malt.file('tmp/test.md')
+</pre>
+<p>
+We can the convert the document to a Malt Html object via the #to_html
+method.
+</p>
+<pre>
+  html = mark.to_html
+</pre>
+<p>
+Notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the document directly to HTML via the #html method.
+</p>
+<pre>
+  out = mark.html
+
+  out.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
+</pre>
+
+<h2>ERB</h2>
+<p>
+Malt supports ERB via the ERB and Erubis engines. 
+</p>
+<p>
+Lets say we have a ERB document called &#8216;test.erb&#8217; containing
+&#8230;
+</p>
+<pre>
+  &lt;h1&gt;Example &lt;%= title %&gt;&lt;/h1&gt;
+
+  &lt;p&gt;This is an example of ERB template.&lt;/p&gt;
+</pre>
+<p>
+We can render erb documents via the <tt>render</tt> method, as we can any
+format. However, becuase ERB if a template format and not just a markup
+syntax, we need to also provide the <tt>render</tt> methods with data for
+interpolation into the ERB document. 
+</p>
+<pre>
+  data = { :title=&gt;&quot;Document&quot; }
+
+  html = Malt.render(:file=&gt;'tmp/test.erb', :data=&gt;data)
+</pre>
+<p>
+And as we can see the document rendered as expected.
+</p>
+<pre>
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+ERB doesn&#8217;t actually care what format the document is rendered as.
+The  template could have been any text file what so ever, so using the
+`:format` option would have no effect here.
+</p>
+<p>
+By default the common ERB library is used to render erb documents. By
+setting the :engine option, Erubis can be used instead.
+</p>
+<pre>
+  html = Malt.render(:file=&gt;'tmp/test.erb', :data=&gt;data, :engine=&gt;:erubis)
+</pre>
+<p>
+And as we can see the document rendered as expected.
+</p>
+<pre>
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Malt supports template engines as well as formats. 
+</p>
+<p>
+Lets say we have an ERB document called &#8216;test.erb&#8217; containing
+&#8230;
+</p>
+<pre>
+  &lt;h1&gt;Example &lt;%= title %&gt;&lt;/h1&gt;
+
+  &lt;p&gt;This is an example of ERB template.&lt;/p&gt;
+</pre>
+<p>
+We can render erb documents to any format we wish.
+</p>
+<pre>
+  erb = Malt.file('tmp/test.erb')
+
+  html = erb.to_html(:title=&gt;&quot;Document&quot;)
+</pre>
+<p>
+We will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the document directly to HTML via the #html method.
+</p>
+<pre>
+  out = erb.html(:title=&gt;&quot;Alternate&quot;)
+
+  out.assert.include?('&lt;h1&gt;Example Alternate&lt;/h1&gt;')
+</pre>
+<p>
+ERB doesn&#8217;t actually care what format the document is rendered as.
+</p>
+
+<h2>Liquid</h2>
+<p>
+Lets say we have a Liquid document called &#8216;test.liquid&#8217;
+containing:
+</p>
+<pre>
+  &lt;h1&gt;Example {{ title }}&lt;/h1&gt;
+
+  &lt;p&gt;This is an example of a Liquid template.&lt;/p&gt;
+</pre>
+<p>
+We can render liquid documents via the <tt>render</tt> method, as we can
+any format. However, becuase Liquid is a template format and not just a
+markup syntax, we need to also provide the <tt>render</tt> function with
+data for interpolation into the liquid document. 
+</p>
+<pre>
+  data = { :title=&gt;&quot;Document&quot; }
+
+  html = Malt.render(:file=&gt;'tmp/test.liquid', :data=&gt;data)
+
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Liquid doesn&#8217;t actually care what format the document is rendered as,
+since it is purely a template engine that can be applied to any other
+format. Lets say we have a Liquid document called &#8216;test.liquid&#8217;
+containing &#8230;
+</p>
+<pre>
+  &lt;h1&gt;Example {{ title }}&lt;/h1&gt;
+
+  &lt;p&gt;This is an example of a Liquid template.&lt;/p&gt;
+</pre>
+<p>
+We can render erb documents to any format we wish.
+</p>
+<pre>
+  liq = Malt.file('tmp/test.liquid')
+
+  html = liq.to_html(:title=&gt;&quot;Document&quot;)
+</pre>
+<p>
+We will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+We will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+Then by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the document directly to HTML via the #html method.
+</p>
+<pre>
+  out = liq.html(:title=&gt;&quot;Alternate&quot;)
+
+  out.assert.include?('&lt;h1&gt;Example Alternate&lt;/h1&gt;')
+</pre>
+<p>
+Liquid doesn&#8217;t actually care what format the document is rendered as,
+since it is purely a template engine that can be applied to any format.
+</p>
+
+<h2>Haml</h2>
+<p>
+Lets say we have a Haml document called &#8216;test.haml&#8217; containing:
+</p>
+<pre>
+  %h1== Example #{title}
+  %p This is an example of a Haml template.
+</pre>
+<p>
+We can render Haml documents via the <tt>render</tt> method, as we can any
+format. While it might not appear as such on first glance, Haml is actually
+a template format and not just a markup language, so we need to also
+provide the <tt>render</tt> function with data for interpolation into the
+Haml document. 
+</p>
+<pre>
+  data = { :title=&gt;&quot;Document&quot; }
+
+  html = Malt.render(:file=&gt;'tmp/test.haml', :data=&gt;data)
+
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+We can get a hold of the Haml document via the Malt.file function.
+</p>
+<pre>
+  haml = Malt.file('tmp/test.haml')
+
+  haml.class.assert == Malt::Formats::Haml
+</pre>
+<p>
+We can convert Haml documents to html very easily.
+</p>
+<pre>
+  data = {:title =&gt; &quot;Document&quot;}
+
+  html = haml.to_html(data)
+</pre>
+<p>
+First we will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the Haml document directly to HTML via the #html method.
+</p>
+<pre>
+  out = haml.html(data)
+
+  out.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+
+<h2>RTAL</h2>
+<p>
+Lets say we have a Rtals document called &#8216;test.rtal&#8217;
+containing:
+</p>
+<pre>
+  &lt;h1&gt;Example&lt;span replace=&quot;title&quot;&gt;DUMMY&lt;/span&gt;&lt;/h1&gt;
+  &lt;p&gt;This is an example of a Rtals template.&lt;/p&gt;
+</pre>
+<p>
+We can render Rtal documents via the <tt>render</tt> method, as we can any
+format.
+</p>
+<pre>
+  data = { :title=&gt;&quot;Document&quot; }
+
+  html = Malt.render(:file=&gt;'tmp/test.rtal', :data=&gt;data)
+
+  html.assert.include?('&lt;h1&gt;Example &lt;span&gt;Document&lt;/span&gt;&lt;/h1&gt;')
+</pre>
+
+<h2>Radius</h2>
+<p>
+Lets say we have a Radius document called &#8216;test.radius&#8217;
+containing:
+</p>
+<pre>
+  &lt;h1&gt;Example &lt;r:title /&gt;&lt;/h1&gt;
+  &lt;p&gt;This is an example of a Radius template.&lt;/p&gt;
+</pre>
+<p>
+We can render Radius documents via the <tt>render</tt> method, as we can
+any format.
+</p>
+<pre>
+  data = {:title=&gt;&quot;Document&quot;}
+
+  html = Malt.render(:file=&gt;'tmp/test.radius', :data=&gt;data, :tag_prefix=&gt;'r')
+
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+We can get a hold of the Radius document via the Malt.file function.
+</p>
+<pre>
+  radi = Malt.file('tmp/test.radius', :tag_prefix=&gt;'r')
+
+  radi.class.assert == Malt::Formats::Radius
+</pre>
+<p>
+Notice here we have passed an option to the file constructor. This option
+is passed on the underlying Radius.new method. Now we can convert Radius
+documents to HTML documents via #to_html.
+</p>
+<pre>
+  data = {:title =&gt; &quot;Document&quot;}
+
+  html = radi.to_html(data)
+</pre>
+<p>
+First we will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the Radius document directly to HTML via the #html
+method.
+</p>
+<pre>
+  out = radi.html(data)
+
+  out.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+
+<h2>Tenjin</h2>
+<p>
+While Tenjin is generally intended to be used to render HTML documents, it
+is a general purpose template format that can be used for any type of
+document. For these uses, the Tenjin file extension is
+&#8217;.tenjin&#8217;.
+</p>
+<p>
+Lets say we have a Tenjin document called &#8216;test.tenjin&#8217;
+containing:
+</p>
+<pre>
+  Hello #{@name}!
+</pre>
+<p>
+We can render the document via #render.
+</p>
+<pre>
+  data = { :name=&gt;'World', :items=&gt;['A','B','C'] }
+
+  @text = Malt.render(:file=&gt;'tmp/test.tenjin', :data=&gt;data)
+</pre>
+<p>
+And we can verify that @text is:
+</p>
+<pre>
+  Hello World!
+</pre>
+<p>
+We can get a OOP interface tothe Tenjin document via the Malt.file
+function.
+</p>
+<pre>
+  tenjin = Malt.file('tmp/test.tenjin')
+
+  tenjin.class.assert == Malt::Formats::Tenjin
+</pre>
+<p>
+Since Tenjin is aa general pupose template foramt, we can convert Tenjin
+documents to any format we wish. For instance we can convert our example to
+a Text documents via #to_txt.
+</p>
+<pre>
+  data = { :name=&gt;'World', :items=&gt;['&lt;AAA&gt;', 'B&amp;B', '&quot;CCC&quot;'] }
+
+  text = tenjin.to_txt(data)
+</pre>
+<p>
+First we will notice that the output is an instance of
+`Malt::Formats::Text`.
+</p>
+<pre>
+  text.class.assert == Malt::Formats::Text
+</pre>
+<p>
+And that by calling #to_s we can get the rendered Text document.
+</p>
+<pre>
+  text.to_s.assert.include?('Hello World!')
+</pre>
+<p>
+Or we can convert the Tenjin document directly to text via the #txt method.
+</p>
+<pre>
+  out = tenjin.txt(data)
+
+  out.assert.include?('Hello World!')
+</pre>
+
+<h2>RBHTML</h2>
+<p>
+Tenjin is a general purpose template language with support for multiple
+languages including Ruby. The variation of Tenjin for Ruby, called
+rbTenjin, defines a document format with an extension of `.rbhtml`.
+</p>
+<p>
+Lets say we have a Tenjin document called &#8216;test.rbhtml&#8217;
+containing:
+</p>
+<pre>
+  Hello #{@name}!
+  &lt;ul&gt;
+  &lt;?rb for item in @items ?&gt;
+   &lt;li&gt;${item}&lt;/li&gt;
+  &lt;?rb end ?&gt;
+  &lt;/ul&gt;
+</pre>
+<p>
+We can render the document via #render.
+</p>
+<pre>
+  data = { :name=&gt;'World', :items=&gt;['&lt;AAA&gt;', 'B&amp;B', '&quot;CCC&quot;'] }
+
+  @html = Malt.render(:file=&gt;'tmp/test.rbhtml', :data=&gt;data)
+</pre>
+<p>
+And we can verify that @html is:
+</p>
+<pre>
+  Hello World!
+  &lt;ul&gt;
+   &lt;li&gt;&amp;lt;AAA&amp;gt;&lt;/li&gt;
+   &lt;li&gt;B&amp;amp;B&lt;/li&gt;
+   &lt;li&gt;&amp;quot;CCC&amp;quot;&lt;/li&gt;
+  &lt;/ul&gt;
+</pre>
+<p>
+We can get a hold of the RBHTML document via the Malt.file function.
+</p>
+<pre>
+  rbhtml = Malt.file('tmp/test.rbhtml')
+
+  rbhtml.class.assert == Malt::Formats::RBHTML
+</pre>
+<p>
+We can convert RBHTML documents to HTML documents via #to_html.
+</p>
+<pre>
+  data = { :name=&gt;'World', :items=&gt;['&lt;AAA&gt;', 'B&amp;B', '&quot;CCC&quot;'] }
+
+  html = rbhtml.to_html(data)
+</pre>
+<p>
+First we will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('Hello World!')
+</pre>
+<p>
+Or we can convert the RBHTML document directly to HTML via the #html
+method.
+</p>
+<pre>
+  out = rbhtml.html(data)
+
+  out.assert.include?('Hello World!')
+</pre>
+
+<h2>Sass</h2>
+<p>
+Lets say we have a Sass document called &#8216;test.sass&#8217; containing:
+</p>
+<pre>
+  $blue: #3bbfce
+  $margin: 16px
+
+  .content-navigation
+    border-color: $blue
+    color: darken($blue, 9%)
+
+  .border
+    padding: $margin / 2
+    margin: $margin / 2
+    border-color: $blue
+</pre>
+<p>
+We can render the Sass document via #render.
+</p>
+<pre>
+  @css = Malt.render(:file=&gt;'tmp/test.sass')
+</pre>
+<p>
+And we can verify that @css is the expected CSS:
+</p>
+<pre>
+  .content-navigation {
+    border-color: #3bbfce;
+    color: #2ca2af; }
+
+  .border {
+    padding: 8px;
+    margin: 8px;
+    border-color: #3bbfce; }
+</pre>
+<p>
+We can also get a hold of the Sass document via the Malt.file function.
+</p>
+<pre>
+  sass = Malt.file('tmp/test.sass')
+
+  sass.class.assert == Malt::Formats::Sass
+</pre>
+<p>
+We can convert the Sass document to a CSS document via the #to_css method.
+</p>
+<pre>
+  css = sass.to_css
+</pre>
+<p>
+We can see that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  css.class.assert == Malt::Formats::CSS
+</pre>
+<p>
+And that by calling #to_s we can get the rendered CSS document.
+</p>
+<pre>
+  css.to_s.assert.include?('border-color: #3bbfce;')
+</pre>
+<p>
+Or we can convert the Sass document directly to CSS via the #css method.
+</p>
+<pre>
+  out = sass.css
+
+  out.assert.include?('border-color: #3bbfce;')
+</pre>
+
+<h2>SCSS</h2>
+<p>
+Lets say we have a SCSS document called &#8216;test.scss&#8217; containing:
+</p>
+<pre>
+  $blue: #3bbfce;
+  $margin: 16px;
+
+  .content-navigation {
+    border-color: $blue;
+    color:
+      darken($blue, 9%);
+  }
+
+  .border {
+    padding: $margin / 2;
+    margin: $margin / 2;
+    border-color: $blue;
+  }
+</pre>
+<p>
+We can render the Sass document via #render.
+</p>
+<pre>
+  @css = Malt.render(:file=&gt;'tmp/test.scss')
+</pre>
+<p>
+And we can verify that @css is the expected CSS:
+</p>
+<pre>
+  .content-navigation {
+    border-color: #3bbfce;
+    color: #2ca2af; }
+
+  .border {
+    padding: 8px;
+    margin: 8px;
+    border-color: #3bbfce; }
+</pre>
+<p>
+We can also get a hold of the SCSS document via the Malt.file function.
+</p>
+<pre>
+  scss = Malt.file('tmp/test.scss')
+
+  scss.class.assert == Malt::Formats::SCSS
+</pre>
+<p>
+We can convert the SCSS document to a CSS document via the #to_css method.
+</p>
+<pre>
+  css = scss.to_css
+</pre>
+<p>
+We can see that the output is an instance of Malt::Formats::SCSS.
+</p>
+<pre>
+  css.class.assert == Malt::Formats::CSS
+</pre>
+<p>
+And that by calling #to_s we can get the rendered CSS document.
+</p>
+<pre>
+  css.to_s.assert.include?('border-color: #3bbfce;')
+</pre>
+<p>
+Or we can convert the SCSS document directly to CSS via the #css method.
+</p>
+<pre>
+  out = scss.css
+
+  out.assert.include?('border-color: #3bbfce;')
+</pre>
+
+<h2>LESS</h2>
+<p>
+Lets say we have a LESS document called &#8216;test.less&#8217; containing:
+</p>
+<pre>
+  @brand_color: #4D926F;
+  #header {
+    color: @brand_color;
+  }
+  h2 {
+    color: @brand_color;
+  }
+</pre>
+<p>
+We can render it via Malt with #render.
+</p>
+<pre>
+  @css = Malt.render(:file=&gt;'tmp/test.less')
+</pre>
+<p>
+And we can verify that @css is:
+</p>
+<pre>
+  #header, h2 { color: #4d926f; }
+</pre>
+<p>
+Look how concise that is. LESS is pretty slick.
+</p>
+<p>
+We can also get a hold of the LESS document via the Malt.file function.
+</p>
+<pre>
+  less = Malt.file('tmp/test.less')
+
+  less.class.assert == Malt::Formats::LESS
+</pre>
+<p>
+We can convert the LESS document to a CSS document via the #to_css method.
+</p>
+<pre>
+  css = less.to_css
+</pre>
+<p>
+We can see that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  css.class.assert == Malt::Formats::CSS
+</pre>
+<p>
+And that by calling #to_s we can get the rendered CSS document.
+</p>
+<pre>
+  css.to_s.assert.include?('#header, h2 { color: #4d926f; }')
+</pre>
+<p>
+Or we can convert the LESS document directly to CSS via the #css method.
+</p>
+<pre>
+  out = less.css
+
+  out.assert.include?('#header, h2 { color: #4d926f; }')
+</pre>
+
+<h2>Ruby</h2>
+<p>
+It may not seem obvious at first, but Ruby itself can be used as a template
+system.
+</p>
+<p>
+Lets say we have a Ruby document called &#8216;test.rb&#8217; containing:
+</p>
+<pre>
+  &quot;&lt;h1&gt;Example #{ title }&lt;/h1&gt;\n&quot; +
+  &quot;&lt;p&gt;This is an example of Ruby rendering.&lt;/p&gt;&quot;
+</pre>
+<p>
+We can run this Ruby script thru Malt&#8217;s <tt>render</tt> function.
+</p>
+<pre>
+  data = {:title =&gt; 'Document'}
+
+  html = Malt.render(:file=&gt;'tmp/test.rb', :data=&gt;data)
+</pre>
+<p>
+Whatever was the final result of evaluating the Ruby script, converted to a
+string via #to_s, will be the result of the rendering.
+</p>
+<pre>
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+We can get a hold of the Ruby template via the Malt.file function.
+</p>
+<pre>
+  ruby = Malt.file('tmp/test.rb')
+
+  ruby.class.assert == Malt::Formats::Ruby
+</pre>
+<p>
+Ruby is a <em>universal template format</em>, so it can be converted to any
+other format (even if it is not really that format).
+</p>
+<pre>
+  data = {:title =&gt; &quot;Document&quot;}
+
+  html = ruby.to_html(data)
+</pre>
+<p>
+First we will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the Ruby document directly to HTML via the #html method.
+</p>
+<pre>
+  out = ruby.html(data)
+
+  out.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+
+
+    </div>
+  </div>
+
+  <br/><br/><br/>
+</body>
+
+</html>
+
+<script src="../assets/scripts/spec.js" type="text/javascript" language="javascript"></script>
+
+<script type="text/javascript" language="javascript">
+  /*****************************************************************
+   * $.toc()
+   * by rebecca murphey
+   * rmurphey gmail com
+   *
+   * This function is called on its own and takes as an argument
+   * a list of selectors with which it will build a table of
+   * contents. 
+   *
+   * The first selector will make up the top level of the TOC;
+   * the second selector will make up the second level of the TOC;
+   * etc.
+   *
+   * This function returns a div containing nested unordered lists;
+   * each list item is linked to an anchor tag added before the item
+   * on the page.
+   *
+   * usage: $.toc('h1,h2,h3').prependTo('body');
+   ************************************************************************/
+  (function($) { 
+    $.toc = function(tocList) {
+      $(tocList).addClass('jquery-toc');
+      var tocListArray = tocList.split(',');
+      $.each(tocListArray, function(i,v) { tocListArray[i] = $.trim(v); });
+      var $elements = $('.jquery-toc');
+      $('body').append('<div></div>');
+      var $toc = $('body div:last');
+      var lastLevel = 1;
+      $toc.append('<ul class="jquery-toc-1"></ul>');
+      $elements.each(function() {
+        var $e = $(this);
+        var text = $e.text();
+        var anchor = text.replace(/ /g,'-');
+        $e.before('<a name="' + anchor + '"></a>');
+        var level;
+        $.each(tocListArray, function(i,v) { 
+          if (v.match(' ')) {
+            var vArray = v.split(' '); 
+            var e = vArray[vArray.length - 1];
+          } else { e = v; }
+          if ($e.is(e)) { level = i+1; } 
+        });
+        var className = 'jquery-toc-' + level;
+        var li = '<li><a href="#' + anchor + '">' + text + '</a></li>';
+        if (level == lastLevel) {
+          $('ul.' + className + ':last',$toc).append(li);
+        } else if (level > lastLevel) {
+          var parentLevel = level - 1;
+          var parentClassName = 'jquery-toc-' + parentLevel;
+          $('ul.' + parentClassName + ':last',$toc).
+            append('<ul class="' + className + '"></ul>');
+          $('ul.' + className + ':last',$toc).append(li);
+        } else if (level < lastLevel) {
+          $('ul.' + className + ':last',$toc).append(li);
+        }
+        lastLevel = level;
+      });
+      var $toc_ul = $('ul.jquery-toc-1',$toc);
+      $toc.remove();
+      return($toc_ul);
+   }
+  })(jQuery);
+</script>
+
+<script>
+  function toc_toggle() {
+    $('#toc_side').toggle();
+    $("pre").addClass("pass");
+    $("pre:contains('FAIL:')").addClass("fail");
+    $("pre:contains('ERROR:')").addClass("error");
+  };
+
+  $.toc('#content h1,h2,h3,h4').appendTo('.toc');
+
+  toc_toggle();
+</script>
+
