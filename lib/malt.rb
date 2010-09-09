@@ -27,7 +27,7 @@ module Malt
     type = ext_to_type(type)
     malt_class = registry[type]
     raise "unkown type -- #{type}" unless malt_class
-    malt_class.new(options.merge(:file=>file))
+    malt_class.new(options.merge(:file=>file,:type=>type))
   end
 
   #
@@ -40,7 +40,7 @@ module Malt
     type = ext_to_type(type)
     malt_class = registry[type] || Formats::Text
     #raise "unkown type -- #{type}" unless malt_class
-    malt_class.new(options.merge(:text=>text,:file=>file))
+    malt_class.new(options.merge(:text=>text,:file=>file,:type=>type))
   end
 
   #

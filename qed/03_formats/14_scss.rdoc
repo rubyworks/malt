@@ -36,13 +36,13 @@ We can also get a hold of the SCSS document via the Malt.file function.
 
   scss = Malt.file('tmp/test.scss')
 
-  scss.class.assert == Malt::Formats::Scss
+  scss.class.assert == Malt::Formats::SCSS
 
 We can convert the SCSS document to a CSS document via the #to_css method.
 
   css = scss.to_css
 
-We can see that the output is an instance of Malt::Formats::HTML.
+We can see that the output is an instance of Malt::Formats::SCSS.
 
   css.class.assert == Malt::Formats::CSS
 

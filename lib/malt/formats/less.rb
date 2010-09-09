@@ -7,7 +7,7 @@ module Malt::Formats
   #
   # See http://lesscss.org/
   #
-  class Less < Abstract
+  class LESS < Abstract
 
     register('less')
 

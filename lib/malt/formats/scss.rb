@@ -4,11 +4,12 @@ require 'malt/engines/sass'
 
 module Malt::Formats
 
-  # Sass Format
+  # SCSS Format
   #
-  class Sass < Abstract
+  # This uses the same engine as Sass.
+  class SCSS < Abstract
 
-    register 'sass'
+    register 'scss'
 
     #
     def css(data=nil, &yld)
