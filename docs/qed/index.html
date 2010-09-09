@@ -140,68 +140,14 @@
     </div>
 
     <div id="content">
-      <h1>Malt</h1>
+      <h1>Introduction</h1>
 <p>
-Malt is a multi-template rendering framework.
+Malt is a multi-template rendering framework. It provides two convenient
+interfaces for working with backend template systems. The first is  a
+functional interface via `Malt.render` method. And the second is an
+object-oriented interface that can be easily constructed via the 
+`Malt.file` or `Malt.text` methods.
 </p>
-<pre>
-  require 'malt'
-</pre>
-<p>
-For example lets say we have a document called &#8216;test.rdoc&#8217;
-containing &#8230;
-</p>
-<pre>
-  = Example
-
-  This is an example of RDOC rendering.
-</pre>
-<p>
-We can convert RDoc documents to html using the universal, functional
-interface easily enough.
-</p>
-<pre>
-  html = Malt.render(:file=&gt;'tmp/test.rdoc')
-</pre>
-<p>
-In this example, Malt recognizes the type of file by the
-&#8217;.rdoc&#8217; extension and renders it using the default redering
-engine (in this case RDoc itself). By default the engine renders to HTML,
-so we did not need to specify the output :format option to the
-<tt>render</tt> method.
-</p>
-<p>
-Alternately we can use the object-oriented interface.
-</p>
-<pre>
-  rdoc = Malt.file('tmp/test.rdoc')
-</pre>
-<p>
-First we will notice that the output is an instance of Malt::Formats::HTML.
-</p>
-<pre>
-  rdoc.class.assert == Malt::Formats::RDoc
-</pre>
-<p>
-While we could have used `Malt::Formats::RDoc.new` to create the object
-directly, Malt provides the #file, as well as #text, methods for convience.
-We can convert the rdoc to html with the #to_html method.
-</p>
-<pre>
-  html = rdoc.to_html
-</pre>
-<p>
-Again notice that the output is an instance of Malt::Formats::HTML.
-</p>
-<pre>
-  html.class.assert == Malt::Formats::HTML
-</pre>
-<p>
-And that by calling #to_s we can get the rendered HTML document.
-</p>
-<pre>
-  html.to_s.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
-</pre>
 
 <h1>Formats</h1>
 <p>
@@ -233,9 +179,14 @@ We can convert rdoc documents to html easily via the univeral
   html.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
 </pre>
 <p>
-Malt recognizes the file type by the  <tt>.rdoc</tt> extension. If we have
-a file that has a different extension, but is in fact an RDoc document, we
-can inform Malt.
+Malt recognizes the type of file by the &#8217;.rdoc&#8217; extension and
+renders it using the default redering engine (in this case RDoc itself). By
+default the engine renders to HTML, so we did not need to specify the
+output :format option to the <tt>render</tt> method.
+</p>
+<p>
+If we have a file that has a different extension, but is in fact an RDoc
+document, we can inform Malt.
 </p>
 <p>
 Lets say we have an RDoc document called &#8216;test.txt&#8217; containing:
@@ -254,13 +205,45 @@ We can inform Malt as the actual type using the `:type` option.
   html.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
 </pre>
 <p>
-Lets say we have an RDoc document called &#8216;test.rdoc&#8217; containing
-&#8230;
+Alternately we can use the object-oriented interface. Again, lets say we
+have an RDoc document called &#8216;test.rdoc&#8217; containing &#8230;
 </p>
 <pre>
   = Example
 
   This is an example of RDOC rendering.
+</pre>
+<p>
+Then we can use the `Malt.file` method to instantiate an RDoc object.
+</p>
+<pre>
+  rdoc = Malt.file('tmp/test.rdoc')
+</pre>
+<p>
+We will notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  rdoc.class.assert == Malt::Formats::RDoc
+</pre>
+<p>
+While we could have used `Malt::Formats::RDoc.new` to create the object
+directly, Malt provides the #file, as well as #text, methods for convience.
+We can convert the rdoc to html with the #to_html method.
+</p>
+<pre>
+  html = rdoc.to_html
+</pre>
+<p>
+Again notice that the output is an instance of Malt::Formats::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Formats::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example&lt;/h1&gt;')
 </pre>
 <p>
 We can convert rdoc documents to html very easily.
