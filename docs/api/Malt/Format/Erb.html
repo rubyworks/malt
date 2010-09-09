@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Malt::Format::Erb</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      $('#documentation pre').wrapInner('<code></code>');
+      hljs.tabReplace = '    ';
+      hljs.initHighlightingOnLoad('ruby');
+
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind( "click", highlightClickTarget );
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../../index.html">Malt</a>&nbsp;
+      <a href="/">Malt::Format::Erb</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../../lib/malt/formats/erb_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/malt/formats/erb.rb">lib/malt/formats/erb.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <!-- why was this class="link" ? -->
+          <li class="class"><a href="AbstractTemplate.html">Malt::Format::AbstractTemplate</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="method">
+              <a href="#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-precompile">#precompile</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-rb">#rb</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-to_html">#to_html</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-to_rb">#to_rb</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-to_ruby">#to_ruby</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../../History_rdoc.html">History.rdoc</a></li>
+        
+          <li class="file"><a href="../../License_txt.html">License.txt</a></li>
+        
+          <li class="file"><a href="../../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../../Malt.html">Malt</a></li>
+        
+          <li class="class"><a href="../../Malt/Config.html">Malt::Config</a></li>
+        
+          <li class="module"><a href="../../Malt/Engine.html">Malt::Engine</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Abstract.html">Malt::Engine::Abstract</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/BlueCloth.html">Malt::Engine::BlueCloth</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Erb.html">Malt::Engine::Erb</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Erubis.html">Malt::Engine::Erubis</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Haml.html">Malt::Engine::Haml</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Kramdown.html">Malt::Engine::Kramdown</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Less.html">Malt::Engine::Less</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Liquid.html">Malt::Engine::Liquid</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RDiscount.html">Malt::Engine::RDiscount</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RDoc.html">Malt::Engine::RDoc</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RTALS.html">Malt::Engine::RTALS</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Radius.html">Malt::Engine::Radius</a></li>
+        
+          <li class="module"><a href="../../Malt/Engine/Radius/context;.html">Malt::Engine::Radius::context;</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RedCloth.html">Malt::Engine::RedCloth</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Ruby.html">Malt::Engine::Ruby</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Sass.html">Malt::Engine::Sass</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Tenjin.html">Malt::Engine::Tenjin</a></li>
+        
+          <li class="module"><a href="../../Malt/Format.html">Malt::Format</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Abstract.html">Malt::Format::Abstract</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/AbstractTemplate.html">Malt::Format::AbstractTemplate</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/CSS.html">Malt::Format::CSS</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Erb.html">Malt::Format::Erb</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/HTML.html">Malt::Format::HTML</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Haml.html">Malt::Format::Haml</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/LESS.html">Malt::Format::LESS</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Latex.html">Malt::Format::Latex</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Liquid.html">Malt::Format::Liquid</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Markdown.html">Malt::Format::Markdown</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/PDF.html">Malt::Format::PDF</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/RBHTML.html">Malt::Format::RBHTML</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/RDoc.html">Malt::Format::RDoc</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/RHTML.html">Malt::Format::RHTML</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Radius.html">Malt::Format::Radius</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Rtals.html">Malt::Format::Rtals</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Ruby.html">Malt::Format::Ruby</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/SCSS.html">Malt::Format::SCSS</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Sass.html">Malt::Format::Sass</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Tenjin.html">Malt::Format::Tenjin</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Text.html">Malt::Format::Text</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Textile.html">Malt::Format::Textile</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/UnsupportedConversion.html">Malt::Format::UnsupportedConversion</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/YAML.html">Malt::Format::YAML</a></li>
+        
+          <li class="module"><a href="../../Malt/Kernel.html">Malt::Kernel</a></li>
+        
+          <li class="class"><a href="../../Malt/Markup.html">Malt::Markup</a></li>
+        
+          <li class="class"><a href="../../Malt/Template.html">Malt::Template</a></li>
+        
+          <li class="class"><a href="../../Hash.html">Hash</a></li>
+        
+          <li class="class"><a href="../../OpenStruct.html">OpenStruct</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.3.0
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Erb</h1>
+      
+
+      
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="html-method" class="method-detail ">
+        <a name="method-i-html"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">html</span><span
+            class="method-args">(data=nil, &yld)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Technically method_missing will pick this up, but since it is likely to be
+the most commonly used, adding the method directly will provide a small
+speed boost.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="html-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/formats/erb.rb, line 33</span>
+33:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">html</span>(<span class="ruby-identifier">data</span>=<span class="ruby-keyword kw">nil</span>, &amp;<span class="ruby-identifier">yld</span>)
+34:       <span class="ruby-identifier">render</span>(<span class="ruby-value">:html</span>, <span class="ruby-identifier">data</span>, &amp;<span class="ruby-identifier">yld</span>)
+35:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="precompile-method" class="method-detail method-alias">
+        <a name="method-i-precompile"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">precompile</span><span
+            class="method-args">(*)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="rb-method" class="method-detail ">
+        <a name="method-i-rb"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">rb</span><span
+            class="method-args">(*)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+TODO: Lookup engine from engine registry.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="rb-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/formats/erb.rb, line 14</span>
+14:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rb</span>(*)
+15:       <span class="ruby-identifier">render_engine</span>.<span class="ruby-identifier">compile</span>(<span class="ruby-value">:text=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">text</span>, <span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>)
+16:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="to-html-method" class="method-detail ">
+        <a name="method-i-to_html"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">to_html</span><span
+            class="method-args">(data=nil, &yld)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Technically method_missing will pick this up, but since it is likely to be
+the most commonly used, adding the method directly will provide a small
+speed boost.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="to-html-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/formats/erb.rb, line 40</span>
+40:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_html</span>(<span class="ruby-identifier">data</span>=<span class="ruby-keyword kw">nil</span>, &amp;<span class="ruby-identifier">yld</span>)
+41:       <span class="ruby-identifier">new_text</span>    = <span class="ruby-identifier">render</span>(<span class="ruby-value">:html</span>, <span class="ruby-identifier">data</span>, &amp;<span class="ruby-identifier">yld</span>)
+42:       <span class="ruby-identifier">new_file</span>    = <span class="ruby-identifier">refile</span>(<span class="ruby-value">:html</span>)
+43:       <span class="ruby-identifier">new_options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:text=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">new_text</span>, <span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">new_file</span>, <span class="ruby-value">:type=</span><span class="ruby-operator">&gt;</span><span class="ruby-value">:html</span>)
+44:       <span class="ruby-constant">HTML</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">new_options</span>)
+45:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="to-rb-method" class="method-detail ">
+        <a name="method-i-to_rb"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">to_rb</span><span
+            class="method-args">(*)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+<a href="Erb.html">Erb</a> templates can be &#8220;pre-compiled&#8221; into
+<a href="Ruby.html">Ruby</a> templates.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="to-rb-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/formats/erb.rb, line 19</span>
+19:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_rb</span>(*)
+20:       <span class="ruby-identifier">text</span> = <span class="ruby-identifier">rb</span>
+21:       <span class="ruby-constant">Ruby</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:text=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">text</span>, <span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">refile</span>(<span class="ruby-value">:rb</span>))
+22:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Erb.html#method-i-to_ruby">to_ruby</a>, <a href="Erb.html#method-i-precompile">precompile</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="to-ruby-method" class="method-detail method-alias">
+        <a name="method-i-to_ruby"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">to_ruby</span><span
+            class="method-args">(*)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="private-instance-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="render-engine-method" class="method-detail ">
+        <a name="method-i-render_engine"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">render_engine</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="render-engine-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/formats/erb.rb, line 89</span>
+89:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_engine</span>
+90:       <span class="ruby-ivar">@render_engine</span> <span class="ruby-operator">||=</span> (
+91:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">engine</span>
+92:         <span class="ruby-keyword kw">when</span> <span class="ruby-value">:erubis</span>
+93:           <span class="ruby-constant">Malt</span><span class="ruby-operator">::</span><span class="ruby-constant">Engine</span><span class="ruby-operator">::</span><span class="ruby-constant">Erubis</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>)
+94:         <span class="ruby-keyword kw">else</span>
+95:           <span class="ruby-constant">Malt</span><span class="ruby-operator">::</span><span class="ruby-constant">Engine</span><span class="ruby-operator">::</span><span class="ruby-constant">Erb</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>)
+96:         <span class="ruby-keyword kw">end</span>
+97:       )
+98:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

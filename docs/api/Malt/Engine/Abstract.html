@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Malt::Engine::Abstract</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      $('#documentation pre').wrapInner('<code></code>');
+      hljs.tabReplace = '    ';
+      hljs.initHighlightingOnLoad('ruby');
+
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind( "click", highlightClickTarget );
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../../index.html">Malt</a>&nbsp;
+      <a href="/">Malt::Engine::Abstract</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../../lib/malt/engines/abstract_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/malt/engines/abstract.rb">lib/malt/engines/abstract.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <li class="class">Object</li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="singleton">
+              <a href="#method-c-default">::default</a>
+            </li>
+          
+            
+            <li class="singleton">
+              <a href="#method-c-new">::new</a>
+            </li>
+          
+            
+            <li class="singleton">
+              <a href="#method-c-register">::register</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-cache%3F">#cache?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-compile">#compile</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-make_binding">#make_binding</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-make_hash">#make_hash</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-make_object">#make_object</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-require_library">#require_library</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+      <div id="includes-section" class="section">
+        <h3 class="section-header">Included Modules</h3>
+        <ul class="link-list">
+        
+        
+          <li class="module"><a class="include" href="../Kernel.html">Malt::Kernel</a></li>
+        
+        
+        </ul>
+      </div>
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../../History_rdoc.html">History.rdoc</a></li>
+        
+          <li class="file"><a href="../../License_txt.html">License.txt</a></li>
+        
+          <li class="file"><a href="../../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../../Malt.html">Malt</a></li>
+        
+          <li class="class"><a href="../../Malt/Config.html">Malt::Config</a></li>
+        
+          <li class="module"><a href="../../Malt/Engine.html">Malt::Engine</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Abstract.html">Malt::Engine::Abstract</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/BlueCloth.html">Malt::Engine::BlueCloth</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Erb.html">Malt::Engine::Erb</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Erubis.html">Malt::Engine::Erubis</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Haml.html">Malt::Engine::Haml</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Kramdown.html">Malt::Engine::Kramdown</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Less.html">Malt::Engine::Less</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Liquid.html">Malt::Engine::Liquid</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RDiscount.html">Malt::Engine::RDiscount</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RDoc.html">Malt::Engine::RDoc</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RTALS.html">Malt::Engine::RTALS</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Radius.html">Malt::Engine::Radius</a></li>
+        
+          <li class="module"><a href="../../Malt/Engine/Radius/context;.html">Malt::Engine::Radius::context;</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RedCloth.html">Malt::Engine::RedCloth</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Ruby.html">Malt::Engine::Ruby</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Sass.html">Malt::Engine::Sass</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Tenjin.html">Malt::Engine::Tenjin</a></li>
+        
+          <li class="module"><a href="../../Malt/Format.html">Malt::Format</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Abstract.html">Malt::Format::Abstract</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/AbstractTemplate.html">Malt::Format::AbstractTemplate</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/CSS.html">Malt::Format::CSS</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Erb.html">Malt::Format::Erb</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/HTML.html">Malt::Format::HTML</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Haml.html">Malt::Format::Haml</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/LESS.html">Malt::Format::LESS</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Latex.html">Malt::Format::Latex</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Liquid.html">Malt::Format::Liquid</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Markdown.html">Malt::Format::Markdown</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/PDF.html">Malt::Format::PDF</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/RBHTML.html">Malt::Format::RBHTML</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/RDoc.html">Malt::Format::RDoc</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/RHTML.html">Malt::Format::RHTML</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Radius.html">Malt::Format::Radius</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Rtals.html">Malt::Format::Rtals</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Ruby.html">Malt::Format::Ruby</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/SCSS.html">Malt::Format::SCSS</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Sass.html">Malt::Format::Sass</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Tenjin.html">Malt::Format::Tenjin</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Text.html">Malt::Format::Text</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Textile.html">Malt::Format::Textile</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/UnsupportedConversion.html">Malt::Format::UnsupportedConversion</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/YAML.html">Malt::Format::YAML</a></li>
+        
+          <li class="module"><a href="../../Malt/Kernel.html">Malt::Kernel</a></li>
+        
+          <li class="class"><a href="../../Malt/Markup.html">Malt::Markup</a></li>
+        
+          <li class="class"><a href="../../Malt/Template.html">Malt::Template</a></li>
+        
+          <li class="class"><a href="../../Hash.html">Hash</a></li>
+        
+          <li class="class"><a href="../../OpenStruct.html">OpenStruct</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.3.0
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Abstract</h1>
+      
+
+      <p>
+<a href="Abstract.html">Abstract</a> <a
+href="../Template.html">Template</a> class serves as the base class for all
+other <a href="../Template.html">Template</a> classes.
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+    <div id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="settings-attribute-method" class="method-detail">
+        <a name="settings"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">settings</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>
+Access to the options given to the initializer. Returns an <a
+href="../../OpenStruct.html">OpenStruct</a> object.
+</p>
+        
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="default-method" class="method-detail ">
+        <a name="method-c-default"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">default</span><span
+            class="method-args">(*exts)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Register and set as the default for given extensions.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="default-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 38</span>
+38:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">default</span>(*<span class="ruby-identifier">exts</span>)
+39:       <span class="ruby-identifier">register</span>(*<span class="ruby-identifier">exts</span>)
+40:       <span class="ruby-identifier">exts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+41:         <span class="ruby-constant">Malt</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">engine</span>[<span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-keyword kw">self</span>
+42:       <span class="ruby-keyword kw">end</span>
+43:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="new-method" class="method-detail ">
+        <a name="method-c-new"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">new</span><span
+            class="method-args">(settings={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Override this method to load rendering engine library.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 46</span>
+46:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">settings</span>={})
+47:       <span class="ruby-ivar">@settings</span> = <span class="ruby-identifier">settings</span>.<span class="ruby-identifier">rekey</span>
+48: 
+49:       <span class="ruby-ivar">@cache</span>  = {}
+50:       <span class="ruby-ivar">@source</span> = {}
+51: 
+52:       <span class="ruby-identifier">initialize_engine</span>
+53:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="register-method" class="method-detail ">
+        <a name="method-c-register"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">register</span><span
+            class="method-args">(*exts)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Register the class to an extension type.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="register-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 33</span>
+33:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">register</span>(*<span class="ruby-identifier">exts</span>)
+34:       <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">register</span>(<span class="ruby-keyword kw">self</span>, *<span class="ruby-identifier">exts</span>)
+35:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="cache--method" class="method-detail ">
+        <a name="method-i-cache%3F"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">cache?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="cache--source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 74</span>
+74:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache?</span>
+75:       <span class="ruby-operator">!</span><span class="ruby-identifier">settings</span>[<span class="ruby-value">:nocache</span>]
+76:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="compile-method" class="method-detail ">
+        <a name="method-i-compile"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">compile</span><span
+            class="method-args">(db, &yld)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="compile-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 69</span>
+69:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compile</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
+70:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;not implemented&quot;</span>
+71:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="render-method" class="method-detail ">
+        <a name="method-i-render"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">render</span><span
+            class="method-args">(text, options={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="render-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 60</span>
+60:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>={}) <span class="ruby-comment cmt">#format, text, file, db, &amp;yld)</span>
+61:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">format</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:format</span>]
+62:         <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unsupported rendering -- #{format}&quot;</span>
+63:       <span class="ruby-keyword kw">else</span>
+64:         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;unsupported rendering&quot;</span>
+65:       <span class="ruby-keyword kw">end</span>
+66:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="private-instance-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="initialize-engine-method" class="method-detail ">
+        <a name="method-i-initialize_engine"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">initialize_engine</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Override this to load template engine library and prepare is for geeral
+usage.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="initialize-engine-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 82</span>
+82:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_engine</span>
+83:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="make-binding-method" class="method-detail ">
+        <a name="method-i-make_binding"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">make_binding</span><span
+            class="method-args">(db, &yld)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Convert a data source into a Binding. TODO: handle yld.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="make-binding-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 92</span>
+ 92:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_binding</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
+ 93:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>
+ 94: 
+ 95:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_binding</span>)
+ 96:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_binding</span>
+ 97:       <span class="ruby-keyword kw">end</span>
+ 98: 
+ 99:       <span class="ruby-identifier">db</span> = <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>)
+100: 
+101:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">instance_eval</span>{ <span class="ruby-identifier">binding</span> }        
+102:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="make-hash-method" class="method-detail ">
+        <a name="method-i-make_hash"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">make_hash</span><span
+            class="method-args">(db, &yld)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Convert a data source into a <a href="../../Hash.html">Hash</a>.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="make-hash-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 120</span>
+120:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_hash</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
+121:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>
+122:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>)
+123:       <span class="ruby-keyword kw">end</span>
+124: 
+125:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_hash</span>)
+126:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_hash</span>
+127:         <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
+128:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
+129:       <span class="ruby-keyword kw">end</span>
+130: 
+131:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_h</span>)
+132:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_h</span>
+133:         <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
+134:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
+135:       <span class="ruby-keyword kw">end</span>
+136: 
+137:       <span class="ruby-comment cmt"># last resort</span>
+138:       <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">instance_variables</span>.<span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+139:         <span class="ruby-identifier">k</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-value str">'@'</span>,<span class="ruby-value str">''</span>).<span class="ruby-identifier">to_sym</span>
+140:         <span class="ruby-identifier">v</span> = <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-identifier">i</span>)
+141:         <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
+142:         <span class="ruby-identifier">h</span>
+143:       <span class="ruby-keyword kw">end</span>
+144:       <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
+145:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
+146:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="make-object-method" class="method-detail ">
+        <a name="method-i-make_object"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">make_object</span><span
+            class="method-args">(db)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Convert a data source into an Object (aka a &#8220;scope&#8221;).
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="make-object-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 105</span>
+105:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>)
+106:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_hash</span>)
+107:         <span class="ruby-identifier">hash</span>  = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_hash</span>
+108:         <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span> }
+109:         <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Struct</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">attrs</span>).<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">values</span>)
+110:       <span class="ruby-keyword kw">end</span>
+111: 
+112:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>
+113:         <span class="ruby-identifier">eval</span>(<span class="ruby-value str">'self'</span>, <span class="ruby-identifier">binding</span>)
+114:       <span class="ruby-keyword kw">end</span>
+115: 
+116:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
+117:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="require-library-method" class="method-detail ">
+        <a name="method-i-require_library"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">require_library</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Require template library.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="require-library-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 86</span>
+86:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_library</span>(<span class="ruby-identifier">path</span>)
+87:       <span class="ruby-identifier">require</span>(<span class="ruby-identifier">path</span>)
+88:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

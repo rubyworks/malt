@@ -223,7 +223,7 @@ Then we can use the `Malt.file` method to instantiate an RDoc object.
 We will notice that the output is an instance of Malt::Formats::HTML.
 </p>
 <pre>
-  rdoc.class.assert == Malt::Formats::RDoc
+  rdoc.class.assert == Malt::Format::RDoc
 </pre>
 <p>
 While we could have used `Malt::Formats::RDoc.new` to create the object
@@ -234,10 +234,10 @@ We can convert the rdoc to html with the #to_html method.
   html = rdoc.to_html
 </pre>
 <p>
-Again notice that the output is an instance of Malt::Formats::HTML.
+Again notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
@@ -254,10 +254,10 @@ We can convert rdoc documents to html very easily.
   html = rdoc.to_html
 </pre>
 <p>
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
@@ -324,10 +324,10 @@ method.
   html = tile.to_html
 </pre>
 <p>
-Notice that the output is an instance of Malt::Formats::HTML.
+Notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
@@ -423,10 +423,10 @@ method.
   html = mark.to_html
 </pre>
 <p>
-Notice that the output is an instance of Malt::Formats::HTML.
+Notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
@@ -512,10 +512,10 @@ We can render erb documents to any format we wish.
   html = erb.to_html(:title=&gt;&quot;Document&quot;)
 </pre>
 <p>
-We will notice that the output is an instance of Malt::Formats::HTML.
+We will notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
@@ -578,16 +578,16 @@ We can render erb documents to any format we wish.
   html = liq.to_html(:title=&gt;&quot;Document&quot;)
 </pre>
 <p>
-We will notice that the output is an instance of Malt::Formats::HTML.
+We will notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
-We will notice that the output is an instance of Malt::Formats::HTML.
+We will notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 Then by calling #to_s we can get the rendered HTML document.
@@ -636,7 +636,7 @@ We can get a hold of the Haml document via the Malt.file function.
 <pre>
   haml = Malt.file('tmp/test.haml')
 
-  haml.class.assert == Malt::Formats::Haml
+  haml.class.assert == Malt::Format::Haml
 </pre>
 <p>
 We can convert Haml documents to html very easily.
@@ -647,10 +647,10 @@ We can convert Haml documents to html very easily.
   html = haml.to_html(data)
 </pre>
 <p>
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
@@ -714,7 +714,7 @@ We can get a hold of the Radius document via the Malt.file function.
 <pre>
   radi = Malt.file('tmp/test.radius', :tag_prefix=&gt;'r')
 
-  radi.class.assert == Malt::Formats::Radius
+  radi.class.assert == Malt::Format::Radius
 </pre>
 <p>
 Notice here we have passed an option to the file constructor. This option
@@ -727,10 +727,10 @@ documents to HTML documents via #to_html.
   html = radi.to_html(data)
 </pre>
 <p>
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
@@ -783,7 +783,7 @@ function.
 <pre>
   tenjin = Malt.file('tmp/test.tenjin')
 
-  tenjin.class.assert == Malt::Formats::Tenjin
+  tenjin.class.assert == Malt::Format::Tenjin
 </pre>
 <p>
 Since Tenjin is aa general pupose template foramt, we can convert Tenjin
@@ -797,10 +797,10 @@ a Text documents via #to_txt.
 </pre>
 <p>
 First we will notice that the output is an instance of
-`Malt::Formats::Text`.
+`Malt::Format::Text`.
 </p>
 <pre>
-  text.class.assert == Malt::Formats::Text
+  text.class.assert == Malt::Format::Text
 </pre>
 <p>
 And that by calling #to_s we can get the rendered Text document.
@@ -860,7 +860,7 @@ We can get a hold of the RBHTML document via the Malt.file function.
 <pre>
   rbhtml = Malt.file('tmp/test.rbhtml')
 
-  rbhtml.class.assert == Malt::Formats::RBHTML
+  rbhtml.class.assert == Malt::Format::RBHTML
 </pre>
 <p>
 We can convert RBHTML documents to HTML documents via #to_html.
@@ -871,10 +871,10 @@ We can convert RBHTML documents to HTML documents via #to_html.
   html = rbhtml.to_html(data)
 </pre>
 <p>
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
@@ -934,7 +934,7 @@ We can also get a hold of the Sass document via the Malt.file function.
 <pre>
   sass = Malt.file('tmp/test.sass')
 
-  sass.class.assert == Malt::Formats::Sass
+  sass.class.assert == Malt::Format::Sass
 </pre>
 <p>
 We can convert the Sass document to a CSS document via the #to_css method.
@@ -943,10 +943,10 @@ We can convert the Sass document to a CSS document via the #to_css method.
   css = sass.to_css
 </pre>
 <p>
-We can see that the output is an instance of Malt::Formats::HTML.
+We can see that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  css.class.assert == Malt::Formats::CSS
+  css.class.assert == Malt::Format::CSS
 </pre>
 <p>
 And that by calling #to_s we can get the rendered CSS document.
@@ -1008,7 +1008,7 @@ We can also get a hold of the SCSS document via the Malt.file function.
 <pre>
   scss = Malt.file('tmp/test.scss')
 
-  scss.class.assert == Malt::Formats::SCSS
+  scss.class.assert == Malt::Format::SCSS
 </pre>
 <p>
 We can convert the SCSS document to a CSS document via the #to_css method.
@@ -1017,10 +1017,10 @@ We can convert the SCSS document to a CSS document via the #to_css method.
   css = scss.to_css
 </pre>
 <p>
-We can see that the output is an instance of Malt::Formats::SCSS.
+We can see that the output is an instance of Malt::Format::SCSS.
 </p>
 <pre>
-  css.class.assert == Malt::Formats::CSS
+  css.class.assert == Malt::Format::CSS
 </pre>
 <p>
 And that by calling #to_s we can get the rendered CSS document.
@@ -1071,7 +1071,7 @@ We can also get a hold of the LESS document via the Malt.file function.
 <pre>
   less = Malt.file('tmp/test.less')
 
-  less.class.assert == Malt::Formats::LESS
+  less.class.assert == Malt::Format::LESS
 </pre>
 <p>
 We can convert the LESS document to a CSS document via the #to_css method.
@@ -1080,10 +1080,10 @@ We can convert the LESS document to a CSS document via the #to_css method.
   css = less.to_css
 </pre>
 <p>
-We can see that the output is an instance of Malt::Formats::HTML.
+We can see that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  css.class.assert == Malt::Formats::CSS
+  css.class.assert == Malt::Format::CSS
 </pre>
 <p>
 And that by calling #to_s we can get the rendered CSS document.
@@ -1133,7 +1133,7 @@ We can get a hold of the Ruby template via the Malt.file function.
 <pre>
   ruby = Malt.file('tmp/test.rb')
 
-  ruby.class.assert == Malt::Formats::Ruby
+  ruby.class.assert == Malt::Format::Ruby
 </pre>
 <p>
 Ruby is a <em>universal template format</em>, so it can be converted to any
@@ -1145,10 +1145,10 @@ other format (even if it is not really that format).
   html = ruby.to_html(data)
 </pre>
 <p>
-First we will notice that the output is an instance of Malt::Formats::HTML.
+First we will notice that the output is an instance of Malt::Format::HTML.
 </p>
 <pre>
-  html.class.assert == Malt::Formats::HTML
+  html.class.assert == Malt::Format::HTML
 </pre>
 <p>
 And that by calling #to_s we can get the rendered HTML document.
