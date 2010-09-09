@@ -1,17 +1,13 @@
 = Malt
 
 * home: http://rubyworks.github.com/malt
+* code: http://github.com/rubyworks/malt
 
 
 == DESCRIPTION
 
 Malt provides a factory framework for rendering
 a variety of template and markup document formats.
-
-
-== RELEASE NOTES
-
-Please see HISTORY file.
 
 
 == SYNOPSIS
@@ -21,7 +17,7 @@ Here's the idea:
   Malt.file('foo.erb').compile(db).to_s
 
 Where +db+ is a data source of some type. Malt will see
-that the file is an Erb template and render it accordingly.
+that the file is an ERB template and render it accordingly.
 
 Malt can also "double render".
 
@@ -55,11 +51,10 @@ cd into it and run setup.rb, e.g.
   $ sudo setup.rb
 
 
-== LICENSE
+== COPYING
 
 Copyright (c) 2010 Thomas Sawyer
 
-This program is ditributed unser the terms of the <%= ENV['DEFAULT_LICENSE'] %> license.
+This program is ditributed under the terms of the Apache 2.0 license.
 
-See the LICENSE or COPYING file for details.
-
+See the LICENSE.txt file for details.

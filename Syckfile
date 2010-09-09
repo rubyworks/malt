@@ -24,12 +24,15 @@ rdoc:
   service : rdoc
   template: redfish
   exclude : [Syckfile, PACKAGE, PROFILE, REQUIRE]
+  output  : doc
+  active  : true
 
 ridoc:
-  service: RIDoc
-  include: ~
-  exclude: ~
-  active : true
+  service : RIDoc
+  include : ~
+  exclude : ~
+  output  : ri
+  active  : true
 
 testrb:
   service  : testrb

@@ -2,10 +2,12 @@
 
 == 0.1.0 | 2010-06-23
 
-
-== 0.0.0 | 2010-06-22
+This if the initial release of Malt. I have no doubt the code base
+still needs some fine-tuning --hence the 0.1 version, but I have put
+it to good use with the latest version of Brite, my static website
+generator, so I know that it is at least is a working state.
 
 Changes:
 
-* Started project.
+* Initial release.
 
