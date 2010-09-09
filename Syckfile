@@ -22,9 +22,9 @@ stats:
 
 rdoc:
   service : rdoc
-  template: redfish
-  exclude : [Syckfile, PACKAGE, PROFILE, REQUIRE]
-  output  : doc
+  template: newfish
+  exclude : [Syckfile]
+  output  : site/docs/api
   active  : true
 
 ridoc:
@@ -33,6 +33,12 @@ ridoc:
   exclude : ~
   output  : ri
   active  : true
+
+qedoc:
+  service : Custom
+  cycle   : main
+  document: |
+    system 'qedoc -o site/docs/qed -t "Malt Demonstrandum" qed/'
 
 testrb:
   service  : testrb
