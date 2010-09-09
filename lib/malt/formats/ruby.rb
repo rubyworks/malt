@@ -17,12 +17,7 @@ module Malt::Formats
   #
   class Ruby < Abstract
 
-    register('rb')
-
-    #
-    def render(data, &yld)
-      render_engine.render(:text=>text, :file=>file, :data=>data, &yld)
-    end
+    register 'rb'
 
     #
     def rb ; text ; end
@@ -33,9 +28,36 @@ module Malt::Formats
     alias_method :to_ruby, :to_rb
 
     #
+    def to(type, data=nil, &yld)
+      new_class   = Malt.registry[type.to_sym]
+      new_text    = render(data, &yld)
+      new_file    = refile(type)
+      new_options = options.merge(:text=>new_text, :file=>new_file)
+      new_class.new(new_options)
+    end
+
+    # Ruby templates can be any type.
+    def method_missing(sym, *args, &yld)
+      if Malt.registry.key?(sym)
+        return to(sym, *args, &yld).to_s
+      elsif md = /^to_/.match(sym.to_s)
+        type = md.post_match.to_sym
+        if Malt.registry.key?(type)
+          return to(type, *args, &yld)
+        end
+      end
+      super(sym, *args, &yld)
+    end
+
+    #
     #def render_to(to, db, &yld)
     #  malt_engine.render(text, file, db, &yld)
     #end
+
+    def render(*type_and_data, &yld)
+      type, data = parse_type_and_data(type_and_data)
+      render_engine.render(:text=>text, :file=>file, :data=>data, &yld)
+    end
 
     private
 

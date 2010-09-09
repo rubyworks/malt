@@ -10,25 +10,9 @@ module Malt::Formats
     register('rdoc')
 
     #
-    #def render(*)
-    #  to_html.to_s
-    #end
-
-    #
-    def html
-      render_engine.render(:format=>:html, :text=>text, :file=>file)
-      #malt_engine.html(text, file)
-    end
-
-    #
     def rdoc
       text
     end
-
-    # THINK: Does this make sense? if it does it is for all formats.
-    #def txt
-    #  text
-    #end
 
     #
     def to_rdoc
@@ -36,14 +20,17 @@ module Malt::Formats
     end
 
     #
+    def html
+      render_engine.render(:text=>text, :file=>file, :format=>:html)
+    end
+
+    #
     def to_html
-      opts = options.merge(:text=>html, :file=>refile(:html))
+      opts = options.merge(:text=>html, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
 
-    #raise UnsupportedConversion.new(type, to)
-
-    ;;;; private ;;;;
+    private
 
     #
     def render_engine

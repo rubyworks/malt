@@ -9,33 +9,28 @@ module Malt::Formats
   #
   class Liquid < Abstract
 
-    register('liquid')
+    register 'liquid'
 
     #
-    def to(type, db=nil, &yld)
-      new_class   = Malt.registry[type.to_sym]
-      new_text    = render(db, &yld)
+    def to(type, data=nil, &yld)
+      type = type.to_sym
+      new_class   = Malt.registry[type]
+      new_text    = render(data, &yld)
       new_file    = refile(type)
-      new_options = options.merge(:text=>new_text, :file=>new_file)
+      new_options = options.merge(:text=>new_text, :file=>new_file, :type=>type)
       new_class.new(new_options)
     end
 
     #
-    def render(data, &yld)
+    def render(*type_and_data, &yld)
+      type, data = parse_type_and_data(type_and_data)
       render_engine.render(:text=>text, :file=>file, :data=>data, &yld)
-      #opts = options.merge(:text=>result, :file=>refile)
-      #Malt.text(result, opts)
     end
-
-    #
-    #def render(db=nil, &yld)
-    #  render_engine.render(default, text, file, db, &yld)
-    #end
 
     # Liquid templates can be any type.
     def method_missing(sym, *args, &yld)
       if Malt.registry.key?(sym)
-        return to(sym, *args, &yld).to_s
+        return render(sym, *args, &yld)
       elsif md = /^to_/.match(sym.to_s)
         type = md.post_match.to_sym
         if Malt.registry.key?(type)

@@ -8,51 +8,44 @@ module Malt::Formats
   # a template format too.
   class Haml < Abstract
 
-    register('haml')
+    register 'haml'
 
     #
-    def compile(db, &yld)
-      result = render_engine.render(text, file, db, &yld)
-      opts = options.merge(:text=>result, :file=>refile(:html))
+    def haml
+      text
+    end
+
+    #
+    def to_haml
+      self
+    end
+
+    #
+    def html(data=nil, &yld)
+      render_engine.render(:format=>:html, :text=>text, :file=>file, :data=>data, &yld)
+    end
+
+    #
+    def to_html(data=nil, &yld)
+      text = html(data=nil, &yld)
+      opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
 
     #
-    #def ruby(db, &yld)
+    #def to_ruby(db, &yld)
     #  @ruby ||= (
     #    source = engine.compile(text, file)
     #    Ruby.new(:text=>source, :file=>refile(:rb))
     #  )
     #end
 
-    #def to_html(db, &yld)
-    #  #convert(:html, db, &yld)
-    #end
+    private
 
-    #def to_haml
-    #  self
-    #end
-
-    #
-    #def render_to(to, db=nil, &yld)
-    #  case to
-    #  when :haml
-    #    text
-    #  when :html
-    #    malt_engine.render_html(text, file, db, &yld)
-    #  when :txt  # THINK: Does this make sense?
-    #    text
-    #  else
-    #    raise UnspportedConversion.new(type, to)
-    #  end
-    #end
-
-    ;;;; private ;;;;
-
-    #
-    def render_engine
-      @render_engine ||= Malt::Engines::Haml.new(options)
-    end
+      #
+      def render_engine
+        @render_engine ||= Malt::Engines::Haml.new(options)
+      end
 
   end
 

@@ -45,6 +45,10 @@ module Engines
     # Override this method to load rendering engine library.
     def initialize(settings={})
       @settings = settings.rekey
+
+      @cache  = {}
+      @source = {}
+
       initialize_engine
     end
 
@@ -64,6 +68,11 @@ module Engines
     #
     def compile(db, &yld)
       raise "not implemented"
+    end
+
+    #
+    def cache?
+      !settings[:nocache]
     end
 
     ;;;; private ;;;;

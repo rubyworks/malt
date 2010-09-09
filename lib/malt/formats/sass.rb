@@ -11,15 +11,21 @@ module Malt::Formats
     register('sass')
 
     #
-    def compile(db, &yld)
-      result = render_engine.render(text, db, &yld)
-      opts = options.merge(:text=>result, file=>refile(:css))
-      CSS.new(opts)
+    def css(data, &yld)
+      render_engine.render(:format=>:css, :text=>text, :file=>file, :type=>type)
     end
 
     #
-    #def to_css(db, &yml)
-    #  convert(:css, db, &yml)
+    def to_css(data, &yld)
+      result = css(data, &yld)
+      CSS.new(:text=>result, :file=>refile(:css), :type=>:css)
+    end
+
+    #
+    #def compile(db, &yld)
+    #  result = render_engine.render(text, db, &yld)
+    #  opts = options.merge(:text=>result, file=>refile(:css))
+    #  CSS.new(opts)
     #end
 
     #

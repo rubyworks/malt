@@ -1,23 +1,35 @@
 require 'malt/formats/abstract'
 require 'malt/formats/html'
-require 'malt/engines/haml'
+require 'malt/engines/rtals'
 
 module Malt::Formats
 
   #
-  class Haml < Abstract
+  class Rtals < Abstract
 
     register('rtal')
 
     #
-    def compile(db, &yld)
-      result = render_engine.render(text, db, &yld)
+    def html(data, &yld)
+      render_engine.render(:text=>text, :data=>data, &yld)
+    end
 
-      fname = file.chomp('.rtal')
-      fname = fname + '.html' unless file.extname.downcase == '.html'
+    #
+    def to_html(data, &yld)
+      text = html(data, &yld)
+      opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
+      HTML.new(opts)
+    end
 
-      opts = options.merge(:text=>result, :file=>fname)
+    #
+    def xml(data, &yld)
+      render_engine.render(:text=>text, :data=>data, &yld)
+    end
 
+    #
+    def to_xml(data, &yld)
+      text = xml(data, &yld)
+      opts = options.merge(:text=>text, :file=>refile(:xml), :type=>:xml)
       HTML.new(opts)
     end
 

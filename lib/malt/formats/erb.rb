@@ -9,14 +9,17 @@ module Malt::Formats
   # but they of course have <% %> slots.
   class Erb < Abstract
 
-    register('erb')
+    register 'erb'
+
+    #
+    def rb(*)
+      render_engine.compile(:text=>text, :file=>file)
+    end
 
     # Erb templates can be "pre-compiled" into Ruby templates.
     def to_rb(*)
-      @to_rb ||= (
-        source = render_engine.compile(:text=>text, :file=>file)
-        Ruby.new(:text=>source, :file=>refile(:rb))
-      )
+      text = rb
+      Ruby.new(:text=>text, :file=>refile(:rb))
     end
 
     #
@@ -26,27 +29,28 @@ module Malt::Formats
     alias_method :precompile, :to_rb
 
     #
-    def to(type, db=nil, &yld)
+    def to(type, data=nil, &yld)
       new_class   = Malt.registry[type.to_sym]
-      new_text    = render(db, &yld)
+      new_text    = render(type, data, &yld)
       new_file    = refile(type)
-      new_options = options.merge(:text=>new_text, :file=>new_file)
+      new_options = options.merge(:text=>new_text, :file=>new_file, :type=>type)
       new_class.new(new_options)
     end
 
     #
-    def render(params={}, &yld)
+    def render(*type_and_data, &yld)
+      type, data = parse_type_and_data(type_and_data)
       if options[:recompile]
-        render_engine.render(params, &yld)
+        render_engine.render(:format=>type,:text=>text,:file=>file,:data=>data, &yld)
       else
-        precompile.render(params, &yld)
+        precompile.render(type, data, &yld)
       end
     end
 
     # ERB templates can be any type.
     def method_missing(sym, *args, &yld)
       if Malt.registry.key?(sym)
-        return to(sym, *args, &yld).to_s
+        return render(sym, *args, &yld).to_s
       elsif md = /^to_/.match(sym.to_s)
         type = md.post_match.to_sym
         if Malt.registry.key?(type)

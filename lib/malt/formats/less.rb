@@ -3,21 +3,13 @@ require 'malt/engines/less'
 
 module Malt::Formats
 
+  # = LESS
+  #
+  # See http://lesscss.org/
   #
   class Less < Abstract
 
     register('less')
-
-    #
-    def css
-      render_engine.render(text) #,file)
-    end
-
-    #
-    def to_css
-      opts = options.merge(:text=>css, file=>refile(:css))
-      CSS.new(opts)
-    end
 
     #
     def less
@@ -30,16 +22,18 @@ module Malt::Formats
     end
 
     #
-    #def render_to(to, *)
-    #  case to
-    #  when :css
-    #    malt_engine.render_css(text, file)
-    #  else
-    #    raise UnsupportedConversion.new(type, to)
-    #  end
-    #end
+    def css
+      render_engine.render(:text=>text, :file=>:file, :format=>:css)
+    end
 
-    ;;;; private ;;;;
+    #
+    def to_css
+      text = css
+      opts = options.merge(:text=>text, file=>refile(:css), :type=>:css)
+      CSS.new(opts)
+    end
+
+    private
 
     #
     def render_engine

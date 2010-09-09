@@ -34,7 +34,7 @@ module Formats
       @engine
     end
 
-    ;;;; private ;;;;
+    private
 
     #
     def initialize(options={})
@@ -47,10 +47,10 @@ module Formats
     def initialize_engine
     end
 
-    ;;;; public ;;;;
+
+    public
 
     # Access to the options given to the initializer.
-    # Returns an OpenStruct object.
     attr :options
 
     # Document source text.
@@ -77,24 +77,17 @@ module Formats
     end
 
     #
-    def to(type, db=nil, &yld)
-      __send__("to_#{type}", db, &yld)
+    def to(type, data=nil, &yld)
+      __send__("to_#{type}", data, &yld)
     end
 
     # Render to default or given format.
     #
     # If the first argument is a Symbol it is considered the format, otherwise
     # it is taken to be the database for rendering template variables.
-    def render(*db, &yld)
-      case db.first
-      when Symbol 
-        to = db.shift
-        db = db.first
-      else
-        to = default
-        db = db.first
-      end
-      render_to(to, db, &yld)
+    def render(*type_and_data, &yld)
+      type, data = parse_type_and_data(type_and_data)
+      __send__(type || default, data, &yld)
     end
 
     #
@@ -116,17 +109,17 @@ module Formats
 #    #end
 #    end
 
-    #
-    def convert(to, *db, &yld)
-      db = db.first
-      output = render_to(to, db, &yld)
-      if subclass = Malt.registry[subtype]
-        subclass.new(:text=>output, :file=>file.chomp(type)).convert(to, db, &yld)
-      else
-        subclass = Malt.registry[".#{to}"]
-        subclass.new(:text=>output, :file=>refile(to), :fallback=>true)
-      end
-    end
+    # TODO: render a file until add extension are exhusted
+#    def convert(to, *db, &yld)
+#      db = db.first
+#      output = render_to(to, db, &yld)
+#      if subclass = Malt.registry[subtype]
+#        subclass.new(:text=>output, :file=>file.chomp(type)).convert(to, db, &yld)
+#      else
+#        subclass = Malt.registry[".#{to}"]
+#        subclass.new(:text=>output, :file=>refile(to), :fallback=>true)
+#      end
+#    end
 
     # Produce a new filename replacing old extension with new
     # extension.
@@ -169,6 +162,18 @@ module Formats
     # differs for the subclassing format.
     def default
       :html
+    end
+
+    #
+    def parse_type_and_data(type_and_data)
+      if Symbol === type_and_data.first
+        type = type_and_data.first
+        data = type_and_data.last
+      else
+        type = nil
+        data = type_and_data.first
+      end
+      return type, data
     end
 
   end

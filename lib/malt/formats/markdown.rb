@@ -6,20 +6,19 @@ require 'malt/engines/bluecloth'
 
 module Malt::Formats
  
-  # If using the Kramdown engine, then Latex is
-  # also a supported output format.
+  # If using the Kramdown engine, then Latex is also a supported output format.
   class Markdown < Abstract
 
     register('markdown', 'md')
 
     #
     def html
-      render_engine.render(:format=>:html, :text=>text, :file=>file)
+      render_engine.render(:text=>text, :file=>file, :format=>:html)
     end
 
     #
     def latex
-      render_engine.render(:format=>:latex, :text=>text, :file=>file)
+      render_engine.render(:text=>text, :file=>file, :format=>:latex)
     end
 
     #
@@ -27,15 +26,18 @@ module Malt::Formats
       text
     end
 
+    #
+    alias_method :md, :markdown
+
     # Convert to HTML.
     def to_html
-      opts = options.merge(:text=>html, :file=>refile(:html))
+      opts = options.merge(:text=>html, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
 
     # Latex is only supported by the Kramdown engine.
     def to_latex
-      opts = options.merge(:text=>html, :file=>refile(:latex))
+      opts = options.merge(:text=>html, :file=>refile(:latex), :type=>:latex)
       Latex.new(opts)
     end
 

@@ -23,7 +23,7 @@ module Malt::Formats
 
     #
     def to_html
-      opts = options.merge(:text=>html, :file=>refile(:html))
+      opts = options.merge(:text=>html, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
 

@@ -1,11 +1,12 @@
 require 'malt/formats/abstract'
+require 'malt/formats/pdf'
 
 module Malt::Formats
 
   #
   class Latex < Abstract
 
-    register('latex')
+    register 'latex'
 
     #
     def latex
@@ -24,7 +25,8 @@ module Malt::Formats
 
     # TODO
     def to_pdf
-      opts = options.merge(:text=>pdf, :file=>refile(:pdf))
+      text = pdf
+      opts = options.merge(:text=>text, :file=>refile(:pdf), :type=>:pdf)
       PDF.new(opts)
     end
 

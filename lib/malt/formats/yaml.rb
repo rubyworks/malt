@@ -1,21 +1,28 @@
 require 'malt/formats/abstract'
+require 'malt/formats/html'
 
 module Malt::Formats
 
-  # TODO: hmm... maybe use db to update yaml?
+  # = YAML format
+  #
+  # TODO: hmm... maybe use data to update yaml?
   class YAML < Abstract
 
-    register('yaml', 'yml')
+    register 'yaml', 'yml'
 
     #
-    def yaml
+    def yaml(*)
       text
     end
 
+    alias_method :yml, :yaml
+
     #
-    def to_yaml
+    def to_yaml(*)
       self
     end
+
+    alias_method :to_yml, :to_yaml
 
     # Converting a plan YAML file to HTML makes no sense so we
     # just wrap it in +pre+ tags.
@@ -25,25 +32,14 @@ module Malt::Formats
 
     #
     def to_html
-      opts = options.merge(:text=>html, :file=>refile(:html))
+      text = html
+      opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
 
-    #
-    #def render_to(to, db, &yld)
-    # case to
-    #  when :yaml, :yml
-    #    text  # TODO: This right, or +self+?
-    #  when :html
-    #    "<pre>#{h text}</pre>"
-    #  else
-    #    raise UnspportedConversion.new(type, to)
-    #  end
-    #end
-
     private
 
-      # TODO: HTML escaping.
+      # TODO: HTML escaping
       def h(text)
         text
       end

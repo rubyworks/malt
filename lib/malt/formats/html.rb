@@ -5,11 +5,7 @@ module Malt::Formats
   #
   class HTML < Abstract
 
-    register('html')
-
-    #def render(*)
-    #  text
-    #end
+    register 'html'
 
     #
     def html(*)

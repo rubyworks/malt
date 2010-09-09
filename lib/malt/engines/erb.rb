@@ -17,40 +17,50 @@ module Malt::Engines
     #
     # The +params+ can be:
     #
-    # * :text - 
+    # * :text - text of erb document
+    # * :file - file name where text was read (or nil)
     # * :data - data source for template interpolation
     # * :safe -
     # * :trim -
     #
+    # Returns a String.
     def render(params={}, &yld)
       text = params[:text]
+      file = params[:file]
       data = params[:data]
       data = make_binding(data, &yld)
-      intermediate(params).result(data)
+      if settings[:precompile] == false
+        intermediate(params).result(data)
+      else
+        ruby = compile(params)
+        eval(ruby, data, file)
+      end
     end
 
     # Compile ERB template into Ruby source code.
     def compile(params={})
-      intermediate(params).src
+      file = params[:file]
+      if cache?
+        @source[file] ||= intermediate(params).src
+      else
+        intermediate(params).src
+      end
     end
 
-    #
+    # Returns instance of underlying ::ERB class.
     def intermediate(params={})
       text = params[:text]
+      file = params[:file]
+
       opts = engine_options(params)
       safe = opts[:safe]
       trim = opts[:trim]
-      ::ERB.new(text, safe, trim)
-    end
 
-    #
-    def safe
-      settings[:safe]
-    end
-
-    #
-    def trim
-      settings[:trim]
+      if cache?
+        @cache[file] ||= ::ERB.new(text, safe, trim)
+      else
+        ::ERB.new(text, safe, trim)
+      end
     end
 
     private

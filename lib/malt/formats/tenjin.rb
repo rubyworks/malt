@@ -11,7 +11,7 @@ module Malt::Formats
   # TODO: fix tenjin
   class Tenjin < Abstract
 
-    register('rbhtml')
+    register 'tenjin', 'rbhtml'
 
     # Erb templates can be "precompiled" into Ruby templates.
     def to_rb
@@ -26,7 +26,7 @@ module Malt::Formats
     #
     def to_html(db, &yld)
       # unless precompilation is turned off, convert to ruby
-      return ruby.html(db, &yld) unless options[:recompile]
+      return to_ruby.to_html(db, &yld) unless options[:recompile]
       convert(:html, db, &yld)
     end
 

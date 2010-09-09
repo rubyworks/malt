@@ -5,7 +5,7 @@ module Malt::Formats
   #
   class PDF < Abstract
 
-    register('pdf')
+    register 'pdf'
 
     #
     def pdf
