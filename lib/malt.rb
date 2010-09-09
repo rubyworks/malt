@@ -63,12 +63,13 @@ module Malt
     db, files = *args.partition{ |x| x.index('=') }
     db = db.inject({}){ |h,kv| k,v = kv.split('='); h[k] = v; h}
     files.each do |file|
-      file = itype ? Malt.file(file, :type=>itype) : Malt.file(file)
-      if otype
-        puts file.render_to(otype, db)
-      else
-        puts file.render(db)
-      end
+      puts Malt.render(:file=>file, :type=>itype, :format=>otype)
+      #file = itype ? Malt.file(file, :type=>itype) : Malt.file(file)
+      #if otype
+      #  puts file.render(otype, db)
+      #else
+      #  puts file.render(db)
+      #end
     end
   end
 
@@ -76,4 +77,3 @@ end
 
 require 'malt/engines'
 require 'malt/formats'
-
