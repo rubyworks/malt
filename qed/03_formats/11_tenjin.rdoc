@@ -1,0 +1,47 @@
+== Tenjin
+
+While Tenjin is generally intended to be used to render HTML documents, it is
+a general purpose template format that can be used for any type of document.
+For these uses, the Tenjin file extension is '.tenjin'.
+
+Lets say we have a Tenjin document called 'test.tenjin' containing:
+
+  Hello #{@name}!
+
+We can render the document via #render.
+
+  data = { :name=>'World', :items=>['A','B','C'] }
+
+  @text = Malt.render(:file=>'tmp/test.tenjin', :data=>data)
+
+And we can verify that @text is:
+
+  Hello World!
+
+We can get a OOP interface tothe Tenjin document via the Malt.file function.
+
+  tenjin = Malt.file('tmp/test.tenjin')
+
+  tenjin.class.assert == Malt::Formats::Tenjin
+
+Since Tenjin is aa general pupose template foramt, we can convert Tenjin
+documents to any format we wish. For instance we can convert our example
+to a Text documents via #to_txt.
+
+  data = { :name=>'World', :items=>['<AAA>', 'B&B', '"CCC"'] }
+
+  text = tenjin.to_txt(data)
+
+First we will notice that the output is an instance of `Malt::Formats::Text`.
+
+  text.class.assert == Malt::Formats::Text
+
+And that by calling #to_s we can get the rendered Text document.
+
+  text.to_s.assert.include?('Hello World!')
+
+Or we can convert the Tenjin document directly to text via the #txt method.
+
+  out = tenjin.txt(data)
+
+  out.assert.include?('Hello World!')

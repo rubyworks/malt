@@ -1,4 +1,32 @@
-= Malt RDoc Support
+== RDoc
+
+Lets say we have a RDoc document called 'test.rdoc' containing:
+
+  = Example
+
+  This is an example of RDoc rendering.
+
+We can convert rdoc documents to html easily via the univeral +render+ function.
+
+  html = Malt.render(:file=>'tmp/test.rdoc')
+
+  html.assert.include?('<h1>Example</h1>')
+
+Malt recognizes the file type by the  +.rdoc+ extension. If we have a file
+that has a different extension, but is in fact an RDoc document, we can
+inform Malt.
+
+Lets say we have an RDoc document called 'test.txt' containing:
+
+  = Example
+
+  This is an example of RDoc rendering.
+
+We can inform Malt as the actual type using the `:type` option.
+
+  html = Malt.render(:file=>'tmp/test.txt', :type=>:rdoc)
+
+  html.assert.include?('<h1>Example</h1>')
 
 Lets say we have an RDoc document called 'test.rdoc' containing ...
 

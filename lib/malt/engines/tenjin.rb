@@ -26,6 +26,7 @@ module Malt::Engines
       data = make_hash(data, &yld)
       template = intermediate(params)
       template.convert(text, file)
+
       template.render(data)
     end
 

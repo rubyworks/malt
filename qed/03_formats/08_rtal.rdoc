@@ -1,4 +1,4 @@
-== Rtal Rendering
+== RTAL
 
 Lets say we have a Rtals document called 'test.rtal' containing:
 

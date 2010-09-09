@@ -1,0 +1,55 @@
+== RBHTML
+
+Tenjin is a general purpose template language with support for multiple
+languages including Ruby. The variation of Tenjin for Ruby, called rbTenjin,
+defines a document format with an extension of `.rbhtml`.
+
+Lets say we have a Tenjin document called 'test.rbhtml' containing:
+
+  Hello #{@name}!
+  <ul>
+  <?rb for item in @items ?>
+   <li>${item}</li>
+  <?rb end ?>
+  </ul>
+
+We can render the document via #render.
+
+  data = { :name=>'World', :items=>['<AAA>', 'B&B', '"CCC"'] }
+
+  @html = Malt.render(:file=>'tmp/test.rbhtml', :data=>data)
+
+And we can verify that @html is:
+
+  Hello World!
+  <ul>
+   <li>&lt;AAA&gt;</li>
+   <li>B&amp;B</li>
+   <li>&quot;CCC&quot;</li>
+  </ul>
+
+We can get a hold of the RBHTML document via the Malt.file function.
+
+  rbhtml = Malt.file('tmp/test.rbhtml')
+
+  rbhtml.class.assert == Malt::Formats::RBHTML
+
+We can convert RBHTML documents to HTML documents via #to_html.
+
+  data = { :name=>'World', :items=>['<AAA>', 'B&B', '"CCC"'] }
+
+  html = rbhtml.to_html(data)
+
+First we will notice that the output is an instance of Malt::Formats::HTML.
+
+  html.class.assert == Malt::Formats::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('Hello World!')
+
+Or we can convert the RBHTML document directly to HTML via the #html method.
+
+  out = rbhtml.html(data)
+
+  out.assert.include?('Hello World!')

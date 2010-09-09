@@ -1,4 +1,4 @@
-require 'malt/formats/abstract'
+require 'malt/formats/abstract_template'
 require 'malt/formats/html'
 require 'malt/engines/tenjin'
 
@@ -8,38 +8,36 @@ module Malt::Formats
   #
   #   http://www.kuwata-lab.com/tenjin/
   #
-  # TODO: fix tenjin
-  class Tenjin < Abstract
+  class Tenjin < AbstractTemplate
 
-    register 'tenjin', 'rbhtml'
+    register 'tenjin'
+
+    def rb
+      render_engine.compile(text, file)
+    end
 
     # Erb templates can be "precompiled" into Ruby templates.
     def to_rb
-      @to_rb ||= (
-        source = malt_engine.compile(text, file)
-        Ruby.new(:text=>source, :file=>refile(:rb))
-      )
+      text = rb
+      Ruby.new(:text=>text, :file=>refile(:rb), :type=>:rb)
     end
 
     alias_method(:to_ruby, :to_rb)
 
     #
-    def to_html(db, &yld)
-      # unless precompilation is turned off, convert to ruby
-      return to_ruby.to_html(db, &yld) unless options[:recompile]
-      convert(:html, db, &yld)
+    def html
+      render(:html, data, &yld)
     end
 
     #
-    #def render_to(to, db, &yld)
-    #  #if options[:recompile]
-    #    malt_engine.render(text, file, db, &yld)
-    #  #else
-    #  #  to_ruby.render(db, &yld)
-    #  #end
-    #end
+    def to_html(data, &yld)
+      new_text    = render(:html, data, &yld)
+      new_file    = refile(:html)
+      new_options = options.merge(:text=>new_text, :file=>new_file, :type=>:html)
+      HTML.new(new_options)
+    end
 
-    ;;;; private ;;;;
+    private
 
     #
     def render_engine

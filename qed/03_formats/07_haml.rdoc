@@ -1,0 +1,44 @@
+== Haml
+
+Lets say we have a Haml document called 'test.haml' containing:
+
+  %h1== Example #{title}
+  %p This is an example of a Haml template.
+
+We can render Haml documents via the +render+ method, as we can any format.
+While it might not appear as such on first glance, Haml is actually a template
+format and not just a markup language, so we need to also provide the +render+
+function with data for interpolation into the Haml document. 
+
+  data = { :title=>"Document" }
+
+  html = Malt.render(:file=>'tmp/test.haml', :data=>data)
+
+  html.assert.include?('<h1>Example Document</h1>')
+
+We can get a hold of the Haml document via the Malt.file function.
+
+  haml = Malt.file('tmp/test.haml')
+
+  haml.class.assert == Malt::Formats::Haml
+
+We can convert Haml documents to html very easily.
+
+  data = {:title => "Document"}
+
+  html = haml.to_html(data)
+
+First we will notice that the output is an instance of Malt::Formats::HTML.
+
+  html.class.assert == Malt::Formats::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example Document</h1>')
+
+Or we can convert the Haml document directly to HTML via the #html method.
+
+  out = haml.html(data)
+
+  out.assert.include?('<h1>Example Document</h1>')
+

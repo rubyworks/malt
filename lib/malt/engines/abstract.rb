@@ -75,7 +75,7 @@ module Engines
       !settings[:nocache]
     end
 
-    ;;;; private ;;;;
+    private
 
     # Override this to load template engine library and
     # prepare is for geeral usage.
@@ -141,7 +141,7 @@ module Engines
         h[k] = v
         h
       end
-      db[:yield] = yld.call
+      db[:yield] = yld.call if yld
       return db
     end
 

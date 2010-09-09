@@ -1,0 +1,58 @@
+== SCSS
+
+Lets say we have a SCSS document called 'test.scss' containing:
+
+  $blue: #3bbfce;
+  $margin: 16px;
+
+  .content-navigation {
+    border-color: $blue;
+    color:
+      darken($blue, 9%);
+  }
+
+  .border {
+    padding: $margin / 2;
+    margin: $margin / 2;
+    border-color: $blue;
+  }
+
+We can render the Sass document via #render.
+
+  @css = Malt.render(:file=>'tmp/test.scss')
+
+And we can verify that @css is the expected CSS:
+
+  .content-navigation {
+    border-color: #3bbfce;
+    color: #2ca2af; }
+
+  .border {
+    padding: 8px;
+    margin: 8px;
+    border-color: #3bbfce; }
+
+We can also get a hold of the SCSS document via the Malt.file function.
+
+  scss = Malt.file('tmp/test.scss')
+
+  scss.class.assert == Malt::Formats::Scss
+
+We can convert the SCSS document to a CSS document via the #to_css method.
+
+  css = scss.to_css
+
+We can see that the output is an instance of Malt::Formats::HTML.
+
+  css.class.assert == Malt::Formats::CSS
+
+And that by calling #to_s we can get the rendered CSS document.
+
+  css.to_s.assert.include?('border-color: #3bbfce;')
+
+Or we can convert the SCSS document directly to CSS via the #css method.
+
+  out = scss.css
+
+  out.assert.include?('border-color: #3bbfce;')
+

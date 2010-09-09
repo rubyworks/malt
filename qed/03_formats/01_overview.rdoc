@@ -1,0 +1,7 @@
+= Formats
+
+Malt support a wide variety of markup and template systems.
+
+Malt provides two distinct APIs for rendering each format --a single-point-of-entry
+functional interface, `Malt.render`, and an object-oriented interface where by
+each format is represented by a document class.

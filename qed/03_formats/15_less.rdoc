@@ -1,0 +1,46 @@
+== LESS
+
+Lets say we have a LESS document called 'test.less' containing:
+
+  @brand_color: #4D926F;
+  #header {
+    color: @brand_color;
+  }
+  h2 {
+    color: @brand_color;
+  }
+
+We can render it via Malt with #render.
+
+  @css = Malt.render(:file=>'tmp/test.less')
+
+And we can verify that @css is:
+
+  #header, h2 { color: #4d926f; }
+
+Look how concise that is. LESS is pretty slick.
+
+We can also get a hold of the LESS document via the Malt.file function.
+
+  less = Malt.file('tmp/test.less')
+
+  less.class.assert == Malt::Formats::Scss
+
+We can convert the LESS document to a CSS document via the #to_css method.
+
+  css = less.to_css
+
+We can see that the output is an instance of Malt::Formats::HTML.
+
+  css.class.assert == Malt::Formats::CSS
+
+And that by calling #to_s we can get the rendered CSS document.
+
+  css.to_s.assert.include?('#header, h2 { color: #4d926f; }')
+
+Or we can convert the LESS document directly to CSS via the #css method.
+
+  out = less.css
+
+  out.assert.include?('#header, h2 { color: #4d926f; }')
+

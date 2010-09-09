@@ -1,17 +1,16 @@
-require 'malt/formats/abstract'
+require 'malt/formats/abstract_template'
 require 'malt/formats/html'
 require 'malt/engines/erb'
 require 'malt/engines/erubis'
 
 module Malt::Formats
 
-  # Erb files are really any kind of file,
-  # but they of course have <% %> slots.
-  class Erb < Abstract
+  #
+  class Erb < AbstractTemplate
 
     register 'erb'
 
-    #
+    # TODO: Lookup engine from engine registry.
     def rb(*)
       render_engine.compile(:text=>text, :file=>file)
     end
@@ -28,37 +27,45 @@ module Malt::Formats
     #
     alias_method :precompile, :to_rb
 
-    #
-    def to(type, data=nil, &yld)
-      new_class   = Malt.registry[type.to_sym]
-      new_text    = render(type, data, &yld)
-      new_file    = refile(type)
-      new_options = options.merge(:text=>new_text, :file=>new_file, :type=>type)
-      new_class.new(new_options)
+    # Technically #method_missing will pick this up, but since it is likely
+    # to be the most commonly used, adding the method directly will provide
+    # a small speed boost.
+    def html(data=nil, &yld)
+      render(:html, data, &yld)
     end
 
-    #
-    def render(*type_and_data, &yld)
-      type, data = parse_type_and_data(type_and_data)
-      if options[:recompile]
-        render_engine.render(:format=>type,:text=>text,:file=>file,:data=>data, &yld)
-      else
-        precompile.render(type, data, &yld)
-      end
+    # Technically #method_missing will pick this up, but since it is likely
+    # to be the most commonly used, adding the method directly will provide
+    # a small speed boost.
+    def to_html(data=nil, &yld)
+      new_text    = render(:html, data, &yld)
+      new_file    = refile(:html)
+      new_options = options.merge(:text=>new_text, :file=>new_file, :type=>:html)
+      HTML.new(new_options)
     end
 
-    # ERB templates can be any type.
-    def method_missing(sym, *args, &yld)
-      if Malt.registry.key?(sym)
-        return render(sym, *args, &yld).to_s
-      elsif md = /^to_/.match(sym.to_s)
-        type = md.post_match.to_sym
-        if Malt.registry.key?(type)
-          return to(type, *args, &yld)
-        end
-      end
-      super(sym, *args, &yld)
-    end
+#    #
+#    def to(type, data=nil, &yld)
+#      new_class   = Malt.registry[type.to_sym]
+#      new_text    = render(type, data, &yld)
+#      new_file    = refile(type)
+#      new_options = options.merge(:text=>new_text, :file=>new_file, :type=>type)
+#      new_class.new(new_options)
+#    end
+
+#    #
+#    def render(*type_and_data, &yld)
+#      type, data = parse_type_and_data(type_and_data)
+#      opts = options.merge(:format=>type, :text=>text, :file=>file, :data=>data)
+#      #opts = options.merge(:format=>type, :text=>text, :file=>file, :data=>data, :engine=>engine)
+#      #Malt.render(opts, &yld)
+#      #if options[:recompile]
+#        render_engine.render(opts, &yld)
+#      #else
+#      # precompile.render(type, data, &yld)
+#      #end
+#    end
+
 
     #
     #def to_html(db, &yld)
