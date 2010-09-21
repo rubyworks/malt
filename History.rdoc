@@ -1,6 +1,20 @@
 = Release History
 
-== 0.1.0 | 2010-06-23
+== 0.1.1 | 2010-09-21
+
+This release simple fixes two bugs. One to handle variant arity
+in format class #render methods. Currently the interface can vary
+dependent on whether they accept interpolation data or not (this will
+probably be uniform in the future). The other fix raises an error if
+no engine exists to handle a given format.
+
+Changes:
+
+* Bug fix to raise error if format not handled by any engine.
+* Bug fix to underlying #render calls to handle variant arities. 
+
+
+== 0.1.0 | 2010-08-23
 
 This if the initial release of Malt. I have no doubt the code base
 still needs some fine-tuning --hence the 0.1 version, but I have put

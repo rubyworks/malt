@@ -64,6 +64,7 @@ meta/data.rb
 meta/gemfile
 meta/profile
 qed/01_overview.rdoc
+qed/02_formats.rdoc
 qed/03_formats/01_overview.rdoc
 qed/03_formats/02_rdoc.rdoc
 qed/03_formats/03_textile.rdoc
@@ -80,6 +81,15 @@ qed/03_formats/14_scss.rdoc
 qed/03_formats/15_less.rdoc
 qed/03_formats/16_ruby.rdoc
 qed/applique/malt.rb
+qed/samples/data.yml
+qed/samples/output-erb.txt
+qed/samples/output-liquid.txt
+qed/samples/output-mustache.txt
+qed/samples/output-radius.txt
+qed/samples/sample.erb
+qed/samples/sample.liquid
+qed/samples/sample.mustache
+qed/samples/sample.radius
 test/samples/sample.md
 test/samples/sample.rdoc
 README.rdoc
