@@ -6,8 +6,12 @@
 
 == DESCRIPTION
 
-Malt provides a factory framework for rendering
-a variety of template and markup document formats.
+Malt provides a factory framework for rendering a variety of template and
+markup document formats. Malt has a very object-oriented design
+utilizing separate engine adapter classes and format classes. This makes
+Malt easy to maintain, debug and extend, and thus more robust. In fact,
+Malt supports template caching and ERB compilation by default, which was
+very easy to implement thanks to it's clean design.
 
 
 == SYNOPSIS
