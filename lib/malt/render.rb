@@ -36,7 +36,11 @@ module Malt
       match = engine.to_s.downcase
       Engine.registry[type].find{ |e| e.basename.downcase == match }
     else
-      Engine.registry[type].first
+      if Engine.registry[type]
+        Engine.registry[type].first
+      else
+        raise "no engine to handle `#{type}' format"
+      end
     end
   end
 
