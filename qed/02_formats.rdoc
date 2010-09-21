@@ -1,0 +1,31 @@
+= Formats
+
+We have created a set of sample documents in the samples directory.
+We will take each format in turn.
+
+  formats = %w{erb erubis liquid}
+
+Included with the format samples are files containing the expected results
+of each rendering.
+
+  expected_output = {}
+
+  formats.each do |format|
+    expected_output[format] = File.read("qed/samples/output-#{format}.txt")
+  end
+
+The data to inject into the formats that interpolate, is also stored in the
+samples folder.
+
+  data = YAML.load(File.new('qed/samples/data.yml'))
+
+Now we can render each of thes formats, and verify we get the expected result.
+
+  formats.each do |format|
+    output = Malt.render(:file=>"qed/samples/sample.#{format}", :format=>format, :data=>data)
+    output.assert == expected_output[format]
+  end
+
+Notice that formats the do not use interpolation data simply ignore it even
+if it is given.
+
