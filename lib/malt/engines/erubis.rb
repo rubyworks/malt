@@ -10,7 +10,7 @@ module Malt::Engine
   #
   class Erubis < Abstract
 
-    register :erb, :erubis, :rhtml
+    register :erb, :rhtml
 
     # Render template.
     def render(params, &yld)
