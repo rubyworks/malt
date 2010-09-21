@@ -87,7 +87,9 @@ module Format
     # it is taken to be the database for rendering template variables.
     def render(*type_and_data, &yld)
       type, data = parse_type_and_data(type_and_data)
-      __send__(type || default, data, &yld)
+      meth = method(type || default)
+      #__send__(type || default, data, &yld)
+      meth.arity == 0 ?  meth.call(&yld) :  meth.call(data, &yld)
     end
 
     #
@@ -178,7 +180,7 @@ module Format
 
   end
 
-  #
+  # TODO: Is this needed anymore, if so where?
   class UnsupportedConversion < Exception
     def initialize(from_type, to_type)
       @from_type = from_type
