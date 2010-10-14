@@ -10,22 +10,22 @@ module Malt::Format
     register('rdoc')
 
     #
-    def rdoc
+    def rdoc(*)
       text
     end
 
     #
-    def to_rdoc
+    def to_rdoc(*)
       self
     end
 
     #
-    def html
+    def html(*)
       render_engine.render(:text=>text, :file=>file, :format=>:html)
     end
 
     #
-    def to_html
+    def to_html(*)
       opts = options.merge(:text=>html, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end

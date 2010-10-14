@@ -13,22 +13,22 @@ module Malt::Format
     register('radius')
 
     #
-    def radius
+    def radius(*)
       text
     end
 
     #
-    def to_radius
+    def to_radius(*)
       self
     end
 
     #
-    def html(data, &yld)
+    def html(data=nil, &yld)
       render_engine.render(:text=>text, :file=>file, :data=>data, &yld)
     end
 
     #
-    def to_html(data, &yld)
+    def to_html(data=nil, &yld)
       text = html(data, &yld)
       opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)

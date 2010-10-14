@@ -20,11 +20,11 @@ module Malt::Format
     register 'rb'
 
     #
-    def rb ; text ; end
+    def rb(*) ; text ; end
     alias_method :ruby, :rb
 
     #
-    def to_rb ; self ; end
+    def to_rb(*) ; self ; end
     alias_method :to_ruby, :to_rb
 
     #

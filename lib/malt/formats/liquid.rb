@@ -9,7 +9,17 @@ module Malt::Format
   #
   class Liquid < AbstractTemplate
 
-    register 'liquid'
+    register('liquid')
+
+    #
+    def liquid(*)
+      text
+    end
+
+    #
+    def to_liquid(*)
+      self
+    end
 
 #    #
 #    def to(type, data=nil, &yld)

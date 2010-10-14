@@ -9,12 +9,7 @@ module Malt::Format
     register('textile', 'tt')
 
     #
-    def html
-      render_engine.render(:format=>:html, :text=>text, :file=>file)
-    end
-
-    #
-    def textile
+    def textile(*)
       text
     end
 
@@ -22,17 +17,22 @@ module Malt::Format
     alias_method :tt, :textile
 
     #
-    def to_html
-      opts = options.merge(:text=>html, :file=>refile(:html), :type=>:html)
-      HTML.new(opts)
-    end
-
-    #
-    def to_textile
+    def to_textile(*)
       self
     end
 
     alias_method :to_tt, :to_textile
+
+    #
+    def html(*)
+      render_engine.render(:format=>:html, :text=>text, :file=>file)
+    end
+
+    #
+    def to_html(*)
+      opts = options.merge(:text=>html, :file=>refile(:html), :type=>:html)
+      HTML.new(opts)
+    end
 
     #
     #def render_to(to, *)

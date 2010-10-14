@@ -8,12 +8,12 @@ module Malt::Format
     register 'pdf'
 
     #
-    def pdf
+    def pdf(*)
       text
     end
 
     #
-    def to_pdf
+    def to_pdf(*)
       self
     end
 

@@ -12,12 +12,12 @@ module Malt::Format
 
     register 'tenjin'
 
-    def rb
+    def rb(*)
       render_engine.compile(text, file)
     end
 
     # Erb templates can be "precompiled" into Ruby templates.
-    def to_rb
+    def to_rb(*)
       text = rb
       Ruby.new(:text=>text, :file=>refile(:rb), :type=>:rb)
     end
@@ -25,12 +25,12 @@ module Malt::Format
     alias_method(:to_ruby, :to_rb)
 
     #
-    def html
+    def html(data=nil, &yld)
       render(:html, data, &yld)
     end
 
     #
-    def to_html(data, &yld)
+    def to_html(data=nil, &yld)
       new_text    = render(:html, data, &yld)
       new_file    = refile(:html)
       new_options = options.merge(:text=>new_text, :file=>new_file, :type=>:html)

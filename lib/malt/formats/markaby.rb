@@ -1,22 +1,22 @@
 require 'malt/formats/abstract'
 require 'malt/formats/html'
-require 'malt/engines/haml'
+require 'malt/engines/markaby'
 
 module Malt::Format
 
-  # Haml looks like a Markup format, but it turns out to be
-  # a template format too.
-  class Haml < Abstract
+  # Erecotr looks like a Markup format, but it is a template format
+  # Much like pure Ruby too.
+  class Markaby < Abstract
 
-    register 'haml'
+    register 'markaby'
 
     #
-    def haml(*)
+    def markaby(*)
       text
     end
 
     #
-    def to_haml(*)
+    def to_markaby(*)
       self
     end
 
@@ -44,7 +44,7 @@ module Malt::Format
 
       #
       def render_engine
-        @render_engine ||= Malt::Engine::Haml.new(options)
+        @render_engine ||= Malt::Engine::Markaby.new(options)
       end
 
   end

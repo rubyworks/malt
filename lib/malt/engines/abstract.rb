@@ -42,7 +42,7 @@ module Engine
       end
     end
 
-    # Override this method to load rendering engine library.
+    #
     def initialize(settings={})
       @settings = settings.rekey
 

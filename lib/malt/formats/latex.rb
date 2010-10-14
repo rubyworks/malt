@@ -9,22 +9,22 @@ module Malt::Format
     register 'latex'
 
     #
-    def latex
+    def latex(*)
       text
     end
 
     #
-    def to_latex
+    def to_latex(*)
       self
     end
 
     # TODO
-    def pdf
+    def pdf(*)
       raise "not implemented yet"
     end
 
     # TODO
-    def to_pdf
+    def to_pdf(*)
       text = pdf
       opts = options.merge(:text=>text, :file=>refile(:pdf), :type=>:pdf)
       PDF.new(opts)

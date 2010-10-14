@@ -39,10 +39,10 @@ module Malt::Engine
       require_library 'sass'
     end
 
-    def engine_options
-      opts = {}
-      opts
-    end
+    #def engine_options
+    #  opts = {}
+    #  opts
+    #end
 
   end
 

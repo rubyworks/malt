@@ -10,24 +10,24 @@ module Malt::Format
     register('rtal')
 
     #
-    def html(data, &yld)
+    def html(data=nil, &yld)
       render_engine.render(:text=>text, :data=>data, &yld)
     end
 
     #
-    def to_html(data, &yld)
+    def to_html(data=nil, &yld)
       text = html(data, &yld)
       opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
 
     #
-    def xml(data, &yld)
+    def xml(data=nil, &yld)
       render_engine.render(:text=>text, :data=>data, &yld)
     end
 
     #
-    def to_xml(data, &yld)
+    def to_xml(data=nil, &yld)
       text = xml(data, &yld)
       opts = options.merge(:text=>text, :file=>refile(:xml), :type=>:xml)
       HTML.new(opts)

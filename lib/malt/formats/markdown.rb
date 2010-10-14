@@ -12,17 +12,17 @@ module Malt::Format
     register('markdown', 'md')
 
     #
-    def html
+    def html(*)
       render_engine.render(:text=>text, :file=>file, :format=>:html)
     end
 
     #
-    def latex
+    def latex(*)
       render_engine.render(:text=>text, :file=>file, :format=>:latex)
     end
 
     #
-    def markdown
+    def markdown(*)
       text
     end
 
@@ -30,19 +30,19 @@ module Malt::Format
     alias_method :md, :markdown
 
     # Convert to HTML.
-    def to_html
+    def to_html(*)
       opts = options.merge(:text=>html, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
 
     # Latex is only supported by the Kramdown engine.
-    def to_latex
+    def to_latex(*)
       opts = options.merge(:text=>html, :file=>refile(:latex), :type=>:latex)
       Latex.new(opts)
     end
 
     #
-    def to_markdown
+    def to_markdown(*)
       self
     end
 

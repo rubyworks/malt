@@ -12,6 +12,16 @@ module Malt::Format
     register 'scss'
 
     #
+    def scss(*)
+      text
+    end
+
+    #
+    def to_scss(*)
+      self
+    end
+
+    #
     def css(data=nil, &yld)
       render_engine.render(:format=>:css, :text=>text, :file=>file, :type=>type)
     end

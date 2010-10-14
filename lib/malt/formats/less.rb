@@ -12,22 +12,22 @@ module Malt::Format
     register('less')
 
     #
-    def less
+    def less(*)
       text
     end
 
     #
-    def to_less
+    def to_less(*)
       self
     end
 
     #
-    def css
+    def css(*)
       render_engine.render(:text=>text, :file=>:file, :format=>:css)
     end
 
     #
-    def to_css
+    def to_css(*)
       text = css
       opts = options.merge(:text=>text, file=>refile(:css), :type=>:css)
       CSS.new(opts)

@@ -1,22 +1,25 @@
 require 'malt/formats/abstract'
 require 'malt/formats/html'
-require 'malt/engines/haml'
+require 'malt/engines/builder'
 
 module Malt::Format
 
-  # Haml looks like a Markup format, but it turns out to be
-  # a template format too.
-  class Haml < Abstract
+  # Builder looks like a Markup format, but it is a template format
+  # as Ruby code.
+  #
+  #   http://builder.rubyforge.org/
+  #
+  class Builder < Abstract
 
-    register 'haml'
+    register 'builder'
 
     #
-    def haml(*)
+    def builder(*)
       text
     end
 
     #
-    def to_haml(*)
+    def to_builder(*)
       self
     end
 
@@ -44,7 +47,7 @@ module Malt::Format
 
       #
       def render_engine
-        @render_engine ||= Malt::Engine::Haml.new(options)
+        @render_engine ||= Malt::Engine::Builder.new(options)
       end
 
   end

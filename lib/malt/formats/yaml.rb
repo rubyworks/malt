@@ -26,12 +26,12 @@ module Malt::Format
 
     # Converting a plan YAML file to HTML makes no sense so we
     # just wrap it in +pre+ tags.
-    def html
+    def html(*)
       "<pre>\n#{h text}\n</pre>"
     end
 
     #
-    def to_html
+    def to_html(*)
       text = html
       opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)

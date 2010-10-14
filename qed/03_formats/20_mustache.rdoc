@@ -1,0 +1,54 @@
+== Mustache
+
+Lets say we have a Mustache document called 'test.mustache' containing:
+
+  <h1>Example {{ title }}</h1>
+
+  <p>This is an example of a Mustache template.</p>
+
+We can render mustache documents via the +render+ method, as we can any format.
+However, becuase Mustache is a template format and not just a markup syntax,
+we need to also provide the +render+ function with data for interpolation
+into the mustache document. 
+
+  data = { :title=>"Document" }
+
+  html = Malt.render(:file=>'tmp/test.mustache', :data=>data)
+
+  html.assert.include?('<h1>Example Document</h1>')
+
+Mustache doesn't actually care what format the document is rendered as, since it
+is purely a template engine that can be applied to any other format.
+Lets say we have a Mustache document called 'test.mustache' containing ...
+
+  <h1>Example {{ title }}</h1>
+
+  <p>This is an example of a Mustache template.</p>
+
+We can render erb documents to any format we wish.
+
+  liq = Malt.file('tmp/test.mustache')
+
+  html = liq.to_html(:title=>"Document")
+
+We will notice that the output is an instance of Malt::Format::HTML.
+
+  html.class.assert == Malt::Format::HTML
+
+We will notice that the output is an instance of Malt::Format::HTML.
+
+  html.class.assert == Malt::Format::HTML
+
+Then by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example Document</h1>')
+
+Or we can convert the document directly to HTML via the #html method.
+
+  out = liq.html(:title=>"Alternate")
+
+  out.assert.include?('<h1>Example Alternate</h1>')
+
+Mustache doesn't actually care what format the document is rendered as, since it
+is purely a template engine that can be applied to any format.
+
