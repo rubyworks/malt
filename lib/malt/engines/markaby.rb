@@ -8,7 +8,7 @@ module Malt::Engine
   #
   class Markaby < Abstract
 
-    default :markaby
+    default :markaby, :mab
 
     #
     #def intermediate(params)

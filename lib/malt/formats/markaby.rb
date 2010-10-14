@@ -8,7 +8,7 @@ module Malt::Format
   # Much like pure Ruby too.
   class Markaby < Abstract
 
-    register 'markaby'
+    register 'markaby', 'mab'
 
     #
     def markaby(*)
