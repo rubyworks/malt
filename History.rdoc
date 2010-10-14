@@ -1,5 +1,21 @@
 = Release History
 
+== 0.2.0 | 2010-10-22
+
+Malt now support Erector, Markaby, Builder and Mustache templates.
+Erector, Markaby and Builder are Ruby-based formats --templates
+are simply Ruby code. This requires them to use instance variables
+in templates rather than local variables/methods. Somethinfg to keep
+in mind.
+
+Changes:
+
+* Add support for Erector templates.
+* Add support for Markaby templates.
+* Add support for Builder templates.
+* Add support for Mustache templates.
+
+
 == 0.1.1 | 2010-09-21
 
 This release simple fixes two bugs. One to handle variant arity

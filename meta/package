@@ -1,6 +1,6 @@
 name    : malt
-date    : 2010-10-21
-version : 0.1.1
+date    : 2010-10-22
+version : 0.2.0
 
 requires:
   - syckle   (build)
