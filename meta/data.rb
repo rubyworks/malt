@@ -4,10 +4,10 @@ module Malt
 
   DIRECTORY = File.dirname(__FILE__)
 
-  def self.gemfile
-    @gemfile ||= (
+  def self.package
+    @package ||= (
       require 'yaml'
-      YAML.load(File.new(DIRECTORY + '/gemfile'))
+      YAML.load(File.new(DIRECTORY + '/package'))
     )
   end
 
@@ -20,7 +20,7 @@ module Malt
 
   def self.const_missing(name)
     key = name.to_s.downcase
-    gemfile[key] || profile[key] || super(name)
+    package[key] || profile[key] || super(name)
   end
 
 end
