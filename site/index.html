@@ -13,19 +13,25 @@
     h2 { font-size: 24px; color: #7e412e; margin-bottom: 10px; margin-top: 10px; }
     code { color: #60381b; font-family: courier; }
     .desc { font-size: 12px; padding-top: 20px; font-weight: bold; text-align: justify; }
-    #head { margin: 0 auto; width: 630px; text-align: center; margin-top: 20px;
+    #head {
+      margin: 0 auto; width: 630px; text-align: center; margin-top: 40px;
       border: 6px solid #ececcc;
       border-bottom: none;
+      border-radius: 5px; -moz-border-radius: 5px;
     }
-    #main { margin: 0 auto; width: 534px; background: url(assets/mainbg.jpg);
+    #wrap {
+      width: 630px; margin: 0 auto; background: url(assets/bg.jpg) repeat-y;
+      border: 6px solid #ececcc; border-top: none; padding-bottom: 7px; 
+      border-radius: 5px; -moz-border-radius: 5px; }
+    #main { width: 534px; margin: 0 auto; background: url(assets/mainbg.jpg);
       text-align: center; padding: 5px 20px 20px 20px; 
       border-left: 6px solid #6e3a24;
       border-right: 6px solid #6e3a24;
+      border-bottom: 6px solid #6e3a24;
     }
-    #foot { margin: 0 auto; width: 566px; text-align: center; font-size: 12px;
-      border-top: 6px solid #6e3a24;
+    #foot { text-align: center; font-size: 12px;
       padding: 10px;
-      color: #999;
+      color: #944;
     }
     #nav { margin: 0; padding: 0; }
   </style>
@@ -36,6 +42,7 @@
   <img src="assets/malt.jpg" />
 </div>
 
+<div id="wrap">
 <div id="main">
   <h1>Malt Ruby</h1>
   <h2>Multi-Template Rendering Engine</h2>
@@ -57,10 +64,10 @@
     functions.
   </p>
 
+  <div id="foot">
+    Copyright &copy; 2010 Thomas Sawyer
+  </div>
 </div>
-
-<div id="foot">
-  Copyright &copy; 2010 Thomas Sawyer
 </div>
 
 </body>
