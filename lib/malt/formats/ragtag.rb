@@ -1,13 +1,17 @@
 require 'malt/formats/abstract'
 require 'malt/formats/html'
-require 'malt/engines/rtals'
+require 'malt/formats/xml'
+require 'malt/engines/ragtag'
 
 module Malt::Format
 
+  # RagTag
   #
-  class Rtals < Abstract
+  #  http://github.com/rubyworks/ragtag
+  #
+  class RagTag < Abstract
 
-    register('rtal')
+    register('ragtag', 'rt')
 
     #
     def html(data=nil, &yld)
@@ -30,14 +34,14 @@ module Malt::Format
     def to_xml(data=nil, &yld)
       text = xml(data, &yld)
       opts = options.merge(:text=>text, :file=>refile(:xml), :type=>:xml)
-      HTML.new(opts)
+      XML.new(opts)
     end
 
     private
 
       #
       def render_engine
-        @render_engine ||= Malt::Engine::RTALS.new(options)
+        @render_engine ||= Malt::Engine::RagTag.new(options)
       end
 
   end

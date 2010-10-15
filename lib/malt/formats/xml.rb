@@ -2,18 +2,18 @@ require 'malt/formats/abstract'
 
 module Malt::Format
 
-  #
-  class HTML < Abstract
+  # TODO: Add conversion to_html.
+  class XML < Abstract
 
-    register 'html'
+    register 'xml'
 
     #
-    def html(*)
+    def xml(*)
       text
     end
 
-    # HTML is HTML ;)
-    def to_html(*)
+    # XML is XML ;)
+    def to_xml(*)
       self
     end
 

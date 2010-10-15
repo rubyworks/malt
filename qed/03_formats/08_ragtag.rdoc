@@ -1,0 +1,19 @@
+== RagTag
+
+Lets say we have a Rtals document called 'test.rt' containing:
+
+  <html>
+  <body>
+    <h1>Example <span replace="title">DUMMY</span></h1>
+    <p>This is an example of a RagTag template.</p>
+  </body>
+  </html>
+
+We can render Rtal documents via the +render+ method, as we can any format.
+
+  data = { :title=>"Document" }
+
+  html = Malt.render(:file=>'tmp/test.rt', :data=>data)
+
+  html.assert.include?('<h1>Example Document</h1>')
+

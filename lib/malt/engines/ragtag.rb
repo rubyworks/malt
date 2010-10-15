@@ -2,13 +2,13 @@ require 'malt/engines/abstract'
 
 module Malt::Engine
 
-  # RTALS
+  # RagTag
   #
-  #  http://github.com/rubyworks/rtals
+  #  http://github.com/rubyworks/ragtag
   #
-  class RTALS < Abstract
+  class RagTag < Abstract
 
-    default :rtal
+    default :ragtag, :rt
 
     #
     def render(params, &yld)
@@ -18,9 +18,12 @@ module Malt::Engine
       format = params[:format]
 
       case format
-      when :html, :xml, nil
+      when :html, nil
         data = make_binding(data, &yld)
-        intermediate(params).compile(data).to_s
+        intermediate(params).compile(data).to_xhtml
+      when :xml
+        data = make_binding(data, &yld)
+        intermediate(params).compile(data).to_xml
       else
         super(params, &yld)
       end
@@ -29,15 +32,15 @@ module Malt::Engine
     #
     def intermediate(params)
       text = params[:text]
-      ::RTAL.new(text)
+      ::RagTag.new(text)
     end
 
     private
 
     # Load Haml library if not already loaded.
     def initialize_engine
-      return if defined? ::RTAL
-      require_library 'rtals'
+      return if defined? ::RagTag
+      require_library 'ragtag'
     end
 
   end
