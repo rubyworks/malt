@@ -29,7 +29,7 @@ module Malt::Format
     #
     def to_css(*)
       text = css
-      opts = options.merge(:text=>text, file=>refile(:css), :type=>:css)
+      opts = options.merge(:text=>text, :file=>refile(:css), :type=>:css)
       CSS.new(opts)
     end
 

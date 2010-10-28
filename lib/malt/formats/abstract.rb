@@ -28,7 +28,9 @@ module Format
       @extensions
     end
 
-    #
+    #--
+    # TODO: warning: instance variable @engine not initialized
+    #++
     def self.engine(set=nil)
       @engine = set if set
       @engine
@@ -46,7 +48,6 @@ module Format
     # Override this method to load rendering engine library.
     def initialize_engine
     end
-
 
     public
 
@@ -158,6 +159,11 @@ module Format
     #
     def to_s
       text
+    end
+
+    #
+    def to_default(data=nil, &yld)
+      to(default, data, &yld)
     end
 
     # Default rendering type is +:html+. Override if it

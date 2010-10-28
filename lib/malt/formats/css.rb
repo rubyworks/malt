@@ -19,14 +19,14 @@ module Malt::Format
 
     private
 
-      #
-      def render_engine
-      end
+    #
+    def render_engine
+    end
 
-      # CSS default output type is itself.
-      def default
-        :css
-      end
+    # CSS default output type is itself.
+    def default
+      :css
+    end
 
   end
 
