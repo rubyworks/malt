@@ -14,7 +14,7 @@ requires:
   - rtals     (test)
   - liquid    (test)
   - erubis    (test)
-  - mustahce  (test)
+  - mustache  (test)
   - erector   (test)
   - markaby   (test)
   - builder   (test)
