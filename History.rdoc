@@ -14,6 +14,8 @@ Changes:
 * Add support for Markaby templates.
 * Add support for Builder templates.
 * Add support for Mustache templates.
+* Add `:pass` option to render method.
+* Rename `:format` option to `:to` for render method.
 
 
 == 0.1.1 | 2010-09-21
