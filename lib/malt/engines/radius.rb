@@ -12,10 +12,10 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      text   = params[:text]
-      data   = params[:data]
-      format = params[:format]
-      case format
+      text = params[:text]
+      data = params[:data]
+      into = params[:to]
+      case into
       when :html, :xml, nil
         data = make_context(data, &yld)
         opts = engine_options(params)

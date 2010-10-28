@@ -10,8 +10,8 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      format = params[:format]
-      case format
+      into = params[:to]
+      case into
       when :html, nil
         render_html(params, &yld)
       else

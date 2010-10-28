@@ -13,10 +13,13 @@ module Malt::Engine
     register :markdown, :md
 
     # Convert Markdown text to HTML text.
+    #
+    # @option params [String] :text Template text
+    # @option params [String,Symbol] :to ('html') Type or file extension to convert template into.
     def render(params)
-      text   = params[:text]
-      format = params[:format]
-      case format
+      text = params[:text]
+      into = params[:to]
+      case into
       when :html, nil
         intermediate(params).to_html
       when :latex
@@ -31,7 +34,6 @@ module Malt::Engine
       text = params[:text]
       ::Kramdown::Document.new(text)
     end
-
 
     private
 

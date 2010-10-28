@@ -28,7 +28,9 @@ module Malt::Engine
       text = params[:text]
       file = params[:file]
       data = params[:data]
+
       data = make_binding(data, &yld)
+
       if settings[:precompile] == false
         intermediate(params).result(data)
       else

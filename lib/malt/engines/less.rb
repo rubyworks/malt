@@ -14,9 +14,9 @@ module Malt::Engine
 
     #
     def render(params)
-      text   = params[:text]
-      format = params[:format]
-      case format
+      text = params[:text]
+      into = params[:to]
+      case into
       when :css, nil
         intermediate(params).to_css
       else
@@ -37,11 +37,11 @@ module Malt::Engine
 
     private
 
-      # Load Less library if not already loaded.
-      def initialize_engine
-        return if defined? ::Less::Engine
-        require_library 'less'
-      end
+    # Load Less library if not already loaded.
+    def initialize_engine
+      return if defined? ::Less::Engine
+      require_library 'less'
+    end
 
   end
 

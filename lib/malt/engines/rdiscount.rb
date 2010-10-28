@@ -16,7 +16,7 @@ module Malt::Engine
 
     # Convert Markdown text to HTML text.
     def render(params)
-      case params[:format]
+      case params[:to]
       when :html, nil
         intermediate(params).to_html
       else

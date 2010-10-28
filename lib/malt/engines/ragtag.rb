@@ -12,12 +12,12 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      text   = params[:text]
-      file   = params[:file]
-      data   = params[:data]
-      format = params[:format]
+      text = params[:text]
+      file = params[:file]
+      data = params[:data]
+      into = params[:to]
 
-      case format
+      case into
       when :html, nil
         data = make_binding(data, &yld)
         intermediate(params).compile(data).to_xhtml

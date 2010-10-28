@@ -15,9 +15,9 @@ module Malt::Engine
 
     # Convert rdoc text to html.
     def render(params)
-      text   = params[:text]
-      format = params[:format]
-      case format
+      text = params[:text]
+      into = params[:to]
+      case into
       when :html, nil
         html_engine.convert(text).to_s
       else

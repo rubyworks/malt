@@ -10,11 +10,11 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      text   = params[:text]
-      file   = params[:file]
-      format = params[:format]
+      text = params[:text]
+      file = params[:file]
+      into = params[:to]
 
-      case format
+      case into
       when :css, nil
         engine = intermediate(params)
         engine.render

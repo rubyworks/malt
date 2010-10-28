@@ -15,13 +15,13 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      text   = params[:text]
-      file   = params[:file]
-      data   = params[:data]
-      type   = params[:type]
-      format = params[:format] || :html
+      text = params[:text]
+      file = params[:file]
+      data = params[:data]
+      type = params[:type]
+      into = params[:to] || :html
 
-      return super(params, &yld) if type == :rbhtml && format != :html
+      return super(params, &yld) if type == :rbhtml && into != :html
 
       data = make_hash(data, &yld)
       template = intermediate(params)
