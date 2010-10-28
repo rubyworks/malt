@@ -53,7 +53,6 @@ module Engine
     end
 
     # Access to the options given to the initializer.
-    # Returns an OpenStruct object.
     attr :settings
 
     #
@@ -90,27 +89,28 @@ module Engine
     # Convert a data source into a Binding.
     # TODO: handle yld.
     def make_binding(db, &yld)
-      return db if Binding === db
+      return db if Binding === db  # FIXME: no yld
 
       if db.respond_to?(:to_binding)
-        return db.to_binding
+        return db.to_binding(&yld)
       end
 
-      db = make_object(db)
+      db = make_object(db, &yld)
 
       return db.instance_eval{ binding }        
     end
 
     # Convert a data source into an Object (aka a "scope").
-    def make_object(db)
+    def make_object(db, &yld)
       if db.respond_to?(:to_hash)
         hash  = db.to_hash
+        hash[:yield] = yld.call if yld
         attrs = hash.keys.map{ |k| k.to_sym }
         return Struct.new(*attrs).new(*hash.values)
       end
 
       if Binding === db
-        eval('self', binding)
+        eval('self', binding) # FIXME: no yld
       end
 
       return db
