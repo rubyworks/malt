@@ -20,6 +20,15 @@ module Malt
     @registry ||= {}
   end
 
+  #
+  def self.support?(ext)
+    ext  = ext.to_s
+    type = ext.sub(/^\./, '').strip
+    return false if type.empty?
+    #@registry.key?(ext.to_sym)
+    #Engine.registry[type.to_sym]
+    Engine.registry.key?(type.to_sym)
+  end
 
   #
   def self.file(file, options={})
