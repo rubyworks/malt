@@ -1,4 +1,5 @@
 require 'malt'
+require 'ae/pry'
 
 When "say we have a (((\\w+))) document called '(((\\S+)))' containing" do |type, fname, text|
   file = File.join('tmp',fname)

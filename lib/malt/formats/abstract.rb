@@ -3,6 +3,23 @@ require 'malt/kernel'
 module Malt
 module Format
 
+  class << self
+    include Malt::Kernel
+  end
+
+  #
+  def self.register(malt_class, *exts)
+    exts.each do |ext|
+      type = ext_to_type(ext)
+      registry[type] = malt_class
+    end
+  end
+
+  #
+  def self.registry
+    @registry ||= {}
+  end
+
   # Abstract format class serves as the base
   # class for all other format classes.
   #
@@ -12,7 +29,7 @@ module Format
     # Register the class to an extension type.
     def self.register(*exts)
       @extensions = exts
-      Malt.register(self, *exts)
+      Malt::Format.register(self, *exts)
 
       #exts.each do |ext|
       #  Abstract.module_eval %{

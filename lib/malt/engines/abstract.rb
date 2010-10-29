@@ -22,6 +22,10 @@ module Engine
     @registry ||= {}
   end
 
+  #
+  def self.defaults
+    @defaults ||= {}
+  end
 
   # Abstract Template class serves as the base
   # class for all other Template classes.
@@ -38,8 +42,13 @@ module Engine
     def self.default(*exts)
       register(*exts)
       exts.each do |ext|
-        Malt.config.engine[ext.to_sym] = self
+        Engine.defaults[ext.to_sym] = self
       end
+    end
+
+    #
+    def self.type
+      basename.downcase.to_sym
     end
 
     #

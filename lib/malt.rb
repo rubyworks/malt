@@ -1,5 +1,8 @@
 require 'malt/kernel'
-require 'malt/render'
+#require 'malt/render'
+require 'malt/config'
+require 'malt/machine'
+require 'malt/core_ext'
 
 module Malt
 
@@ -7,60 +10,47 @@ module Malt
     include Malt::Kernel
   end
 
-  #
-  def self.register(malt_class, *exts)
-    exts.each do |ext|
-      type = ext_to_type(ext)
-      registry[type] = malt_class
-    end
+  # FIXME: figure out a better way to get/set default rendering engines
+  def self.config
+    @config ||= Config.new
   end
 
   #
-  def self.registry
-    @registry ||= {}
-  end
-
-  #
-  def self.support?(ext)
-    ext  = ext.to_s
-    type = ext.sub(/^\./, '').strip
-    return false if type.empty?
-    #@registry.key?(ext.to_sym)
-    #Engine.registry[type.to_sym]
-    Engine.registry.key?(type.to_sym)
+  def self.machine
+    @machine ||= Machine.new
   end
 
   #
   def self.file(file, options={})
-    type = options[:type] || options[:format] || File.extname(file)
-    type = ext_to_type(type)
-    malt_class = registry[type]
-    raise "unkown type -- #{type}" unless malt_class
-    malt_class.new(options.merge(:file=>file,:type=>type))
+    machine.file(file, options)
   end
 
   #
   def self.text(text, options={})
-    if file = options[:file]
-      ext = File.extname(file)
-      ext = nil if ext.empty?
-    end
-    type = options[:type] || options[:format] || ext
-    type = ext_to_type(type)
-    malt_class = registry[type] || Format::Text
-    #raise "unkown type -- #{type}" unless malt_class
-    malt_class.new(options.merge(:text=>text,:file=>file,:type=>type))
+    machine.text(text, options)
   end
 
   #
   def self.open(url, options={})
-    require 'open-uri'
-    text = open(url).read
-    file = File.basename(url) # parse better with URI.parse
-    text(text, :file=>file)
+    machine.open(url, options)
   end
 
   #
+  def self.render(params, &body)
+    machine.render(params, &body)
+  end
+
+  #
+  def self.format?(ext)
+    machine.format?(ext)
+  end
+
+  # Returns true if the extension given is renderable.
+  def self.engine?(ext)
+    machine.engine?(ext)
+  end
+
+  # TODO: Rename to #cli.
   def self.main(*args)
     require 'optparse'
     itype, otype = nil, nil

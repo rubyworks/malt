@@ -1,0 +1,29 @@
+== Limited Formats
+
+The Machine class makes it possible to control which formats
+are available for rendering.
+
+For example, let's make a Machine that only support RDoc format
+and no others.
+
+  malt = Malt::Machine.new(:types=>[:rdoc])
+
+Now we use the `malt` machine object to handle rendering. First let's
+make sure that the machine is infact setup to limit formats to just RDoc.
+
+  malt.formats.keys.assert = [:rdoc]
+
+  malt.assert.format?('.rdoc')
+  malt.refute.format?('.markdown')
+
+This being the case we should be able to render an RDoc file without issue.
+
+  malt.render(:file=>'qed/samples/sample.rdoc')
+
+Where as another format type, though usually supported, but excluded in this
+case, will fail.
+
+  expect Malt::NoEngineError do
+    malt.render(:file=>'qed/samples/sample.markdown')
+  end
+
