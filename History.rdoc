@@ -1,5 +1,24 @@
 = Release History
 
+
+== 0.3.0 | 2010-11-04
+
+New release adds a Malt::Machine class that encapsulates all
+Malt's class level functionality. This allow Malt to be 
+be more finaly controlled. For example an instance of 
+Malt::Machine can be used to limit rendering to a select
+set of formats.
+
+Changes:
+
+* Add Machine class to ecapsulate toplevel functions.
+* Add feature via Machine options to select available formats.
+* Add `#to_default` to for converting to default format.
+* Add `Malt.engine?` to test for supported engine types.
+* Rename `Malt.support?` to `Malt.format?`.
+* Rename `Malt.main` to `Malt.cli`.
+
+
 == 0.2.0 | 2010-10-22
 
 Malt now support Erector, Markaby, Builder and Mustache templates.
