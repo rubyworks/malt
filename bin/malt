@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require 'malt'
-Malt.main(*ARGV)
+Malt.cli(*ARGV)
 

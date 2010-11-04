@@ -1,6 +1,5 @@
+require 'malt/meta/data'
 require 'malt/kernel'
-#require 'malt/render'
-require 'malt/config'
 require 'malt/machine'
 require 'malt/core_ext'
 
@@ -8,11 +7,6 @@ module Malt
 
   class << self
     include Malt::Kernel
-  end
-
-  # FIXME: figure out a better way to get/set default rendering engines
-  def self.config
-    @config ||= Config.new
   end
 
   #
@@ -50,8 +44,8 @@ module Malt
     machine.engine?(ext)
   end
 
-  # TODO: Rename to #cli.
-  def self.main(*args)
+  #
+  def self.cli(*args)
     require 'optparse'
     itype, otype = nil, nil
     OptionParser.new{|o|

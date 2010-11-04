@@ -3,19 +3,25 @@ module Malt
   # The Machine class encapsulates Malt's main methods
   # along with configuratable settings to control
   # which engines and formats are used for rendering.
+  #--
+  # TODO: Can we dynamically generate the MARKUP and TEMPLATE constants
+  # from the format classes? In anycase, the still need tweaking.
+  #++
   class Machine
 
-    # List of markup types.
-    # TODO: dynamically generate this list from classes.
-    MARKUP_TYPES = [:rdoc, :markdown, :textile]
+    # List of markup types. These are formats that just allow markup transformations
+    # and do not provide for data injection.
+    MARKUP = [:rdoc, :markdown, :textile, :scss, :sass, :less, :css, :html, :xml]
 
-    # List of template types.
-    # TODO: dynamically generate this list from classes.
-    TEMPLATE_TYPES = [:erb, :liquid, :ruby]
+    # List of template types. These are template formats that provide data injection.
+    TEMPLATES = [:ruby, :erb, :liquid, :mustache, :tenjin, :ragtag, :radius, :erector, :builder, :markaby]
+
+    # Template types that prevent arbitrary Ruby code execution.
+    TEMPLATES_SAFE = [:liquid, :mustache]
 
     # New Malt Machine.
     #
-    # * config[:types]    - list formats to handle
+    # * config[:types]    - list of formats to handle
     # * config[:priority] - list of prioritized engines
     #
     def initialize(config={})

@@ -1,3 +1,5 @@
+raise "not used anymore"
+
 require 'malt/kernel'
 require 'malt/config'
 require 'malt/core_ext'
