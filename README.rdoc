@@ -18,7 +18,7 @@ very easy to implement thanks to it's clean design.
 
 === Functional API
 
-  Malt.render(:file=>'foo.erb', :format=>:html, :data=>data)
+  Malt.render(:file=>'foo.erb', :to=>:html, :data=>data)
 
 Where +data+ is a data source of some type. Malt will see
 that the file is an ERB template and render it accordingly.

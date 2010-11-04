@@ -9,7 +9,6 @@ features/samples/sample.radius
 features/step_definitions/engine_steps.rb
 features/support/loadpath.rb
 features/support/sample_class.rb
-lib/malt/config.rb
 lib/malt/core_ext.rb
 lib/malt/engines/abstract.rb
 lib/malt/engines/bluecloth.rb
@@ -62,11 +61,11 @@ lib/malt/formats/xml.rb
 lib/malt/formats/yaml.rb
 lib/malt/formats.rb
 lib/malt/kernel.rb
+lib/malt/machine.rb
 lib/malt/markup.rb
 lib/malt/meta/data.rb
 lib/malt/meta/package
 lib/malt/meta/profile
-lib/malt/render.rb
 lib/malt/template.rb
 lib/malt.rb
 meta/data.rb
@@ -93,6 +92,8 @@ qed/03_formats/17_markaby.rdoc
 qed/03_formats/18_builder.rb
 qed/03_formats/19_erector.rb
 qed/03_formats/20_mustache.rdoc
+qed/05_machine/01_limited_formats.rdoc
+qed/05_machine/02_prioritized_engines.rdoc
 qed/applique/malt.rb
 qed/samples/data.yml
 qed/samples/output-erb.txt
