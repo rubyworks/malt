@@ -107,6 +107,11 @@
             </li>
           
             
+            <li class="singleton">
+              <a href="#method-c-type">::type</a>
+            </li>
+          
+            
             <li class="method">
               <a href="#method-i-cache%3F">#cache?</a>
             </li>
@@ -200,15 +205,17 @@
         
           <li class="module"><a href="../../Malt.html">Malt</a></li>
         
-          <li class="class"><a href="../../Malt/Config.html">Malt::Config</a></li>
-        
           <li class="module"><a href="../../Malt/Engine.html">Malt::Engine</a></li>
         
           <li class="class"><a href="../../Malt/Engine/Abstract.html">Malt::Engine::Abstract</a></li>
         
           <li class="class"><a href="../../Malt/Engine/BlueCloth.html">Malt::Engine::BlueCloth</a></li>
         
+          <li class="class"><a href="../../Malt/Engine/Builder.html">Malt::Engine::Builder</a></li>
+        
           <li class="class"><a href="../../Malt/Engine/Erb.html">Malt::Engine::Erb</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Erector.html">Malt::Engine::Erector</a></li>
         
           <li class="class"><a href="../../Malt/Engine/Erubis.html">Malt::Engine::Erubis</a></li>
         
@@ -220,15 +227,19 @@
         
           <li class="class"><a href="../../Malt/Engine/Liquid.html">Malt::Engine::Liquid</a></li>
         
+          <li class="class"><a href="../../Malt/Engine/Markaby.html">Malt::Engine::Markaby</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/Mustache.html">Malt::Engine::Mustache</a></li>
+        
           <li class="class"><a href="../../Malt/Engine/RDiscount.html">Malt::Engine::RDiscount</a></li>
         
           <li class="class"><a href="../../Malt/Engine/RDoc.html">Malt::Engine::RDoc</a></li>
         
-          <li class="class"><a href="../../Malt/Engine/RTALS.html">Malt::Engine::RTALS</a></li>
-        
           <li class="class"><a href="../../Malt/Engine/Radius.html">Malt::Engine::Radius</a></li>
         
           <li class="module"><a href="../../Malt/Engine/Radius/context;.html">Malt::Engine::Radius::context;</a></li>
+        
+          <li class="class"><a href="../../Malt/Engine/RagTag.html">Malt::Engine::RagTag</a></li>
         
           <li class="class"><a href="../../Malt/Engine/RedCloth.html">Malt::Engine::RedCloth</a></li>
         
@@ -244,9 +255,13 @@
         
           <li class="class"><a href="../../Malt/Format/AbstractTemplate.html">Malt::Format::AbstractTemplate</a></li>
         
+          <li class="class"><a href="../../Malt/Format/Builder.html">Malt::Format::Builder</a></li>
+        
           <li class="class"><a href="../../Malt/Format/CSS.html">Malt::Format::CSS</a></li>
         
           <li class="class"><a href="../../Malt/Format/Erb.html">Malt::Format::Erb</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Erector.html">Malt::Format::Erector</a></li>
         
           <li class="class"><a href="../../Malt/Format/HTML.html">Malt::Format::HTML</a></li>
         
@@ -258,7 +273,11 @@
         
           <li class="class"><a href="../../Malt/Format/Liquid.html">Malt::Format::Liquid</a></li>
         
+          <li class="class"><a href="../../Malt/Format/Markaby.html">Malt::Format::Markaby</a></li>
+        
           <li class="class"><a href="../../Malt/Format/Markdown.html">Malt::Format::Markdown</a></li>
+        
+          <li class="class"><a href="../../Malt/Format/Mustache.html">Malt::Format::Mustache</a></li>
         
           <li class="class"><a href="../../Malt/Format/PDF.html">Malt::Format::PDF</a></li>
         
@@ -270,7 +289,7 @@
         
           <li class="class"><a href="../../Malt/Format/Radius.html">Malt::Format::Radius</a></li>
         
-          <li class="class"><a href="../../Malt/Format/Rtals.html">Malt::Format::Rtals</a></li>
+          <li class="class"><a href="../../Malt/Format/RagTag.html">Malt::Format::RagTag</a></li>
         
           <li class="class"><a href="../../Malt/Format/Ruby.html">Malt::Format::Ruby</a></li>
         
@@ -286,11 +305,17 @@
         
           <li class="class"><a href="../../Malt/Format/UnsupportedConversion.html">Malt::Format::UnsupportedConversion</a></li>
         
+          <li class="class"><a href="../../Malt/Format/XML.html">Malt::Format::XML</a></li>
+        
           <li class="class"><a href="../../Malt/Format/YAML.html">Malt::Format::YAML</a></li>
         
           <li class="module"><a href="../../Malt/Kernel.html">Malt::Kernel</a></li>
         
+          <li class="class"><a href="../../Malt/Machine.html">Malt::Machine</a></li>
+        
           <li class="class"><a href="../../Malt/Markup.html">Malt::Markup</a></li>
+        
+          <li class="class"><a href="../../Malt/NoEngineError.html">Malt::NoEngineError</a></li>
         
           <li class="class"><a href="../../Malt/Template.html">Malt::Template</a></li>
         
@@ -308,7 +333,7 @@
       <div style="float: right; margin-right: 5px;">
         <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
       </div>
-      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.3.0
+      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.4.0
       <br/><br/>
     </div>
   </div>
@@ -348,8 +373,7 @@ other <a href="../Template.html">Template</a> classes.
         <div class="method-description">
         
         <p>
-Access to the options given to the initializer. Returns an <a
-href="../../OpenStruct.html">OpenStruct</a> object.
+Access to the options given to the initializer.
 </p>
         
         </div>
@@ -386,13 +410,13 @@ Register and set as the default for given extensions.
           <div class="method-source-code"
             id="default-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 38</span>
-38:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">default</span>(*<span class="ruby-identifier">exts</span>)
-39:       <span class="ruby-identifier">register</span>(*<span class="ruby-identifier">exts</span>)
-40:       <span class="ruby-identifier">exts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
-41:         <span class="ruby-constant">Malt</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">engine</span>[<span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-keyword kw">self</span>
-42:       <span class="ruby-keyword kw">end</span>
-43:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 42</span>
+42:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">default</span>(*<span class="ruby-identifier">exts</span>)
+43:       <span class="ruby-identifier">register</span>(*<span class="ruby-identifier">exts</span>)
+44:       <span class="ruby-identifier">exts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+45:         <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-keyword kw">self</span>
+46:       <span class="ruby-keyword kw">end</span>
+47:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -414,24 +438,22 @@ Register and set as the default for given extensions.
 
         <div class="method-description">
           
-          <p>
-Override this method to load rendering engine library.
-</p>
+          
           
 
           
           <div class="method-source-code"
             id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 46</span>
-46:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">settings</span>={})
-47:       <span class="ruby-ivar">@settings</span> = <span class="ruby-identifier">settings</span>.<span class="ruby-identifier">rekey</span>
-48: 
-49:       <span class="ruby-ivar">@cache</span>  = {}
-50:       <span class="ruby-ivar">@source</span> = {}
-51: 
-52:       <span class="ruby-identifier">initialize_engine</span>
-53:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 55</span>
+55:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">settings</span>={})
+56:       <span class="ruby-ivar">@settings</span> = <span class="ruby-identifier">settings</span>.<span class="ruby-identifier">rekey</span>
+57: 
+58:       <span class="ruby-ivar">@cache</span>  = {}
+59:       <span class="ruby-ivar">@source</span> = {}
+60: 
+61:       <span class="ruby-identifier">initialize_engine</span>
+62:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -462,10 +484,42 @@ Register the class to an extension type.
           <div class="method-source-code"
             id="register-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 33</span>
-33:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">register</span>(*<span class="ruby-identifier">exts</span>)
-34:       <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">register</span>(<span class="ruby-keyword kw">self</span>, *<span class="ruby-identifier">exts</span>)
-35:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 37</span>
+37:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">register</span>(*<span class="ruby-identifier">exts</span>)
+38:       <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">register</span>(<span class="ruby-keyword kw">self</span>, *<span class="ruby-identifier">exts</span>)
+39:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="type-method" class="method-detail ">
+        <a name="method-c-type"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">type</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="type-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 50</span>
+50:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>
+51:       <span class="ruby-identifier">basename</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">to_sym</span>
+52:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -500,10 +554,10 @@ Register the class to an extension type.
           <div class="method-source-code"
             id="cache--source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 74</span>
-74:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache?</span>
-75:       <span class="ruby-operator">!</span><span class="ruby-identifier">settings</span>[<span class="ruby-value">:nocache</span>]
-76:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 82</span>
+82:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache?</span>
+83:       <span class="ruby-operator">!</span><span class="ruby-identifier">settings</span>[<span class="ruby-value">:nocache</span>]
+84:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -532,10 +586,10 @@ Register the class to an extension type.
           <div class="method-source-code"
             id="compile-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 69</span>
-69:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compile</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
-70:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;not implemented&quot;</span>
-71:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 77</span>
+77:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compile</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
+78:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;not implemented&quot;</span>
+79:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -564,14 +618,14 @@ Register the class to an extension type.
           <div class="method-source-code"
             id="render-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 60</span>
-60:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>={}) <span class="ruby-comment cmt">#format, text, file, db, &amp;yld)</span>
-61:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">format</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:format</span>]
-62:         <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unsupported rendering -- #{format}&quot;</span>
-63:       <span class="ruby-keyword kw">else</span>
-64:         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;unsupported rendering&quot;</span>
-65:       <span class="ruby-keyword kw">end</span>
-66:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 68</span>
+68:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>={}) <span class="ruby-comment cmt">#format, text, file, db, &amp;yld)</span>
+69:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">format</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:format</span>]
+70:         <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unsupported rendering -- #{format}&quot;</span>
+71:       <span class="ruby-keyword kw">else</span>
+72:         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;unsupported rendering&quot;</span>
+73:       <span class="ruby-keyword kw">end</span>
+74:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -609,9 +663,9 @@ usage.
           <div class="method-source-code"
             id="initialize-engine-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 82</span>
-82:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_engine</span>
-83:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 90</span>
+90:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_engine</span>
+91:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -642,18 +696,18 @@ Convert a data source into a Binding. TODO: handle yld.
           <div class="method-source-code"
             id="make-binding-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 92</span>
- 92:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_binding</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
- 93:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>
- 94: 
- 95:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_binding</span>)
- 96:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_binding</span>
- 97:       <span class="ruby-keyword kw">end</span>
- 98: 
- 99:       <span class="ruby-identifier">db</span> = <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>)
-100: 
-101:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">instance_eval</span>{ <span class="ruby-identifier">binding</span> }        
-102:     <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 100</span>
+100:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_binding</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
+101:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>  <span class="ruby-comment cmt"># FIXME: no yld</span>
+102: 
+103:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_binding</span>)
+104:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_binding</span>(&amp;<span class="ruby-identifier">yld</span>)
+105:       <span class="ruby-keyword kw">end</span>
+106: 
+107:       <span class="ruby-identifier">db</span> = <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
+108: 
+109:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">instance_eval</span>{ <span class="ruby-identifier">binding</span> }        
+110:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -684,34 +738,34 @@ Convert a data source into a <a href="../../Hash.html">Hash</a>.
           <div class="method-source-code"
             id="make-hash-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 120</span>
-120:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_hash</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
-121:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>
-122:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>)
-123:       <span class="ruby-keyword kw">end</span>
-124: 
-125:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_hash</span>)
-126:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_hash</span>
-127:         <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
-128:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
-129:       <span class="ruby-keyword kw">end</span>
-130: 
-131:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_h</span>)
-132:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_h</span>
-133:         <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
-134:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
-135:       <span class="ruby-keyword kw">end</span>
-136: 
-137:       <span class="ruby-comment cmt"># last resort</span>
-138:       <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">instance_variables</span>.<span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-139:         <span class="ruby-identifier">k</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-value str">'@'</span>,<span class="ruby-value str">''</span>).<span class="ruby-identifier">to_sym</span>
-140:         <span class="ruby-identifier">v</span> = <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-identifier">i</span>)
-141:         <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
-142:         <span class="ruby-identifier">h</span>
-143:       <span class="ruby-keyword kw">end</span>
-144:       <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
-145:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
-146:     <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 129</span>
+129:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_hash</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
+130:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>
+131:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>)
+132:       <span class="ruby-keyword kw">end</span>
+133: 
+134:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_hash</span>)
+135:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_hash</span>
+136:         <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
+137:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
+138:       <span class="ruby-keyword kw">end</span>
+139: 
+140:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_h</span>)
+141:         <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_h</span>
+142:         <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
+143:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
+144:       <span class="ruby-keyword kw">end</span>
+145: 
+146:       <span class="ruby-comment cmt"># last resort</span>
+147:       <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">instance_variables</span>.<span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+148:         <span class="ruby-identifier">k</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-value str">'@'</span>,<span class="ruby-value str">''</span>).<span class="ruby-identifier">to_sym</span>
+149:         <span class="ruby-identifier">v</span> = <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-identifier">i</span>)
+150:         <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
+151:         <span class="ruby-identifier">h</span>
+152:       <span class="ruby-keyword kw">end</span>
+153:       <span class="ruby-identifier">db</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
+154:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
+155:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -726,7 +780,7 @@ Convert a data source into a <a href="../../Hash.html">Hash</a>.
         <div class="method-heading">
         
           <span class="method-name">make_object</span><span
-            class="method-args">(db)</span>
+            class="method-args">(db, &yld)</span>
           <span class="method-click-advice">click to toggle source</span>
         
         </div>
@@ -742,20 +796,21 @@ Convert a data source into an Object (aka a &#8220;scope&#8221;).
           <div class="method-source-code"
             id="make-object-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 105</span>
-105:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>)
-106:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_hash</span>)
-107:         <span class="ruby-identifier">hash</span>  = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_hash</span>
-108:         <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span> }
-109:         <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Struct</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">attrs</span>).<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">values</span>)
-110:       <span class="ruby-keyword kw">end</span>
-111: 
-112:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>
-113:         <span class="ruby-identifier">eval</span>(<span class="ruby-value str">'self'</span>, <span class="ruby-identifier">binding</span>)
-114:       <span class="ruby-keyword kw">end</span>
-115: 
-116:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
-117:     <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 113</span>
+113:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_object</span>(<span class="ruby-identifier">db</span>, &amp;<span class="ruby-identifier">yld</span>)
+114:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_hash</span>)
+115:         <span class="ruby-identifier">hash</span>  = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_hash</span>
+116:         <span class="ruby-identifier">hash</span>[<span class="ruby-value">:yield</span>] = <span class="ruby-identifier">yld</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yld</span>
+117:         <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span> }
+118:         <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Struct</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">attrs</span>).<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">values</span>)
+119:       <span class="ruby-keyword kw">end</span>
+120: 
+121:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Binding</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">db</span>
+122:         <span class="ruby-identifier">eval</span>(<span class="ruby-value str">'self'</span>, <span class="ruby-identifier">binding</span>) <span class="ruby-comment cmt"># FIXME: no yld</span>
+123:       <span class="ruby-keyword kw">end</span>
+124: 
+125:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">db</span>
+126:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -786,10 +841,10 @@ Require template library.
           <div class="method-source-code"
             id="require-library-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 86</span>
-86:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_library</span>(<span class="ruby-identifier">path</span>)
-87:       <span class="ruby-identifier">require</span>(<span class="ruby-identifier">path</span>)
-88:     <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt/engines/abstract.rb, line 94</span>
+94:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_library</span>(<span class="ruby-identifier">path</span>)
+95:       <span class="ruby-identifier">require</span>(<span class="ruby-identifier">path</span>)
+96:     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>

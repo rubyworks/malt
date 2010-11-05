@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Malt::Machine</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      $('#documentation pre').wrapInner('<code></code>');
+      hljs.tabReplace = '    ';
+      hljs.initHighlightingOnLoad('ruby');
+
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind( "click", highlightClickTarget );
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../index.html">Malt</a>&nbsp;
+      <a href="/">Malt::Machine</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../lib/malt/machine_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/malt/machine.rb">lib/malt/machine.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <li class="class">Object</li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="singleton">
+              <a href="#method-c-new">::new</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-engine">#engine</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-engine%3F">#engine?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-engines">#engines</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-ext_to_type">#ext_to_type</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-file">#file</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-file_read">#file_read</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-file_type">#file_type</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-format%3F">#format?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-formats">#formats</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-open">#open</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-priority">#priority</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#method-i-text">#text</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../History_rdoc.html">History.rdoc</a></li>
+        
+          <li class="file"><a href="../License_txt.html">License.txt</a></li>
+        
+          <li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../Malt.html">Malt</a></li>
+        
+          <li class="module"><a href="../Malt/Engine.html">Malt::Engine</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Abstract.html">Malt::Engine::Abstract</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/BlueCloth.html">Malt::Engine::BlueCloth</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Builder.html">Malt::Engine::Builder</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Erb.html">Malt::Engine::Erb</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Erector.html">Malt::Engine::Erector</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Erubis.html">Malt::Engine::Erubis</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Haml.html">Malt::Engine::Haml</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Kramdown.html">Malt::Engine::Kramdown</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Less.html">Malt::Engine::Less</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Liquid.html">Malt::Engine::Liquid</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Markaby.html">Malt::Engine::Markaby</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Mustache.html">Malt::Engine::Mustache</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/RDiscount.html">Malt::Engine::RDiscount</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/RDoc.html">Malt::Engine::RDoc</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Radius.html">Malt::Engine::Radius</a></li>
+        
+          <li class="module"><a href="../Malt/Engine/Radius/context;.html">Malt::Engine::Radius::context;</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/RagTag.html">Malt::Engine::RagTag</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/RedCloth.html">Malt::Engine::RedCloth</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Ruby.html">Malt::Engine::Ruby</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Sass.html">Malt::Engine::Sass</a></li>
+        
+          <li class="class"><a href="../Malt/Engine/Tenjin.html">Malt::Engine::Tenjin</a></li>
+        
+          <li class="module"><a href="../Malt/Format.html">Malt::Format</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Abstract.html">Malt::Format::Abstract</a></li>
+        
+          <li class="class"><a href="../Malt/Format/AbstractTemplate.html">Malt::Format::AbstractTemplate</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Builder.html">Malt::Format::Builder</a></li>
+        
+          <li class="class"><a href="../Malt/Format/CSS.html">Malt::Format::CSS</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Erb.html">Malt::Format::Erb</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Erector.html">Malt::Format::Erector</a></li>
+        
+          <li class="class"><a href="../Malt/Format/HTML.html">Malt::Format::HTML</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Haml.html">Malt::Format::Haml</a></li>
+        
+          <li class="class"><a href="../Malt/Format/LESS.html">Malt::Format::LESS</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Latex.html">Malt::Format::Latex</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Liquid.html">Malt::Format::Liquid</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Markaby.html">Malt::Format::Markaby</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Markdown.html">Malt::Format::Markdown</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Mustache.html">Malt::Format::Mustache</a></li>
+        
+          <li class="class"><a href="../Malt/Format/PDF.html">Malt::Format::PDF</a></li>
+        
+          <li class="class"><a href="../Malt/Format/RBHTML.html">Malt::Format::RBHTML</a></li>
+        
+          <li class="class"><a href="../Malt/Format/RDoc.html">Malt::Format::RDoc</a></li>
+        
+          <li class="class"><a href="../Malt/Format/RHTML.html">Malt::Format::RHTML</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Radius.html">Malt::Format::Radius</a></li>
+        
+          <li class="class"><a href="../Malt/Format/RagTag.html">Malt::Format::RagTag</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Ruby.html">Malt::Format::Ruby</a></li>
+        
+          <li class="class"><a href="../Malt/Format/SCSS.html">Malt::Format::SCSS</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Sass.html">Malt::Format::Sass</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Tenjin.html">Malt::Format::Tenjin</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Text.html">Malt::Format::Text</a></li>
+        
+          <li class="class"><a href="../Malt/Format/Textile.html">Malt::Format::Textile</a></li>
+        
+          <li class="class"><a href="../Malt/Format/UnsupportedConversion.html">Malt::Format::UnsupportedConversion</a></li>
+        
+          <li class="class"><a href="../Malt/Format/XML.html">Malt::Format::XML</a></li>
+        
+          <li class="class"><a href="../Malt/Format/YAML.html">Malt::Format::YAML</a></li>
+        
+          <li class="module"><a href="../Malt/Kernel.html">Malt::Kernel</a></li>
+        
+          <li class="class"><a href="../Malt/Machine.html">Malt::Machine</a></li>
+        
+          <li class="class"><a href="../Malt/Markup.html">Malt::Markup</a></li>
+        
+          <li class="class"><a href="../Malt/NoEngineError.html">Malt::NoEngineError</a></li>
+        
+          <li class="class"><a href="../Malt/Template.html">Malt::Template</a></li>
+        
+          <li class="class"><a href="../Hash.html">Hash</a></li>
+        
+          <li class="class"><a href="../OpenStruct.html">OpenStruct</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.4.0
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Machine</h1>
+      
+
+      <p>
+The <a href="Machine.html">Machine</a> class encapsulates Malt&#8217;s main
+methods along with configuratable settings to control which engines and
+formats are used for rendering.
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+    <div id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt><a name="MARKUP">MARKUP</a></dt>
+        
+        <dd class="description"><p>
+List of markup types. These are formats that just allow markup
+transformations and do not provide for data injection.
+</p></dd>
+        
+      
+        <dt><a name="TEMPLATES">TEMPLATES</a></dt>
+        
+        <dd class="description"><p>
+List of template types. These are template formats that provide data
+injection.
+</p></dd>
+        
+      
+        <dt><a name="TEMPLATES_SAFE">TEMPLATES_SAFE</a></dt>
+        
+        <dd class="description"><p>
+<a href="Template.html">Template</a> types that prevent arbitrary Ruby code
+execution.
+</p></dd>
+        
+      
+      </dl>
+    </div>
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="new-method" class="method-detail ">
+        <a name="method-c-new"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">new</span><span
+            class="method-args">(config={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+New <a href="../Malt.html">Malt</a> <a href="Machine.html">Machine</a>.
+</p>
+<ul>
+<li><p>
+config[:types]    - list of formats to handle
+</p>
+</li>
+<li><p>
+config[:priority] - list of prioritized engines
+</p>
+</li>
+</ul>
+          
+
+          
+          <div class="method-source-code"
+            id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 27</span>
+27:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">config</span>={})
+28:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">priority</span> = <span class="ruby-identifier">config</span>[<span class="ruby-value">:priority</span>]
+29:         <span class="ruby-identifier">priority</span>.<span class="ruby-identifier">map!</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_sym</span> }
+30:       <span class="ruby-keyword kw">else</span>
+31:         <span class="ruby-identifier">priority</span> = []
+32:       <span class="ruby-keyword kw">end</span>
+33:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">types</span> = <span class="ruby-identifier">config</span>[<span class="ruby-value">:types</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">config</span>[<span class="ruby-value">:type</span>]
+34:         <span class="ruby-identifier">formats</span> = {}
+35:         <span class="ruby-identifier">engines</span> = {}
+36:         <span class="ruby-identifier">types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
+37:           <span class="ruby-identifier">k</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">type</span>)
+38:           <span class="ruby-identifier">formats</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-constant">Malt</span><span class="ruby-operator">::</span><span class="ruby-constant">Format</span>.<span class="ruby-identifier">registry</span>[<span class="ruby-identifier">k</span>]
+39:           <span class="ruby-identifier">engines</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-constant">Malt</span><span class="ruby-operator">::</span><span class="ruby-constant">Engine</span>.<span class="ruby-identifier">registry</span>[<span class="ruby-identifier">k</span>]
+40:         <span class="ruby-keyword kw">end</span>
+41:       <span class="ruby-keyword kw">else</span>
+42:         <span class="ruby-identifier">formats</span> = <span class="ruby-constant">Malt</span><span class="ruby-operator">::</span><span class="ruby-constant">Format</span>.<span class="ruby-identifier">registry</span> <span class="ruby-comment cmt">#.dup</span>
+43:         <span class="ruby-identifier">engines</span> = <span class="ruby-constant">Malt</span><span class="ruby-operator">::</span><span class="ruby-constant">Engine</span>.<span class="ruby-identifier">registry</span> <span class="ruby-comment cmt">#.dup</span>
+44:       <span class="ruby-keyword kw">end</span>
+45:       <span class="ruby-ivar">@formats</span>  = <span class="ruby-identifier">formats</span>
+46:       <span class="ruby-ivar">@engines</span>  = <span class="ruby-identifier">engines</span>
+47:       <span class="ruby-ivar">@priority</span> = <span class="ruby-identifier">priority</span>
+48:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="engine--method" class="method-detail ">
+        <a name="method-i-engine%3F"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">engine?</span><span
+            class="method-args">(ext)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="engine--source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 73</span>
+73:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">engine?</span>(<span class="ruby-identifier">ext</span>)
+74:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">ext</span>)
+75:       <span class="ruby-identifier">engines</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">type</span>)
+76:       <span class="ruby-comment cmt">##ext  = ext.to_s</span>
+77:       <span class="ruby-comment cmt">##type = ext.sub(/^\./, '').strip</span>
+78:       <span class="ruby-comment cmt">##return false if type.empty?</span>
+79:       <span class="ruby-comment cmt">###@registry.key?(ext.to_sym)</span>
+80:       <span class="ruby-comment cmt">###Engine.registry[type.to_sym]</span>
+81:       <span class="ruby-comment cmt">##Engine.registry.key?(type.to_sym)</span>
+82:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="engines-method" class="method-detail ">
+        <a name="method-i-engines"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">engines</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="engines-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 56</span>
+56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">engines</span>
+57:       <span class="ruby-ivar">@engines</span>
+58:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="file-method" class="method-detail ">
+        <a name="method-i-file"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">file</span><span
+            class="method-args">(file, options={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="file-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 91</span>
+91:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>={})
+92:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:format</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>)
+93:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">type</span>)
+94:       <span class="ruby-identifier">malt_class</span> = <span class="ruby-identifier">formats</span>[<span class="ruby-identifier">type</span>]
+95:       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unkown type -- #{type}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">malt_class</span>
+96:       <span class="ruby-identifier">malt_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>,<span class="ruby-value">:type=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">type</span>))
+97:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="format--method" class="method-detail ">
+        <a name="method-i-format%3F"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">format?</span><span
+            class="method-args">(ext)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="format--source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 85</span>
+85:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format?</span>(<span class="ruby-identifier">ext</span>)
+86:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">ext</span>)
+87:       <span class="ruby-identifier">formats</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">type</span>)
+88:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="formats-method" class="method-detail ">
+        <a name="method-i-formats"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">formats</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="formats-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 51</span>
+51:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">formats</span>
+52:       <span class="ruby-ivar">@formats</span>
+53:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="open-method" class="method-detail ">
+        <a name="method-i-open"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">open</span><span
+            class="method-args">(url, options={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Open a URL as a <a href="../Malt.html">Malt</a> <a
+href="Format.html">Format</a> object.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="open-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 113</span>
+113:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">options</span>={})
+114:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'open-uri'</span>
+115:       <span class="ruby-identifier">text</span> = <span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>).<span class="ruby-identifier">read</span>
+116:       <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">url</span>) <span class="ruby-comment cmt"># parse better with URI.parse</span>
+117:       <span class="ruby-identifier">text</span>(<span class="ruby-identifier">text</span>, <span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>)
+118:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="priority-method" class="method-detail ">
+        <a name="method-i-priority"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">priority</span><span
+            class="method-args">(type=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+<a href="Engine.html">Engine</a> priorities.
+</p>
+<p>
+Returns an Array of symbolic engine names.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="priority-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 63</span>
+63:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">priority</span>(<span class="ruby-identifier">type</span>=<span class="ruby-keyword kw">nil</span>)
+64:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span>
+65:         <span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">to_sym</span>
+66:         <span class="ruby-ivar">@priority</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">type</span>)
+67:         <span class="ruby-ivar">@priority</span>.<span class="ruby-identifier">uniq!</span>  <span class="ruby-comment cmt"># assuming first are kept</span>
+68:       <span class="ruby-keyword kw">end</span>
+69:       <span class="ruby-ivar">@priority</span>
+70:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="render-method" class="method-detail ">
+        <a name="method-i-render"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">render</span><span
+            class="method-args">(parameters={}, &body)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Render template directly.
+</p>
+<p>
+parameters[:file]   - File name of template. Used to read text.
+parameters[:text]   - Text of template document. parameters[:type]   - File
+type/extension used to look up engine. parameters[:pass]   - If not a
+supported type return text rather than raise an error. parameters[:engine]
+- Force the use of a this specific engine. parameters[:to]     - <a
+href="Format.html">Format</a> to convert to (usual default is `html`).
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="render-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 129</span>
+129:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">parameters</span>={}, &amp;<span class="ruby-identifier">body</span>)
+130:       <span class="ruby-identifier">type</span>   = <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:type</span>]
+131:       <span class="ruby-identifier">file</span>   = <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:file</span>]
+132:       <span class="ruby-identifier">text</span>   = <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:text</span>]
+133:       <span class="ruby-identifier">engine</span> = <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:engine</span>]
+134: 
+135:       <span class="ruby-identifier">type</span>   = <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">type</span>)
+136:       <span class="ruby-identifier">text</span>   = <span class="ruby-identifier">file_read</span>(<span class="ruby-identifier">file</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">text</span>
+137: 
+138:       <span class="ruby-identifier">engine_class</span> = <span class="ruby-identifier">engine</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">engine</span>)
+139: 
+140:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">engine_class</span>
+141:         <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:type</span>] = <span class="ruby-identifier">type</span>
+142:         <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:text</span>] = <span class="ruby-identifier">text</span>
+143: 
+144:         <span class="ruby-identifier">engine</span> = <span class="ruby-identifier">engine_class</span>.<span class="ruby-identifier">new</span>
+145:         <span class="ruby-identifier">engine</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">parameters</span>, &amp;<span class="ruby-identifier">body</span>)
+146:       <span class="ruby-keyword kw">else</span>
+147:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:pass</span>]
+148:           <span class="ruby-identifier">text</span>
+149:         <span class="ruby-keyword kw">else</span>
+150:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoEngineError</span>, <span class="ruby-node">&quot;no engine to handle `#{type}' format&quot;</span>      
+151:         <span class="ruby-keyword kw">end</span>
+152:       <span class="ruby-keyword kw">end</span>
+153:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="text-method" class="method-detail ">
+        <a name="method-i-text"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">text</span><span
+            class="method-args">(text, options={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="text-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 100</span>
+100:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">text</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>={})
+101:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:file</span>]
+102:         <span class="ruby-identifier">ext</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>)
+103:         <span class="ruby-identifier">ext</span> = <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">empty?</span>
+104:       <span class="ruby-keyword kw">end</span>
+105:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:format</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">ext</span>
+106:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">type</span>)
+107:       <span class="ruby-identifier">malt_class</span> = <span class="ruby-identifier">formats</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Format</span><span class="ruby-operator">::</span><span class="ruby-constant">Text</span>  <span class="ruby-comment cmt"># :pass ?</span>
+108:       <span class="ruby-comment cmt">#raise &quot;unkown type -- #{type}&quot; unless malt_class</span>
+109:       <span class="ruby-identifier">malt_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:text=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">text</span>,<span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>,<span class="ruby-value">:type=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">type</span>))
+110:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="private-instance-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="engine-method" class="method-detail ">
+        <a name="method-i-engine"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">engine</span><span
+            class="method-args">(type, engine=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="engine-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 158</span>
+158:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">engine</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">engine</span>=<span class="ruby-keyword kw">nil</span>)
+159:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">type</span>)
+160:       <span class="ruby-comment cmt">#engine = engine || Malt.config.engine[type]  # FIXME</span>
+161:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">engine</span>
+162:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Class</span>
+163:         <span class="ruby-comment cmt">#raise unless Engine.registry[type].include?(engine)</span>
+164:         <span class="ruby-identifier">engine</span>
+165:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+166:         <span class="ruby-identifier">match</span> = <span class="ruby-identifier">engine</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">to_sym</span>
+167:         <span class="ruby-comment cmt">#Engine.registry[type].find{ |e| e.basename.downcase == match }</span>
+168:         <span class="ruby-comment cmt">#engines[type].find{ |e| e.basename.downcase == match }</span>
+169:         <span class="ruby-identifier">engines</span>[<span class="ruby-identifier">type</span>].<span class="ruby-identifier">find</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">match</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">type</span> }
+170:       <span class="ruby-keyword kw">else</span>
+171:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">engines</span>[<span class="ruby-identifier">type</span>]
+172:           <span class="ruby-comment cmt">#Engine.registry[type].first</span>
+173:           <span class="ruby-identifier">types</span> = <span class="ruby-identifier">engines</span>[<span class="ruby-identifier">type</span>]
+174:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prior</span> = <span class="ruby-identifier">types</span>.<span class="ruby-identifier">find</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">priority</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">type</span>) }
+175:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">prior</span>
+176:           <span class="ruby-keyword kw">end</span>
+177:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">default</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">type</span>]           
+178:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">default</span> <span class="ruby-comment cmt">#if engine?(default.type)</span>
+179:           <span class="ruby-keyword kw">end</span>
+180:           <span class="ruby-identifier">types</span>.<span class="ruby-identifier">first</span>
+181:         <span class="ruby-keyword kw">else</span>
+182:           <span class="ruby-keyword kw">nil</span>
+183:         <span class="ruby-keyword kw">end</span>
+184:       <span class="ruby-keyword kw">end</span>
+185:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="ext-to-type-method" class="method-detail ">
+        <a name="method-i-ext_to_type"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">ext_to_type</span><span
+            class="method-args">(ext)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Normal file extension to a symbol type reference.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="ext-to-type-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 211</span>
+211:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">ext</span>)
+212:       <span class="ruby-identifier">ext</span> = <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>
+213:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">empty?</span>
+214:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ext</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'.'</span>
+215:         <span class="ruby-identifier">ext</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>].<span class="ruby-identifier">to_sym</span>
+216:       <span class="ruby-keyword kw">else</span>
+217:         <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_sym</span>
+218:       <span class="ruby-keyword kw">end</span>
+219:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="file-read-method" class="method-detail ">
+        <a name="method-i-file_read"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">file_read</span><span
+            class="method-args">(file)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+TODO: Handle File objects and URLs.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="file-read-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 206</span>
+206:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file_read</span>(<span class="ruby-identifier">file</span>)
+207:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">file</span>)
+208:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="file-type-method" class="method-detail ">
+        <a name="method-i-file_type"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">file_type</span><span
+            class="method-args">(file, type=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="file-type-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/malt/machine.rb, line 188</span>
+188:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">type</span>=<span class="ruby-keyword kw">nil</span>)
+189:       <span class="ruby-identifier">ext</span> = <span class="ruby-identifier">type</span> <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>)
+190:       <span class="ruby-identifier">ext</span> = <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>
+191:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">empty?</span>
+192:         <span class="ruby-keyword kw">nil</span>
+193:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">ext</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'.'</span>
+194:         <span class="ruby-identifier">ext</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>].<span class="ruby-identifier">to_sym</span>
+195:       <span class="ruby-keyword kw">else</span>
+196:         <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_sym</span>
+197:       <span class="ruby-keyword kw">end</span>
+198:     <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

@@ -49,7 +49,7 @@
       <h3 class="section-header">File Stats</h3>
       <dl>
         <dt class="modified-date">Last Modified</dt>
-        <dd class="modified-date">Tue Sep 07 10:45:10 -0400 2010</dd>
+        <dd class="modified-date">Thu Nov 04 17:48:11 -0400 2010</dd>
 
         
 
@@ -91,15 +91,17 @@
         
           <li class="module"><a href="./Malt.html">Malt</a></li>
         
-          <li class="class"><a href="./Malt/Config.html">Malt::Config</a></li>
-        
           <li class="module"><a href="./Malt/Engine.html">Malt::Engine</a></li>
         
           <li class="class"><a href="./Malt/Engine/Abstract.html">Malt::Engine::Abstract</a></li>
         
           <li class="class"><a href="./Malt/Engine/BlueCloth.html">Malt::Engine::BlueCloth</a></li>
         
+          <li class="class"><a href="./Malt/Engine/Builder.html">Malt::Engine::Builder</a></li>
+        
           <li class="class"><a href="./Malt/Engine/Erb.html">Malt::Engine::Erb</a></li>
+        
+          <li class="class"><a href="./Malt/Engine/Erector.html">Malt::Engine::Erector</a></li>
         
           <li class="class"><a href="./Malt/Engine/Erubis.html">Malt::Engine::Erubis</a></li>
         
@@ -111,15 +113,19 @@
         
           <li class="class"><a href="./Malt/Engine/Liquid.html">Malt::Engine::Liquid</a></li>
         
+          <li class="class"><a href="./Malt/Engine/Markaby.html">Malt::Engine::Markaby</a></li>
+        
+          <li class="class"><a href="./Malt/Engine/Mustache.html">Malt::Engine::Mustache</a></li>
+        
           <li class="class"><a href="./Malt/Engine/RDiscount.html">Malt::Engine::RDiscount</a></li>
         
           <li class="class"><a href="./Malt/Engine/RDoc.html">Malt::Engine::RDoc</a></li>
         
-          <li class="class"><a href="./Malt/Engine/RTALS.html">Malt::Engine::RTALS</a></li>
-        
           <li class="class"><a href="./Malt/Engine/Radius.html">Malt::Engine::Radius</a></li>
         
           <li class="module"><a href="./Malt/Engine/Radius/context;.html">Malt::Engine::Radius::context;</a></li>
+        
+          <li class="class"><a href="./Malt/Engine/RagTag.html">Malt::Engine::RagTag</a></li>
         
           <li class="class"><a href="./Malt/Engine/RedCloth.html">Malt::Engine::RedCloth</a></li>
         
@@ -135,9 +141,13 @@
         
           <li class="class"><a href="./Malt/Format/AbstractTemplate.html">Malt::Format::AbstractTemplate</a></li>
         
+          <li class="class"><a href="./Malt/Format/Builder.html">Malt::Format::Builder</a></li>
+        
           <li class="class"><a href="./Malt/Format/CSS.html">Malt::Format::CSS</a></li>
         
           <li class="class"><a href="./Malt/Format/Erb.html">Malt::Format::Erb</a></li>
+        
+          <li class="class"><a href="./Malt/Format/Erector.html">Malt::Format::Erector</a></li>
         
           <li class="class"><a href="./Malt/Format/HTML.html">Malt::Format::HTML</a></li>
         
@@ -149,7 +159,11 @@
         
           <li class="class"><a href="./Malt/Format/Liquid.html">Malt::Format::Liquid</a></li>
         
+          <li class="class"><a href="./Malt/Format/Markaby.html">Malt::Format::Markaby</a></li>
+        
           <li class="class"><a href="./Malt/Format/Markdown.html">Malt::Format::Markdown</a></li>
+        
+          <li class="class"><a href="./Malt/Format/Mustache.html">Malt::Format::Mustache</a></li>
         
           <li class="class"><a href="./Malt/Format/PDF.html">Malt::Format::PDF</a></li>
         
@@ -161,7 +175,7 @@
         
           <li class="class"><a href="./Malt/Format/Radius.html">Malt::Format::Radius</a></li>
         
-          <li class="class"><a href="./Malt/Format/Rtals.html">Malt::Format::Rtals</a></li>
+          <li class="class"><a href="./Malt/Format/RagTag.html">Malt::Format::RagTag</a></li>
         
           <li class="class"><a href="./Malt/Format/Ruby.html">Malt::Format::Ruby</a></li>
         
@@ -177,11 +191,17 @@
         
           <li class="class"><a href="./Malt/Format/UnsupportedConversion.html">Malt::Format::UnsupportedConversion</a></li>
         
+          <li class="class"><a href="./Malt/Format/XML.html">Malt::Format::XML</a></li>
+        
           <li class="class"><a href="./Malt/Format/YAML.html">Malt::Format::YAML</a></li>
         
           <li class="module"><a href="./Malt/Kernel.html">Malt::Kernel</a></li>
         
+          <li class="class"><a href="./Malt/Machine.html">Malt::Machine</a></li>
+        
           <li class="class"><a href="./Malt/Markup.html">Malt::Markup</a></li>
+        
+          <li class="class"><a href="./Malt/NoEngineError.html">Malt::NoEngineError</a></li>
         
           <li class="class"><a href="./Malt/Template.html">Malt::Template</a></li>
         
@@ -201,13 +221,19 @@
             
             <li class="singleton" style="clear: both;">
               <span class="method-parent-aside">Malt</span>
-              <a href="Malt.html#method-c-config">::config</a>
+              <a href="Malt.html#method-c-cli">::cli</a>
             </li>
           
             
             <li class="singleton" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::Abstract</span>
               <a href="Malt/Engine/Abstract.html#method-c-default">::default</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine</span>
+              <a href="Malt/Engine.html#method-c-defaults">::defaults</a>
             </li>
           
             
@@ -219,7 +245,7 @@
             
             <li class="singleton" style="clear: both;">
               <span class="method-parent-aside">Malt</span>
-              <a href="Malt.html#method-c-engine">::engine</a>
+              <a href="Malt.html#method-c-engine%3F">::engine?</a>
             </li>
           
             
@@ -237,25 +263,13 @@
             
             <li class="singleton" style="clear: both;">
               <span class="method-parent-aside">Malt</span>
-              <a href="Malt.html#method-c-file_read">::file_read</a>
+              <a href="Malt.html#method-c-format%3F">::format?</a>
             </li>
           
             
             <li class="singleton" style="clear: both;">
               <span class="method-parent-aside">Malt</span>
-              <a href="Malt.html#method-c-file_type">::file_type</a>
-            </li>
-          
-            
-            <li class="singleton" style="clear: both;">
-              <span class="method-parent-aside">Malt</span>
-              <a href="Malt.html#method-c-main">::main</a>
-            </li>
-          
-            
-            <li class="singleton" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Abstract</span>
-              <a href="Malt/Engine/Abstract.html#method-c-new">::new</a>
+              <a href="Malt.html#method-c-machine">::machine</a>
             </li>
           
             
@@ -272,14 +286,20 @@
           
             
             <li class="singleton" style="clear: both;">
-              <span class="method-parent-aside">Malt</span>
-              <a href="Malt.html#method-c-open">::open</a>
+              <span class="method-parent-aside">Malt::Engine::Abstract</span>
+              <a href="Malt/Engine/Abstract.html#method-c-new">::new</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-c-new">::new</a>
             </li>
           
             
             <li class="singleton" style="clear: both;">
               <span class="method-parent-aside">Malt</span>
-              <a href="Malt.html#method-c-register">::register</a>
+              <a href="Malt.html#method-c-open">::open</a>
             </li>
           
             
@@ -290,8 +310,8 @@
           
             
             <li class="singleton" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Abstract</span>
-              <a href="Malt/Format/Abstract.html#method-c-register">::register</a>
+              <span class="method-parent-aside">Malt::Format</span>
+              <a href="Malt/Format.html#method-c-register">::register</a>
             </li>
           
             
@@ -302,14 +322,20 @@
           
             
             <li class="singleton" style="clear: both;">
-              <span class="method-parent-aside">Malt</span>
-              <a href="Malt.html#method-c-registry">::registry</a>
+              <span class="method-parent-aside">Malt::Format::Abstract</span>
+              <a href="Malt/Format/Abstract.html#method-c-register">::register</a>
             </li>
           
             
             <li class="singleton" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine</span>
               <a href="Malt/Engine.html#method-c-registry">::registry</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format</span>
+              <a href="Malt/Format.html#method-c-registry">::registry</a>
             </li>
           
             
@@ -322,6 +348,18 @@
             <li class="singleton" style="clear: both;">
               <span class="method-parent-aside">Malt</span>
               <a href="Malt.html#method-c-text">::text</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Abstract</span>
+              <a href="Malt/Engine/Abstract.html#method-c-type">::type</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Builder</span>
+              <a href="Malt/Format/Builder.html#method-i-builder">#builder</a>
             </li>
           
             
@@ -338,6 +376,12 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Ruby</span>
+              <a href="Malt/Engine/Ruby.html#method-i-compile">#compile</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::Abstract</span>
               <a href="Malt/Engine/Abstract.html#method-i-compile">#compile</a>
             </li>
@@ -350,8 +394,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Ruby</span>
-              <a href="Malt/Engine/Ruby.html#method-i-compile">#compile</a>
+              <span class="method-parent-aside">Malt::Engine::Erubis</span>
+              <a href="Malt/Engine/Erubis.html#method-i-compile">#compile</a>
             </li>
           
             
@@ -362,8 +406,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Erubis</span>
-              <a href="Malt/Engine/Erubis.html#method-i-compile">#compile</a>
+              <span class="method-parent-aside">Malt::Format::LESS</span>
+              <a href="Malt/Format/LESS.html#method-i-css">#css</a>
             </li>
           
             
@@ -380,20 +424,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::LESS</span>
-              <a href="Malt/Format/LESS.html#method-i-css">#css</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::SCSS</span>
               <a href="Malt/Format/SCSS.html#method-i-css">#css</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Sass</span>
-              <a href="Malt/Format/Sass.html#method-i-default">#default</a>
             </li>
           
             
@@ -404,14 +436,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::LESS</span>
-              <a href="Malt/Format/LESS.html#method-i-default">#default</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Abstract</span>
-              <a href="Malt/Format/Abstract.html#method-i-default">#default</a>
+              <span class="method-parent-aside">Malt::Format::CSS</span>
+              <a href="Malt/Format/CSS.html#method-i-default">#default</a>
             </li>
           
             
@@ -422,14 +448,20 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::CSS</span>
-              <a href="Malt/Format/CSS.html#method-i-default">#default</a>
+              <span class="method-parent-aside">Malt::Format::LESS</span>
+              <a href="Malt/Format/LESS.html#method-i-default">#default</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Config</span>
-              <a href="Malt/Config.html#method-i-engine">#engine</a>
+              <span class="method-parent-aside">Malt::Format::Sass</span>
+              <a href="Malt/Format/Sass.html#method-i-default">#default</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Abstract</span>
+              <a href="Malt/Format/Abstract.html#method-i-default">#default</a>
             </li>
           
             
@@ -440,8 +472,26 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-engine">#engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-engine%3F">#engine?</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::Erb</span>
               <a href="Malt/Engine/Erb.html#method-i-engine_options">#engine_options</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Builder</span>
+              <a href="Malt/Engine/Builder.html#method-i-engine_options">#engine_options</a>
             </li>
           
             
@@ -452,14 +502,32 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Sass</span>
-              <a href="Malt/Engine/Sass.html#method-i-engine_options">#engine_options</a>
+              <span class="method-parent-aside">Malt::Engine::Tenjin</span>
+              <a href="Malt/Engine/Tenjin.html#method-i-engine_options">#engine_options</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Tenjin</span>
-              <a href="Malt/Engine/Tenjin.html#method-i-engine_options">#engine_options</a>
+              <span class="method-parent-aside">Malt::Engine::Erector</span>
+              <a href="Malt/Engine/Erector.html#method-i-engine_options">#engine_options</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-engines">#engines</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Erector</span>
+              <a href="Malt/Format/Erector.html#method-i-erector">#erector</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-ext_to_type">#ext_to_type</a>
             </li>
           
             
@@ -476,14 +544,44 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-file">#file</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Abstract</span>
               <a href="Malt/Format/Abstract.html#method-i-file">#file</a>
             </li>
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-file_read">#file_read</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-file_type">#file_type</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::RDiscount</span>
               <a href="Malt/Engine/RDiscount.html#method-i-flags">#flags</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-format%3F">#format?</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-formats">#formats</a>
             </li>
           
             
@@ -500,62 +598,26 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Haml</span>
-              <a href="Malt/Format/Haml.html#method-i-html">#html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Tenjin</span>
-              <a href="Malt/Format/Tenjin.html#method-i-html">#html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Textile</span>
               <a href="Malt/Format/Textile.html#method-i-html">#html</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::YAML</span>
-              <a href="Malt/Format/YAML.html#method-i-html">#html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RBHTML</span>
-              <a href="Malt/Format/RBHTML.html#method-i-html">#html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Markdown</span>
-              <a href="Malt/Format/Markdown.html#method-i-html">#html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Erb</span>
-              <a href="Malt/Format/Erb.html#method-i-html">#html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RDoc</span>
-              <a href="Malt/Format/RDoc.html#method-i-html">#html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Rtals</span>
-              <a href="Malt/Format/Rtals.html#method-i-html">#html</a>
+              <span class="method-parent-aside">Malt::Format::Erector</span>
+              <a href="Malt/Format/Erector.html#method-i-html">#html</a>
             </li>
           
             
             <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::RHTML</span>
               <a href="Malt/Format/RHTML.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Erb</span>
+              <a href="Malt/Format/Erb.html#method-i-html">#html</a>
             </li>
           
             
@@ -572,20 +634,62 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Haml</span>
+              <a href="Malt/Format/Haml.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::RagTag</span>
+              <a href="Malt/Format/RagTag.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::RDoc</span>
+              <a href="Malt/Format/RDoc.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::YAML</span>
+              <a href="Malt/Format/YAML.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Markdown</span>
+              <a href="Malt/Format/Markdown.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Markaby</span>
+              <a href="Malt/Format/Markaby.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::RBHTML</span>
+              <a href="Malt/Format/RBHTML.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Builder</span>
+              <a href="Malt/Format/Builder.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Tenjin</span>
+              <a href="Malt/Format/Tenjin.html#method-i-html">#html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::RDoc</span>
               <a href="Malt/Engine/RDoc.html#method-i-html_engine">#html_engine</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Kramdown</span>
-              <a href="Malt/Engine/Kramdown.html#method-i-initialize_engine">#initialize_engine</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::RDoc</span>
-              <a href="Malt/Engine/RDoc.html#method-i-initialize_engine">#initialize_engine</a>
             </li>
           
             
@@ -596,14 +700,68 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Abstract</span>
-              <a href="Malt/Format/Abstract.html#method-i-initialize_engine">#initialize_engine</a>
+              <span class="method-parent-aside">Malt::Engine::BlueCloth</span>
+              <a href="Malt/Engine/BlueCloth.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::RDoc</span>
+              <a href="Malt/Engine/RDoc.html#method-i-initialize_engine">#initialize_engine</a>
             </li>
           
             
             <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::RDiscount</span>
               <a href="Malt/Engine/RDiscount.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Erector</span>
+              <a href="Malt/Engine/Erector.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::RedCloth</span>
+              <a href="Malt/Engine/RedCloth.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Builder</span>
+              <a href="Malt/Engine/Builder.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Mustache</span>
+              <a href="Malt/Engine/Mustache.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Ruby</span>
+              <a href="Malt/Engine/Ruby.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Markaby</span>
+              <a href="Malt/Engine/Markaby.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Abstract</span>
+              <a href="Malt/Format/Abstract.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Sass</span>
+              <a href="Malt/Engine/Sass.html#method-i-initialize_engine">#initialize_engine</a>
             </li>
           
             
@@ -620,8 +778,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::RTALS</span>
-              <a href="Malt/Engine/RTALS.html#method-i-initialize_engine">#initialize_engine</a>
+              <span class="method-parent-aside">Malt::Engine::Kramdown</span>
+              <a href="Malt/Engine/Kramdown.html#method-i-initialize_engine">#initialize_engine</a>
             </li>
           
             
@@ -632,32 +790,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::RedCloth</span>
-              <a href="Malt/Engine/RedCloth.html#method-i-initialize_engine">#initialize_engine</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::Erubis</span>
               <a href="Malt/Engine/Erubis.html#method-i-initialize_engine">#initialize_engine</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Erb</span>
-              <a href="Malt/Engine/Erb.html#method-i-initialize_engine">#initialize_engine</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Ruby</span>
-              <a href="Malt/Engine/Ruby.html#method-i-initialize_engine">#initialize_engine</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::BlueCloth</span>
-              <a href="Malt/Engine/BlueCloth.html#method-i-initialize_engine">#initialize_engine</a>
             </li>
           
             
@@ -668,14 +802,32 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Sass</span>
-              <a href="Malt/Engine/Sass.html#method-i-initialize_engine">#initialize_engine</a>
+              <span class="method-parent-aside">Malt::Engine::Haml</span>
+              <a href="Malt/Engine/Haml.html#method-i-initialize_engine">#initialize_engine</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Haml</span>
-              <a href="Malt/Engine/Haml.html#method-i-initialize_engine">#initialize_engine</a>
+              <span class="method-parent-aside">Malt::Engine::Erb</span>
+              <a href="Malt/Engine/Erb.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::RagTag</span>
+              <a href="Malt/Engine/RagTag.html#method-i-initialize_engine">#initialize_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Tenjin</span>
+              <a href="Malt/Engine/Tenjin.html#method-i-intermediate">#intermediate</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::RDiscount</span>
+              <a href="Malt/Engine/RDiscount.html#method-i-intermediate">#intermediate</a>
             </li>
           
             
@@ -688,6 +840,12 @@
             <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::BlueCloth</span>
               <a href="Malt/Engine/BlueCloth.html#method-i-intermediate">#intermediate</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Erector</span>
+              <a href="Malt/Engine/Erector.html#method-i-intermediate">#intermediate</a>
             </li>
           
             
@@ -710,6 +868,24 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Liquid</span>
+              <a href="Malt/Engine/Liquid.html#method-i-intermediate">#intermediate</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Less</span>
+              <a href="Malt/Engine/Less.html#method-i-intermediate">#intermediate</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::RagTag</span>
+              <a href="Malt/Engine/RagTag.html#method-i-intermediate">#intermediate</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::Haml</span>
               <a href="Malt/Engine/Haml.html#method-i-intermediate">#intermediate</a>
             </li>
@@ -722,32 +898,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Liquid</span>
-              <a href="Malt/Engine/Liquid.html#method-i-intermediate">#intermediate</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::RTALS</span>
-              <a href="Malt/Engine/RTALS.html#method-i-intermediate">#intermediate</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Less</span>
-              <a href="Malt/Engine/Less.html#method-i-intermediate">#intermediate</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::RDiscount</span>
-              <a href="Malt/Engine/RDiscount.html#method-i-intermediate">#intermediate</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Tenjin</span>
-              <a href="Malt/Engine/Tenjin.html#method-i-intermediate">#intermediate</a>
+              <span class="method-parent-aside">Malt::Format::Latex</span>
+              <a href="Malt/Format/Latex.html#method-i-latex">#latex</a>
             </li>
           
             
@@ -758,14 +910,14 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Latex</span>
-              <a href="Malt/Format/Latex.html#method-i-latex">#latex</a>
+              <span class="method-parent-aside">Malt::Format::LESS</span>
+              <a href="Malt/Format/LESS.html#method-i-less">#less</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::LESS</span>
-              <a href="Malt/Format/LESS.html#method-i-less">#less</a>
+              <span class="method-parent-aside">Malt::Format::Liquid</span>
+              <a href="Malt/Format/Liquid.html#method-i-liquid">#liquid</a>
             </li>
           
             
@@ -812,6 +964,12 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Markaby</span>
+              <a href="Malt/Format/Markaby.html#method-i-markaby">#markaby</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Markdown</span>
               <a href="Malt/Format/Markdown.html#method-i-markdown">#markdown</a>
             </li>
@@ -830,6 +988,12 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Ruby</span>
+              <a href="Malt/Format/Ruby.html#method-i-method_missing">#method_missing</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::AbstractTemplate</span>
               <a href="Malt/Format/AbstractTemplate.html#method-i-method_missing">#method_missing</a>
             </li>
@@ -842,8 +1006,14 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Ruby</span>
-              <a href="Malt/Format/Ruby.html#method-i-method_missing">#method_missing</a>
+              <span class="method-parent-aside">Malt::Format::Mustache</span>
+              <a href="Malt/Format/Mustache.html#method-i-mustache">#mustache</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-open">#open</a>
             </li>
           
             
@@ -866,14 +1036,14 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Erb</span>
-              <a href="Malt/Format/Erb.html#method-i-precompile">#precompile</a>
+              <span class="method-parent-aside">Malt::Format::RHTML</span>
+              <a href="Malt/Format/RHTML.html#method-i-precompile">#precompile</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RHTML</span>
-              <a href="Malt/Format/RHTML.html#method-i-precompile">#precompile</a>
+              <span class="method-parent-aside">Malt::Format::Erb</span>
+              <a href="Malt/Format/Erb.html#method-i-precompile">#precompile</a>
             </li>
           
             
@@ -884,20 +1054,20 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-priority">#priority</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Radius</span>
               <a href="Malt/Format/Radius.html#method-i-radius">#radius</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Erb</span>
-              <a href="Malt/Format/Erb.html#method-i-rb">#rb</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Ruby</span>
-              <a href="Malt/Format/Ruby.html#method-i-rb">#rb</a>
+              <span class="method-parent-aside">Malt::Format::RHTML</span>
+              <a href="Malt/Format/RHTML.html#method-i-rb">#rb</a>
             </li>
           
             
@@ -908,14 +1078,20 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Erb</span>
+              <a href="Malt/Format/Erb.html#method-i-rb">#rb</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::RBHTML</span>
               <a href="Malt/Format/RBHTML.html#method-i-rb">#rb</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RHTML</span>
-              <a href="Malt/Format/RHTML.html#method-i-rb">#rb</a>
+              <span class="method-parent-aside">Malt::Format::Ruby</span>
+              <a href="Malt/Format/Ruby.html#method-i-rb">#rb</a>
             </li>
           
             
@@ -938,14 +1114,62 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Ruby</span>
-              <a href="Malt/Format/Ruby.html#method-i-render">#render</a>
+              <span class="method-parent-aside">Malt::Engine::RagTag</span>
+              <a href="Malt/Engine/RagTag.html#method-i-render">#render</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Abstract</span>
-              <a href="Malt/Format/Abstract.html#method-i-render">#render</a>
+              <span class="method-parent-aside">Malt::Engine::Kramdown</span>
+              <a href="Malt/Engine/Kramdown.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Builder</span>
+              <a href="Malt/Engine/Builder.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Less</span>
+              <a href="Malt/Engine/Less.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Abstract</span>
+              <a href="Malt/Engine/Abstract.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::RedCloth</span>
+              <a href="Malt/Engine/RedCloth.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Liquid</span>
+              <a href="Malt/Engine/Liquid.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Markaby</span>
+              <a href="Malt/Engine/Markaby.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Erb</span>
+              <a href="Malt/Engine/Erb.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::AbstractTemplate</span>
+              <a href="Malt/Format/AbstractTemplate.html#method-i-render">#render</a>
             </li>
           
             
@@ -962,74 +1186,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Abstract</span>
-              <a href="Malt/Engine/Abstract.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Erubis</span>
-              <a href="Malt/Engine/Erubis.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Tenjin</span>
-              <a href="Malt/Engine/Tenjin.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Sass</span>
-              <a href="Malt/Engine/Sass.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::AbstractTemplate</span>
-              <a href="Malt/Format/AbstractTemplate.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Ruby</span>
-              <a href="Malt/Engine/Ruby.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::RedCloth</span>
-              <a href="Malt/Engine/RedCloth.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Kramdown</span>
-              <a href="Malt/Engine/Kramdown.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Radius</span>
-              <a href="Malt/Engine/Radius.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Erb</span>
-              <a href="Malt/Engine/Erb.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::RTALS</span>
-              <a href="Malt/Engine/RTALS.html#method-i-render">#render</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::RDoc</span>
-              <a href="Malt/Engine/RDoc.html#method-i-render">#render</a>
+              <span class="method-parent-aside">Malt::Engine::Mustache</span>
+              <a href="Malt/Engine/Mustache.html#method-i-render">#render</a>
             </li>
           
             
@@ -1040,32 +1198,80 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Liquid</span>
-              <a href="Malt/Engine/Liquid.html#method-i-render">#render</a>
+              <span class="method-parent-aside">Malt::Format::Abstract</span>
+              <a href="Malt/Format/Abstract.html#method-i-render">#render</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Engine::Less</span>
-              <a href="Malt/Engine/Less.html#method-i-render">#render</a>
+              <span class="method-parent-aside">Malt::Engine::Radius</span>
+              <a href="Malt/Engine/Radius.html#method-i-render">#render</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Liquid</span>
-              <a href="Malt/Format/Liquid.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Engine::Erubis</span>
+              <a href="Malt/Engine/Erubis.html#method-i-render">#render</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Tenjin</span>
-              <a href="Malt/Format/Tenjin.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Engine::Ruby</span>
+              <a href="Malt/Engine/Ruby.html#method-i-render">#render</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Latex</span>
-              <a href="Malt/Format/Latex.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Engine::Sass</span>
+              <a href="Malt/Engine/Sass.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Erector</span>
+              <a href="Malt/Engine/Erector.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Ruby</span>
+              <a href="Malt/Format/Ruby.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Tenjin</span>
+              <a href="Malt/Engine/Tenjin.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::RDoc</span>
+              <a href="Malt/Engine/RDoc.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-render">#render</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Markaby</span>
+              <a href="Malt/Format/Markaby.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Ruby</span>
+              <a href="Malt/Format/Ruby.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::XML</span>
+              <a href="Malt/Format/XML.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
@@ -1076,14 +1282,32 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Text</span>
-              <a href="Malt/Format/Text.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::Liquid</span>
+              <a href="Malt/Format/Liquid.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Sass</span>
-              <a href="Malt/Format/Sass.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::SCSS</span>
+              <a href="Malt/Format/SCSS.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Mustache</span>
+              <a href="Malt/Format/Mustache.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Latex</span>
+              <a href="Malt/Format/Latex.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::RagTag</span>
+              <a href="Malt/Format/RagTag.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
@@ -1100,14 +1324,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RHTML</span>
-              <a href="Malt/Format/RHTML.html#method-i-render_engine">#render_engine</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Haml</span>
-              <a href="Malt/Format/Haml.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::Textile</span>
+              <a href="Malt/Format/Textile.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
@@ -1118,14 +1336,20 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::HTML</span>
-              <a href="Malt/Format/HTML.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::Sass</span>
+              <a href="Malt/Format/Sass.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Ruby</span>
-              <a href="Malt/Format/Ruby.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::Haml</span>
+              <a href="Malt/Format/Haml.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Builder</span>
+              <a href="Malt/Format/Builder.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
@@ -1136,32 +1360,26 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Textile</span>
-              <a href="Malt/Format/Textile.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::RHTML</span>
+              <a href="Malt/Format/RHTML.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::SCSS</span>
-              <a href="Malt/Format/SCSS.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::HTML</span>
+              <a href="Malt/Format/HTML.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Erb</span>
-              <a href="Malt/Format/Erb.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::Erector</span>
+              <a href="Malt/Format/Erector.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Rtals</span>
-              <a href="Malt/Format/Rtals.html#method-i-render_engine">#render_engine</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::CSS</span>
-              <a href="Malt/Format/CSS.html#method-i-render_engine">#render_engine</a>
+              <span class="method-parent-aside">Malt::Format::Tenjin</span>
+              <a href="Malt/Format/Tenjin.html#method-i-render_engine">#render_engine</a>
             </li>
           
             
@@ -1172,8 +1390,44 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::CSS</span>
+              <a href="Malt/Format/CSS.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Erb</span>
+              <a href="Malt/Format/Erb.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Text</span>
+              <a href="Malt/Format/Text.html#method-i-render_engine">#render_engine</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Markaby</span>
+              <a href="Malt/Engine/Markaby.html#method-i-render_html">#render_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Engine::Haml</span>
               <a href="Malt/Engine/Haml.html#method-i-render_html">#render_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Erector</span>
+              <a href="Malt/Engine/Erector.html#method-i-render_html">#render_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Engine::Builder</span>
+              <a href="Malt/Engine/Builder.html#method-i-render_html">#render_html</a>
             </li>
           
             
@@ -1196,8 +1450,26 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Sass</span>
+              <a href="Malt/Format/Sass.html#method-i-sass">#sass</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::SCSS</span>
+              <a href="Malt/Format/SCSS.html#method-i-scss">#scss</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Abstract</span>
               <a href="Malt/Format/Abstract.html#method-i-subtype">#subtype</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Machine</span>
+              <a href="Malt/Machine.html#method-i-text">#text</a>
             </li>
           
             
@@ -1214,8 +1486,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Abstract</span>
-              <a href="Malt/Format/Abstract.html#method-i-to">#to</a>
+              <span class="method-parent-aside">Malt::Format::Ruby</span>
+              <a href="Malt/Format/Ruby.html#method-i-to">#to</a>
             </li>
           
             
@@ -1226,20 +1498,26 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Ruby</span>
-              <a href="Malt/Format/Ruby.html#method-i-to">#to</a>
+              <span class="method-parent-aside">Malt::Format::Abstract</span>
+              <a href="Malt/Format/Abstract.html#method-i-to">#to</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::SCSS</span>
-              <a href="Malt/Format/SCSS.html#method-i-to_css">#to_css</a>
+              <span class="method-parent-aside">Malt::Format::Builder</span>
+              <a href="Malt/Format/Builder.html#method-i-to_builder">#to_builder</a>
             </li>
           
             
             <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::CSS</span>
               <a href="Malt/Format/CSS.html#method-i-to_css">#to_css</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::SCSS</span>
+              <a href="Malt/Format/SCSS.html#method-i-to_css">#to_css</a>
             </li>
           
             
@@ -1252,6 +1530,18 @@
             <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Sass</span>
               <a href="Malt/Format/Sass.html#method-i-to_css">#to_css</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Abstract</span>
+              <a href="Malt/Format/Abstract.html#method-i-to_default">#to_default</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Erector</span>
+              <a href="Malt/Format/Erector.html#method-i-to_erector">#to_erector</a>
             </li>
           
             
@@ -1274,44 +1564,20 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Rtals</span>
-              <a href="Malt/Format/Rtals.html#method-i-to_html">#to_html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Erb</span>
-              <a href="Malt/Format/Erb.html#method-i-to_html">#to_html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::HTML</span>
               <a href="Malt/Format/HTML.html#method-i-to_html">#to_html</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Radius</span>
-              <a href="Malt/Format/Radius.html#method-i-to_html">#to_html</a>
+              <span class="method-parent-aside">Malt::Format::Builder</span>
+              <a href="Malt/Format/Builder.html#method-i-to_html">#to_html</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Textile</span>
-              <a href="Malt/Format/Textile.html#method-i-to_html">#to_html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RHTML</span>
-              <a href="Malt/Format/RHTML.html#method-i-to_html">#to_html</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Haml</span>
-              <a href="Malt/Format/Haml.html#method-i-to_html">#to_html</a>
+              <span class="method-parent-aside">Malt::Format::YAML</span>
+              <a href="Malt/Format/YAML.html#method-i-to_html">#to_html</a>
             </li>
           
             
@@ -1322,8 +1588,50 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RDoc</span>
-              <a href="Malt/Format/RDoc.html#method-i-to_html">#to_html</a>
+              <span class="method-parent-aside">Malt::Format::RagTag</span>
+              <a href="Malt/Format/RagTag.html#method-i-to_html">#to_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Radius</span>
+              <a href="Malt/Format/Radius.html#method-i-to_html">#to_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Markaby</span>
+              <a href="Malt/Format/Markaby.html#method-i-to_html">#to_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::RHTML</span>
+              <a href="Malt/Format/RHTML.html#method-i-to_html">#to_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Textile</span>
+              <a href="Malt/Format/Textile.html#method-i-to_html">#to_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Haml</span>
+              <a href="Malt/Format/Haml.html#method-i-to_html">#to_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Erb</span>
+              <a href="Malt/Format/Erb.html#method-i-to_html">#to_html</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Erector</span>
+              <a href="Malt/Format/Erector.html#method-i-to_html">#to_html</a>
             </li>
           
             
@@ -1334,14 +1642,14 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RBHTML</span>
-              <a href="Malt/Format/RBHTML.html#method-i-to_html">#to_html</a>
+              <span class="method-parent-aside">Malt::Format::RDoc</span>
+              <a href="Malt/Format/RDoc.html#method-i-to_html">#to_html</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::YAML</span>
-              <a href="Malt/Format/YAML.html#method-i-to_html">#to_html</a>
+              <span class="method-parent-aside">Malt::Format::RBHTML</span>
+              <a href="Malt/Format/RBHTML.html#method-i-to_html">#to_html</a>
             </li>
           
             
@@ -1364,6 +1672,18 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Liquid</span>
+              <a href="Malt/Format/Liquid.html#method-i-to_liquid">#to_liquid</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Markaby</span>
+              <a href="Malt/Format/Markaby.html#method-i-to_markaby">#to_markaby</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Markdown</span>
               <a href="Malt/Format/Markdown.html#method-i-to_markdown">#to_markdown</a>
             </li>
@@ -1376,8 +1696,8 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::PDF</span>
-              <a href="Malt/Format/PDF.html#method-i-to_pdf">#to_pdf</a>
+              <span class="method-parent-aside">Malt::Format::Mustache</span>
+              <a href="Malt/Format/Mustache.html#method-i-to_mustache">#to_mustache</a>
             </li>
           
             
@@ -1388,8 +1708,20 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::PDF</span>
+              <a href="Malt/Format/PDF.html#method-i-to_pdf">#to_pdf</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Radius</span>
               <a href="Malt/Format/Radius.html#method-i-to_radius">#to_radius</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::RHTML</span>
+              <a href="Malt/Format/RHTML.html#method-i-to_rb">#to_rb</a>
             </li>
           
             
@@ -1400,20 +1732,14 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Tenjin</span>
-              <a href="Malt/Format/Tenjin.html#method-i-to_rb">#to_rb</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Ruby</span>
               <a href="Malt/Format/Ruby.html#method-i-to_rb">#to_rb</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RHTML</span>
-              <a href="Malt/Format/RHTML.html#method-i-to_rb">#to_rb</a>
+              <span class="method-parent-aside">Malt::Format::Tenjin</span>
+              <a href="Malt/Format/Tenjin.html#method-i-to_rb">#to_rb</a>
             </li>
           
             
@@ -1430,6 +1756,18 @@
           
             
             <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::Erb</span>
+              <a href="Malt/Format/Erb.html#method-i-to_ruby">#to_ruby</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::RHTML</span>
+              <a href="Malt/Format/RHTML.html#method-i-to_ruby">#to_ruby</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::RBHTML</span>
               <a href="Malt/Format/RBHTML.html#method-i-to_ruby">#to_ruby</a>
             </li>
@@ -1442,26 +1780,26 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::RHTML</span>
-              <a href="Malt/Format/RHTML.html#method-i-to_ruby">#to_ruby</a>
-            </li>
-          
-            
-            <li class="method" style="clear: both;">
               <span class="method-parent-aside">Malt::Format::Ruby</span>
               <a href="Malt/Format/Ruby.html#method-i-to_ruby">#to_ruby</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Erb</span>
-              <a href="Malt/Format/Erb.html#method-i-to_ruby">#to_ruby</a>
+              <span class="method-parent-aside">Malt::Format::Abstract</span>
+              <a href="Malt/Format/Abstract.html#method-i-to_s">#to_s</a>
             </li>
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Abstract</span>
-              <a href="Malt/Format/Abstract.html#method-i-to_s">#to_s</a>
+              <span class="method-parent-aside">Malt::Format::Sass</span>
+              <a href="Malt/Format/Sass.html#method-i-to_sass">#to_sass</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::SCSS</span>
+              <a href="Malt/Format/SCSS.html#method-i-to_scss">#to_scss</a>
             </li>
           
             
@@ -1484,8 +1822,14 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Rtals</span>
-              <a href="Malt/Format/Rtals.html#method-i-to_xml">#to_xml</a>
+              <span class="method-parent-aside">Malt::Format::RagTag</span>
+              <a href="Malt/Format/RagTag.html#method-i-to_xml">#to_xml</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::XML</span>
+              <a href="Malt/Format/XML.html#method-i-to_xml">#to_xml</a>
             </li>
           
             
@@ -1526,8 +1870,14 @@
           
             
             <li class="method" style="clear: both;">
-              <span class="method-parent-aside">Malt::Format::Rtals</span>
-              <a href="Malt/Format/Rtals.html#method-i-xml">#xml</a>
+              <span class="method-parent-aside">Malt::Format::RagTag</span>
+              <a href="Malt/Format/RagTag.html#method-i-xml">#xml</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Malt::Format::XML</span>
+              <a href="Malt/Format/XML.html#method-i-xml">#xml</a>
             </li>
           
             
@@ -1551,7 +1901,7 @@
       <div style="float: right; margin-right: 5px;">
         <a href="http://validator.w3.org/check/referer"><img src="./assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
       </div>
-      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.3.0
+      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.4.0
       <br/><br/>
     </div>
   </div>
@@ -1569,7 +1919,102 @@
 
   <div id="documentation">
     <h1>Release History</h1>
-<h2>0.1.0 | 2010-06-23</h2>
+<h2>0.3.0 | 2010-11-04</h2>
+<p>
+New release adds a <a href="Malt/Machine.html">Malt::Machine</a> class that
+encapsulates all Malt&#8217;s class level functionality. This allow <a
+href="Malt.html">Malt</a> to be  be more finaly controlled. For example an
+instance of  <a href="Malt/Machine.html">Malt::Machine</a> can be used to
+limit rendering to a select set of formats.
+</p>
+<p>
+Changes:
+</p>
+<ul>
+<li><p>
+Add Machine class to ecapsulate toplevel functions.
+</p>
+</li>
+<li><p>
+Add feature via Machine options to select available formats.
+</p>
+</li>
+<li><p>
+Add `to_default` to for converting to default format.
+</p>
+</li>
+<li><p>
+Add `Malt.engine?` to test for supported engine types.
+</p>
+</li>
+<li><p>
+Rename `Malt.support?` to `Malt.format?`.
+</p>
+</li>
+<li><p>
+Rename `Malt.main` to `Malt.cli`.
+</p>
+</li>
+</ul>
+<h2>0.2.0 | 2010-10-22</h2>
+<p>
+<a href="Malt.html">Malt</a> now support Erector, Markaby, Builder and
+Mustache templates. Erector, Markaby and Builder are Ruby-based formats
+&#8212;templates are simply Ruby code. This requires them to use instance
+variables in templates rather than local variables/methods. Somethinfg to
+keep in mind.
+</p>
+<p>
+Changes:
+</p>
+<ul>
+<li><p>
+Add support for Erector templates.
+</p>
+</li>
+<li><p>
+Add support for Markaby templates.
+</p>
+</li>
+<li><p>
+Add support for Builder templates.
+</p>
+</li>
+<li><p>
+Add support for Mustache templates.
+</p>
+</li>
+<li><p>
+Add `:pass` option to render method.
+</p>
+</li>
+<li><p>
+Rename `:format` option to `:to` for render method.
+</p>
+</li>
+</ul>
+<h2>0.1.1 | 2010-09-21</h2>
+<p>
+This release simple fixes two bugs. One to handle variant arity in format
+class render methods. Currently the interface can vary dependent on whether
+they accept interpolation data or not (this will probably be uniform in the
+future). The other fix raises an error if no engine exists to handle a
+given format.
+</p>
+<p>
+Changes:
+</p>
+<ul>
+<li><p>
+Bug fix to raise error if format not handled by any engine.
+</p>
+</li>
+<li><p>
+Bug fix to underlying render calls to handle variant arities. 
+</p>
+</li>
+</ul>
+<h2>0.1.0 | 2010-08-23</h2>
 <p>
 This if the initial release of <a href="Malt.html">Malt</a>. I have no
 doubt the code base still needs some fine-tuning &#8212;hence the 0.1

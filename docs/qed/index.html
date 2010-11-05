@@ -151,6 +151,57 @@ object-oriented interface that can be easily constructed via the
 
 <h1>Formats</h1>
 <p>
+We have created a set of sample documents in the samples directory. We will
+take each format in turn.
+</p>
+<pre>
+  formats = %w{erb liquid}
+</pre>
+<p>
+Included with the format samples are files containing the expected results
+of each rendering.
+</p>
+<pre>
+  expected_output = {}
+
+  formats.each do |format|
+    expected_output[format] = File.read(&quot;qed/samples/output-#{format}.txt&quot;)
+  end
+</pre>
+<p>
+The data to inject into the formats that interpolate, is also stored in the
+samples folder.
+</p>
+<pre>
+  data = YAML.load(File.new('qed/samples/data.yml'))
+</pre>
+<p>
+Now we can render each of thes formats, and verify we get the expected
+result.
+</p>
+<pre>
+  formats.each do |format|
+    output = Malt.render(:file=&gt;&quot;qed/samples/sample.#{format}&quot;, :format=&gt;format, :data=&gt;data)
+    output.assert == expected_output[format]
+  end
+</pre>
+<p>
+Notice that formats the do not use interpolation data simply ignore it even
+if it is given.
+</p>
+<p>
+We can also handle the files in a more object-oriented manner.
+</p>
+<pre>
+  formats.each do |format|
+    object = Malt.file(&quot;qed/samples/sample.#{format}&quot;, :format=&gt;format)
+    output = object.render(data)
+    output.assert == expected_output[format]
+  end
+</pre>
+
+<h1>Formats</h1>
+<p>
 Malt support a wide variety of markup and template systems.
 </p>
 <p>
@@ -667,14 +718,17 @@ Or we can convert the Haml document directly to HTML via the #html method.
   out.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
 </pre>
 
-<h2>RTAL</h2>
+<h2>RagTag</h2>
 <p>
-Lets say we have a Rtals document called &#8216;test.rtal&#8217;
-containing:
+Lets say we have a Rtals document called &#8216;test.rt&#8217; containing:
 </p>
 <pre>
-  &lt;h1&gt;Example&lt;span replace=&quot;title&quot;&gt;DUMMY&lt;/span&gt;&lt;/h1&gt;
-  &lt;p&gt;This is an example of a Rtals template.&lt;/p&gt;
+  &lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Example &lt;span replace=&quot;title&quot;&gt;DUMMY&lt;/span&gt;&lt;/h1&gt;
+    &lt;p&gt;This is an example of a RagTag template.&lt;/p&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
 </pre>
 <p>
 We can render Rtal documents via the <tt>render</tt> method, as we can any
@@ -683,9 +737,9 @@ format.
 <pre>
   data = { :title=&gt;&quot;Document&quot; }
 
-  html = Malt.render(:file=&gt;'tmp/test.rtal', :data=&gt;data)
+  html = Malt.render(:file=&gt;'tmp/test.rt', :data=&gt;data)
 
-  html.assert.include?('&lt;h1&gt;Example &lt;span&gt;Document&lt;/span&gt;&lt;/h1&gt;')
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
 </pre>
 
 <h2>Radius</h2>
@@ -1164,6 +1218,491 @@ Or we can convert the Ruby document directly to HTML via the #html method.
 
   out.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
 </pre>
+
+<h2>Markaby</h2>
+<p>
+Lets say we have a Markaby document called &#8216;test.markaby&#8217;
+containing:
+</p>
+<pre>
+  html do
+    h1 &quot;Example #{@title}&quot;
+    p &quot;This is an example of a Maraby template.&quot;
+  end
+</pre>
+<p>
+Notice the use of the instance variable. Markaby templates must use
+instance variables for data rendering in order to avoid ambiguity with the
+markup syntax itself.
+</p>
+<p>
+We can render Markaby documents via the <tt>render</tt> method, as we can
+any format. Since Markaby is a template format and not just a markup
+syntax, so we need to also provide the <tt>render</tt> function with data
+for interpolation into the Markaby document. 
+</p>
+<pre>
+  data = { :title=&gt;&quot;Document&quot; }
+
+  html = Malt.render(:file=&gt;'tmp/test.markaby', :data=&gt;data)
+
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+We can get a hold of the Markaby document via the Malt.file function.
+</p>
+<pre>
+  markaby = Malt.file('tmp/test.markaby')
+
+  markaby.class.assert == Malt::Format::Markaby
+</pre>
+<p>
+We can convert Markaby documents to html very easily.
+</p>
+<pre>
+  data = {:title =&gt; &quot;Document&quot;}
+
+  html = markaby.to_html(data)
+</pre>
+<p>
+First we will notice that the output is an instance of Malt::Format::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Format::HTML
+</pre>
+<p>
+And that by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the Markaby document directly to HTML via the #html
+method.
+</p>
+<pre>
+  out = markaby.html(data)
+
+  out.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+
+<h2>Mustache</h2>
+<p>
+Lets say we have a Mustache document called &#8216;test.mustache&#8217;
+containing:
+</p>
+<pre>
+  &lt;h1&gt;Example {{ title }}&lt;/h1&gt;
+
+  &lt;p&gt;This is an example of a Mustache template.&lt;/p&gt;
+</pre>
+<p>
+We can render mustache documents via the <tt>render</tt> method, as we can
+any format. However, becuase Mustache is a template format and not just a
+markup syntax, we need to also provide the <tt>render</tt> function with
+data for interpolation into the mustache document. 
+</p>
+<pre>
+  data = { :title=&gt;&quot;Document&quot; }
+
+  html = Malt.render(:file=&gt;'tmp/test.mustache', :data=&gt;data)
+
+  html.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Mustache doesn&#8217;t actually care what format the document is rendered
+as, since it is purely a template engine that can be applied to any other
+format. Lets say we have a Mustache document called
+&#8216;test.mustache&#8217; containing &#8230;
+</p>
+<pre>
+  &lt;h1&gt;Example {{ title }}&lt;/h1&gt;
+
+  &lt;p&gt;This is an example of a Mustache template.&lt;/p&gt;
+</pre>
+<p>
+We can render erb documents to any format we wish.
+</p>
+<pre>
+  liq = Malt.file('tmp/test.mustache')
+
+  html = liq.to_html(:title=&gt;&quot;Document&quot;)
+</pre>
+<p>
+We will notice that the output is an instance of Malt::Format::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Format::HTML
+</pre>
+<p>
+We will notice that the output is an instance of Malt::Format::HTML.
+</p>
+<pre>
+  html.class.assert == Malt::Format::HTML
+</pre>
+<p>
+Then by calling #to_s we can get the rendered HTML document.
+</p>
+<pre>
+  html.to_s.assert.include?('&lt;h1&gt;Example Document&lt;/h1&gt;')
+</pre>
+<p>
+Or we can convert the document directly to HTML via the #html method.
+</p>
+<pre>
+  out = liq.html(:title=&gt;&quot;Alternate&quot;)
+
+  out.assert.include?('&lt;h1&gt;Example Alternate&lt;/h1&gt;')
+</pre>
+<p>
+Mustache doesn&#8217;t actually care what format the document is rendered
+as, since it is purely a template engine that can be applied to any format.
+</p>
+
+
+
+
+
+
+
+
+<h1>Markdown: Basics</h1>
+
+<ul id="ProjectSubmenu">
+    <li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li>
+    <li><a class="selected" title="Markdown Basics">Basics</a></li>
+    <li><a href="/projects/markdown/syntax" title="Markdown Syntax Documentation">Syntax</a></li>
+    <li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li>
+    <li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li>
+</ul>
+
+
+<h2>Getting the Gist of Markdown's Formatting Syntax</h2>
+
+<p>This page offers a brief overview of what it's like to use Markdown.
+The <a href="/projects/markdown/syntax" title="Markdown Syntax">syntax page</a> provides complete, detailed documentation for
+every feature, but Markdown should be very easy to pick up simply by
+looking at a few examples of it in action. The examples on this page
+are written in a before/after style, showing example syntax and the
+HTML output produced by Markdown.</p>
+
+<p>It's also helpful to simply try Markdown out; the <a href="/projects/markdown/dingus" title="Markdown Dingus">Dingus</a> is a
+web application that allows you type your own Markdown-formatted text
+and translate it to XHTML.</p>
+
+<p><strong>Note:</strong> This document is itself written using Markdown; you
+can <a href="/projects/markdown/basics.text">see the source for it by adding '.text' to the URL</a>.</p>
+
+<h2>Paragraphs, Headers, Blockquotes</h2>
+
+<p>A paragraph is simply one or more consecutive lines of text, separated
+by one or more blank lines. (A blank line is any line that looks like
+a blank line -- a line containing nothing but spaces or tabs is
+considered blank.) Normal paragraphs should not be indented with
+spaces or tabs.</p>
+
+<p>Markdown offers two styles of headers: <em>Setext</em> and <em>atx</em>.
+Setext-style headers for <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> are created by
+"underlining" with equal signs (<code>=</code>) and hyphens (<code>-</code>), respectively.
+To create an atx-style header, you put 1-6 hash marks (<code>#</code>) at the
+beginning of the line -- the number of hashes equals the resulting
+HTML header level.</p>
+
+<p>Blockquotes are indicated using email-style '<code>&gt;</code>' angle brackets.</p>
+
+<p>Markdown:</p>
+
+<pre><code>A First Level Header
+====================
+
+A Second Level Header
+---------------------
+
+Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.
+
+The quick brown fox jumped over the lazy
+dog's back.
+
+### Header 3
+
+&gt; This is a blockquote.
+&gt; 
+&gt; This is the second paragraph in the blockquote.
+&gt;
+&gt; ## This is an H2 in a blockquote
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;h1&gt;A First Level Header&lt;/h1&gt;
+
+&lt;h2&gt;A Second Level Header&lt;/h2&gt;
+
+&lt;p&gt;Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.&lt;/p&gt;
+
+&lt;p&gt;The quick brown fox jumped over the lazy
+dog's back.&lt;/p&gt;
+
+&lt;h3&gt;Header 3&lt;/h3&gt;
+
+&lt;blockquote&gt;
+    &lt;p&gt;This is a blockquote.&lt;/p&gt;
+
+    &lt;p&gt;This is the second paragraph in the blockquote.&lt;/p&gt;
+
+    &lt;h2&gt;This is an H2 in a blockquote&lt;/h2&gt;
+&lt;/blockquote&gt;
+</code></pre>
+
+<h3>Phrase Emphasis</h3>
+
+<p>Markdown uses asterisks and underscores to indicate spans of emphasis.</p>
+
+<p>Markdown:</p>
+
+<pre><code>Some of these words *are emphasized*.
+Some of these words _are emphasized also_.
+
+Use two asterisks for **strong emphasis**.
+Or, if you prefer, __use two underscores instead__.
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;p&gt;Some of these words &lt;em&gt;are emphasized&lt;/em&gt;.
+Some of these words &lt;em&gt;are emphasized also&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Use two asterisks for &lt;strong&gt;strong emphasis&lt;/strong&gt;.
+Or, if you prefer, &lt;strong&gt;use two underscores instead&lt;/strong&gt;.&lt;/p&gt;
+</code></pre>
+
+<h2>Lists</h2>
+
+<p>Unordered (bulleted) lists use asterisks, pluses, and hyphens (<code>*</code>,
+<code>+</code>, and <code>-</code>) as list markers. These three markers are
+interchangable; this:</p>
+
+<pre><code>*   Candy.
+*   Gum.
+*   Booze.
+</code></pre>
+
+<p>this:</p>
+
+<pre><code>+   Candy.
++   Gum.
++   Booze.
+</code></pre>
+
+<p>and this:</p>
+
+<pre><code>-   Candy.
+-   Gum.
+-   Booze.
+</code></pre>
+
+<p>all produce the same output:</p>
+
+<pre><code>&lt;ul&gt;
+&lt;li&gt;Candy.&lt;/li&gt;
+&lt;li&gt;Gum.&lt;/li&gt;
+&lt;li&gt;Booze.&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>Ordered (numbered) lists use regular numbers, followed by periods, as
+list markers:</p>
+
+<pre><code>1.  Red
+2.  Green
+3.  Blue
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;ol&gt;
+&lt;li&gt;Red&lt;/li&gt;
+&lt;li&gt;Green&lt;/li&gt;
+&lt;li&gt;Blue&lt;/li&gt;
+&lt;/ol&gt;
+</code></pre>
+
+<p>If you put blank lines between items, you'll get <code>&lt;p&gt;</code> tags for the
+list item text. You can create multi-paragraph list items by indenting
+the paragraphs by 4 spaces or 1 tab:</p>
+
+<pre><code>*   A list item.
+
+    With multiple paragraphs.
+
+*   Another item in the list.
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;A list item.&lt;/p&gt;
+&lt;p&gt;With multiple paragraphs.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Another item in the list.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<h3>Links</h3>
+
+<p>Markdown supports two styles for creating links: <em>inline</em> and
+<em>reference</em>. With both styles, you use square brackets to delimit the
+text you want to turn into a link.</p>
+
+<p>Inline-style links use parentheses immediately after the link text.
+For example:</p>
+
+<pre><code>This is an [example link](http://example.com/).
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;p&gt;This is an &lt;a href="http://example.com/"&gt;
+example link&lt;/a&gt;.&lt;/p&gt;
+</code></pre>
+
+<p>Optionally, you may include a title attribute in the parentheses:</p>
+
+<pre><code>This is an [example link](http://example.com/ "With a Title").
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;p&gt;This is an &lt;a href="http://example.com/" title="With a Title"&gt;
+example link&lt;/a&gt;.&lt;/p&gt;
+</code></pre>
+
+<p>Reference-style links allow you to refer to your links by names, which
+you define elsewhere in your document:</p>
+
+<pre><code>I get 10 times more traffic from [Google][1] than from
+[Yahoo][2] or [MSN][3].
+
+[1]: http://google.com/        "Google"
+[2]: http://search.yahoo.com/  "Yahoo Search"
+[3]: http://search.msn.com/    "MSN Search"
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;p&gt;I get 10 times more traffic from &lt;a href="http://google.com/"
+title="Google"&gt;Google&lt;/a&gt; than from &lt;a href="http://search.yahoo.com/"
+title="Yahoo Search"&gt;Yahoo&lt;/a&gt; or &lt;a href="http://search.msn.com/"
+title="MSN Search"&gt;MSN&lt;/a&gt;.&lt;/p&gt;
+</code></pre>
+
+<p>The title attribute is optional. Link names may contain letters,
+numbers and spaces, but are <em>not</em> case sensitive:</p>
+
+<pre><code>I start my morning with a cup of coffee and
+[The New York Times][NY Times].
+
+[ny times]: http://www.nytimes.com/
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;p&gt;I start my morning with a cup of coffee and
+&lt;a href="http://www.nytimes.com/"&gt;The New York Times&lt;/a&gt;.&lt;/p&gt;
+</code></pre>
+
+<h3>Images</h3>
+
+<p>Image syntax is very much like link syntax.</p>
+
+<p>Inline (titles are optional):</p>
+
+<pre><code>![alt text](/path/to/img.jpg "Title")
+</code></pre>
+
+<p>Reference-style:</p>
+
+<pre><code>![alt text][id]
+
+[id]: /path/to/img.jpg "Title"
+</code></pre>
+
+<p>Both of the above examples produce the same output:</p>
+
+<pre><code>&lt;img src="/path/to/img.jpg" alt="alt text" title="Title" /&gt;
+</code></pre>
+
+<h3>Code</h3>
+
+<p>In a regular paragraph, you can create code span by wrapping text in
+backtick quotes. Any ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> or
+<code>&gt;</code>) will automatically be translated into HTML entities. This makes
+it easy to use Markdown to write about HTML example code:</p>
+
+<pre><code>I strongly recommend against using any `&lt;blink&gt;` tags.
+
+I wish SmartyPants used named entities like `&amp;mdash;`
+instead of decimal-encoded entites like `&amp;#8212;`.
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;p&gt;I strongly recommend against using any
+&lt;code&gt;&amp;lt;blink&amp;gt;&lt;/code&gt; tags.&lt;/p&gt;
+
+&lt;p&gt;I wish SmartyPants used named entities like
+&lt;code&gt;&amp;amp;mdash;&lt;/code&gt; instead of decimal-encoded
+entites like &lt;code&gt;&amp;amp;#8212;&lt;/code&gt;.&lt;/p&gt;
+</code></pre>
+
+<p>To specify an entire block of pre-formatted code, indent every line of
+the block by 4 spaces or 1 tab. Just like with code spans, <code>&amp;</code>, <code>&lt;</code>,
+and <code>&gt;</code> characters will be escaped automatically.</p>
+
+<p>Markdown:</p>
+
+<pre><code>If you want your page to validate under XHTML 1.0 Strict,
+you've got to put paragraph tags in your blockquotes:
+
+    &lt;blockquote&gt;
+        &lt;p&gt;For example.&lt;/p&gt;
+    &lt;/blockquote&gt;
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;p&gt;If you want your page to validate under XHTML 1.0 Strict,
+you've got to put paragraph tags in your blockquotes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;blockquote&amp;gt;
+    &amp;lt;p&amp;gt;For example.&amp;lt;/p&amp;gt;
+&amp;lt;/blockquote&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+
+
+
+<h1>RDoc Format</h1>
+<p>
+This is RDoc formatted markup.
+</p>
+<ul>
+<li><p>
+one
+</p>
+</li>
+<li><p>
+two
+</p>
+</li>
+<li><p>
+three
+</p>
+</li>
+</ul>
 
 
     </div>

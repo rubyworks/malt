@@ -61,9 +61,6 @@
             <li class="file"><a href="./lib/malt/engines_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
               class="thickbox" title="lib/malt/engines.rb">lib/malt/engines.rb</a></li>
           
-            <li class="file"><a href="./lib/malt/config_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/malt/config.rb">lib/malt/config.rb</a></li>
-          
             <li class="file"><a href="./lib/malt/markup_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
               class="thickbox" title="lib/malt/markup.rb">lib/malt/markup.rb</a></li>
           
@@ -72,9 +69,6 @@
           
             <li class="file"><a href="./lib/malt/formats/abstract_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
               class="thickbox" title="lib/malt/formats/abstract.rb">lib/malt/formats/abstract.rb</a></li>
-          
-            <li class="file"><a href="./lib/malt/render_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/malt/render.rb">lib/malt/render.rb</a></li>
           
             <li class="file"><a href="./lib/malt/formats_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
               class="thickbox" title="lib/malt/formats.rb">lib/malt/formats.rb</a></li>
@@ -87,6 +81,9 @@
           
             <li class="file"><a href="./lib/malt/template_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
               class="thickbox" title="lib/malt/template.rb">lib/malt/template.rb</a></li>
+          
+            <li class="file"><a href="./lib/malt/machine_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/malt/machine.rb">lib/malt/machine.rb</a></li>
           
           </ul>
         </div>
@@ -115,9 +112,11 @@
           
           <li class="module"><a href="Malt/Kernel.html">Malt::Kernel</a></li>
           
-          <li class="class"><a href="Malt/Config.html">Malt::Config</a></li>
+          <li class="class"><a href="Malt/Machine.html">Malt::Machine</a></li>
           
           <li class="class"><a href="Malt/Markup.html">Malt::Markup</a></li>
+          
+          <li class="class"><a href="Malt/NoEngineError.html">Malt::NoEngineError</a></li>
           
           <li class="class"><a href="Malt/Template.html">Malt::Template</a></li>
           
@@ -133,12 +132,12 @@
           
             
             <li class="singleton">
-              <a href="#method-c-config">::config</a>
+              <a href="#method-c-cli">::cli</a>
             </li>
           
             
             <li class="singleton">
-              <a href="#method-c-engine">::engine</a>
+              <a href="#method-c-engine%3F">::engine?</a>
             </li>
           
             
@@ -148,32 +147,17 @@
           
             
             <li class="singleton">
-              <a href="#method-c-file_read">::file_read</a>
+              <a href="#method-c-format%3F">::format?</a>
             </li>
           
             
             <li class="singleton">
-              <a href="#method-c-file_type">::file_type</a>
-            </li>
-          
-            
-            <li class="singleton">
-              <a href="#method-c-main">::main</a>
+              <a href="#method-c-machine">::machine</a>
             </li>
           
             
             <li class="singleton">
               <a href="#method-c-open">::open</a>
-            </li>
-          
-            
-            <li class="singleton">
-              <a href="#method-c-register">::register</a>
-            </li>
-          
-            
-            <li class="singleton">
-              <a href="#method-c-registry">::registry</a>
             </li>
           
             
@@ -240,15 +224,17 @@
         
           <li class="module"><a href="./Malt.html">Malt</a></li>
         
-          <li class="class"><a href="./Malt/Config.html">Malt::Config</a></li>
-        
           <li class="module"><a href="./Malt/Engine.html">Malt::Engine</a></li>
         
           <li class="class"><a href="./Malt/Engine/Abstract.html">Malt::Engine::Abstract</a></li>
         
           <li class="class"><a href="./Malt/Engine/BlueCloth.html">Malt::Engine::BlueCloth</a></li>
         
+          <li class="class"><a href="./Malt/Engine/Builder.html">Malt::Engine::Builder</a></li>
+        
           <li class="class"><a href="./Malt/Engine/Erb.html">Malt::Engine::Erb</a></li>
+        
+          <li class="class"><a href="./Malt/Engine/Erector.html">Malt::Engine::Erector</a></li>
         
           <li class="class"><a href="./Malt/Engine/Erubis.html">Malt::Engine::Erubis</a></li>
         
@@ -260,15 +246,19 @@
         
           <li class="class"><a href="./Malt/Engine/Liquid.html">Malt::Engine::Liquid</a></li>
         
+          <li class="class"><a href="./Malt/Engine/Markaby.html">Malt::Engine::Markaby</a></li>
+        
+          <li class="class"><a href="./Malt/Engine/Mustache.html">Malt::Engine::Mustache</a></li>
+        
           <li class="class"><a href="./Malt/Engine/RDiscount.html">Malt::Engine::RDiscount</a></li>
         
           <li class="class"><a href="./Malt/Engine/RDoc.html">Malt::Engine::RDoc</a></li>
         
-          <li class="class"><a href="./Malt/Engine/RTALS.html">Malt::Engine::RTALS</a></li>
-        
           <li class="class"><a href="./Malt/Engine/Radius.html">Malt::Engine::Radius</a></li>
         
           <li class="module"><a href="./Malt/Engine/Radius/context;.html">Malt::Engine::Radius::context;</a></li>
+        
+          <li class="class"><a href="./Malt/Engine/RagTag.html">Malt::Engine::RagTag</a></li>
         
           <li class="class"><a href="./Malt/Engine/RedCloth.html">Malt::Engine::RedCloth</a></li>
         
@@ -284,9 +274,13 @@
         
           <li class="class"><a href="./Malt/Format/AbstractTemplate.html">Malt::Format::AbstractTemplate</a></li>
         
+          <li class="class"><a href="./Malt/Format/Builder.html">Malt::Format::Builder</a></li>
+        
           <li class="class"><a href="./Malt/Format/CSS.html">Malt::Format::CSS</a></li>
         
           <li class="class"><a href="./Malt/Format/Erb.html">Malt::Format::Erb</a></li>
+        
+          <li class="class"><a href="./Malt/Format/Erector.html">Malt::Format::Erector</a></li>
         
           <li class="class"><a href="./Malt/Format/HTML.html">Malt::Format::HTML</a></li>
         
@@ -298,7 +292,11 @@
         
           <li class="class"><a href="./Malt/Format/Liquid.html">Malt::Format::Liquid</a></li>
         
+          <li class="class"><a href="./Malt/Format/Markaby.html">Malt::Format::Markaby</a></li>
+        
           <li class="class"><a href="./Malt/Format/Markdown.html">Malt::Format::Markdown</a></li>
+        
+          <li class="class"><a href="./Malt/Format/Mustache.html">Malt::Format::Mustache</a></li>
         
           <li class="class"><a href="./Malt/Format/PDF.html">Malt::Format::PDF</a></li>
         
@@ -310,7 +308,7 @@
         
           <li class="class"><a href="./Malt/Format/Radius.html">Malt::Format::Radius</a></li>
         
-          <li class="class"><a href="./Malt/Format/Rtals.html">Malt::Format::Rtals</a></li>
+          <li class="class"><a href="./Malt/Format/RagTag.html">Malt::Format::RagTag</a></li>
         
           <li class="class"><a href="./Malt/Format/Ruby.html">Malt::Format::Ruby</a></li>
         
@@ -326,11 +324,17 @@
         
           <li class="class"><a href="./Malt/Format/UnsupportedConversion.html">Malt::Format::UnsupportedConversion</a></li>
         
+          <li class="class"><a href="./Malt/Format/XML.html">Malt::Format::XML</a></li>
+        
           <li class="class"><a href="./Malt/Format/YAML.html">Malt::Format::YAML</a></li>
         
           <li class="module"><a href="./Malt/Kernel.html">Malt::Kernel</a></li>
         
+          <li class="class"><a href="./Malt/Machine.html">Malt::Machine</a></li>
+        
           <li class="class"><a href="./Malt/Markup.html">Malt::Markup</a></li>
+        
+          <li class="class"><a href="./Malt/NoEngineError.html">Malt::NoEngineError</a></li>
         
           <li class="class"><a href="./Malt/Template.html">Malt::Template</a></li>
         
@@ -348,7 +352,7 @@
       <div style="float: right; margin-right: 5px;">
         <a href="http://validator.w3.org/check/referer"><img src="./assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
       </div>
-      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.3.0
+      Generated with <a href="http://rubyworks.github.com/rdazzle">RDazzle Newfish</a> 1.4.0
       <br/><br/>
     </div>
   </div>
@@ -375,13 +379,13 @@
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="config-method" class="method-detail ">
-        <a name="method-c-config"></a>
+      <div id="cli-method" class="method-detail ">
+        <a name="method-c-cli"></a>
 
         <div class="method-heading">
         
-          <span class="method-name">config</span><span
-            class="method-args">()</span>
+          <span class="method-name">cli</span><span
+            class="method-args">(*args)</span>
           <span class="method-click-advice">click to toggle source</span>
         
         </div>
@@ -393,12 +397,29 @@
 
           
           <div class="method-source-code"
-            id="config-source">
+            id="cli-source">
 <pre>
-   <span class="ruby-comment cmt"># File lib/malt/render.rb, line 7</span>
-7:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">config</span>
-8:     <span class="ruby-ivar">@config</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
-9:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt.rb, line 48</span>
+48:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">cli</span>(*<span class="ruby-identifier">args</span>)
+49:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'optparse'</span>
+50:     <span class="ruby-identifier">itype</span>, <span class="ruby-identifier">otype</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">nil</span>
+51:     <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+52:       <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'-t TYPE'</span>, <span class="ruby-value str">'input type'</span>){  <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">itype</span>  = <span class="ruby-identifier">t</span> }
+53:       <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'-o TYPE'</span>, <span class="ruby-value str">'output type'</span>){ <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">otype</span> = <span class="ruby-identifier">t</span> }
+54:       <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--help'</span>, <span class="ruby-value str">'-h'</span>       , <span class="ruby-value str">'display this help message'</span>){ <span class="ruby-identifier">puts</span> <span class="ruby-identifier">o</span>; <span class="ruby-identifier">exit</span> }
+55:     }.<span class="ruby-identifier">parse!</span>
+56:     <span class="ruby-identifier">db</span>, <span class="ruby-identifier">files</span> = *<span class="ruby-identifier">args</span>.<span class="ruby-identifier">partition</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">'='</span>) }
+57:     <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">inject</span>({}){ <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>,<span class="ruby-identifier">kv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span> = <span class="ruby-identifier">kv</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'='</span>); <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>; <span class="ruby-identifier">h</span>}
+58:     <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+59:       <span class="ruby-identifier">puts</span> <span class="ruby-constant">Malt</span>.<span class="ruby-identifier">render</span>(<span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>, <span class="ruby-value">:type=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">itype</span>, <span class="ruby-value">:format=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">otype</span>)
+60:       <span class="ruby-comment cmt">#file = itype ? Malt.file(file, :type=&gt;itype) : Malt.file(file)</span>
+61:       <span class="ruby-comment cmt">#if otype</span>
+62:       <span class="ruby-comment cmt">#  puts file.render(otype, db)</span>
+63:       <span class="ruby-comment cmt">#else</span>
+64:       <span class="ruby-comment cmt">#  puts file.render(db)</span>
+65:       <span class="ruby-comment cmt">#end</span>
+66:     <span class="ruby-keyword kw">end</span>
+67:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -407,41 +428,32 @@
       </div>
 
     
-      <div id="engine-method" class="method-detail ">
-        <a name="method-c-engine"></a>
+      <div id="engine--method" class="method-detail ">
+        <a name="method-c-engine%3F"></a>
 
         <div class="method-heading">
         
-          <span class="method-name">engine</span><span
-            class="method-args">(type, engine=nil)</span>
+          <span class="method-name">engine?</span><span
+            class="method-args">(ext)</span>
           <span class="method-click-advice">click to toggle source</span>
         
         </div>
 
         <div class="method-description">
           
-          
+          <p>
+Returns true if the extension given is renderable.
+</p>
           
 
           
           <div class="method-source-code"
-            id="engine-source">
+            id="engine--source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/render.rb, line 28</span>
-28:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">engine</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">engine</span>=<span class="ruby-keyword kw">nil</span>)
-29:     <span class="ruby-identifier">type</span>   = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>
-30:     <span class="ruby-identifier">engine</span> = <span class="ruby-identifier">engine</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">engine</span>[<span class="ruby-identifier">type</span>]
-31:     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">engine</span>
-32:     <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Class</span>
-33:       <span class="ruby-comment cmt">#raise unless Engine.registry[type].include?(engine)</span>
-34:       <span class="ruby-identifier">engine</span>
-35:     <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
-36:       <span class="ruby-identifier">match</span> = <span class="ruby-identifier">engine</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>
-37:       <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">registry</span>[<span class="ruby-identifier">type</span>].<span class="ruby-identifier">find</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">basename</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">match</span> }
-38:     <span class="ruby-keyword kw">else</span>
-39:       <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">registry</span>[<span class="ruby-identifier">type</span>].<span class="ruby-identifier">first</span>
-40:     <span class="ruby-keyword kw">end</span>
-41:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt.rb, line 43</span>
+43:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">engine?</span>(<span class="ruby-identifier">ext</span>)
+44:     <span class="ruby-identifier">machine</span>.<span class="ruby-identifier">engine?</span>(<span class="ruby-identifier">ext</span>)
+45:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -470,14 +482,10 @@
           <div class="method-source-code"
             id="file-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt.rb, line 25</span>
-25:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>={})
-26:     <span class="ruby-identifier">type</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:format</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>)
-27:     <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">type</span>)
-28:     <span class="ruby-identifier">malt_class</span> = <span class="ruby-identifier">registry</span>[<span class="ruby-identifier">type</span>]
-29:     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unkown type -- #{type}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">malt_class</span>
-30:     <span class="ruby-identifier">malt_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>,<span class="ruby-value">:type=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">type</span>))
-31:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt.rb, line 18</span>
+18:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>={})
+19:     <span class="ruby-identifier">machine</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">options</span>)
+20:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -486,47 +494,13 @@
       </div>
 
     
-      <div id="file-read-method" class="method-detail ">
-        <a name="method-c-file_read"></a>
+      <div id="format--method" class="method-detail ">
+        <a name="method-c-format%3F"></a>
 
         <div class="method-heading">
         
-          <span class="method-name">file_read</span><span
-            class="method-args">(file)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        
-        </div>
-
-        <div class="method-description">
-          
-          <p>
-TODO: Handle File objects and URLs.
-</p>
-          
-
-          
-          <div class="method-source-code"
-            id="file-read-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/malt/render.rb, line 57</span>
-57:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">file_read</span>(<span class="ruby-identifier">file</span>)
-58:     <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">file</span>)
-59:   <span class="ruby-keyword kw">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-      </div>
-
-    
-      <div id="file-type-method" class="method-detail ">
-        <a name="method-c-file_type"></a>
-
-        <div class="method-heading">
-        
-          <span class="method-name">file_type</span><span
-            class="method-args">(file)</span>
+          <span class="method-name">format?</span><span
+            class="method-args">(ext)</span>
           <span class="method-click-advice">click to toggle source</span>
         
         </div>
@@ -538,20 +512,12 @@ TODO: Handle File objects and URLs.
 
           
           <div class="method-source-code"
-            id="file-type-source">
+            id="format--source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/render.rb, line 44</span>
-44:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">file</span>)
-45:     <span class="ruby-identifier">ext</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>)
-46:     <span class="ruby-identifier">ext</span> = <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>
-47:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">empty?</span>
-48:       <span class="ruby-keyword kw">nil</span>
-49:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">ext</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'.'</span>
-50:       <span class="ruby-identifier">ext</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>].<span class="ruby-identifier">to_sym</span>
-51:     <span class="ruby-keyword kw">else</span>
-52:       <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_sym</span>
-53:     <span class="ruby-keyword kw">end</span>
-54:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt.rb, line 38</span>
+38:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">format?</span>(<span class="ruby-identifier">ext</span>)
+39:     <span class="ruby-identifier">machine</span>.<span class="ruby-identifier">format?</span>(<span class="ruby-identifier">ext</span>)
+40:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -560,13 +526,13 @@ TODO: Handle File objects and URLs.
       </div>
 
     
-      <div id="main-method" class="method-detail ">
-        <a name="method-c-main"></a>
+      <div id="machine-method" class="method-detail ">
+        <a name="method-c-machine"></a>
 
         <div class="method-heading">
         
-          <span class="method-name">main</span><span
-            class="method-args">(*args)</span>
+          <span class="method-name">machine</span><span
+            class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         
         </div>
@@ -578,29 +544,12 @@ TODO: Handle File objects and URLs.
 
           
           <div class="method-source-code"
-            id="main-source">
+            id="machine-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt.rb, line 55</span>
-55:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">main</span>(*<span class="ruby-identifier">args</span>)
-56:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'optparse'</span>
-57:     <span class="ruby-identifier">itype</span>, <span class="ruby-identifier">otype</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">nil</span>
-58:     <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
-59:       <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'-t TYPE'</span>, <span class="ruby-value str">'input type'</span>){  <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">itype</span>  = <span class="ruby-identifier">t</span> }
-60:       <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'-o TYPE'</span>, <span class="ruby-value str">'output type'</span>){ <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">otype</span> = <span class="ruby-identifier">t</span> }
-61:       <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">'--help'</span>, <span class="ruby-value str">'-h'</span>       , <span class="ruby-value str">'display this help message'</span>){ <span class="ruby-identifier">puts</span> <span class="ruby-identifier">o</span>; <span class="ruby-identifier">exit</span> }
-62:     }.<span class="ruby-identifier">parse!</span>
-63:     <span class="ruby-identifier">db</span>, <span class="ruby-identifier">files</span> = *<span class="ruby-identifier">args</span>.<span class="ruby-identifier">partition</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">'='</span>) }
-64:     <span class="ruby-identifier">db</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">inject</span>({}){ <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>,<span class="ruby-identifier">kv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span> = <span class="ruby-identifier">kv</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'='</span>); <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>; <span class="ruby-identifier">h</span>}
-65:     <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-66:       <span class="ruby-identifier">puts</span> <span class="ruby-constant">Malt</span>.<span class="ruby-identifier">render</span>(<span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>, <span class="ruby-value">:type=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">itype</span>, <span class="ruby-value">:format=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">otype</span>)
-67:       <span class="ruby-comment cmt">#file = itype ? Malt.file(file, :type=&gt;itype) : Malt.file(file)</span>
-68:       <span class="ruby-comment cmt">#if otype</span>
-69:       <span class="ruby-comment cmt">#  puts file.render(otype, db)</span>
-70:       <span class="ruby-comment cmt">#else</span>
-71:       <span class="ruby-comment cmt">#  puts file.render(db)</span>
-72:       <span class="ruby-comment cmt">#end</span>
-73:     <span class="ruby-keyword kw">end</span>
-74:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt.rb, line 13</span>
+13:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">machine</span>
+14:     <span class="ruby-ivar">@machine</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Machine</span>.<span class="ruby-identifier">new</span>
+15:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -629,80 +578,10 @@ TODO: Handle File objects and URLs.
           <div class="method-source-code"
             id="open-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt.rb, line 47</span>
-47:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">options</span>={})
-48:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'open-uri'</span>
-49:     <span class="ruby-identifier">text</span> = <span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>).<span class="ruby-identifier">read</span>
-50:     <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">url</span>) <span class="ruby-comment cmt"># parse better with URI.parse</span>
-51:     <span class="ruby-identifier">text</span>(<span class="ruby-identifier">text</span>, <span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>)
-52:   <span class="ruby-keyword kw">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-      </div>
-
-    
-      <div id="register-method" class="method-detail ">
-        <a name="method-c-register"></a>
-
-        <div class="method-heading">
-        
-          <span class="method-name">register</span><span
-            class="method-args">(malt_class, *exts)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        
-        </div>
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code"
-            id="register-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/malt.rb, line 11</span>
-11:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">register</span>(<span class="ruby-identifier">malt_class</span>, *<span class="ruby-identifier">exts</span>)
-12:     <span class="ruby-identifier">exts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
-13:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">ext</span>)
-14:       <span class="ruby-identifier">registry</span>[<span class="ruby-identifier">type</span>] = <span class="ruby-identifier">malt_class</span>
-15:     <span class="ruby-keyword kw">end</span>
-16:   <span class="ruby-keyword kw">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-      </div>
-
-    
-      <div id="registry-method" class="method-detail ">
-        <a name="method-c-registry"></a>
-
-        <div class="method-heading">
-        
-          <span class="method-name">registry</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        
-        </div>
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code"
-            id="registry-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/malt.rb, line 19</span>
-19:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">registry</span>
-20:     <span class="ruby-ivar">@registry</span> <span class="ruby-operator">||=</span> {}
-21:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt.rb, line 28</span>
+28:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">options</span>={})
+29:     <span class="ruby-identifier">machine</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">options</span>)
+30:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -717,7 +596,7 @@ TODO: Handle File objects and URLs.
         <div class="method-heading">
         
           <span class="method-name">render</span><span
-            class="method-args">(parameters={}, &body)</span>
+            class="method-args">(params, &body)</span>
           <span class="method-click-advice">click to toggle source</span>
         
         </div>
@@ -731,21 +610,10 @@ TODO: Handle File objects and URLs.
           <div class="method-source-code"
             id="render-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt/render.rb, line 12</span>
-12:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">parameters</span>={}, &amp;<span class="ruby-identifier">body</span>)
-13:     <span class="ruby-identifier">type</span>   = <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:type</span>]
-14:     <span class="ruby-identifier">file</span>   = <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:file</span>]
-15:     <span class="ruby-identifier">engine</span> = <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:engine</span>]
-16: 
-17:     <span class="ruby-identifier">type</span>   = <span class="ruby-identifier">file_type</span>(<span class="ruby-identifier">file</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">type</span>
-18:     <span class="ruby-identifier">text</span>   = <span class="ruby-identifier">file_read</span>(<span class="ruby-identifier">file</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">text</span>
-19:     <span class="ruby-identifier">engine</span> = <span class="ruby-identifier">engine</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">engine</span>).<span class="ruby-identifier">new</span>
-20: 
-21:     <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:type</span>] = <span class="ruby-identifier">type</span>
-22:     <span class="ruby-identifier">parameters</span>[<span class="ruby-value">:text</span>] = <span class="ruby-identifier">text</span>
-23: 
-24:     <span class="ruby-identifier">engine</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">parameters</span>, &amp;<span class="ruby-identifier">body</span>)
-25:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt.rb, line 33</span>
+33:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">params</span>, &amp;<span class="ruby-identifier">body</span>)
+34:     <span class="ruby-identifier">machine</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">params</span>, &amp;<span class="ruby-identifier">body</span>)
+35:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
@@ -774,18 +642,10 @@ TODO: Handle File objects and URLs.
           <div class="method-source-code"
             id="text-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/malt.rb, line 34</span>
-34:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">text</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>={})
-35:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:file</span>]
-36:       <span class="ruby-identifier">ext</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>)
-37:       <span class="ruby-identifier">ext</span> = <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">empty?</span>
-38:     <span class="ruby-keyword kw">end</span>
-39:     <span class="ruby-identifier">type</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:format</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">ext</span>
-40:     <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ext_to_type</span>(<span class="ruby-identifier">type</span>)
-41:     <span class="ruby-identifier">malt_class</span> = <span class="ruby-identifier">registry</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Format</span><span class="ruby-operator">::</span><span class="ruby-constant">Text</span>
-42:     <span class="ruby-comment cmt">#raise &quot;unkown type -- #{type}&quot; unless malt_class</span>
-43:     <span class="ruby-identifier">malt_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:text=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">text</span>,<span class="ruby-value">:file=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">file</span>,<span class="ruby-value">:type=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">type</span>))
-44:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/malt.rb, line 23</span>
+23:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">text</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>={})
+24:     <span class="ruby-identifier">machine</span>.<span class="ruby-identifier">text</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>)
+25:   <span class="ruby-keyword kw">end</span></pre>
           </div>
           
         </div>
