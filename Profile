@@ -1,14 +1,29 @@
+--- 
 title  : Malt
 summary: Multi-template/multi-markup rendering engine
 contact: trans <transfire@gmail.com>
 created: 2010-06-22
 
-authors:
-  - Thomas Sawyer
-
 description:
   Malt provides a factory framework for rendering
   a variety of template and markup document formats.
+
+requires:
+  - syckle   (build)
+  - qed       (test)
+  - rdoc      (test)
+  - redcloth  (test)
+  - bluecloth (test)
+  - kramdown  (test)
+  - haml      (test)
+  - tenjin    (test)
+  - rtals     (test)
+  - liquid    (test)
+  - erubis    (test)
+  - mustache  (test)
+  - erector   (test)
+  - markaby   (test)
+  - builder   (test)
 
 resources:
   home: http://rubyworks.github.com/malt
@@ -16,6 +31,9 @@ resources:
   wiki: http://wiki.github.com/rubyworks/malt
   docs: http://rubyworks.github.com/malt/docs/api
   bugs: http://github.com/rubyworks/malt/issues
+
+authors:
+  - Thomas Sawyer
 
 copyright:
   Copyright (c) 2010 Thomas Sawyer
