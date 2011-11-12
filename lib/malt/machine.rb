@@ -14,10 +14,10 @@ module Malt
     MARKUP = [:rdoc, :markdown, :textile, :scss, :sass, :less, :css, :html, :xml]
 
     # List of template types. These are template formats that provide data injection.
-    TEMPLATES = [:ruby, :erb, :liquid, :mustache, :tenjin, :ragtag, :radius, :erector, :builder, :markaby]
+    TEMPLATE = [:ruby, :erb, :liquid, :mustache, :tenjin, :ragtag, :radius, :erector, :builder, :markaby]
 
     # Template types that prevent arbitrary Ruby code execution.
-    TEMPLATES_SAFE = [:liquid, :mustache]
+    TEMPLATE_SAFE = [:liquid, :mustache]
 
     # New Malt Machine.
     #
@@ -92,7 +92,7 @@ module Malt
       type = options[:type] || options[:format] || File.extname(file)
       type = ext_to_type(type)
       malt_class = formats[type]
-      raise "unkown type -- #{type}" unless malt_class
+      raise "unknown type -- #{type}" unless malt_class
       malt_class.new(options.merge(:file=>file,:type=>type))
     end
 
