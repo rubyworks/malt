@@ -29,7 +29,7 @@ module Malt::Format
 
     #
     def html(data=nil, &yld)
-      render_engine.render(:text=>text, :file=>file, :format=>:html)
+      render_engine.render(:text=>text, :file=>file, :data=>data, :to=>:html, &yld)
     end
 
     #
