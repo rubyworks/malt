@@ -1,0 +1,44 @@
+== Slim
+
+Lets say we have a Slim document called 'test.slim' containing:
+
+  h1 Example = title
+  p This is an example of a Slim template.
+
+We can render Slim documents via the +render+ method, as we can any format.
+While it might not appear as such on first glance, Slim is actually a template
+format and not just a markup language, so we need to also provide the +render+
+function with data for interpolation into the Haml document. 
+
+  data = { :title=>"Document" }
+
+  html = Malt.render(:file=>'test.slim', :data=>data)
+
+  html.assert.include?('<h1>Example Document</h1>')
+
+We can get a hold of the Slim document via the Malt.file function.
+
+  slim = Malt.file('test.slim')
+
+  slim.class.assert == Malt::Format::Slim
+
+We can convert Slim documents to html very easily.
+
+  data = {:title => "Document"}
+
+  html = slim.to_html(data)
+
+First we will notice that the output is an instance of Malt::Format::HTML.
+
+  html.class.assert == Malt::Format::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example Document</h1>')
+
+Or we can convert the Haml document directly to HTML via the #html method.
+
+  out = slim.html(data)
+
+  out.assert.include?('<h1>Example Document</h1>')
+
