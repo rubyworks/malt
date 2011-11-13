@@ -79,6 +79,10 @@ requirements:
   groups:
   - test
   development: true
+- name: coffe-script
+  groups:
+  - test
+  development: true
 dependencies: []
 conflicts: []
 repositories:
