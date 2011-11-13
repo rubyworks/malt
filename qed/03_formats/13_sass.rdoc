@@ -16,7 +16,7 @@ Lets say we have a Sass document called 'test.sass' containing:
 
 We can render the Sass document via #render.
 
-  @css = Malt.render(:file=>'tmp/test.sass')
+  @css = Malt.render(:file=>'test.sass')
 
 And we can verify that @css is the expected CSS:
 
@@ -31,7 +31,7 @@ And we can verify that @css is the expected CSS:
 
 We can also get a hold of the Sass document via the Malt.file function.
 
-  sass = Malt.file('tmp/test.sass')
+  sass = Malt.file('test.sass')
 
   sass.class.assert == Malt::Format::Sass
 

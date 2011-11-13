@@ -71,6 +71,18 @@ module Format
     # Access to the options given to the initializer.
     attr :options
 
+    # Change options on the fly.
+    def with(options={})
+      alt = dup
+      alt.with!(options)
+    end
+
+    # Change options in-place.
+    def with!(options)
+      @options.update(options.rekey)
+      self
+    end
+
     # Document source text.
     def text
       @text ||= options[:text] || File.read(file)
@@ -95,8 +107,8 @@ module Format
     end
 
     #
-    def to(type, data=nil, &yld)
-      __send__("to_#{type}", data, &yld)
+    def to(type, *data, &yld)
+      __send__("to_#{type}", *data, &yld)
     end
 
     # Render to default or given format.
@@ -104,10 +116,10 @@ module Format
     # If the first argument is a Symbol it is considered the format, otherwise
     # it is taken to be the database for rendering template variables.
     def render(*type_and_data, &yld)
-      type, data = parse_type_and_data(type_and_data)
+      type, data = parse_type_and_data(*type_and_data)
       meth = method(type || default)
       #__send__(type || default, data, &yld)
-      meth.arity == 0 ?  meth.call(&yld) :  meth.call(data, &yld)
+      meth.arity == 0 ?  meth.call(&yld) :  meth.call(*data, &yld)
     end
 
     #
@@ -179,8 +191,8 @@ module Format
     end
 
     #
-    def to_default(data=nil, &yld)
-      to(default, data, &yld)
+    def to_default(*data, &yld)
+      to(default, *data, &yld)
     end
 
     # Default rendering type is +:html+. Override if it
@@ -190,15 +202,35 @@ module Format
     end
 
     #
-    def parse_type_and_data(type_and_data)
-      if Symbol === type_and_data.first
-        type = type_and_data.first
-        data = type_and_data.last
+    def parse_type_from_data(*data)
+      if Symbol === data.first
+        type = data.shift
       else
         type = nil
-        data = type_and_data.first
       end
       return type, data
+    end
+
+    ##
+    #def parse_type_scope_data(*data)
+    #  if Symbol === data.first
+    #    type = data.shift
+    #  else
+    #    type = nil
+    #  end
+    #  scope, data = scope_vs_data(*data)
+    #  return type, scope, data
+    #end
+
+    # @deprecate
+    def scope_vs_data(scope, data=nil)
+      if scope && !data
+        if scope.respond_to?(:to_hash)
+          data  = scope
+          scope = nil
+        end
+      end
+      return scope, data
     end
 
   end

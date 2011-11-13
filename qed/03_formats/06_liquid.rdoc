@@ -13,7 +13,7 @@ into the liquid document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'tmp/test.liquid', :data=>data)
+  html = Malt.render(:file=>'test.liquid', :data=>data)
 
   html.assert.include?('<h1>Example Document</h1>')
 
@@ -27,7 +27,7 @@ Lets say we have a Liquid document called 'test.liquid' containing ...
 
 We can render erb documents to any format we wish.
 
-  liq = Malt.file('tmp/test.liquid')
+  liq = Malt.file('test.liquid')
 
   html = liq.to_html(:title=>"Document")
 

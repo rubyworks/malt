@@ -11,7 +11,7 @@ Lets say we have a Textile document called 'test.tt' containing ...
 We can redner the textile document via the universal render function.
 Textile documents are recognized by the +.textile+ or +.tt+ extension.
 
-  html = Malt.render(:file=>'tmp/test.tt')
+  html = Malt.render(:file=>'test.tt')
 
   html.assert.include?('<h1>Example</h1>')
 
@@ -26,7 +26,7 @@ Lets say we have an Textile document called 'test.tt' containing ...
 We can access the file via the +Malt.file+ method. Textile documents are
 recognized by the +.textile+ or +.tt+ extension.
 
-  tile = Malt.file('tmp/test.tt')
+  tile = Malt.file('test.tt')
 
 We can the convert the document to a Malt Html object via the #to_html method.
 

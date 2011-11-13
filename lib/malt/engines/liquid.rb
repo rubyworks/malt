@@ -18,8 +18,9 @@ module Malt::Engine
 
     #
     def render(params={}, &yld) #file, db, &yld)
-      text = params[:text]
-      data = params[:data]
+      text  = params[:text]
+      data  = params[:data]
+
       data = make_hash(data, &yld)
       data = data.rekey{ |k| k.to_s }
       engine = intermediate(params)

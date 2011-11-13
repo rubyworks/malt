@@ -1,8 +1,18 @@
 require 'malt'
 require 'ae/pry'
 
-When "say we have a (((\\w+))) document called '(((\\S+)))' containing" do |type, fname, text|
-  file = File.join('tmp',fname)
+def sample(file)
+  s = File.join(File.dirname(__FILE__), '..', '..', 'qed', 'samples', file)
+  File.expand_path(s)
+end
+
+#unless File.directory?('samples')
+#  dir = File.dirname(__FILE__)+'/../samples'
+#  FileUtils.cp_r(dir,'.')
+#end
+
+When "say we have a((n?)) (((\\w+))) document called '(((\\S+)))' containing" do |type, fname, text|
+  file = File.join(fname)
   File.open(file, 'w'){ |f| f << text }
 end
 

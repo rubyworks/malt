@@ -10,7 +10,7 @@ Lets say we have a Markdown document called 'test.md' containing ...
 
 Markdown documents are recognized by the +.markdown+ or +.md+ file extensions.
 
-  html = Malt.render(:file=>'tmp/test.md')
+  html = Malt.render(:file=>'test.md')
 
   html.assert.include?('<h1>Example</h1>')
 
@@ -18,7 +18,7 @@ By default teh RDiscount library is used to render markdown documents, but
 Malt supports BlueCloth and Kramdown as well. These case be used by setting
 the :engine option.
 
-  html = Malt.render(:file=>'tmp/test.md', :engine=>:bluecloth)
+  html = Malt.render(:file=>'test.md', :engine=>:bluecloth)
 
 And as we can see the document rendered as expected.
 
@@ -26,7 +26,7 @@ And as we can see the document rendered as expected.
 
 And using the Kramdown library,
 
-  html = Malt.render(:file=>'tmp/test.md', :engine=>:kramdown)
+  html = Malt.render(:file=>'test.md', :engine=>:kramdown)
 
 We can see the document rendered as well, though notice that Kramdown provides
 some bonus features compared to the other rendering engines.
@@ -44,7 +44,7 @@ Lets say we have an Markdown document called 'test.md' containing ...
 We can access the file via the +Malt.file+ method. Markdown documents are
 recognized by the +.markdown+ or +.md+ file extensions.
 
-  mark = Malt.file('tmp/test.md')
+  mark = Malt.file('test.md')
 
 We can the convert the document to a Malt Html object via the #to_html method.
 

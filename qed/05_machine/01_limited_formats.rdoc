@@ -9,7 +9,7 @@ and no others.
   malt = Malt::Machine.new(:types=>[:rdoc])
 
 Now we use the `malt` machine object to handle rendering. First let's
-make sure that the machine is infact setup to limit formats to just RDoc.
+make sure that the machine is in fact setup to limit formats to just RDoc.
 
   malt.formats.keys.assert = [:rdoc]
 
@@ -17,13 +17,27 @@ make sure that the machine is infact setup to limit formats to just RDoc.
   malt.refute.format?('.markdown')
 
 This being the case we should be able to render an RDoc file without issue.
+So, lets say we have a Ruby document called 'sample.rdoc' containing:
 
-  malt.render(:file=>'qed/samples/sample.rdoc')
+  = Sample
+
+  This is an sample.
+
+Then it can be rendered as follows.
+
+  malt.render(:file=>'sample.rdoc')
 
 Where as another format type, though usually supported, but excluded in this
-case, will fail.
+case, will fail. Lets say we have a Ruby document called 'sample.markdown'
+containing:
+
+  # Sample
+
+  This is an sample.
+
+Then it can be rendered will bulk with a `Malt::NoEngineError`.
 
   expect Malt::NoEngineError do
-    malt.render(:file=>'qed/samples/sample.markdown')
+    malt.render(:file=>'sample.markdown')
   end
 

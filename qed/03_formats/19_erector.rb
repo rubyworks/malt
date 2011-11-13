@@ -18,13 +18,13 @@ Erector document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'tmp/test.erector', :data=>data)
+  html = Malt.render(:file=>'test.erector', :data=>data)
 
   html.assert.include?('<h1>Example Document</h1>')
 
 We can get a hold of the Erector document via the Malt.file function.
 
-  erector = Malt.file('tmp/test.erector')
+  erector = Malt.file('test.erector')
 
   erector.class.assert == Malt::Format::Erector
 

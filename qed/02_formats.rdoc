@@ -11,18 +11,18 @@ of each rendering.
   expected_output = {}
 
   formats.each do |format|
-    expected_output[format] = File.read("qed/samples/output-#{format}.txt")
+    expected_output[format] = File.read(sample("output-#{format}.txt"))
   end
 
 The data to inject into the formats that interpolate, is also stored in the
 samples folder.
 
-  data = YAML.load(File.new('qed/samples/data.yml'))
+  data = YAML.load(File.new(sample('data.yml')))
 
 Now we can render each of thes formats, and verify we get the expected result.
 
   formats.each do |format|
-    output = Malt.render(:file=>"qed/samples/sample.#{format}", :format=>format, :data=>data)
+    output = Malt.render(:file=>sample("sample.#{format}"), :format=>format, :data=>data)
     output.assert == expected_output[format]
   end
 
@@ -32,7 +32,7 @@ if it is given.
 We can also handle the files in a more object-oriented manner.
 
   formats.each do |format|
-    object = Malt.file("qed/samples/sample.#{format}", :format=>format)
+    object = Malt.file(sample("sample.#{format}"), :format=>format)
     output = object.render(data)
     output.assert == expected_output[format]
   end

@@ -15,7 +15,7 @@ into the ERB document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'tmp/test.erb', :data=>data)
+  html = Malt.render(:file=>'test.erb', :data=>data)
 
 And as we can see the document rendered as expected.
 
@@ -28,7 +28,7 @@ option would have no effect here.
 By default the common ERB library is used to render erb documents. By setting
 the :engine option, Erubis can be used instead.
 
-  html = Malt.render(:file=>'tmp/test.erb', :data=>data, :engine=>:erubis)
+  html = Malt.render(:file=>'test.erb', :data=>data, :engine=>:erubis)
 
 And as we can see the document rendered as expected.
 
@@ -44,7 +44,7 @@ Lets say we have an ERB document called 'test.erb' containing ...
 
 We can render erb documents to any format we wish.
 
-  erb = Malt.file('tmp/test.erb')
+  erb = Malt.file('test.erb')
 
   html = erb.to_html(:title=>"Document")
 

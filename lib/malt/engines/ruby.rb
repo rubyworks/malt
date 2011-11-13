@@ -15,8 +15,10 @@ module Malt::Engine
       text = params[:text]
       file = params[:file]
       data = params[:data]
-      data = make_binding(data, &yld)
-      eval(text, data, file)
+
+      binding = make_binding(data, &yld)
+
+      eval(text, binding, file)
     end
 
     # Ruby compiles to Ruby. How odd. ;)

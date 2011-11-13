@@ -19,7 +19,7 @@ module Format
      
     #
     def render(*type_and_data, &yld)
-      type, data = parse_type_and_data(type_and_data)
+      type, data = parse_type_from_data(*type_and_data)
       opts = options.merge(:format=>type, :text=>text, :file=>file, :data=>data)
       render_engine.render(opts, &yld)
       #opts = options.merge(:format=>type, :text=>text, :file=>file, :data=>data, :engine=>engine)

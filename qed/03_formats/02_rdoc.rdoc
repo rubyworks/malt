@@ -8,7 +8,7 @@ Lets say we have a RDoc document called 'test.rdoc' containing:
 
 We can convert rdoc documents to html easily via the univeral +render+ function.
 
-  html = Malt.render(:file=>'tmp/test.rdoc')
+  html = Malt.render(:file=>'test.rdoc')
 
   html.assert.include?('<h1>Example</h1>')
 
@@ -18,9 +18,8 @@ renders to HTML, so we did not need to specify the output :format option to
 the +render+ method.
 
 If we have a file that has a different extension, but is in fact an RDoc
-document, we can inform Malt.
-
-Lets say we have an RDoc document called 'test.txt' containing:
+document, we can inform Malt. For instance, lets say we have an RDoc document
+called 'test.txt' containing:
 
   = Example
 
@@ -28,12 +27,12 @@ Lets say we have an RDoc document called 'test.txt' containing:
 
 We can inform Malt as the actual type using the `:type` option.
 
-  html = Malt.render(:file=>'tmp/test.txt', :type=>:rdoc)
+  html = Malt.render(:file=>'test.txt', :type=>:rdoc)
 
   html.assert.include?('<h1>Example</h1>')
 
 Alternately we can use the object-oriented interface. Again, lets say we have
-an RDoc document called 'test.rdoc' containing ...
+an RDoc document called 'test.rdoc' containing:
 
   = Example
 
@@ -41,7 +40,7 @@ an RDoc document called 'test.rdoc' containing ...
 
 Then we can use the `Malt.file` method to instantiate an RDoc object.
 
-  rdoc = Malt.file('tmp/test.rdoc')
+  rdoc = Malt.file('test.rdoc')
 
 We will notice that the output is an instance of Malt::Formats::HTML.
 
@@ -63,7 +62,7 @@ And that by calling #to_s we can get the rendered HTML document.
 
 We can convert rdoc documents to html very easily.
 
-  rdoc = Malt.file('tmp/test.rdoc')
+  rdoc = Malt.file('test.rdoc')
 
   html = rdoc.to_html
 

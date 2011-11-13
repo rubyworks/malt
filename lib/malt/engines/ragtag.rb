@@ -19,11 +19,11 @@ module Malt::Engine
 
       case into
       when :html, nil
-        data = make_binding(data, &yld)
-        intermediate(params).compile(data).to_xhtml
+        binding = make_binding(data, &yld)
+        intermediate(params).compile(binding).to_xhtml
       when :xml
-        data = make_binding(data, &yld)
-        intermediate(params).compile(data).to_xml
+        binding = make_binding(data, &yld)
+        intermediate(params).compile(binding).to_xml
       else
         super(params, &yld)
       end

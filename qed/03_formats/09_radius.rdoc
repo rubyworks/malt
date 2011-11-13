@@ -9,13 +9,13 @@ We can render Radius documents via the +render+ method, as we can any format.
 
   data = {:title=>"Document"}
 
-  html = Malt.render(:file=>'tmp/test.radius', :data=>data, :tag_prefix=>'r')
+  html = Malt.render(:file=>'test.radius', :data=>data, :tag_prefix=>'r')
 
   html.assert.include?('<h1>Example Document</h1>')
 
 We can get a hold of the Radius document via the Malt.file function.
 
-  radi = Malt.file('tmp/test.radius', :tag_prefix=>'r')
+  radi = Malt.file('test.radius', :tag_prefix=>'r')
 
   radi.class.assert == Malt::Format::Radius
 

@@ -28,12 +28,12 @@ module Malt::Format
     alias_method(:precompile, :to_rb)
 
     #
-    def html(data=nil, &yld)
+    def html(*data, &yld)
       render_engine.render(:text=>text, :file=>file, :data=>data, :to=>:html, &yld)
     end
 
     #
-    def to_html(data=nil, &yld)
+    def to_html(*data, &yld)
       text = html(data, &yld)
       opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)

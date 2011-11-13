@@ -18,13 +18,13 @@ Markaby document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'tmp/test.markaby', :data=>data)
+  html = Malt.render(:file=>'test.markaby', :data=>data)
 
   html.assert.include?('<h1>Example Document</h1>')
 
 We can get a hold of the Markaby document via the Malt.file function.
 
-  markaby = Malt.file('tmp/test.markaby')
+  markaby = Malt.file('test.markaby')
 
   markaby.class.assert == Malt::Format::Markaby
 

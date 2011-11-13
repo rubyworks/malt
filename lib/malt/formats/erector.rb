@@ -21,13 +21,13 @@ module Malt::Format
     end
 
     #
-    def html(data=nil, &yld)
+    def html(*data, &yld)
       render_engine.render(:format=>:html, :text=>text, :file=>file, :data=>data, &yld)
     end
 
     #
-    def to_html(data=nil, &yld)
-      text = html(data, &yld)
+    def to_html(*data, &yld)
+      text = html(*data, &yld)
       opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end

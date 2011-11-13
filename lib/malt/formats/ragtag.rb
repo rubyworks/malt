@@ -14,25 +14,25 @@ module Malt::Format
     register('ragtag', 'rt')
 
     #
-    def html(data=nil, &yld)
+    def html(*data, &yld)
       render_engine.render(:text=>text, :data=>data, &yld)
     end
 
     #
-    def to_html(data=nil, &yld)
-      text = html(data, &yld)
+    def to_html(*data, &yld)
+      text = html(*data, &yld)
       opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
 
     #
-    def xml(data=nil, &yld)
+    def xml(*data, &yld)
       render_engine.render(:text=>text, :data=>data, &yld)
     end
 
     #
-    def to_xml(data=nil, &yld)
-      text = xml(data, &yld)
+    def to_xml(*data, &yld)
+      text = xml(*data, &yld)
       opts = options.merge(:text=>text, :file=>refile(:xml), :type=>:xml)
       XML.new(opts)
     end

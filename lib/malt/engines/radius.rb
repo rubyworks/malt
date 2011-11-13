@@ -15,6 +15,15 @@ module Malt::Engine
       text = params[:text]
       data = params[:data]
       into = params[:to]
+
+      if Array === data 
+        if data.size > 1
+          data = make_hash(data)
+        else
+          data = data.first
+        end
+      end
+
       case into
       when :html, :xml, nil
         data = make_context(data, &yld)

@@ -32,8 +32,9 @@ module Malt::Engine
     #
     def render_html(params={}, &yld)
       #text = params[:text]
-      file = params[:file]
-      data = params[:data]
+      file  = params[:file]
+      data  = params[:data]
+ 
       data = make_hash(data, &yld)
 
       intermediate(params).new(data).to_html      

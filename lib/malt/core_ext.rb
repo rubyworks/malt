@@ -29,3 +29,38 @@ class OpenStruct
   end unless method_defined?(:to_hash)
 
 end
+
+
+class Binding
+  # Conversion for bindings.
+  #
+  # @todo Is there any way to integrate the optional data and block?
+  def to_binding
+    self
+  end
+
+  #
+  def self
+    Kernel.eval('self', self)
+  end
+
+  #
+  def with(_variables={}, &yields)
+    obj = self.self
+    hoc = (class << obj; self; end)
+    (_variables || {}).to_hash.each do |name,value|
+      hoc.__send__(:define_method, name){ value }
+    end
+    #if yields
+    #  hoc.__send__(:define_method, :yield, &yields)
+    #end
+    obj.to_binding
+  end
+end
+
+class Object
+  def to_binding
+    binding
+  end
+end
+

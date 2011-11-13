@@ -22,13 +22,13 @@ module Malt::Format
     end
 
     #
-    def css(data=nil, &yld)
-      render_engine.render(:format=>:css, :text=>text, :file=>file, :type=>type)
+    def css(*data, &yld)
+      render_engine.render(:format=>:css, :text=>text, :file=>file, :data=>data, :type=>type)
     end
 
     #
-    def to_css(data=nil, &yld)
-      result = css(data, &yld)
+    def to_css(*data, &yld)
+      result = css(*data, &yld)
       CSS.new(:text=>result, :file=>refile(:css), :type=>:css)
     end
 

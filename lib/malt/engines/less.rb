@@ -16,9 +16,11 @@ module Malt::Engine
     def render(params)
       text = params[:text]
       into = params[:to]
+      cmpr = params[:compress]
+
       case into
       when :css, nil
-        intermediate(params).to_css
+        intermediate(params).parse(text).to_css(:compress=>cmpr)
       else
         super(params)
       end
@@ -26,8 +28,8 @@ module Malt::Engine
 
     #
     def intermediate(params)
-      text = params[:text]
-      ::Less::Engine.new(text)
+      file = params[:file]
+      ::Less::Parser.new(:filename=>file)
     end
 
     #
@@ -39,7 +41,7 @@ module Malt::Engine
 
     # Load Less library if not already loaded.
     def initialize_engine
-      return if defined? ::Less::Engine
+      return if defined? ::Less::Parser
       require_library 'less'
     end
 

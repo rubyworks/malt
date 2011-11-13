@@ -28,9 +28,9 @@ module Malt::Format
     alias_method :to_ruby, :to_rb
 
     #
-    def to(type, data=nil, &yld)
+    def to(type, *data, &yld)
       new_class   = Malt::Format.registry[type.to_sym]  # TODO: Malt.machine.format?
-      new_text    = render(data, &yld)
+      new_text    = render(*data, &yld)
       new_file    = refile(type)
       new_options = options.merge(:text=>new_text, :file=>new_file)
       new_class.new(new_options)
@@ -55,7 +55,7 @@ module Malt::Format
     #end
 
     def render(*type_and_data, &yld)
-      type, data = parse_type_and_data(type_and_data)
+      type, data = parse_type_from_data(*type_and_data)
       render_engine.render(:text=>text, :file=>file, :data=>data, &yld)
     end
 

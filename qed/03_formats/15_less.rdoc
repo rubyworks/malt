@@ -12,17 +12,22 @@ Lets say we have a LESS document called 'test.less' containing:
 
 We can render it via Malt with #render.
 
-  @css = Malt.render(:file=>'tmp/test.less')
+  @css = Malt.render(:file=>'test.less')
 
 And we can verify that @css is:
 
-  #header, h2 { color: #4d926f; }
+  #header {
+    color: #4d926f;
+  }
+  h2 {
+    color: #4d926f;
+  }
 
 Look how concise that is. LESS is pretty slick.
 
 We can also get a hold of the LESS document via the Malt.file function.
 
-  less = Malt.file('tmp/test.less')
+  less = Malt.file('test.less')
 
   less.class.assert == Malt::Format::LESS
 
@@ -36,11 +41,25 @@ We can see that the output is an instance of Malt::Format::HTML.
 
 And that by calling #to_s we can get the rendered CSS document.
 
-  css.to_s.assert.include?('#header, h2 { color: #4d926f; }')
+  css.to_s.assert.include?("#header {\n  color: #4d926f;")
+  css.to_s.assert.include?("h2 {\n  color: #4d926f;")
 
 Or we can convert the LESS document directly to CSS via the #css method.
 
   out = less.css
 
-  out.assert.include?('#header, h2 { color: #4d926f; }')
+  out.assert.include?("#header {\n  color: #4d926f;")
+  out.assert.include?("h2 {\n  color: #4d926f;")
+
+Less supports a compression option. We can modify this option on the fly
+via the `#with` method.
+
+  less = Malt.file('test.less')
+
+  less.class.assert == Malt::Format::LESS
+
+  out = less.with(:compress=>true).css
+
+  out.assert.include?('#header{color:#4d926f;}')
+  out.assert.include?('h2{color:#4d926f;}')
 

@@ -25,13 +25,13 @@ module Malt::Format
     alias_method(:to_ruby, :to_rb)
 
     #
-    def html(data=nil, &yld)
-      render(:html, data, &yld)
+    def html(*data, &yld)
+      render(:html, *data, &yld)
     end
 
     #
-    def to_html(data=nil, &yld)
-      new_text    = render(:html, data, &yld)
+    def to_html(*data, &yld)
+      new_text    = render(:html, *data, &yld)
       new_file    = refile(:html)
       new_options = options.merge(:text=>new_text, :file=>new_file, :type=>:html)
       HTML.new(new_options)

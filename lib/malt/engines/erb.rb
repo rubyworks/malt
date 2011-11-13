@@ -25,17 +25,17 @@ module Malt::Engine
     #
     # Returns a String.
     def render(params={}, &yld)
-      text = params[:text]
-      file = params[:file]
-      data = params[:data]
+      text  = params[:text]
+      file  = params[:file]
+      data  = params[:data] 
 
-      data = make_binding(data, &yld)
+      binding = make_binding(data, &yld)
 
       if settings[:precompile] == false
-        intermediate(params).result(data)
+        intermediate(params).result(binding)
       else
         ruby = compile(params)
-        eval(ruby, data, file)
+        eval(ruby, binding, file)
       end
     end
 

@@ -12,7 +12,7 @@ We can run this Ruby script thru Malt's +render+ function.
 
   data = {:title => 'Document'}
 
-  html = Malt.render(:file=>'tmp/test.rb', :data=>data)
+  html = Malt.render(:file=>'test.rb', :data=>data)
 
 Whatever was the final result of evaluating the Ruby script, converted to
 a string via #to_s, will be the result of the rendering.
@@ -21,11 +21,11 @@ a string via #to_s, will be the result of the rendering.
 
 We can get a hold of the Ruby template via the Malt.file function.
 
-  ruby = Malt.file('tmp/test.rb')
+  ruby = Malt.file('test.rb')
 
   ruby.class.assert == Malt::Format::Ruby
 
-Ruby is a <i>universal template format</i>, so it can be converted to any other
+Ruby is a Universal Template Format, so it can be converted to any other
 format (even if it is not really that format).
 
   data = {:title => "Document"}

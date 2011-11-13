@@ -30,19 +30,21 @@ module Malt::Format
     # Technically #method_missing will pick this up, but since it is likely
     # to be the most commonly used, adding the method directly will provide
     # a small speed boost.
-    def html(data=nil, &yld)
-      render(:html, data, &yld)
+    #
+    def html(*data, &yld)
+      render(:html, *data, &yld)
     end
 
     # Technically #method_missing will pick this up, but since it is likely
     # to be the most commonly used, adding the method directly will provide
     # a small speed boost.
-    def to_html(data=nil, &yld)
-      new_text    = render(:html, data, &yld)
+    def to_html(*data, &yld)
+      new_text    = render(:html, *data, &yld)
       new_file    = refile(:html)
       new_options = options.merge(:text=>new_text, :file=>new_file, :type=>:html)
       HTML.new(new_options)
     end
+
 
 #    #
 #    def to(type, data=nil, &yld)

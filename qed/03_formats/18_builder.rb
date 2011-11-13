@@ -18,13 +18,13 @@ Builder document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'tmp/test.builder', :data=>data)
+  html = Malt.render(:file=>'test.builder', :data=>data)
 
   html.assert.include?('<h1>Example Document</h1>')
 
 We can get a hold of the Builder document via the Malt.file function.
 
-  builder = Malt.file('tmp/test.builder')
+  builder = Malt.file('test.builder')
 
   builder.class.assert == Malt::Format::Builder
 

@@ -65,7 +65,7 @@ module Engine
     attr :settings
 
     #
-    def render(text, options={}) #format, text, file, db, &yld)
+    def render(text, options={}) #format, text, file, db, &yields)
       if format = options[:format]
         raise "unsupported rendering -- #{format}"
       else
@@ -74,7 +74,7 @@ module Engine
     end
 
     #
-    def compile(db, &yld)
+    def compile(*data, &yields)
       raise "not implemented"
     end
 
@@ -95,63 +95,119 @@ module Engine
       require(path)
     end
 
-    # Convert a data source into a Binding.
-    # TODO: handle yld.
-    def make_binding(db, &yld)
-      return db if Binding === db  # FIXME: no yld
-
-      if db.respond_to?(:to_binding)
-        return db.to_binding(&yld)
+    # Take a data source are return a scope object and data hash.
+    #
+    # @param [Object,Binding,Hash,Array] data 
+    #   The data source used for evaluation.
+    #   If the data is an Array with more than one entry, the first element
+    #   will be assumed to be an Object or Binding scope and the remaining
+    #   entries hashes which will be merged into one hash.
+    #
+    # @return [Array<Object,Hash>] Two element array of scope object and data hash.
+    def scope_vs_data(data)
+      case data
+      when Array
+        if data.size > 1
+          scope, *data = *data
+          data = data.inject({}){ |h,d| h.update(d); h }
+          return scope, data
+        else
+          data = data.first
+        end
       end
 
-      db = make_object(db, &yld)
+      scope = nil
+      if !data.respond_to?(:to_hash)
+        scope = data
+        data  = nil
+      end
 
-      return db.instance_eval{ binding }        
+      return scope, data
     end
 
-    # Convert a data source into an Object (aka a "scope").
-    def make_object(db, &yld)
-      if db.respond_to?(:to_hash)
-        hash  = db.to_hash
-        hash[:yield] = yld.call if yld
+    # Convert scope and data into a Binding.
+    #
+    # @param [Object,Binding,Hash,Array] data
+    #   The data source used for evaluation.
+    #
+    # @see #scope_vs_hash
+    #
+    # @return [Object] The data and yield block converted to a Binding.
+    def make_binding(data, &yields)
+      scope, data = scope_vs_data(data)
+      scope = Object.new unless scope
+      scope.to_binding.with(data, &yields)
+    end
+
+    # Convert scope and data into a scope object.
+    #
+    # @param [Object,Binding,Hash,Array] data
+    #   The data source used for evaluation.
+    #
+    # @see #scope_vs_hash
+    #
+    # @return [Object] The data and yield block converted to an Object.
+    def make_object(data, &yields)
+      scope, data = scope_vs_data(data)
+      if scope
+        scope = scope.self if Binding === scope
+        adhoc = (class << scope; self; end)
+        if data
+          data.to_hash.each do |name,value|
+            adhoc.__send__(:define_method, name){ value }
+          end
+        end
+        if yields
+          adhoc.__send__(:define_method, :yield, &yields)
+        end
+        scope
+      else
+        hash = data.to_hash.dup
+        hash[:yield] = yields.call if yields  # rescue nil ?
         attrs = hash.keys.map{ |k| k.to_sym }
-        return Struct.new(*attrs).new(*hash.values)
+        Struct.new(*attrs).new(*hash.values)
       end
-
-      if Binding === db
-        eval('self', binding) # FIXME: no yld
-      end
-
-      return db
     end
 
-    # Convert a data source into a Hash.
-    def make_hash(db, &yld)
-      if Binding === db
-        db = make_object(db)
+    # Convert data source into a hash.
+    #
+    # @param [Object,Binding,Hash,Array] data
+    #   The data source used for evaluation.
+    #
+    # @see #scope_vs_hash
+    #
+    # @return [Hash] The data and yield block converted to a Hash.
+    def make_hash(data, &yields)
+      scope, data = scope_vs_data(data)
+      hash = if scope
+               scope = scope.self if Binding === scope
+               if scope.respond_to?(:to_hash)
+                 scope.to_hash
+               else # last resort
+                 scope.instance_variables.inject({}) do |h, i|
+                   k = i.sub('@','').to_sym
+                   v = instance_variable_get(i)
+                   h[k] = v
+                   h
+                 end
+               end
+             else
+               {}
+             end
+
+      hash = hash.merge(data || {})
+
+      if yields
+        hash[:yield] = yields.call  # rescue nil ?
       end
 
-      if db.respond_to?(:to_hash)
-        db = db.to_hash
-        db[:yield] = yld.call if yld
-        return db
-      end
+      hash
+    end
 
-      if db.respond_to?(:to_h)
-        db = db.to_h
-        db[:yield] = yld.call if yld
-        return db
-      end
-
-      # last resort
-      db = db.instance_variables.inject({}) do |h, i|
-        k = i.sub('@','').to_sym
-        v = instance_variable_get(i)
-        h[k] = v
-        h
-      end
-      db[:yield] = yld.call if yld
-      return db
+    #
+    def make_object_and_hash(data, &yields)
+      scope, data = scope_vs_data(data)
+      return scope, data
     end
 
   end

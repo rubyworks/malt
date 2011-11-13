@@ -12,7 +12,7 @@ We can render the document via #render.
 
   data = { :name=>'World', :items=>['A','B','C'] }
 
-  @text = Malt.render(:file=>'tmp/test.tenjin', :data=>data)
+  @text = Malt.render(:file=>'test.tenjin', :data=>data)
 
 And we can verify that @text is:
 
@@ -20,7 +20,7 @@ And we can verify that @text is:
 
 We can get a OOP interface tothe Tenjin document via the Malt.file function.
 
-  tenjin = Malt.file('tmp/test.tenjin')
+  tenjin = Malt.file('test.tenjin')
 
   tenjin.class.assert == Malt::Format::Tenjin
 

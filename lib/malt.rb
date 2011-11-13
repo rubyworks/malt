@@ -18,11 +18,6 @@ module Malt
     machine.file(file, options)
   end
 
-  # for Tilt compatibile interface.
-  def self.new(file, options={})
-    machine.file(file, options)
-  end
-
   #
   def self.text(text, options={})
     machine.text(text, options)

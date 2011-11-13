@@ -21,25 +21,36 @@ module Malt::Engine
 
     #
     def render_html(params, &yld)
-      text = params[:text]
-      file = params[:file]
-      data = params[:data]
+      text  = params[:text]
+      file  = params[:file]
+      data  = params[:data]
+
+      scope, data = make_object_and_hash(data)
+      scope ||= Object.new
 
       engine = intermediate(params)
-      case data
-      when Binding
-        html = engine.render(make_object(data), &yld)
-      when Hash
-        html = engine.render(Object.new, data, &yld)
-      else
-        if data.respond_to?(:to_hash)
-          data = data.to_hash
-          html = engine.render(Object.new, data, &yld)
-        else
-          html = engine.render(data || Object.new, &yld)
-        end
-      end
-      html
+      engine.render(scope, data, &yld)
+
+      #case data
+      #when Binding
+      #  raise ArgumentError, "redundant scope" if scope
+      #  html = engine.render(make_object(data), &yld)
+      #when Hash
+      #  scope = scope || Object.new
+      #  scope = scope.self if Binding === scope
+      #  html = engine.render(scope, data, &yld)
+      #else
+      #  if data.respond_to?(:to_hash)
+      #    data  = data.to_hash
+      #    scope = scope || Object.new
+      #    scope = scope.self if Binding === scope
+      #    html  = engine.render(scope, data, &yld)
+      #  else
+      #    raise ArgumentError, "redundant scope" if data && scope
+      #    html = engine.render(data || scope, &yld)
+      #  end
+      #end
+      #html
     end
 
     #

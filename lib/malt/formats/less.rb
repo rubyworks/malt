@@ -23,7 +23,8 @@ module Malt::Format
 
     #
     def css(*)
-      render_engine.render(:text=>text, :file=>:file, :format=>:css)
+      opts = options.merge(:text=>text, :file=>file, :format=>:css)
+      render_engine.render(opts)
     end
 
     #

@@ -13,7 +13,7 @@ into the mustache document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'tmp/test.mustache', :data=>data)
+  html = Malt.render(:file=>'test.mustache', :data=>data)
 
   html.assert.include?('<h1>Example Document</h1>')
 
@@ -27,7 +27,7 @@ Lets say we have a Mustache document called 'test.mustache' containing ...
 
 We can render erb documents to any format we wish.
 
-  liq = Malt.file('tmp/test.mustache')
+  liq = Malt.file('test.mustache')
 
   html = liq.to_html(:title=>"Document")
 
