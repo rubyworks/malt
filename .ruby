@@ -1,189 +1,106 @@
---- 
-name: malt
-title: Malt
-contact: trans <transfire@gmail.com>
-requires: 
-- group: 
+---
+source:
+- var
+authors:
+- name: trans
+  email: transfire@gmail.com
+copyrights:
+- holder: Rubyworks
+  year: '2010'
+  license: BSD-2-Clause
+replacements: []
+alternatives: []
+requirements:
+- name: detroit
+  groups:
   - build
-  name: syckle
-  version: 0+
-- group: 
+  development: true
+- name: qed
+  groups:
   - test
-  name: qed
-  version: 0+
-- group: 
+  development: true
+- name: rdoc
+  groups:
   - test
-  name: rdoc
-  version: 0+
-- group: 
+  development: true
+- name: RedCloth
+  groups:
   - test
-  name: redcloth
-  version: 0+
-- group: 
+  development: true
+- name: bluecloth
+  groups:
   - test
-  name: bluecloth
-  version: 0+
-- group: 
+  development: true
+- name: kramdown
+  groups:
   - test
-  name: kramdown
-  version: 0+
-- group: 
+  development: true
+- name: haml
+  groups:
   - test
-  name: haml
-  version: 0+
-- group: 
+  development: true
+- name: sass
+  groups:
   - test
-  name: tenjin
-  version: 0+
-- group: 
+  development: true
+- name: less
+  groups:
   - test
-  name: rtals
-  version: 0+
-- group: 
+  development: true
+- name: tenjin
+  groups:
   - test
-  name: liquid
-  version: 0+
-- group: 
+  development: true
+- name: rtals
+  groups:
   - test
-  name: erubis
-  version: 0+
-- group: 
+  development: true
+- name: liquid
+  groups:
   - test
-  name: mustache
-  version: 0+
-- group: 
+  development: true
+- name: erubis
+  groups:
   - test
-  name: erector
-  version: 0+
-- group: 
+  development: true
+- name: mustache
+  groups:
   - test
-  name: markaby
-  version: 0+
-- group: 
+  development: true
+- name: erector
+  groups:
   - test
-  name: builder
-  version: 0+
-resources: 
+  development: true
+- name: markaby
+  groups:
+  - test
+  development: true
+- name: builder
+  groups:
+  - test
+  development: true
+dependencies: []
+conflicts: []
+repositories:
+- uri: git@github.com:rubyworks/malt.git
+  scm: git
+  name: upstream
+resources:
+  home: http://rubyworks.github.com/malt
   code: http://github.com/rubyworks/malt
+  wiki: http://wiki.github.com/rubyworks/malt
   docs: http://rubyworks.github.com/malt/docs/api
   bugs: http://github.com/rubyworks/malt/issues
-  home: http://rubyworks.github.com/malt
-  wiki: http://wiki.github.com/rubyworks/malt
-pom_verison: 1.0.0
-manifest: 
-- .ruby
-- bin/malt
-- features/consistent_rendering.feature
-- features/samples/sample.erb
-- features/samples/sample.erubis
-- features/samples/sample.liquid
-- features/samples/sample.mustache
-- features/samples/sample.radius
-- features/step_definitions/engine_steps.rb
-- features/support/loadpath.rb
-- features/support/sample_class.rb
-- lib/malt/core_ext.rb
-- lib/malt/engines/abstract.rb
-- lib/malt/engines/bluecloth.rb
-- lib/malt/engines/builder.rb
-- lib/malt/engines/erb.rb
-- lib/malt/engines/erector.rb
-- lib/malt/engines/erubis.rb
-- lib/malt/engines/haml.rb
-- lib/malt/engines/kramdown.rb
-- lib/malt/engines/less.rb
-- lib/malt/engines/liquid.rb
-- lib/malt/engines/markaby.rb
-- lib/malt/engines/mustache.rb
-- lib/malt/engines/radius.rb
-- lib/malt/engines/ragtag.rb
-- lib/malt/engines/rdiscount.rb
-- lib/malt/engines/rdoc.rb
-- lib/malt/engines/redcloth.rb
-- lib/malt/engines/ruby.rb
-- lib/malt/engines/sass.rb
-- lib/malt/engines/slim.rb
-- lib/malt/engines/tenjin.rb
-- lib/malt/engines.rb
-- lib/malt/formats/abstract.rb
-- lib/malt/formats/abstract_template.rb
-- lib/malt/formats/builder.rb
-- lib/malt/formats/css.rb
-- lib/malt/formats/erb.rb
-- lib/malt/formats/erector.rb
-- lib/malt/formats/haml.rb
-- lib/malt/formats/html.rb
-- lib/malt/formats/latex.rb
-- lib/malt/formats/less.rb
-- lib/malt/formats/liquid.rb
-- lib/malt/formats/markaby.rb
-- lib/malt/formats/markdown.rb
-- lib/malt/formats/mustache.rb
-- lib/malt/formats/pdf.rb
-- lib/malt/formats/radius.rb
-- lib/malt/formats/ragtag.rb
-- lib/malt/formats/rbhtml.rb
-- lib/malt/formats/rdoc.rb
-- lib/malt/formats/rhtml.rb
-- lib/malt/formats/ruby.rb
-- lib/malt/formats/sass.rb
-- lib/malt/formats/scss.rb
-- lib/malt/formats/tenjin.rb
-- lib/malt/formats/text.rb
-- lib/malt/formats/textile.rb
-- lib/malt/formats/xml.rb
-- lib/malt/formats/yaml.rb
-- lib/malt/formats.rb
-- lib/malt/kernel.rb
-- lib/malt/machine.rb
-- lib/malt/markup.rb
-- lib/malt/meta/data.rb
-- lib/malt/template.rb
-- lib/malt.rb
-- lib/malt.yml
-- spec/01_overview.rdoc
-- spec/02_formats.rdoc
-- spec/03_formats/01_overview.rdoc
-- spec/03_formats/02_rdoc.rdoc
-- spec/03_formats/03_textile.rdoc
-- spec/03_formats/04_markdown.rdoc
-- spec/03_formats/05_erb.rdoc
-- spec/03_formats/06_liquid.rdoc
-- spec/03_formats/07_haml.rdoc
-- spec/03_formats/08_ragtag.rdoc
-- spec/03_formats/09_radius.rdoc
-- spec/03_formats/11_tenjin.rdoc
-- spec/03_formats/12_rbhtml.rdoc
-- spec/03_formats/13_sass.rdoc
-- spec/03_formats/14_scss.rdoc
-- spec/03_formats/15_less.rdoc
-- spec/03_formats/16_ruby.rdoc
-- spec/03_formats/17_markaby.rdoc
-- spec/03_formats/18_builder.rb
-- spec/03_formats/19_erector.rb
-- spec/03_formats/20_mustache.rdoc
-- spec/05_machine/01_limited_formats.rdoc
-- spec/05_machine/02_prioritized_engines.rdoc
-- spec/applique/malt.rb
-- spec/samples/data.yml
-- spec/samples/output-erb.txt
-- spec/samples/output-liquid.txt
-- spec/samples/output-mustache.txt
-- spec/samples/output-radius.txt
-- spec/samples/sample.erb
-- spec/samples/sample.liquid
-- spec/samples/sample.markdown
-- spec/samples/sample.mustache
-- spec/samples/sample.radius
-- spec/samples/sample.rdoc
-- README.rdoc
-- History.rdoc
-- Version
-- License.txt
-version: 0.3.0
-copyright: Copyright (c) 2010 Thomas Sawyer
-description: Malt provides a factory framework for rendering a variety of template and markup document formats.
+extra: {}
+load_path:
+- lib
+revision: 0
+created: '2010-06-22'
 summary: Multi-template/multi-markup rendering engine
-authors: 
-- Thomas Sawyer
-created: 2010-06-22
+title: Malt
+version: 0.3.0
+name: malt
+description: Malt provides a factory framework for rendering a variety of template
+  and markup document formats.
+organization: rubyworks
+date: '2011-11-13'
