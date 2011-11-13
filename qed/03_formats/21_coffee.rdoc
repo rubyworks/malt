@@ -1,0 +1,43 @@
+== Coffee Script
+
+Lets say we have a Coffee document called 'test.coffee' containing:
+
+  square = (x) -> x * x
+
+We can run this Coffee script thru Malt's +render+ function.
+
+  jscript = Malt.render(:file=>'test.coffee')
+
+  jscript.assert.include?("square = function(x) {\n    return x * x;\n  };")
+
+We can get a hold of a Coffee script via the Malt.file function.
+
+  coffee = Malt.file('test.coffee')
+
+  coffee.class.assert == Malt::Format::Coffee
+
+Coffee can only convert to Javascript.
+
+  jscript = coffee.to_javascript
+
+First we will notice that the output is an instance of Malt::Format::Javascript.
+
+  jscript.class.assert == Malt::Format::Javascript
+
+And that by calling `#to_s` we can get the rendered javascript document.
+
+  jscript.to_s.assert.include?("square = function(x) {\n    return x * x;\n  };")
+
+Or we can convert the Coffee script directly to Javascript via the `#javascript`
+method.
+
+  out = coffee.javascript
+
+  out.assert.include?("square = function(x) {\n    return x * x;\n  };")
+
+Malt also offers shorter aliases as `#to_js` and `#js`.
+
+  out = coffee.js
+
+  out.assert.include?("square = function(x) {\n    return x * x;\n  };")
+
