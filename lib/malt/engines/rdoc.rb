@@ -31,6 +31,7 @@ module Malt::Engine
       def initialize_engine
         return if defined?(::RDoc::Markup)
         require 'rubygems' # hack
+        require_library 'rdoc'
         require_library 'rdoc/markup'
         require_library 'rdoc/markup/to_html'
       end
