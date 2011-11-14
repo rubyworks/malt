@@ -5,6 +5,7 @@
 - RedCloth  (test)
 - bluecloth (test)
 - kramdown  (test)
+- rdiscount (test)
 - haml      (test)
 - sass      (test)
 - less      (test)
@@ -16,4 +17,4 @@
 - erector   (test)
 - markaby   (test)
 - builder   (test)
-- coffe-script (test)
+- coffee-script (test)

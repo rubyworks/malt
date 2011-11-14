@@ -35,6 +35,10 @@ requirements:
   groups:
   - test
   development: true
+- name: rdiscount
+  groups:
+  - test
+  development: true
 - name: haml
   groups:
   - test
