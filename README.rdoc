@@ -1,7 +1,10 @@
 = Malt
 
-* home: http://rubyworks.github.com/malt
-* code: http://github.com/rubyworks/malt
+{Homepage}[http://rubyworks.github.com/malt] |
+{Development}[http://github.com/rubyworks/malt] |
+{Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
+
+{<img src="http://travis-ci.org/rubyworks/malt.png" />}[http://travis-ci.org/rubyworks/malt]
 
 
 == DESCRIPTION
