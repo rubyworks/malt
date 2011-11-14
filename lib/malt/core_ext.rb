@@ -50,6 +50,7 @@ class Binding
 
   #
   def with(_hash)
+    _hash = (_hash || {}).to_hash
     eval("Proc.new{ |#{_hash.keys.join(',')}| binding }").call(*_hash.values)
   end
 
