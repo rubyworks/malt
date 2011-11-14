@@ -83,6 +83,14 @@ requirements:
   groups:
   - test
   development: true
+- name: radius
+  groups:
+  - test
+  development: true
+- name: ragtag
+  groups:
+  - test
+  development: true
 - name: coffee-script
   groups:
   - test
