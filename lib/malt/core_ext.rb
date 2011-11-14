@@ -1,6 +1,9 @@
 require 'ostruct'
 require 'facets/module/basename'
+require 'facets/to_hash'
+require 'facets/hash/rekey'
 
+=begin
 class Hash
 
   #
@@ -20,6 +23,7 @@ class Hash
   end unless method_defined?(:rekey)
 
 end
+=end
 
 class OpenStruct
 
@@ -45,17 +49,10 @@ class Binding
   end
 
   #
-  def with(_variables={}, &yields)
-    obj = self.self
-    hoc = (class << obj; self; end)
-    (_variables || {}).to_hash.each do |name,value|
-      hoc.__send__(:define_method, name){ value }
-    end
-    #if yields
-    #  hoc.__send__(:define_method, :yield, &yields)
-    #end
-    obj.to_binding
+  def with(_hash)
+    eval("Proc.new{ |#{_hash.keys.join(',')}| binding }").call(*_hash.values)
   end
+
 end
 
 class Object
