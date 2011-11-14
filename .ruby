@@ -79,7 +79,7 @@ requirements:
   groups:
   - test
   development: true
-- name: coffe-script
+- name: coffee-script
   groups:
   - test
   development: true
