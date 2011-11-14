@@ -1,7 +1,7 @@
+require 'malt/core_ext'
 require 'malt/version'
 require 'malt/kernel'
 require 'malt/machine'
-require 'malt/core_ext'
 
 module Malt
   class << self

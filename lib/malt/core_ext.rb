@@ -3,7 +3,6 @@ require 'facets/module/basename'
 require 'facets/to_hash'
 require 'facets/hash/rekey'
 
-=begin
 class Hash
 
   #
@@ -23,7 +22,6 @@ class Hash
   end unless method_defined?(:rekey)
 
 end
-=end
 
 class OpenStruct
 
@@ -45,7 +43,7 @@ class Binding
 
   #
   def self
-    Kernel.eval('self', self)
+    eval('self')
   end
 
   #
@@ -61,4 +59,5 @@ class Object
     binding
   end
 end
+
 

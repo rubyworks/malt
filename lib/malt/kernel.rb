@@ -1,7 +1,6 @@
-require 'malt/core_ext'
-
 module Malt
 
+  # Common methods that can be used through-out Malt classes.
   module Kernel
     private
 
