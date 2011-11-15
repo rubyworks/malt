@@ -2,7 +2,7 @@ require 'malt' unless defined?(Malt)
 
 module Malt
 
-  #
+  # Base class for the Tilt-like template classes.
   class Malted
     #
     def self.engine_index
@@ -20,7 +20,7 @@ module Malt
 
     #
     def malt_engine
-      self.class.malt_engine
+      self.class.malt_engine.new(@options)
     end
 
     #
@@ -32,11 +32,11 @@ module Malt
     #
     def render(*data, &yields)
       text = File.read(@file)
-      malt_engine.new(@options).render(:text=>text, :file=>@file, :data=>data, &yields)
+      malt_engine.render(:text=>text, :file=>@file, :data=>data, &yields)
     end
   end
 
-  # Tilt compatability layer.
+  # Tilt compatability layer. This get included into the toplevel.
   module Tilted
 
     #
@@ -107,6 +107,7 @@ module Malt
       #  malt_engine Malt::Engine::Nokogiri
       #end
 
+
       # R D O C
 
       #
@@ -114,12 +115,14 @@ module Malt
         malt_engine Malt::Engine::RDoc
       end
 
+
       # T E X T I L E
 
       #
       class RedClothTemplate < Malted
         malt_engine Malt::Engine::RedCloth
       end
+
 
       # M A R K D O W N
 
@@ -138,33 +141,51 @@ module Malt
         malt_engine Malt::Engine::Kramdown
       end
 
-      #class RedcarpetTemplate < Malted
-      #  malt_engine Malt::Engine::Redcarpet  # TODO
-      #end
+      #
+      class RedcarpetTemplate < Malted
+        malt_engine Malt::Engine::Redcarpet
+      end
 
-      #class MarukuTemplate < Malted
-      #  malt_engine Malt::Engine::Maruku  # TODO
-      #end
+      #
+      class MarukuTemplate < Malted
+        malt_engine Malt::Engine::Maruku
+      end
+
 
       # C S S
 
       #
       class SassTemplate < Malted
         malt_engine Malt::Engine::Sass
+        #
+        def malt_engine
+          options = @options.merge(:type=>:sass)
+          self.class.malt_engine.new(options)
+        end
       end
 
-      #class ScssTemplate < Malted   # TODO
-      #  malt_engine Malt::Engine::Scss
-      #end
+      #
+      class ScssTemplate < Malted
+        malt_engine Malt::Engine::Sass
+        #
+        def malt_engine
+          options = @options.merge(:type=>:scss)
+          self.class.malt_engine.new(options)
+        end
+      end
 
       class LessTemplate < Malted
         malt_engine Malt::Engine::Less
       end
 
 
+      # S O U R C E  C O D E
+
+      #
       class CoffeeScriptTemplate < Malted
         malt_engine Malt::Engine::Coffee
       end
+
 
       # W I K I
 

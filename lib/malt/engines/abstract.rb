@@ -66,7 +66,7 @@ module Engine
 
     #
     def render(text, options={}) #format, text, file, db, &yields)
-      if format = options[:format]
+      if format = options[:format]  # TODO: or type ?
         raise "unsupported rendering -- #{format}"
       else
         raise "unsupported rendering"
@@ -209,6 +209,22 @@ module Engine
     def make_scope_and_data(data, &yields)
       scope, data = scope_vs_data(data)
       return scope, data
+    end
+
+    #
+    def engine_options(params)
+      opts = {}
+      engine_option_names.each do |o|
+        o = o.to_sym
+        v = params[o] || settings[o]
+        opts[o] = v if v
+      end
+      opts
+    end
+
+    # Override this.
+    def engine_option_names
+      []
     end
 
   end

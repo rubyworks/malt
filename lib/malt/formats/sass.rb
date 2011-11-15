@@ -6,6 +6,7 @@ module Malt::Format
 
   # Sass Format
   #
+  #
   class Sass < Abstract
 
     register 'sass'
@@ -21,13 +22,13 @@ module Malt::Format
     end
 
     #
-    def css(*data, &yielding)
-      render_engine.render(:format=>:css, :text=>text, :file=>file, :data=>data, :type=>type, &yielding)
+    def css(*data, &yld)
+      render_engine.render(:format=>:css, :text=>text, :file=>file, :data=>data, :type=>type, &yld)
     end
 
     #
-    def to_css(*data, &yielding)
-      result = css(*data, &yielding)
+    def to_css(*data, &yld)
+      result = css(*data, &yld)
       CSS.new(:text=>result, :file=>refile(:css), :type=>:css)
     end
 
@@ -36,16 +37,6 @@ module Malt::Format
     #  result = render_engine.render(text, db, &yld)
     #  opts = options.merge(:text=>result, file=>refile(:css))
     #  CSS.new(opts)
-    #end
-
-    #
-    #def render_to(to, db, &yld)
-    #  case to
-    #  when :css
-    #    malt_engine.render_css(text, file, db, &yld)
-    #  else
-    #    raise UnspportedConversion.new(type, to)
-    #  end
     #end
 
     private

@@ -23,7 +23,7 @@ module Malt::Format
 
     #
     def css(*data, &yld)
-      render_engine.render(:format=>:css, :text=>text, :file=>file, :data=>data, :type=>type)
+      render_engine.render(:format=>:css, :text=>text, :file=>file, :data=>data, :type=>type, &yld)
     end
 
     #
@@ -37,16 +37,6 @@ module Malt::Format
     #  result = render_engine.render(text, db, &yld)
     #  opts = options.merge(:text=>result, file=>refile(:css))
     #  CSS.new(opts)
-    #end
-
-    #
-    #def render_to(to, db, &yld)
-    #  case to
-    #  when :css
-    #    malt_engine.render_css(text, file, db, &yld)
-    #  else
-    #    raise UnspportedConversion.new(type, to)
-    #  end
     #end
 
     private
