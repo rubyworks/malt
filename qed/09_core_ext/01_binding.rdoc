@@ -6,11 +6,11 @@
 
   b.to_binding  #=> b
 
-## self
+## itself
 
   b = binding
 
-  b.self  #=> self
+  b.itself  #=> self
 
 ## with
 
