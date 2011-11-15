@@ -79,11 +79,12 @@ module Malt::Engine
     #
     def intermediate(params)
       case params[:to]
-      #when :man, :manpage
-      #  renderer = Redcarpet::Render::ManPage
+      when :man, :manpage
+        renderer = Redcarpet::Render::ManPage
       else
-        ::Redcarpet::Markdown.new(Redcarpet::Render::HTML, engine_options(params))
+        renderer = Redcarpet::Render::HTML
       end
+      ::Redcarpet::Markdown.new(renderer, engine_options(params))
     end
 
     private
