@@ -12,22 +12,15 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      into, text, data = parameters(params, :to, :text, :data)
-
-      if Array === data 
-        if data.size > 1
-          data = make_hash(data)
-        else
-          data = data.first
-        end
-      end
+      into, text = parameters(params, :to, :text)
 
       case into
       when :html, :xml, nil
-        data = intermediate(params, &yld)
-        opts = engine_options(params)
+        context = intermediate(params, &yld)
+        options = engine_options(params)
 
-        parser = ::Radius::Parser.new(data, opts)
+        parser = ::Radius::Parser.new(context, options)
+
         parser.parse(text)
       else
         super(params, &yld)
@@ -37,6 +30,15 @@ module Malt::Engine
     #
     def intermediate(params={}, &yld)
       data = parameters(params, :data)
+
+      if Array === data 
+        if data.size > 1
+          data = make_hash(data)
+        else
+          data = data.first
+        end
+      end
+
       make_context(data, &yld)
     end
 

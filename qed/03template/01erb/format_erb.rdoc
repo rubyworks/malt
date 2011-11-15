@@ -1,6 +1,6 @@
 == ERB
 
-Malt supports ERB via the ERB and Erubis engines. 
+Malt supports ERB via the ERB engine. 
 
 Lets say we have a ERB document called 'test.erb' containing ...
 
@@ -10,7 +10,7 @@ Lets say we have a ERB document called 'test.erb' containing ...
 
 We can render erb documents via the +render+ method, as we can any format.
 However, becuase ERB if a template format and not just a markup syntax,
-we need to also provide the +render+ methods with data for interpolation
+we need to also provide the +render+ method with data for interpolation
 into the ERB document. 
 
   data = { :title=>"Document" }
@@ -25,45 +25,6 @@ ERB doesn't actually care what format the document is rendered as. The
 template could have been any text file what so ever, so using the `:format`
 option would have no effect here.
 
-=== Erubis
-
-By default the common ERB library is used to render .erb documents. By setting
-the :engine option, Erubis can be used instead.
-
-  html = Malt.render(:file=>'test.erb', :data=>data, :engine=>:erubis)
-
-And as we can see the document rendered as expected.
-
-  html.assert.include?('<h1>Example Document</h1>')
-
-Malt supports template engines as well as formats. 
-
-Lets say we have an ERB document called 'test.erb' containing:
-
-  <h1>Example <%= title %></h1>
-
-  <p>This is an example of ERB template.</p>
-
-We can render erb documents to any format we wish.
-
-  erb = Malt.file('test.erb')
-
-  html = erb.to_html(:title=>"Document")
-
-We will notice that the output is an instance of Malt::Format::HTML.
-
-  html.class.assert == Malt::Format::HTML
-
-And that by calling #to_s we can get the rendered HTML document.
-
-  html.to_s.assert.include?('<h1>Example Document</h1>')
-
-Or we can convert the document directly to HTML via the #html method.
-
-  out = erb.html(:title=>"Alternate")
-
-  out.assert.include?('<h1>Example Alternate</h1>')
-
 === Yield
 
 Lets say we have an ERB document called 'test.erb' containing:
@@ -74,7 +35,7 @@ Then
 
   data = { :title=>"Document" }
 
-  text = Malt.render(:file=>'test.erb',:engine=>:erubis){ 'world' }
+  text = Malt.render(:file=>'test.erb',:engine=>:erb){ 'world' }
 
 Then
 

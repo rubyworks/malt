@@ -1,0 +1,106 @@
+== Erubis
+
+By default the common ERB library is used to render .erb documents. By setting
+the :engine option, Erubis can be used instead.
+
+Lets say we have a ERB document called 'test.erb' containing ...
+
+  <h1>Example <%= title %></h1>
+
+  <p>This is an example of ERB template.</p>
+
+And data to supply the template.
+
+  data = { :title=>"Document" }
+
+
+=== Engine
+
+  Malt::Engine::Erubis.new(:text=>'<h1><%= title %></h1>')
+
+
+=== Format
+
+  erb = Malt::Format::Erb.new(:text=>'<h1><%= title %></h1>')
+
+
+=== Malt.file
+
+We can get an Erb instance via the Malt.file method.
+
+  erb = Malt.file('test.erb')
+
+  erb.assert.is_a?(Malt::Format::Erb)
+
+Then we can convert it to HTML using Erubis.
+
+  html = erb.to_html(:title=>"Document", :engine=>:erubis)
+
+We will notice that the output is an instance of Malt::Format::HTML.
+
+  html.class.assert == Malt::Format::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example Document</h1>')
+
+Or we can convert the document directly to HTML via the #html method.
+
+  out = erb.html(:title=>"Alternate")
+
+  out.assert.include?('<h1>Example Alternate</h1>')
+
+
+=== Malt.text
+
+When using `Malt.text` without supplying a `:file` setting, then we must supply
+the `:type`.
+
+  erb = Malt.text('<h1><%= title %></h1>', :type=>:erb)
+
+  erb.assert.is_a?(Malt::Format::Erb)
+
+
+=== Malt.render
+
+We can render via Erubis using the `Malt.render` method. Malt will
+automatically recognize the format and the engine to use by the file
+extensions.
+
+  html = Malt.render(:file=>'test.erb', :data=>data)
+
+And as we can see the document rendered as expected.
+
+  html.assert.include?('<h1>Example Document</h1>')
+
+If the file extension were otherwise we could explicitly select the
+the Erubis engine.
+
+Lets say we have a ERB document called 'test.erb' containing:
+
+  <h1>Example <%= title %></h1>
+  <p>This is an example of ERB template.</p>
+
+Then by specifying the :engine Erubis will be used instead of the default ERB.
+
+  html = Malt.render(:file=>'test.erb', :data=>data, :engine=>:erubis)
+
+  html.assert.include?('<h1>Example Document</h1>')
+
+==== with yield
+
+Lets say we have an ERB document called 'test.erb' containing:
+
+  Hello <%= yield %>!
+
+Then
+
+  data = { :title=>"Document" }
+
+  text = Malt.render(:file=>'test.erb',:engine=>:erubis){ 'world' }
+
+Then
+
+  text.strip  #=> "Hello world!"
+
+

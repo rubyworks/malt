@@ -6,18 +6,20 @@ Lets say we have a RDoc document called 'test.rdoc' containing:
 
   This is an example of RDoc rendering.
 
-We can convert rdoc documents to html easily via the univeral +render+ function.
+=== Malt.render
+
+We can convert rdoc documents to html easily via +Malt.render+ method.
 
   html = Malt.render(:file=>'test.rdoc')
 
   html.assert.include?('Example</h1>')
 
-Note, that we left out the fist portion of the h1 tag becuase newer versions
-of RDoc include `class="label-Example"`, while older versions do not.
+(Note, that we left out the fist portion of the h1 tag becuase newer versions
+of RDoc include `class="label-Example"`, while older versions do not.)
 
 Malt recognizes the type of file by the '.rdoc' extension and renders it using
 the default redering engine (in this case RDoc itself). By default the engine
-renders to HTML, so we did not need to specify the output :format option to
+renders to HTML, so we did not need to specify the output `:to` option to
 the +render+ method.
 
 If we have a file that has a different extension, but is in fact an RDoc
@@ -33,6 +35,8 @@ We can inform Malt as the actual type using the `:type` option.
   html = Malt.render(:file=>'test.txt', :type=>:rdoc)
 
   html.assert.include?('Example</h1>')
+
+=== Malt.file
 
 Alternately we can use the object-oriented interface. Again, lets say we have
 an RDoc document called 'test.rdoc' containing:

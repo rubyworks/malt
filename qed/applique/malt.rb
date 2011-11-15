@@ -12,6 +12,9 @@ end
 #end
 
 When "say we have a((n?)) (((\\w+))) document called '(((\\S+)))' containing" do |type, fname, text|
+  @params ||= {}
+  @params[:file] = fname
+
   file = File.join(fname)
   File.open(file, 'w'){ |f| f << text }
 end
