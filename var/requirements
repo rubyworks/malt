@@ -1,6 +1,7 @@
 ---
 - detroit   (build)
 - qed       (test)
+- test      (test)
 - rdoc      (test)
 - RedCloth  (test)
 - bluecloth (test)

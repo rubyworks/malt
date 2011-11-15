@@ -19,6 +19,10 @@ requirements:
   groups:
   - test
   development: true
+- name: test
+  groups:
+  - test
+  development: true
 - name: rdoc
   groups:
   - test
@@ -119,4 +123,4 @@ name: malt
 description: Malt provides a factory framework for rendering a variety of template
   and markup document formats.
 organization: rubyworks
-date: '2011-11-14'
+date: '2011-11-15'
