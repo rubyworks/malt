@@ -107,6 +107,10 @@ requirements:
   groups:
   - test
   development: true
+- name: coffee-script
+  groups:
+  - test
+  development: true
 dependencies: []
 conflicts: []
 repositories:

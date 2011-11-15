@@ -23,5 +23,5 @@
 - ragtag    (test)
 - erector        (test)
 - active_support (test)  # erector needs it
-#- coffee-script (test)  # libv8 doesn compile on travis-ci
+- coffee-script  (test)
 
