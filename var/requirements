@@ -21,7 +21,7 @@
 - builder   (test)
 - radius    (test)
 - ragtag    (test)
-- coffee-script  (test)
 - erector        (test)
 - active_support (test)  # erector needs it
+#- coffee-script (test)  # libv8 doesn compile on travis-ci
 
