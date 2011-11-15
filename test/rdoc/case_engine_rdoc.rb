@@ -5,7 +5,8 @@ testcase Malt::Engine::RDoc do
     test "convert RDoc text" do
       e = Malt::Engine::RDoc.new(:text=>"= Testing")
       h = e.render
-      h.assert.index "<h1>Testing</h1>"
+      #h.assert.index '<h1 id="label-Testing">Testing</h1>'
+      h.assert.index 'Testing</h1>'
     end
 
     test "raises NotImplementedError if converstion format not supported" do
