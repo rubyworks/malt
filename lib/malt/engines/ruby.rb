@@ -6,9 +6,9 @@ module Malt::Engine
   #
   #   http://ruby-lang.org
   #
-  class String < Abstract
+  class Ruby < Abstract
 
-    default :str
+    default :rb
 
     #
     def render(params={}, &yld)
@@ -18,20 +18,20 @@ module Malt::Engine
 
       # @note If this supported yield, it would be all we need:
       #   binding = make_binding(data, &yld)
-      #   eval("%{#{text}}", binding, file)
+      #   eval(text, binding, file)
 
       scope, data = make_scope_and_data(data)
       vars, vals  = data.keys, data.values
       ruby = <<-END
         def ___erb(#{vars.join(',')})
-          %{#{text}}
+          #{text}
         end
         method(:___erb)
       END
       eval(ruby, scope.to_binding, file).call(*vals, &yld)
     end
 
-    # Ruby compiles to Ruby. How odd. ;)
+    #
     def compile(text, file)
       text
     end

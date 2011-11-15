@@ -21,7 +21,7 @@ module Malt::Engine
     # * :file - file name where text was read (or nil)
     # * :data - data source for template interpolation
     # * :safe -
-    # * :trim -
+    # * :trim - trim mode
     #
     # Returns a String.
     def render(params={}, &yld)
@@ -29,13 +29,21 @@ module Malt::Engine
       file  = params[:file]
       data  = params[:data] 
 
-      binding = make_binding(data, &yld)
-
       if settings[:precompile] == false
+        warn "non-compiled ERB does not support yield" if yld
+        binding = make_binding(data, &yld)
         intermediate(params).result(binding)
       else
+        scope, data = make_scope_and_data(data)
+        vars, vals  = data.keys, data.values
         ruby = compile(params)
-        eval(ruby, binding, file)
+        ruby = <<-END
+          def ___erb(#{vars.join(',')})
+            #{ruby}
+          end
+          method(:___erb)
+        END
+        eval(ruby, scope.to_binding, file).call(*vals, &yld)
       end
     end
 

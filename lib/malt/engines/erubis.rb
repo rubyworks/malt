@@ -10,21 +10,43 @@ module Malt::Engine
   #
   class Erubis < Abstract
 
-    register :erb, :rhtml
+    register :erb, :rhtml, :eruby
 
     # Render template.
     def render(params, &yld)
       text = params[:text]
+      file = params[:file]
       data = params[:data]
-      data = make_binding(data, &yld)
-      intermediate(params).result(data)
+
+      # @note Erubis can handle hash data via result(:list=>data)
+      #   but how to handle yield then too? 
+
+      if settings[:precompile] == false
+        warn "non-compiled ERB does not support yield" if yld
+        binding = make_binding(data, &yld)
+        intermediate(params).result(binding)
+      else
+        scope, data = make_scope_and_data(data)
+        vars, vals  = data.keys, data.values
+        ruby = compile(params)
+        ruby = <<-END
+          def ___erb(#{vars.join(',')})
+            #{ruby}
+          end
+          method(:___erb)
+        END
+        eval(ruby, scope.to_binding, file).call(*vals, &yld)
+      end
     end
 
     # Compile template into Ruby source code.
     def compile(params)
-      text = params[:text]
       file = params[:file]
-      intermediate(text, file).src
+      if cache?
+        @source[file] ||= intermediate(params).src
+      else
+        intermediate(params).src
+      end
     end
 
     #
@@ -32,31 +54,31 @@ module Malt::Engine
       text = params[:text]
       file = params[:file]
 
-      opts = {}
+      opts = engine_options(params)
 
       if params[:escape_html] || settings[:escape_html]
-        ::Erubis::EscapedEruby.new(text, settings)
+        ::Erubis::EscapedEruby.new(text, opts)
       else
-        ::Erubis::Eruby.new(text, settings)
+        ::Erubis::Eruby.new(text, opts)
       end
     end
 
-    #
-    def safe
-      options[:safe]
-    end
-
-    #
-    def trim
-      options[:trim]
-    end
-
-    ;;;; private ;;;;
+   private
 
     # Load ERB library if not already loaded.
     def initialize_engine
       return if defined? ::Erubius
       require_library('erubis')
+    end
+
+    #
+    def engine_options(params)
+      opts = {}
+      %w{safe trim pattern preamble postable}.each do |o|
+        s = o.to_sym
+        opts[s] = params[s] || settings[s]
+      end
+      opts
     end
 
   end

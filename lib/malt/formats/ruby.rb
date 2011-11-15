@@ -1,5 +1,5 @@
 require 'malt/formats/abstract'
-require 'malt/formats/html'
+#require 'malt/formats/html'
 require 'malt/engines/erb'
 
 module Malt::Format
@@ -15,15 +15,17 @@ module Malt::Format
   # The Ruby type is also used for "precompiling" other formats such
   # as ERB.
   #
-  class String < Abstract
+  class Ruby < Abstract
 
-    register '.str'
-
-    #
-    def string(*) ; text ; end
+    register 'rb'
 
     #
-    def to_string(*) ; self ; end
+    def rb(*) ; text ; end
+    alias_method :ruby, :rb
+
+    #
+    def to_rb(*) ; self ; end
+    alias_method :to_ruby, :to_rb
 
     #
     def to(type, *data, &yld)
@@ -61,7 +63,7 @@ module Malt::Format
 
     #
     def render_engine
-      @render_engine ||= Malt::Engine::String.new(options)
+      @render_engine ||= Malt::Engine::Ruby.new(options)
     end
 
   end
