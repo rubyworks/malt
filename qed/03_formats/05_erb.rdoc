@@ -25,7 +25,9 @@ ERB doesn't actually care what format the document is rendered as. The
 template could have been any text file what so ever, so using the `:format`
 option would have no effect here.
 
-By default the common ERB library is used to render erb documents. By setting
+=== Erubis
+
+By default the common ERB library is used to render .erb documents. By setting
 the :engine option, Erubis can be used instead.
 
   html = Malt.render(:file=>'test.erb', :data=>data, :engine=>:erubis)
@@ -36,7 +38,7 @@ And as we can see the document rendered as expected.
 
 Malt supports template engines as well as formats. 
 
-Lets say we have an ERB document called 'test.erb' containing ...
+Lets say we have an ERB document called 'test.erb' containing:
 
   <h1>Example <%= title %></h1>
 
@@ -62,4 +64,23 @@ Or we can convert the document directly to HTML via the #html method.
 
   out.assert.include?('<h1>Example Alternate</h1>')
 
-ERB doesn't actually care what format the document is rendered as.
+=== Yield
+
+Lets say we have an ERB document called 'test.erb' containing:
+
+  Hello <%= yield %>!
+
+Then
+
+  data = { :title=>"Document" }
+
+  text = Malt.render(:file=>'test.erb',:engine=>:erubis){ 'world' }
+
+Then
+
+  text.strip  #=> "Hello world!"
+
+
+
+
+
