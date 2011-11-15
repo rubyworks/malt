@@ -112,14 +112,14 @@ module Engine
           data = data.inject({}){ |h,d| h.update(d); h }
           return scope, data
         else
-          data = data.first
+          data = data.first || {}
         end
       end
 
       scope = nil
       if !data.respond_to?(:to_hash)
         scope = data
-        data  = nil
+        data  = {}
       end
 
       return scope, data
@@ -149,14 +149,14 @@ module Engine
     # @return [Object] The data and yield block converted to an Object.
     def make_object(data, &yields)
       scope, data = scope_vs_data(data)
-      if scope
-        scope = scope.self if Binding === scope
+      if scope  # TODO: this is the trickiest one
+        scope = scope.eval('self') if Binding === scope
         adhoc = (class << scope; self; end)
-        if data
-          data.to_hash.each do |name,value|
-            adhoc.__send__(:define_method, name){ value }
-          end
+
+        data.to_hash.each do |name,value|
+          adhoc.__send__(:define_method, name){ value }
         end
+
         if yields
           adhoc.__send__(:define_method, :yield, &yields)
         end
@@ -180,22 +180,23 @@ module Engine
     def make_hash(data, &yields)
       scope, data = scope_vs_data(data)
       hash = if scope
-               scope = scope.self if Binding === scope
+               scope = scope.eval('self') if Binding === scope
                if scope.respond_to?(:to_hash)
                  scope.to_hash
                else # last resort
-                 scope.instance_variables.inject({}) do |h, i|
-                   k = i.sub('@','').to_sym
-                   v = instance_variable_get(i)
-                   h[k] = v
-                   h
-                 end
+                 Hash.new{ |h,k| h[k] = scope.__send__(k) }
+                 #scope.instance_variables.inject({}) do |h, i|
+                 #  k = i.sub('@','').to_sym
+                 #  v = instance_variable_get(i)
+                 #  h[k] = v
+                 #  h
+                 #end
                end
              else
                {}
              end
 
-      hash = hash.merge(data || {})
+      hash = hash.merge(data)
 
       if yields
         hash[:yield] = yields.call  # rescue nil ?
@@ -205,7 +206,7 @@ module Engine
     end
 
     #
-    def make_object_and_hash(data, &yields)
+    def make_scope_and_data(data, &yields)
       scope, data = scope_vs_data(data)
       return scope, data
     end
