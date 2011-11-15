@@ -107,7 +107,7 @@ requirements:
   groups:
   - test
   development: true
-- name: active-support
+- name: active_support
   groups:
   - test
   development: true

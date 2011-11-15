@@ -23,5 +23,5 @@
 - ragtag    (test)
 - coffee-script  (test)
 - erector        (test)
-- active-support (test)  # erector needs it
+- active_support (test)  # erector needs it
 
