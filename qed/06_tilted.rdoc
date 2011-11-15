@@ -1,0 +1,35 @@
+# Tilted
+
+Malt provides a Tile compatability layer, which can be used as a drop
+in replacement for Tilt in most cases.
+
+  require 'malt/tilted'
+
+Now we can use Malt as if it were Tilt.
+
+Lets say we have an ERB document called 'foo.erb' containing:
+
+  Hello world!
+
+Then just like with Tilt,
+
+  template = Tilt.new('foo.erb')
+  output = template.render
+
+  output #=> "Hello world!"
+
+Lets say we have an ERB document called 'foo.erb' containing:
+
+  Hey <%= yield %>!
+
+Then we can supply a block to the render method.
+
+  template = Tilt::ERBTemplate.new('foo.erb')
+  template.render { 'Joe' }  #=> "Hey Joe!"
+
+Let's try Erubis for good measure.
+
+  template = Tilt::ErubisTemplate.new('foo.erb')
+  template.render { 'Joe' }  #=> "Hey Joe!"
+
+
