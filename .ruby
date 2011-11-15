@@ -99,6 +99,22 @@ requirements:
   groups:
   - test
   development: true
+- name: redcarpet
+  groups:
+  - test
+  development: true
+- name: wikicloth
+  groups:
+  - test
+  development: true
+- name: maruku
+  groups:
+  - test
+  development: true
+- name: creole
+  groups:
+  - test
+  development: true
 - name: erector
   groups:
   - test
