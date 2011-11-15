@@ -25,7 +25,7 @@ module Malt::Engine
       file  = params[:file]
       data  = params[:data]
 
-      scope, data = make_object_and_hash(data)
+      scope, data = make_scope_and_data(data)
       scope ||= Object.new
 
       engine = intermediate(params)
