@@ -65,11 +65,11 @@ module Engine
     attr :settings
 
     #
-    def render(text, options={}) #format, text, file, db, &yields)
-      if format = options[:format]  # TODO: or type ?
-        raise "unsupported rendering -- #{format}"
+    def render(params, &block)
+      if into = params[:to]
+        raise NotImplementedError, "unsupported rendering -- #{into}"
       else
-        raise "unsupported rendering"
+        raise NotImplementedError, "unsupported rendering"
       end
     end
 

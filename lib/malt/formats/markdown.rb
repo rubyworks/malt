@@ -3,6 +3,9 @@ require 'malt/formats/html'
 require 'malt/formats/latex'
 require 'malt/engines/rdiscount'
 require 'malt/engines/bluecloth'
+require 'malt/engines/maruku'
+require 'malt/engines/redcarpet'
+require 'malt/engines/kramdown'
 
 module Malt::Format
  

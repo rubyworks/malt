@@ -33,19 +33,23 @@ module Malt::Engine
       data = params[:data]
 
       data = make_hash(data, &yld)
+
       builder = ::Builder::XmlMarkup.new(engine_options(params))
+
       data.each{ |k,v| builder.instance_eval("@#{k} = v") }
+
       builder.instance_eval(text, file)
     end
 
     private
 
-    # Load Erector library if not already loaded.
+    # Load Builder library if not already loaded.
     def initialize_engine
       return if defined? ::Builder
       require_library 'builder'
     end
 
+    #
     # :target=>target_object: Object receiving the markup. target_object must
     # respond to the <<(a_string) operator and return itself.
     # The default target is a plain string target.
@@ -55,15 +59,9 @@ module Malt::Engine
     #
     # :margin=>initial_indentation_level: Amount of initial indentation
     # (specified in levels, not spaces). 
-    def engine_options(params)
-      target = params[:target] || settings[:target]
-      indent = params[:indent] || settings[:indent]
-      margin = params[:margin] || settings[:margin]
-      opts = {}
-      opts[:target] = target if target
-      opts[:indent] = indent if indent
-      opts[:margin] = margin if margin
-      opts
+    #
+    def engine_option_names
+      [:target, :indent, :margin]
     end
 
   end

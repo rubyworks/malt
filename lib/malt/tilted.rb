@@ -190,14 +190,14 @@ module Malt
       # W I K I
 
       #
-      #class CreoleTemplate < Malted   # TODO
-      #  malt_engine Malt::Engine::Creole
-      #end
+      class CreoleTemplate < Malted
+        malt_engine Malt::Engine::Creole
+      end
 
       #
-      #class WikiClothTemplate < Malted   # TODO
-      #  malt_engine Malt::Engine::WikiCloth
-      #end
+      class WikiClothTemplate < Malted
+        malt_engine Malt::Engine::WikiCloth
+      end
 
     end
 
