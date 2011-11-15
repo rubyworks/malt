@@ -14,9 +14,7 @@ module Malt::Engine
 
     # Render template.
     def render(params, &yld)
-      text = params[:text]
-      file = params[:file]
-      data = params[:data]
+      text, file, data = parameters(params, :text, :file, :data)
 
       # @note Erubis can handle hash data via result(:list=>data)
       #   but how to handle yield then too? 
@@ -35,28 +33,27 @@ module Malt::Engine
           end
           method(:___erb)
         END
-        eval(ruby, scope.to_binding, file).call(*vals, &yld)
+        args = [ruby, scope.to_binding, file].compact
+        eval(*args).call(*vals, &yld)
       end
     end
 
     # Compile template into Ruby source code.
     def compile(params)
-      file = params[:file]
       if cache?
-        @source[file] ||= intermediate(params).src
+        @source[params] ||= intermediate(params).src
       else
         intermediate(params).src
       end
     end
 
     #
-    def intermediate(params)
-      text = params[:text]
-      file = params[:file]
+    def intermediate(params={})
+      text, file, esc = parameters(params, :text, :file, :escape_html)
 
       opts = engine_options(params)
 
-      if params[:escape_html] || settings[:escape_html]
+      if esc
         ::Erubis::EscapedEruby.new(text, opts)
       else
         ::Erubis::Eruby.new(text, opts)
@@ -70,15 +67,13 @@ module Malt::Engine
       return if defined? ::Erubius
       require_library('erubis')
     end
+  
+    #  
+    ENGINE_OPTION_NAMES = %w{safe trim pattern preamble postable}
 
     #
-    def engine_options(params)
-      opts = {}
-      %w{safe trim pattern preamble postable}.each do |o|
-        s = o.to_sym
-        opts[s] = params[s] || settings[s]
-      end
-      opts
+    def engine_option_names
+      ENGINE_OPTION_NAMES
     end
 
   end

@@ -4,7 +4,7 @@ module Malt::Engine
 
   # RagTag
   #
-  #  http://github.com/rubyworks/ragtag
+  # @see http://github.com/rubyworks/ragtag
   #
   class RagTag < Abstract
 
@@ -12,10 +12,7 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      text = params[:text]
-      file = params[:file]
-      data = params[:data]
-      into = params[:to]
+      into, text, file, data = parameters(params, :to, :text, :file, :data)
 
       case into
       when :html, nil
@@ -31,7 +28,7 @@ module Malt::Engine
 
     #
     def intermediate(params)
-      text = params[:text]
+      text = parameters(params, :text)
       ::RagTag.new(text)
     end
 

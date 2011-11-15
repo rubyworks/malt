@@ -15,23 +15,37 @@ module Malt::Engine
 
     # Render ERB template.
     #
-    # The +params+ can be:
+    # @param [Hash] params
     #
-    # * :text - text of erb document
-    # * :file - file name where text was read (or nil)
-    # * :data - data source for template interpolation
-    # * :safe -
-    # * :trim - trim mode
+    # @option params [String] :text
+    #   Text of ERB document.
     #
-    # Returns a String.
+    # @option params [String] :file
+    #   The file name where text was read (or nil).
+    #
+    # @option params [Hash,Binding,Object,Array] :data
+    #   Data source for template interpolation.
+    #
+    # @option params [Boolean] :safe
+    #   Run in separate thread.
+    #
+    # @option params [String] :trim
+    #   Trim mode, can be either of the following:
+    #     a) `%`  enables Ruby code processing for lines beginning with `%`.
+    #     b) `<>` omit newline for lines starting with `<%` and ending in `%>`.
+    #     c) `>`  omit newline for lines ending in `%>`.
+    # 
+    # @option params [Boolean] :precompile (true)
+    #   Precompile the ERB template. Default is `true`.
+    #   Note that `yield` currently does work with non-compiled tempaltes.
+    #
+    # @return [String] Rendered output.
     def render(params={}, &yld)
-      text  = params[:text]
-      file  = params[:file]
-      data  = params[:data] 
+      text, file, data = parameters(params, :text, :file, :data)
 
       if settings[:precompile] == false
         warn "non-compiled ERB does not support yield" if yld
-        binding = make_binding(data, &yld)
+        binding = make_binding(data, &yld)  # Ruby needs to support lambda{ yield }
         intermediate(params).result(binding)
       else
         scope, data = make_scope_and_data(data)
@@ -43,15 +57,20 @@ module Malt::Engine
           end
           method(:___erb)
         END
-        eval(ruby, scope.to_binding, file).call(*vals, &yld)
+        if file
+          eval(ruby, scope.to_binding, file).call(*vals, &yld)
+        else
+          eval(ruby, scope.to_binding).call(*vals, &yld)
+        end
       end
     end
 
     # Compile ERB template into Ruby source code.
+    #
+    # @return [String] Ruby source code.
     def compile(params={})
-      file = params[:file]
       if cache?
-        @source[file] ||= intermediate(params).src
+        @source[params] ||= intermediate(params).src
       else
         intermediate(params).src
       end
@@ -59,8 +78,7 @@ module Malt::Engine
 
     # Returns instance of underlying ::ERB class.
     def intermediate(params={})
-      text = params[:text]
-      file = params[:file]
+      text, file = parameters(params, :text, :file)
 
       opts = engine_options(params)
       safe = opts[:safe]

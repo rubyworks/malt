@@ -4,7 +4,7 @@ module Malt::Engine
 
   # Ruby strings as template engine.
   #
-  #   http://ruby-lang.org
+  # @see http://ruby-lang.org
   #
   class String < Abstract
 
@@ -12,9 +12,7 @@ module Malt::Engine
 
     #
     def render(params={}, &yld)
-      text = params[:text]
-      file = params[:file]
-      data = params[:data]
+      text, file, data = parameters(params, :text, :file, :data)
 
       # @note If this supported yield, it would be all we need:
       #   binding = make_binding(data, &yld)
@@ -36,7 +34,7 @@ module Malt::Engine
       text
     end
 
-    private
+  private
 
     #
     def initialize_engine

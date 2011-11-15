@@ -12,9 +12,7 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      text = params[:text]
-      data = params[:data]
-      into = params[:to]
+      into, text, data = parameters(params, :to, :text, :data)
 
       if Array === data 
         if data.size > 1
@@ -35,7 +33,7 @@ module Malt::Engine
       end
     end
 
-    private
+  private
 
     # Load Radius library if not already loaded.
     def initialize_engine

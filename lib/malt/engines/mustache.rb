@@ -4,11 +4,23 @@ module Malt::Engine
 
   # Mustache engine.
   #
-  #   http://github.com/defunkt/mustache
+  # @see http://github.com/defunkt/mustache
   #
   class Mustache < Abstract
 
     register :mustache
+
+    #
+    def render(params={}, &yld) #file, db, &yld)
+      text, data = parameters(params, :text, :data)
+
+      data = make_hash(data, &yld)
+
+      #engine = intermediate(params)
+      #engine.render(data)
+
+      ::Mustache.render(text, data)
+    end
 
     ## Convert Markdown text to intermediate object.
     #def intermediate(params)
@@ -16,20 +28,7 @@ module Malt::Engine
     #  ???
     #end
 
-    #
-    def render(params={}, &yld) #file, db, &yld)
-      text = params[:text]
-      data = params[:data]
-
-      data = make_hash(data, &yld)
-
-      #engine = intermediate(params)
-      #engine.render(data)
-      ::Mustache.render(text, data)
-    end
-
-
-    private
+  private
 
     # Load rdoc makup library if not already loaded.
     def initialize_engine

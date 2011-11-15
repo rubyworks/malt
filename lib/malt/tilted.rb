@@ -72,6 +72,7 @@ module Malt
 
       # C U R L E Y  B R A C K E T S
 
+      #
       class LiquidTemplate < Malted
         malt_engine Malt::Engine::Liquid
       end
@@ -90,7 +91,7 @@ module Malt
       end
 
 
-      # X M L
+      # B U I L D E R
 
       #
       class BuilderTemplate < Malted
@@ -103,9 +104,14 @@ module Malt
       end
 
       #
-      #class NokogiriTemplate < Malted
-      #  malt_engine Malt::Engine::Nokogiri
-      #end
+      class NokogiriTemplate < Malted
+        malt_engine Malt::Engine::Nokogiri
+      end
+
+      #
+      class ErectorTemplate < Malted
+        malt_engine Malt::Engine::Erector
+      end
 
 
       # R D O C

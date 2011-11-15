@@ -73,9 +73,21 @@ module Engine
       end
     end
 
+    # Convert a rendition to Ruby source code. Not all engines support compiling.
     #
     def compile(*data, &yields)
-      raise "not implemented"
+      raise NotImplementedError, "not implemented"
+    end
+
+    # The intermedate object of an engine is an instanceof the engine's
+    # rendering class with initial setup options and template text preset.
+    #
+    # The intermediate object should never include data.
+    #
+    # In the future, this will be used with a cache to apply different datasets
+    # over the same intermediate renderer.
+    def intermediate
+      raise NotImplementedError, "not implemented"
     end
 
     #
@@ -157,7 +169,7 @@ module Engine
           adhoc.__send__(:define_method, name){ value }
         end
 
-        if yields
+        if yields  # TODO: this won't work!!!
           adhoc.__send__(:define_method, :yield, &yields)
         end
         scope
@@ -208,6 +220,7 @@ module Engine
     #
     def make_scope_and_data(data, &yields)
       scope, data = scope_vs_data(data)
+      scope ||= Object.new
       return scope, data
     end
 
@@ -225,6 +238,19 @@ module Engine
     # Override this.
     def engine_option_names
       []
+    end
+
+    # Helper method to get paramters.
+    def parameters(params, *names)
+      pvals = names.map do |name|
+        params[name.to_sym] || settings[name.to_sym]
+      end
+
+      if names.size == 1
+        return pvals.first
+      else
+        return *pvals
+      end
     end
 
   end

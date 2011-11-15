@@ -6,7 +6,7 @@ module Malt::Engine
 
   # Discount Markdown implementation.
   #
-  #   http://github.com/rtomayko/rdiscount
+  # @see http://github.com/rtomayko/rdiscount
   #
   # The +:smart+ and +:filter_html+ options can be set true
   # to enable those flags on the underlying RDiscount object.
@@ -16,7 +16,9 @@ module Malt::Engine
 
     # Convert Markdown text to HTML text.
     def render(params)
-      case params[:to]
+      into = parameters(params, :to)
+
+      case into
       when :html, nil
         intermediate(params).to_html
       else
@@ -26,11 +28,12 @@ module Malt::Engine
 
     # Convert Markdown text to intermediate engine object.
     def intermediate(params)
-      text = params[:text]
+      text = parameters(params, :text)
+
       ::RDiscount.new(text, *flags)
     end
 
-    private
+  private
 
     # Load rdoc makup library if not already loaded.
     def initialize_engine

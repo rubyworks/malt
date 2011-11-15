@@ -13,7 +13,9 @@ module Malt::Engine
     # Convert WikiMedia format to HTML.
     # 
     def render(params={}, &yld)
-      case params[:to]
+      into = parameters(params, :to)
+
+      case into
       when :html, nil
         intermediate(params).to_html
       else
@@ -23,7 +25,8 @@ module Malt::Engine
 
     #
     def intermediate(params={})
-      ::Creole::Parser.new(params[:text], engine_optoins(params))
+      text = parameters(params, :text)
+      ::Creole::Parser.new(text, engine_optoins(params))
     end
 
     private

@@ -25,8 +25,8 @@ module Malt::Engine
     # @see http://kramdown.rubyforge.org/rdoc/Kramdown/Options.html
     #
     def render(params)
-      text = params[:text]
-      into = params[:to]
+      into, text = parameters(params, :to, :text)
+
       case into
       when :html, nil
         intermediate(params).to_html
@@ -39,7 +39,7 @@ module Malt::Engine
 
     # Convert Markdown text to intermediate object.
     def intermediate(params)
-      text = params[:text]
+      text = parameters(params, :text)
       ::Kramdown::Document.new(text)
     end
 

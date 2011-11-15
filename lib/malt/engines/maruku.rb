@@ -21,9 +21,7 @@ module Malt::Engine
     #   Type or file extension to convert template into.
     #
     def render(params)
-      text = params[:text]
-      part = params[:partial]
-      into = params[:to]
+      into, text, part = parameters(params, :to, :text, :partial)
 
       case into
       when :html, nil
@@ -53,7 +51,7 @@ module Malt::Engine
     #   If :raise, then raise error.
     #
     def intermediate(params)
-      text = params[:text]
+      text = parameters(params, :text)
       ::Maruku.new(text, engine_options(params))
     end
 

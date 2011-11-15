@@ -10,9 +10,7 @@ module Malt::Engine
 
     # Render coffee script to JavaScript.
     def render(params, &yld)
-      text = params[:text]
-      file = params[:file]
-      into = params[:to]
+      into, text, file = parameters(params, :to, :text, :file)
 
       case into
       when :javascript, :js, nil
@@ -21,6 +19,11 @@ module Malt::Engine
         super(params, &yld)
       end
     end
+
+    # TODO: make a psuedo intermediate ?
+    # def intermediate(params)
+    #   
+    # end
 
   private
 

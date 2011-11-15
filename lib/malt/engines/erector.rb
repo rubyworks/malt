@@ -4,23 +4,16 @@ module Malt::Engine
 
   # Erector
   #
-  #   http://erector.rubyforge.org/userguide.html
+  # @see http://erector.rubyforge.org/userguide.html
   #
   class Erector < Abstract
 
     default :erector
 
     #
-    def intermediate(params)
-      text = params[:text]
-      Class.new(::Erector::Widget) do
-        module_eval %{ def content; #{text}; end }
-      end
-    end
-
-    #
-    def render(params, &yld)
+    def render(params={}, &yld)
       into = params[:to]
+
       case into
       when :html, nil
         render_html(params, &yld)
@@ -31,27 +24,28 @@ module Malt::Engine
 
     #
     def render_html(params={}, &yld)
-      #text = params[:text]
-      file  = params[:file]
-      data  = params[:data]
+      file, data = parameters(params, :file, :data)
  
       data = make_hash(data, &yld)
 
       intermediate(params).new(data).to_html      
     end
 
-    private
+    #
+    def intermediate(params={})
+      text = parameters(params, :text)
+
+      Class.new(::Erector::Widget) do
+        module_eval %{ def content; #{text}; end }
+      end
+    end
+
+  private
 
     # Load Erector library if not already loaded.
     def initialize_engine
       return if defined? ::Erector
       require_library 'erector'
-    end
-
-    #
-    def engine_options(params)
-      opts = {}
-      opts
     end
 
   end

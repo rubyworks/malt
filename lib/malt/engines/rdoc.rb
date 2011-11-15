@@ -15,31 +15,31 @@ module Malt::Engine
 
     # Convert rdoc text to html.
     def render(params)
-      text = params[:text]
-      into = params[:to]
+      into, text = parameters(params, :to, :text)
+
       case into
       when :html, nil
-        html_engine.convert(text).to_s
+        intermediate(params).convert(text).to_s
       else
         super(params)
       end
     end
 
-    private
+  private
 
-      # Load rdoc makup library if not already loaded.
-      def initialize_engine
-        return if defined?(::RDoc::Markup)
-        require 'rubygems' # hack
-        require_library 'rdoc'
-        require_library 'rdoc/markup'
-        require_library 'rdoc/markup/to_html'
-      end
+    # Load rdoc makup library if not already loaded.
+    def initialize_engine
+      return if defined?(::RDoc::Markup)
+      require 'rubygems' # hack
+      require_library 'rdoc'
+      require_library 'rdoc/markup'
+      require_library 'rdoc/markup/to_html'
+    end
 
-      #
-      def html_engine
-        @html_engine ||= ::RDoc::Markup::ToHtml.new
-      end
+    #
+    def intermediate(params={})
+      @_html_engine ||= ::RDoc::Markup::ToHtml.new
+    end
 
   end
 

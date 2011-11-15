@@ -10,7 +10,8 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      into = params[:to]
+      into = parameters(params, :to)
+
       case into
       when :html, nil
         render_html(params, &yld)
@@ -21,12 +22,9 @@ module Malt::Engine
 
     #
     def render_html(params, &yld)
-      text  = params[:text]
-      file  = params[:file]
-      data  = params[:data]
+      text, file, data  = parameters(params, :text, :file, :data)
 
       scope, data = make_scope_and_data(data)
-      scope ||= Object.new
 
       engine = intermediate(params)
       engine.render(scope, data, &yld)
@@ -60,12 +58,11 @@ module Malt::Engine
 
     #
     def intermediate(params)
-      text = params[:text]
-      file = params[:file]
+      text, file = parameters(params, :text, :file)
       ::Haml::Engine.new(text, :filename=>file)
     end
 
-    private
+  private
 
     # Load Haml library if not already loaded.
     def initialize_engine

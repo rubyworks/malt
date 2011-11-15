@@ -2,32 +2,33 @@ require 'malt/engines/abstract'
 
 module Malt::Engine
 
-  # Liquid
+  # Liquid templates.
   #
-  #   http://liquid.rubyforge.org/
+  # @see http://liquid.rubyforge.org/
   #
   class Liquid < Abstract
 
     default :liquid
 
     #
-    def intermediate(params)
-      text = params[:text]
-      ::Liquid::Template.parse(text)
-    end
-
-    #
     def render(params={}, &yld) #file, db, &yld)
-      text  = params[:text]
-      data  = params[:data]
+      text, data = parameters(params, :text, :data)
 
       data = make_hash(data, &yld)
       data = data.rekey{ |k| k.to_s }
+
       engine = intermediate(params)
+
       engine.render(data)
     end
 
-    private
+    #
+    def intermediate(params)
+      text = parameters(params, :text)
+      ::Liquid::Template.parse(text)
+    end
+
+  private
 
     # Load Liquid library if not already loaded.
     def initialize_engine

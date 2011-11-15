@@ -4,44 +4,44 @@ module Malt::Engine
 
   # Tenjin
   #
-  #   http://www.kuwata-lab.com/tenjin/
-  #
-  # options
-  #   :escapefunc=>'CGI.escapeHTML'
+  # @see http://www.kuwata-lab.com/tenjin/
   #
   class Tenjin < Abstract
 
     default :tenjin, :rbhtml
 
+    # Render Tenjin.
+    #
+    # @option params [String] :escapefunc
+    #   Defaults to 'CGI.escapeHTML'.
     #
     def render(params, &yld)
-      text = params[:text]
-      file = params[:file]
-      data = params[:data]
-      type = params[:type]
-      into = params[:to] || :html
+      into, text, file, data, type = parameters(params, :to, :text, :file, :data, :type)
+
+      into ||= :html
 
       return super(params, &yld) if type == :rbhtml && into != :html
 
       data = make_hash(data, &yld)
-      template = intermediate(params)
-      template.convert(text, file)
 
-      template.render(data)
+      engine = intermediate(params)
+      engine.convert(text, file)
+
+      engine.render(data)
     end
 
     #
     def compile(params)
-      text = params[:text]
-      file = params[:file]
+      text, file = parameters(params, :text, :file)
       intermediate(params).convert(text, file) 
     end
 
-    private
-
+    #
     def intermediate(params)
       ::Tenjin::Template.new(nil, engine_options(params))
     end
+
+  private
 
     # Load Liquid library if not already loaded.
     def initialize_engine
@@ -49,10 +49,9 @@ module Malt::Engine
       require_library 'tenjin'
     end
 
-    def engine_options(params)
-      opts = {}
-      opts[:escapefunc] = params[:escapefunc] || settings[:escapefunc]
-      opts
+    #
+    def engine_option_names
+      [:escapefunc]
     end
 
   end

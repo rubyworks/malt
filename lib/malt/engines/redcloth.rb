@@ -2,7 +2,10 @@ require 'malt/engines/abstract'
 
 module Malt::Engine
 
+  # Redcloth handles textile markup.
   #
+  # @see http://redcloth.org/
+
   class RedCloth < Abstract
 
     default :tt, :textile
@@ -14,7 +17,9 @@ module Malt::Engine
     #   :format => Symbol of the format to render [:html]
     #
     def render(params={})
-      case params[:to]
+      into = parameters(params, :to)
+
+      case into
       when :html, nil
         intermediate(params).to_html
       else
@@ -24,11 +29,12 @@ module Malt::Engine
 
     #
     def intermediate(params={})
-      text = params[:text]
+      text = parameters(params, :text)
+
       ::RedCloth.new(text)
     end
 
-    private
+  private
 
     # Load redcloth library if not already loaded.
     def initialize_engine

@@ -11,15 +11,15 @@ module Malt::Engine
     default :builder
 
     #
-    #def intermediate(params)
-    #end
-
-    #
     def render(params, &yld)
-      into = params[:to]
+      into = parameters(params, :to)
+
       case into
+      when :xml, :xhtml, nil
+        render_xml(params, &yld)
       when :html, nil
-        render_html(params, &yld)
+        # @todo htmlify xml
+        render_xml(params, &yld)
       else
         super(params, &yld)
       end
@@ -27,18 +27,23 @@ module Malt::Engine
 
     # TODO: Do we need a #make_ivar(data, &yld) method to make data into
     # instance variables for some templates like this one?
-    def render_html(params={}, &yld)
-      text = params[:text]
-      file = params[:file]
-      data = params[:data]
+
+    #
+    def render_xml(params={}, &yld)
+      text, file, data = parameters(params, :text, :file, :data)
 
       data = make_hash(data, &yld)
 
-      builder = ::Builder::XmlMarkup.new(engine_options(params))
+      builder = intermediate(params)
 
       data.each{ |k,v| builder.instance_eval("@#{k} = v") }
 
       builder.instance_eval(text, file)
+    end
+
+    #
+    def intermediate(params)
+      ::Builder::XmlMarkup.new(engine_options(params))
     end
 
     private

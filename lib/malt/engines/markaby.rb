@@ -4,21 +4,16 @@ module Malt::Engine
 
   # Markaby
   #
-  #   http://markaby.rubyforge.org/
+  # @see http://markaby.rubyforge.org/
   #
   class Markaby < Abstract
 
     default :markaby, :mab
 
     #
-    #def intermediate(params)
-    #  text = params[:text]
-    #  eval("lambda{ #{text} }")
-    #end
-
-    #
     def render(params, &yld)
-      into = params[:to]
+      into = parameters(params, :to)
+
       case into
       when :html, nil
         render_html(params, &yld)
@@ -29,15 +24,22 @@ module Malt::Engine
 
     #
     def render_html(params={}, &yld)
-      text = params[:text]
-      file = params[:file]
-      data = params[:data]
+      text, file, data = parameters(params, :text, :file, :data)
+
       data = make_hash(data, &yld)
+
       builder = ::Markaby::Builder.new(data)
+
       builder.instance_eval(text).to_s
     end
 
-    private
+    #
+    #def intermediate(params)
+    #  text = params[:text]
+    #  eval("lambda{ #{text} }")
+    #end
+
+  private
 
     # Load Markaby library if not already loaded.
     def initialize_engine

@@ -15,7 +15,7 @@ module Malt::Engine
 
     #
     def render(params, &yld)
-      into = params[:to]
+      into = parameters(params, :to)
 
       case into
       when :xml, :xhtml, nil
@@ -29,8 +29,7 @@ module Malt::Engine
 
     #
     def render_xml(params, &yld)
-      text = params[:text]
-      data = params[:data]
+      text, data = parameters(params, :text, :data)
 
       scope, locals = make_scope_and_data(data)
 
@@ -43,7 +42,8 @@ module Malt::Engine
     #
     # @todo: Possible to allow `yield` in dsl?
     def intermediate(params, &yld)
-      text = params[:text]
+      text = parameters(params, :text)
+
       if text.respond_to?(:to_str)
         builder = ::Nokogiri::XML::Builder.new
         builder.instance_eval(text)
@@ -53,7 +53,7 @@ module Malt::Engine
       end
     end
 
-    private
+  private
 
     # Load Nokogiri library if not already loaded.
     def initialize_engine

@@ -13,7 +13,7 @@ module Malt::Engine
 
     #
     def render(params={}, &yld)
-      data = params[:data] 
+      data = parameters(params, :data)
 
       data = make_hash(data, &yld)
 
@@ -27,7 +27,8 @@ module Malt::Engine
 
     #
     def intermediate(params={})
-      text = params[:text]
+      text = parameters(params, :text)
+
       ::WikiCloth::WikiCloth.new(:data => text)
     end
 

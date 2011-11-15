@@ -4,7 +4,7 @@ module Malt::Engine
 
   # Redcarpet Markdown implementation.
   #
-  #   https://github.com/tanoku/redcarpet
+  # @see https://github.com/tanoku/redcarpet
   #
   class Redcarpet < Abstract
 
@@ -21,8 +21,7 @@ module Malt::Engine
     #   Type or file extension to convert template into.
     #
     def render(params)
-      text = params[:text]
-      into = params[:to]
+      into, text = parameters(params, :to, :text)
 
       case into
       when :html, nil  # :man, :manpage
@@ -78,7 +77,9 @@ module Malt::Engine
     #   values can be enclosed in parenthesis, e.g. `this is the 2^(nd) time`
     #
     def intermediate(params)
-      case params[:to]
+      into = parameters(params, :to)
+
+      case into
       when :man, :manpage
         renderer = Redcarpet::Render::ManPage
       else
@@ -87,23 +88,23 @@ module Malt::Engine
       ::Redcarpet::Markdown.new(renderer, engine_options(params))
     end
 
-    private
+  private
 
-      ENGINE_OPTION_NAMES = %w{
-        no_intra_emphasis tables fenced_code_blocks autolink strikethrough
-        lax_html_blocks space_after_headers superscript
-      }
+    ENGINE_OPTION_NAMES = %w{
+      no_intra_emphasis tables fenced_code_blocks autolink strikethrough
+      lax_html_blocks space_after_headers superscript
+    }
 
-      # Load rdoc makup library if not already loaded.
-      def initialize_engine
-        return if defined? ::Redcarpet
-        require_library 'redcarpet'
-      end
+    # Load rdoc makup library if not already loaded.
+    def initialize_engine
+      return if defined? ::Redcarpet
+      require_library 'redcarpet'
+    end
 
-      #
-      def engine_option_names
-        ENGINE_OPTION_NAMES
-      end
+    #
+    def engine_option_names
+      ENGINE_OPTION_NAMES
+    end
 
   end
 
