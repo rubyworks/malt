@@ -8,10 +8,10 @@ module DotRuby
   class GemSpec
 
     # For which revision of .ruby is this gemspec intended?
-    REVISION = 0
+    REVISION ||= 0
 
     #
-    PATTERNS = {
+    PATTERNS ||= {
       :bin_files  => 'bin/*',
       :lib_files  => 'lib/{**/}*.rb',
       :ext_files  => 'ext/{**/}extconf.rb',
