@@ -38,7 +38,8 @@ module Malt::Engine
 
     #
     def intermediate(params)
-      ::Tenjin::Template.new(nil, engine_options(params))
+      file = parameters(params, :file)
+      ::Tenjin::Template.new(file, engine_options(params))
     end
 
   private

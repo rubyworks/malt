@@ -24,13 +24,20 @@ module Malt::Engine
 
       case into
       when :html, :xml, nil
-        data = make_context(data, &yld)
+        data = intermediate(params, &yld)
         opts = engine_options(params)
+
         parser = ::Radius::Parser.new(data, opts)
         parser.parse(text)
       else
         super(params, &yld)
       end
+    end
+
+    #
+    def intermediate(params={}, &yld)
+      data = parameters(params, :data)
+      make_context(data, &yld)
     end
 
   private
@@ -47,7 +54,7 @@ module Malt::Engine
       when Hash
         context = make_context_from_hash(data, &yld)
       else
-        if data.respond_to(:to_hash)
+        if data.respond_to?(:to_hash)
           data = data.to_hash
           context = make_context_from_hash(data, &yld)
         else

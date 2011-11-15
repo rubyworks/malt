@@ -9,7 +9,7 @@ module Malt::Engine
     default :haml
 
     #
-    def render(params, &yld)
+    def render(params={}, &yld)
       into = parameters(params, :to)
 
       case into
@@ -21,7 +21,7 @@ module Malt::Engine
     end
 
     #
-    def render_html(params, &yld)
+    def render_html(params={}, &yld)
       text, file, data  = parameters(params, :text, :file, :data)
 
       scope, data = make_scope_and_data(data)
@@ -57,7 +57,7 @@ module Malt::Engine
     #end
 
     #
-    def intermediate(params)
+    def intermediate(params={})
       text, file = parameters(params, :text, :file)
       ::Haml::Engine.new(text, :filename=>file)
     end

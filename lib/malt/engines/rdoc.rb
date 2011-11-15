@@ -14,7 +14,7 @@ module Malt::Engine
     default :rdoc
 
     # Convert rdoc text to html.
-    def render(params)
+    def render(params={})
       into, text = parameters(params, :to, :text)
 
       case into

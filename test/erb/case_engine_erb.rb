@@ -8,11 +8,16 @@ testcase Malt::Engine::Erb do
       h.assert.index "<h1>Testing</h1>"
     end
 
+    test "Erb is converstion format agnostic" do
+      e = Malt::Engine::Erb.new
+      e.render(:to=>:DNE, :text=>"<h1>Testing</h1>")
+    end
+
   end
 
   method :intermediate do
 
-    test "returns a WikiCloth instance" do
+    test "returns an ERB instance" do
       e = Malt::Engine::Erb.new
       r = e.intermediate(:text=>"=<h1><%= title %></h1>")
       r.assert.is_a? ::ERB

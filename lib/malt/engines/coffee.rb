@@ -9,7 +9,7 @@ module Malt::Engine
     default :coffee
 
     # Render coffee script to JavaScript.
-    def render(params, &yld)
+    def render(params={}, &yld)
       into, text, file = parameters(params, :to, :text, :file)
 
       case into

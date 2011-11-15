@@ -86,7 +86,7 @@ module Engine
     #
     # In the future, this will be used with a cache to apply different datasets
     # over the same intermediate renderer.
-    def intermediate
+    def intermediate(*)
       raise NotImplementedError, "not implemented"
     end
 
@@ -175,9 +175,14 @@ module Engine
         scope
       else
         hash = data.to_hash.dup
-        hash[:yield] = yields.call if yields  # rescue nil ?
-        attrs = hash.keys.map{ |k| k.to_sym }
-        Struct.new(*attrs).new(*hash.values)
+        if hash.empty?
+          Object.new
+        else
+          # TODO: how to handle yield ?
+          hash[:yield] = yields.call if yields  # rescue nil ?
+          attrs = hash.keys.map{ |k| k.to_sym }
+          Struct.new(*attrs).new(*hash.values)
+        end
       end
     end
 

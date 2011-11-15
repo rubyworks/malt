@@ -26,7 +26,10 @@ module Malt::Engine
         end
         method(:___erb)
       END
-      eval(ruby, scope.to_binding, file).call(*vals, &yld)
+
+      args = [ruby, scope.to_binding, file].compact
+
+      eval(*args).call(*vals, &yld)
     end
 
     #

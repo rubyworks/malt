@@ -12,11 +12,12 @@ module Malt::Engine
     default :less
 
     #
-    def render(params)
+    def render(params={})
       into, text, compress = parameters(params, :to, :text, :compress)
 
       case into
       when :css, nil
+p text
         intermediate(params).parse(text).to_css(:compress=>compress)
       else
         super(params)
@@ -24,7 +25,7 @@ module Malt::Engine
     end
 
     #
-    def intermediate(params)
+    def intermediate(params={})
       file = parameters(params, :file)
       ::Less::Parser.new(:filename=>file)
     end

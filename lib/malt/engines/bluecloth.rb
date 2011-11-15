@@ -8,7 +8,7 @@ module Malt::Engine
     register :markdown, :md
 
     # Convert Markdown text to HTML text.
-    def render(params)
+    def render(params={})
       into = params[:to]
 
       text = parameters(params, :text)
@@ -22,7 +22,7 @@ module Malt::Engine
     end
 
     # Convert Markdown text to intermediate object.
-    def intermediate(params)
+    def intermediate(params={})
       text = parameters(params, :text)
 
       ::BlueCloth.new(text)

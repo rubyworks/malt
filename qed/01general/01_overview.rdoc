@@ -6,3 +6,10 @@ a functional interface via `Malt.render` method. And the second is an
 object-oriented interface that can be easily constructed via the 
 `Malt.file` or `Malt.text` methods.
 
+= Formats
+
+Malt support a wide variety of markup and template systems.
+
+Malt provides two distinct APIs for rendering each format --a single-point-of-entry
+functional interface, `Malt.render`, and an object-oriented interface where by
+each format is represented by a document class.

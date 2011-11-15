@@ -15,7 +15,7 @@ module Malt::Engine
     default :markdown, :md
 
     # Convert Markdown text to HTML text.
-    def render(params)
+    def render(params={})
       into = parameters(params, :to)
 
       case into
@@ -27,7 +27,7 @@ module Malt::Engine
     end
 
     # Convert Markdown text to intermediate engine object.
-    def intermediate(params)
+    def intermediate(params={})
       text = parameters(params, :text)
 
       ::RDiscount.new(text, *flags)

@@ -26,7 +26,7 @@ module Malt::Engine
     #
     def intermediate(params={})
       text = parameters(params, :text)
-      ::Creole::Parser.new(text, engine_optoins(params))
+      ::Creole::Parser.new(text, engine_options(params))
     end
 
     private

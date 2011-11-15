@@ -22,9 +22,9 @@ module Malt::Engine
       ::Mustache.render(text, data)
     end
 
-    ## Convert Markdown text to intermediate object.
+    #
     #def intermediate(params)
-    #  text = params[:text]
+    #  text = parameters(params, :text)
     #  ???
     #end
 

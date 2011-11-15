@@ -38,7 +38,11 @@ module Malt::Engine
 
       data.each{ |k,v| builder.instance_eval("@#{k} = v") }
 
-      builder.instance_eval(text, file)
+      if file
+        builder.instance_eval(text, file)
+      else
+        builder.instance_eval(text)
+      end
     end
 
     #

@@ -8,11 +8,16 @@ testcase Malt::Engine::Erubis do
       h.assert.index "<h1>Testing</h1>"
     end
 
+    test "Erubis is converstion format agnostic" do
+      e = Malt::Engine::Erubis.new
+      e.render(:to=>:DNE, :text=>"<h1>Testing</h1>")
+    end
+
   end
 
   method :intermediate do
 
-    test "returns a ERubius instance" do
+    test "returns a Erubius::Eruby instance" do
       e = Malt::Engine::Erubis.new
       r = e.intermediate(:text=>"<h1><%= title %></h1>")
       r.assert.is_a? ::Erubis::Eruby

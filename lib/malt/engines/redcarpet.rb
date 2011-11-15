@@ -20,12 +20,16 @@ module Malt::Engine
     # @option params [String,Symbol] :to ('html')
     #   Type or file extension to convert template into.
     #
-    def render(params)
+    def render(params={})
       into, text = parameters(params, :to, :text)
 
       case into
       when :html, nil  # :man, :manpage
-        intermediate(params).render(text)
+        if ::Redcarpet::VERSION < '2'
+          intermediate(params).to_html
+        else
+          intermediate(params).render(text)
+        end
       else
         super(params)
       end
@@ -76,16 +80,28 @@ module Malt::Engine
     #   contiguous superscripts are nested together, and complex
     #   values can be enclosed in parenthesis, e.g. `this is the 2^(nd) time`
     #
-    def intermediate(params)
-      into = parameters(params, :to)
+    def intermediate(params={})
+      return intermediate_old(params) if ::Redcarpet::VERSION < '2'
+
+      into, toc = parameters(params, :to, :toc)
 
       case into
       when :man, :manpage
-        renderer = Redcarpet::Render::ManPage
+        renderer = ::Redcarpet::Render::ManPage
       else
-        renderer = Redcarpet::Render::HTML
+        if toc
+          renderer = ::Redcarpet::Render::HTML_TOC
+        else
+          renderer = ::Redcarpet::Render::HTML
+        end
       end
       ::Redcarpet::Markdown.new(renderer, engine_options(params))
+    end
+
+    # For Recarpet v1.x.
+    def intermediate_old(params={})
+      text = parameters(params, :text)
+      ::Redcarpet.new(text) #, engine_options(params))
     end
 
   private

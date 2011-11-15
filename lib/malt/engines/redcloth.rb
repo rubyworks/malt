@@ -17,7 +17,7 @@ module Malt::Engine
     #   :format => Symbol of the format to render [:html]
     #
     def render(params={})
-      into = parameters(params, :to)
+      into, text = parameters(params, :to, :text)
 
       case into
       when :html, nil
