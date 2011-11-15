@@ -23,6 +23,14 @@ requirements:
   groups:
   - test
   development: true
+- name: lemon
+  groups:
+  - test
+  development: true
+- name: ae
+  groups:
+  - test
+  development: true
 - name: rdoc
   groups:
   - test

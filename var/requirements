@@ -2,6 +2,8 @@
 - detroit   (build)
 - qed       (test)
 - test      (test)
+- lemon     (test)
+- ae        (test)
 - rdoc      (test)
 - RedCloth  (test)
 - bluecloth (test)
