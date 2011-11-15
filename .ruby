@@ -119,4 +119,4 @@ name: malt
 description: Malt provides a factory framework for rendering a variety of template
   and markup document formats.
 organization: rubyworks
-date: '2011-11-13'
+date: '2011-11-14'

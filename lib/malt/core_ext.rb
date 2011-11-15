@@ -3,8 +3,8 @@ require 'facets/module/basename'
 require 'facets/to_hash'
 require 'facets/hash/rekey'
 
+=begin
 class Hash
-
   #
   def to_hash
     dup
@@ -20,16 +20,14 @@ class Hash
     end
     h
   end unless method_defined?(:rekey)
-
 end
+=end
 
 class OpenStruct
-
   #
   def to_hash
     @table.dup
   end unless method_defined?(:to_hash)
-
 end
 
 
@@ -42,14 +40,32 @@ class Binding
   end
 
   #
-  def self
+  def itself
     eval('self')
   end
 
   #
-  def with(_hash)
+  def with(_hash, &_yield)
     _hash = (_hash || {}).to_hash
-    eval("Proc.new{ |#{_hash.keys.join(',')}| binding }").call(*_hash.values)
+
+#    _args = (_hash.keys + ['&yld']).join(',')
+#    eval <<-END
+#     (class << self; self; end).class_eval do
+#       define_method(:_with) do |#{_args}|
+#         binding
+#       end
+#     end
+#    END
+#    #(class << self; self; end).class_eval(code)
+#    b = self.self._with(*_hash.values, &_yield)
+#    #(class << self; self; end).class_eval{ remove_method(:_with) }
+#    return b
+
+    #args = (_hash.keys + ['&yld']).join(',')
+    #eval("Proc.new{ |#{args}| binding }").call(*_hash.values, &_yield)
+
+    args = _hash.keys.join(',')
+    eval("lambda {|#{args}| binding}").call(*_hash.values)
   end
 
 end

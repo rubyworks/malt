@@ -1,6 +1,10 @@
+.rbx
+.reap/digest
+.yardoc
 doc
 log
-ri
 pkg
 tmp
-site/docs
+site
+web
+pages
