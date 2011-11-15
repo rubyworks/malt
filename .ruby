@@ -83,10 +83,6 @@ requirements:
   groups:
   - test
   development: true
-- name: erector
-  groups:
-  - test
-  development: true
 - name: markaby
   groups:
   - test
@@ -104,6 +100,14 @@ requirements:
   - test
   development: true
 - name: coffee-script
+  groups:
+  - test
+  development: true
+- name: erector
+  groups:
+  - test
+  development: true
+- name: active-support
   groups:
   - test
   development: true

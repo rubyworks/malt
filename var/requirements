@@ -17,9 +17,11 @@
 - liquid    (test)
 - erubis    (test)
 - mustache  (test)
-- erector   (test)
 - markaby   (test)
 - builder   (test)
 - radius    (test)
 - ragtag    (test)
-- coffee-script (test)
+- coffee-script  (test)
+- erector        (test)
+- active-support (test)  # erector needs it
+
