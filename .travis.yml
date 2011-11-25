@@ -8,6 +8,6 @@ rvm:
   - jruby
   - ree
 env:
-  - testcmd="qed -v"
+  - testcmd="qed"
   - testcmd="ruby-test -fpro -r./test/helper.rb test/"
 

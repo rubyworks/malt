@@ -28,7 +28,7 @@ the +render+ method.
 
 And again the result should be:
 
-  <h1>Example</h1>
+  <h1 id="label-Example">Example</h1>
 
   <p>This is an example of RDoc rendering.</p>
 
