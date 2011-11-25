@@ -4,12 +4,14 @@ Lets say we have a Markaby document called 'test.markaby' containing:
 
   html do
     h1 "Example #{@title}"
-    p "This is an example of a Maraby template."
+    p "This is an example of a Markaby template."
   end
 
-Notice the use of the instance variable. Markaby templates must use instance
+Notice the use of the instance variable. Markaby templates use instance
 variables for data rendering in order to avoid ambiguity with the markup
 syntax itself.
+
+=== Rendering
 
 We can render Markaby documents via the +render+ method, as we can any format.
 Since Markaby is a template format and not just a markup syntax, so we need
@@ -18,33 +20,69 @@ Markaby document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'test.markaby', :data=>data)
+  html = Malt.render(:file=>'test.markaby', :data=>data, :engine=>:markaby)
 
   html.assert.include?('<h1>Example Document</h1>')
+  html.assert.include?('<p>This is an example of a Markaby template.</p>')
 
-We can get a hold of the Markaby document via the Malt.file function.
+=== Format Object
 
-  markaby = Malt.file('test.markaby')
+Markaby object's are represented by the `Malt::Format::Builder` class.
+We can get a hold of such an object via the Malt.file function.
 
-  markaby.class.assert == Malt::Format::Markaby
+  markaby = Malt.file('test.markaby', :engine=>:markaby)
 
-We can convert Markaby documents to html very easily.
+  markaby.class.assert == Malt::Format::Builder
+
+We can convert this to another format, such as html,
 
   data = {:title => "Document"}
 
   html = markaby.to_html(data)
 
-First we will notice that the output is an instance of Malt::Format::HTML.
+We can see that the output is an instance of Malt::Format::HTML.
 
   html.class.assert == Malt::Format::HTML
 
-And that by calling #to_s we can get the rendered HTML document.
+And then by calling #to_s we can get the rendered HTML document.
 
   html.to_s.assert.include?('<h1>Example Document</h1>')
 
-Or we can convert the Markaby document directly to HTML via the #html method.
+Alternately, we can take a shortcut, and convert the Builder object directly
+to an HTML document via the `#html` method.
 
   out = markaby.html(data)
 
   out.assert.include?('<h1>Example Document</h1>')
+
+=== Content Block
+
+Lets say we have a Markaby document called 'test.markaby' containing:
+
+  html do
+    h1 'Document'
+    div @content
+  end
+
+Then rendering,
+
+  out = Malt.render(:file=>'test.markaby', :engine=>:markaby){ 'Content' }
+
+Should produce,
+
+  out.assert == "<html><h1>Document</h1><div>Content</div></html>"
+
+IMPORTANT NOTE! Markaby will not render trailing data instance varaibles,
+e.g. the following @template would have no content:
+
+  html do
+    h1 "Document"
+    @content
+  end
+
+As can be shown,
+
+  out = Malt.render(:text=>@template, :type=>:markaby, :engine=>:markaby){ 'Content' }
+
+  out.assert == "<html><h1>Document</h1></html>"
 

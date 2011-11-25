@@ -23,11 +23,11 @@ testcase Malt::Engine::Sass do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns an ::Sass instance" do
       e = Malt::Engine::Sass.new
-      r = e.intermediate(:text=>"#menu\n  :margin 0")
+      r = e.prepare_engine(:text=>"#menu\n  :margin 0")
       r.assert.is_a? ::Sass::Engine
     end
 

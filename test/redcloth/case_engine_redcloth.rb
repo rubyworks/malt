@@ -17,11 +17,11 @@ testcase Malt::Engine::RedCloth do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns an ::RedCloth instance" do
       e = Malt::Engine::RedCloth.new
-      r = e.intermediate(:text=>"h1. Testing")
+      r = e.prepare_engine(:text=>"h1. Testing")
       #RedCloth.assert === r
       String.assert === r
     end

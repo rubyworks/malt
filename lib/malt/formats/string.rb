@@ -15,7 +15,7 @@ module Malt::Format
   # The Ruby type is also used for "precompiling" other formats such
   # as ERB.
   #
-  class String < Abstract
+  class String < AbstractTemplate
 
     register '.str'
 

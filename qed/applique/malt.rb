@@ -19,8 +19,24 @@ When "say we have a((n?)) (((\\w+))) document called '(((\\S+)))' containing" do
   File.open(file, 'w'){ |f| f << text }
 end
 
-When "verify that (((.*?))) is" do |var, text|
-  out = instance_variable_get(var)
+When "verify that (((@\w+))) is" do |iv, text|
+  out = instance_variable_get(iv)
   out.strip.assert == text.strip
+end
+
+When 'verify that the result is' do |text|
+  @_.strip.assert == text.strip
+end
+
+When 'the result (((will|should))) be' do |_, text|
+  @_.to_s.strip.assert == text.strip
+end
+
+When "render the `(((\S+)))` document as `(((\w+)))` via `Malt.render`." do |file, into, text|
+  @_ = Malt.render(:to=>into, file=>file)
+end
+
+When 'the following (((@\w+)))' do |name, text|
+  instance_variable_set(name, text)
 end
 

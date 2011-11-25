@@ -17,11 +17,21 @@ testcase Malt::Engine::BlueCloth do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
-    test "returns an ::BlueCloth instance" do
+    test "returns a ::BlueCloth instance" do
       e = Malt::Engine::BlueCloth.new
-      r = e.intermediate(:text=>"# Testing")
+      r = e.prepare_engine(:text=>"# Testing")
+      r.assert.is_a? ::BlueCloth
+    end
+
+  end
+
+  method :create_engine do
+
+    test "returns a ::BlueCloth instance" do
+      e = Malt::Engine::BlueCloth.new
+      r = e.create_engine(:text=>"# Testing")
       r.assert.is_a? ::BlueCloth
     end
 

@@ -11,6 +11,8 @@ Notice the use of the instance variable. Erector templates must use instance
 variables for data rendering in order to avoid ambiguity with the markup
 syntax itself.
 
+=== Rendering
+
 We can render Erector documents via the +render+ method, as we can any format.
 Since Erector is a template format and not just a markup syntax, so we need
 to also provide the +render+ function with data for interpolation into the
@@ -18,15 +20,17 @@ Erector document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'test.erector', :data=>data)
+  html = Malt.render(:file=>'test.erector', :data=>data, :engine=>:erector)
 
   html.assert.include?('<h1>Example Document</h1>')
 
+=== Format Object
+
 We can get a hold of the Erector document via the Malt.file function.
 
-  erector = Malt.file('test.erector')
+  erector = Malt.file('test.erector', :engine=>:erector)
 
-  erector.class.assert == Malt::Format::Erector
+  erector.class.assert == Malt::Format::Builder
 
 We can convert Erector documents to html very easily.
 
@@ -47,4 +51,21 @@ Or we can convert the Erector document directly to HTML via the #html method.
   out = erector.html(data)
 
   out.assert.include?('<h1>Example Document</h1>')
+
+=== Content Block
+
+Lets say we have an Erector document called 'test.erector' containing:
+
+  html do
+    h1 'Document'
+    div @content
+  end
+
+Then rendering,
+
+  out = Malt.render(:file=>'test.erector', :engine=>:erector){ 'Content' }
+
+Should produce,
+
+  out.assert == "<html><h1>Document</h1><div>Content</div></html>"
 

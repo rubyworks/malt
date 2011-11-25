@@ -17,11 +17,11 @@ testcase Malt::Engine::Maruku do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns an ::Maruku instance" do
       e = Malt::Engine::Maruku.new
-      r = e.intermediate(:text=>"# Testing")
+      r = e.prepare_engine(:text=>"# Testing")
       r.assert.is_a? ::Maruku
     end
 

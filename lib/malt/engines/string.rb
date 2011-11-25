@@ -11,36 +11,23 @@ module Malt::Engine
     default :str
 
     #
-    def render(params={}, &yld)
+    def render(params={}, &content)
       text, file, data = parameters(params, :text, :file, :data)
 
-      # @note If this supported yield, it would be all we need:
-      #   binding = make_binding(data, &yld)
-      #   eval("%{#{text}}", binding, file)
-
-      scope, data = make_scope_and_data(data)
-      vars, vals  = data.keys, data.values
-      ruby = <<-END
-        def ___erb(#{vars.join(',')})
-          %{#{text}}
-        end
-        method(:___erb)
-      END
-
-      args = [ruby, scope.to_binding, file].compact
-
-      eval(*args).call(*vals, &yld)
+      bind = make_binding(data, &content)
+      eval("%{#{text}}", bind, file || 'eval')
     end
 
     # Ruby compiles to Ruby. How odd. ;)
-    def compile(text, file)
-      text
+    def compile(params)
+      text = parameters(params, :text)
+      "%{#{text}}"
     end
 
   private
 
     #
-    def initialize_engine
+    def require_engine
     end
 
   end

@@ -2,7 +2,7 @@
 
 Malt can render Markdown via RDiscount.
 
-Lets say we have a Markdown document called 'test.md' containing ...
+Lets say we have a Markdown document called 'test.md' containing:
 
   # Example
 

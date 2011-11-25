@@ -11,11 +11,11 @@ testcase Malt::Engine::WikiCloth do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns a WikiCloth instance" do
       e = Malt::Engine::WikiCloth.new
-      r = e.intermediate(:text=>"== Testing ==")
+      r = e.prepare_engine(:text=>"== Testing ==")
       r.assert.is_a? ::WikiCloth::WikiCloth
     end
 

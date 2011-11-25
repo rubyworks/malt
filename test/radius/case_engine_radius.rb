@@ -17,11 +17,11 @@ testcase Malt::Engine::Radius do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns an instance of a subclass of ::Radius::Context" do
       e = Malt::Engine::Radius.new
-      r = e.intermediate(:text=>"<h1>Testing</h1>")
+      r = e.prepare_engine(:text=>"<h1>Testing</h1>")
       r.assert.is_a? ::Radius::Context
     end
 

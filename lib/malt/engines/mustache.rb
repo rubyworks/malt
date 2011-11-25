@@ -11,10 +11,17 @@ module Malt::Engine
     register :mustache
 
     #
-    def render(params={}, &yld) #file, db, &yld)
+    def render(params={}, &content) #file, db, &content)
       text, data = parameters(params, :text, :data)
 
-      data = make_hash(data, &yld)
+      data = make_hash(data, &content)
+
+      # convert symbol keys to strings w/o rewriting the hash
+      symbol_keys = data.keys.select{ |k| Symbol === k }
+      symbol_keys.each do |k|
+        data[k.to_s] = data[k]
+        data.delete(k)
+      end
 
       #engine = intermediate(params)
       #engine.render(data)
@@ -31,7 +38,7 @@ module Malt::Engine
   private
 
     # Load rdoc makup library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::Mustache
       require_library 'mustache'
     end

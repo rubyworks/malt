@@ -21,23 +21,25 @@ module Malt::Engine
 
       case into
       when :html, nil
-        intermediate(params).to_html
+        prepare_engine(params).to_html
       else
         super(params)
       end
     end
 
     #
-    def intermediate(params={})
+    def create_engine(params={})
       text = parameters(params, :text)
 
-      ::RedCloth.new(text)
+      cached(text) do
+        ::RedCloth.new(text)
+      end
     end
 
   private
 
     # Load redcloth library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::RedCloth
       require_library 'redcloth'
     end

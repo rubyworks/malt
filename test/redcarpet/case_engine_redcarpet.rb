@@ -17,11 +17,11 @@ testcase Malt::Engine::Redcarpet do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns an ::Redcarpet instance" do
       e = Malt::Engine::Redcarpet.new
-      r = e.intermediate(:text=>"# Testing")
+      r = e.prepare_engine(:text=>"# Testing")
       r.assert.is_a? ::Redcarpet
     end
 

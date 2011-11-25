@@ -1,6 +1,6 @@
-## Object Extensions
+== Object Extensions
 
-## to_binding
+=== to_binding
 
   o = Object.new
 

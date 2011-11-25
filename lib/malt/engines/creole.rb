@@ -12,27 +12,36 @@ module Malt::Engine
 
     # Convert WikiMedia format to HTML.
     # 
-    def render(params={}, &yld)
+    def render(params={}, &content)
       into = parameters(params, :to)
 
       case into
       when :html, nil
-        intermediate(params).to_html
+        prepare_engine(params, &content).to_html
       else
         super(params)
       end
     end
 
     #
-    def intermediate(params={})
+    #def prepare_engine(params={}, &content)
+    #  create_engine(params)
+    #end
+
+    #
+    def create_engine(params={})
       text = parameters(params, :text)
-      ::Creole::Parser.new(text, engine_options(params))
+      opts = engine_options(params)
+
+      cached(opts, text) do
+        ::Creole::Parser.new(text, opts)
+      end
     end
 
-    private
+  private
 
     # Load `creole` library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::Creole
       require_library 'creole'
     end

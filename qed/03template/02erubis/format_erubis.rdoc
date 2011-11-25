@@ -3,7 +3,7 @@
 By default the common ERB library is used to render .erb documents. By setting
 the :engine option, Erubis can be used instead.
 
-Lets say we have a ERB document called 'test.erb' containing ...
+Lets say we have a ERB document called 'test.erb' containing:
 
   <h1>Example <%= title %></h1>
 
@@ -87,11 +87,11 @@ Then by specifying the :engine Erubis will be used instead of the default ERB.
 
   html.assert.include?('<h1>Example Document</h1>')
 
-==== with yield
+==== Content Block
 
 Lets say we have an ERB document called 'test.erb' containing:
 
-  Hello <%= yield %>!
+  Hello <%= content %>!
 
 Then
 
@@ -102,5 +102,4 @@ Then
 Then
 
   text.strip  #=> "Hello world!"
-
 

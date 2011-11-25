@@ -19,26 +19,30 @@ module Malt::Engine
 
       case into
       when :html, nil
-        intermediate(params).convert(text).to_s
+        prepare_engine(params).convert(text).to_s
       else
         super(params)
+      end
+    end
+
+    #
+    def create_engine(params={})
+      into = parameters(params, :to)
+
+      cached(into) do
+        ::RDoc::Markup::ToHtml.new
       end
     end
 
   private
 
     # Load rdoc makup library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined?(::RDoc::Markup)
       require 'rubygems' # hack
       require_library 'rdoc'
       require_library 'rdoc/markup'
       require_library 'rdoc/markup/to_html'
-    end
-
-    #
-    def intermediate(params={})
-      @_html_engine ||= ::RDoc::Markup::ToHtml.new
     end
 
   end

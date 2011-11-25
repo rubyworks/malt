@@ -1,18 +1,18 @@
-## Binding Extensions
+== Binding Extensions
 
-## to_binding
+=== to_binding
 
   b = binding
 
   b.to_binding  #=> b
 
-## itself
+=== itself
 
   b = binding
 
   b.itself  #=> self
 
-## with
+=== with
 
   b1 = binding
 

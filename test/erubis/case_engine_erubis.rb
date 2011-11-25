@@ -15,11 +15,11 @@ testcase Malt::Engine::Erubis do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns a Erubius::Eruby instance" do
       e = Malt::Engine::Erubis.new
-      r = e.intermediate(:text=>"<h1><%= title %></h1>")
+      r = e.prepare_engine(:text=>"<h1><%= title %></h1>")
       r.assert.is_a? ::Erubis::Eruby
     end
 

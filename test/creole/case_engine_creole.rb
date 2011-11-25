@@ -11,11 +11,21 @@ testcase Malt::Engine::Creole do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns a Creole instance" do
       e = Malt::Engine::Creole.new
-      r = e.intermediate(:text=>"== Testing ==")
+      r = e.prepare_engine(:text=>"== Testing ==")
+      r.assert.is_a? ::Creole::Parser
+    end
+
+  end
+
+  method :create_engine do
+
+    test "returns a Creole instance" do
+      e = Malt::Engine::Creole.new
+      r = e.create_engine(:text=>"== Testing ==")
       r.assert.is_a? ::Creole::Parser
     end
 

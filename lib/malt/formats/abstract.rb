@@ -116,7 +116,7 @@ module Format
     # If the first argument is a Symbol it is considered the format, otherwise
     # it is taken to be the database for rendering template variables.
     def render(*type_and_data, &yld)
-      type, data = parse_type_and_data(*type_and_data)
+      type, data = parse_type_from_data(*type_and_data)
       meth = method(type || default)
       #__send__(type || default, data, &yld)
       meth.arity == 0 ?  meth.call(&yld) :  meth.call(*data, &yld)
@@ -164,7 +164,7 @@ module Format
         if type
           type = type.to_s.sub(/^\./,'')
           fext = self.class.extensions.find{|e| file.end_with?(e)}
-          new_file = file.chomp(fext) + type
+          new_file = file.chomp(fext) + '.' + type
         else
           fext = self.class.extensions.find{|e| file.end_with?(e)}
           new_file = file.chomp('.'+fext)

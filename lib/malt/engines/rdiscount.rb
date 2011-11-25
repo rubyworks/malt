@@ -20,29 +20,33 @@ module Malt::Engine
 
       case into
       when :html, nil
-        intermediate(params).to_html
+        prepare_engine(params).to_html
       else
         super(params)
       end
     end
 
-    # Convert Markdown text to intermediate engine object.
-    def intermediate(params={})
+    # Convert Markdown text to create_engine engine object.
+    def create_engine(params={})
       text = parameters(params, :text)
 
-      ::RDiscount.new(text, *flags)
+      flags = engine_options(params)
+
+      cached(text, flags) do
+        ::RDiscount.new(text, *flags)
+      end
     end
 
   private
 
     # Load rdoc makup library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::RDiscount
       require_library 'rdiscount'
     end
 
     #
-    def flags(params={})
+    def engine_options(params={})
       [:smart, :filter_html].select{ |flag| params[flag] || settings[flag] }
     end
 

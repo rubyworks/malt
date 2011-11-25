@@ -23,13 +23,6 @@ class Hash
 end
 =end
 
-class OpenStruct
-  #
-  def to_hash
-    @table.dup
-  end unless method_defined?(:to_hash)
-end
-
 
 class Binding
   # Conversion for bindings.
@@ -44,30 +37,38 @@ class Binding
     eval('self')
   end
 
+  # Create a new binding incorporating the current binding and
+  # the given local settings hash and yield block.
   #
+  # The yield code was neccessary b/c Ruby does not respect the use
+  # of yield in a lambda (boo hiss). 
   def with(_hash, &_yield)
     _hash = (_hash || {}).to_hash
 
-#    _args = (_hash.keys + ['&yld']).join(',')
-#    eval <<-END
-#     (class << self; self; end).class_eval do
-#       define_method(:_with) do |#{_args}|
-#         binding
-#       end
-#     end
-#    END
-#    #(class << self; self; end).class_eval(code)
-#    b = self.self._with(*_hash.values, &_yield)
-#    #(class << self; self; end).class_eval{ remove_method(:_with) }
-#    return b
+    if _yield
+      vars = eval('local_variables')
+      vals = eval("[#{vars.join(',')}]")
 
-    #args = (_hash.keys + ['&yld']).join(',')
-    #eval("Proc.new{ |#{args}| binding }").call(*_hash.values, &_yield)
+      vars += _hash.keys
+      vals += _hash.values
 
-    args = _hash.keys.join(',')
-    eval("lambda {|#{args}| binding}").call(*_hash.values)
+      code = <<-END
+        def self.___with(#{vars.join(',')})
+          binding
+        end
+        method(:___with)
+      END
+      eval(code).call(*vals, &_yield)
+
+      #_args = _hash.empty? ? '' : '|' + _hash.keys.join(',') + ',&y|'
+      #lamb = eval("lambda{#{_args} binding}")
+      #(class << self; self; end).send(:define_method, :__temp__, &lamb)
+      #method(:__temp__).call(*_hash.values, &_yield)
+    else
+      _args = _hash.empty? ? '' : '|' + _hash.keys.join(',') + '|'
+      eval("lambda{#{_args} binding}").call(*_hash.values)
+    end
   end
-
 end
 
 class Object
@@ -76,4 +77,28 @@ class Object
   end
 end
 
+class Struct
+  def to_struct
+    self
+  end
+
+  def to_h
+    Hash[members.zip(values)]
+  end unless method_defined?(:to_h)
+
+  #def to_hash
+  #  Hash[members.zip(values)]
+  #end
+end
+
+class OpenStruct
+  def to_struct
+    self
+  end
+
+  #
+  def to_h #ash
+    @table.dup
+  end unless method_defined?(:to_h)
+end
 

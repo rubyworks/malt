@@ -8,52 +8,98 @@ module Malt::Engine
   #
   class Builder < Abstract
 
-    default :builder
+    default :builder, :rbml
 
     #
-    def render(params, &yld)
-      into = parameters(params, :to)
+    def render(params, &content)
+      into = parameters(params, :to) || :html
 
       case into
-      when :xml, :xhtml, nil
-        render_xml(params, &yld)
-      when :html, nil
-        # @todo htmlify xml
-        render_xml(params, &yld)
+      when :xml, :html, :xhtml
+        prepare_engine(params, &content) #.target!
       else
-        super(params, &yld)
+        super(params, &content)
       end
     end
 
-    # TODO: Do we need a #make_ivar(data, &yld) method to make data into
-    # instance variables for some templates like this one?
+  #private
+
+    # Prepare engine for rendering.
+    def prepare_engine(params={}, &content)
+      prefix = parameters(params, :prefix)
+
+      if prefix
+        prepare_engine_prefix(params, &content)
+      else
+        prepare_engine_scope(params, &content)
+      end
+    end
+
+    # TODO: Can Builder be cached?
 
     #
-    def render_xml(params={}, &yld)
+    def create_engine(params={})
+      opts = engine_options(params)
+
+      #cached(opts) do
+        ::Builder::XmlMarkup.new(opts)
+      #end
+    end
+
+    #
+    def prepare_engine_prefix(params, &content)
+      text, file, data, prefix = parameters(params, :text, :file, :data, :prefix)
+
+      file ||= "(builder)"
+
+      bind = make_binding(data, &content)
+
+      #scope, locals = split_data(data)
+
+      #scope  ||= Object.new
+      #locals ||= {}
+
+      engine = create_engine(params)
+
+      code = %{
+        lambda do |#{prefix}|
+          #{text}
+        end
+      }
+
+      eval(code, bind, file || '(builder)').call(engine)
+    end
+
+    #
+    def prepare_engine_scope(params, &content)
       text, file, data = parameters(params, :text, :file, :data)
 
-      data = make_hash(data, &yld)
+      scope, locals = external_scope_and_locals(data, &content)
 
-      builder = intermediate(params)
+      engine = create_engine
 
-      data.each{ |k,v| builder.instance_eval("@#{k} = v") }
-
-      if file
-        builder.instance_eval(text, file)
-      else
-        builder.instance_eval(text)
+      locals.each do |k,v|
+        next if k.to_sym == :target
+        engine.instance_eval("@#{k} = v")
       end
+
+      unless scope.respond_to?(:to_struct)
+        scope.instance_variables.each do |k|
+          next if k == "@target"
+          v = scope.instance_variable_get(k)
+          engine.instance_eval("#{k} = v") 
+        end
+      end
+
+      engine.instance_eval(text, file || '(builder)')
+
+      engine.target!
     end
 
-    #
-    def intermediate(params)
-      ::Builder::XmlMarkup.new(engine_options(params))
-    end
-
-    private
+  private
 
     # Load Builder library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::Builder
       require_library 'builder'
     end

@@ -1,0 +1,19 @@
+== Prefix Mode
+
+Say we have the following @template:
+
+  bld.html do |html|
+    html.h1 "Example #{title}"
+    html.p "This is an example of a Markaby template."
+  end
+
+Then
+
+  data = Struct.new(:title).new("Document")
+
+  html = Malt.render(:text=>@template, :type=>:builder, :data=>data, :engine=>:builder, :prefix=>:bld)
+
+  html.assert.include?('<h1>Example Document</h1>')
+  html.assert.include?('<p>This is an example of a Markaby template.</p>')
+
+

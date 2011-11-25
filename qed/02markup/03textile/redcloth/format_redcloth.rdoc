@@ -2,7 +2,7 @@
 
 Malt supports Textile via RedCloth.
 
-Lets say we have a Textile document called 'test.tt' containing ...
+Lets say we have a Textile document called 'test.tt' containing:
 
   h1. Example
 
@@ -15,9 +15,9 @@ Textile documents are recognized by the +.textile+ or +.tt+ extension.
 
   html.assert.include?('<h1>Example</h1>')
 
-Malt supports Textile via either the RedCloth or the ___ backend.
+Malt supports Textile via either the RedCloth backend.
 
-Lets say we have an Textile document called 'test.tt' containing ...
+Lets say we have an Textile document called 'test.tt' containing:
 
   h1. Example
 

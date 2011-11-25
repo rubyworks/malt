@@ -1,0 +1,83 @@
+=== Scope Redering
+
+Builder formats, such as Builder, Markaby, Nokogiri and Erector, can only
+support evaluation scopes by externalizing them, since they must evaluate
+templates from within their own evaluation scopes in order to work. To
+compensate, the scope is made availabe via the `@scope` variable.
+
+To demonstrate, lets say we the following @template:
+
+  html do
+    h1 "Example #{@scope.title}"
+    p "This is an example of a Markaby template."
+  end
+
+Then for each engine we will see
+
+  %w{markaby builder erector nokogiri}.each do |engine|
+
+    data = Struct.new(:title).new('Document')
+
+    html = Malt.render(:text=>@template, :type=>:rbml, :data=>data, :engine=>engine)
+
+    html.assert.include?('<h1>Example Document</h1>')
+    html.assert.include?('<p>This is an example of a Markaby template.</p>')
+
+  end
+
+In additions to this, any instancnce variables defined within the scope are also
+made available as instance_variables in the template.
+
+To demonstrate lets say we have the following @template:
+
+  html do
+    h1 "Example #{@title}"
+    p "This is an example of a Markaby template."
+  end
+
+Then
+
+  %w{markaby builder erector nokogiri}.each do |engine|
+
+    data = Class.new do
+             def initialize
+               @title = 'Document'
+             end
+           end.new
+
+    html = Malt.render(:text=>@template, :type=>:builder, :data=>data, :engine=>engine)
+
+    html.assert.include?('<h1>Example Document</h1>')
+    html.assert.include?('<p>This is an example of a Markaby template.</p>')
+
+  end
+
+The @scope variable is actually a special wrapper around the actual scope
+that allows calls to draw from private methods, which makes it more like
+evaluation from within the scope --as it would be for other template engines.
+
+To demonstrate lets say we have the following @template:
+
+  html do
+    h1 "Example #{@scope.title}"
+    p "This is an example of a Markaby template."
+  end
+
+Then
+
+  %w{markaby builder erector nokogiri}.each do |engine|
+
+    data = Class.new do
+             private
+             def title
+               'Document'
+             end
+           end.new
+
+    html = Malt.render(:text=>@template, :type=>:builder, :data=>data, :engine=>engine)
+
+    html.assert.include?('<h1>Example Document</h1>')
+    html.assert.include?('<p>This is an example of a Markaby template.</p>')
+
+  end
+

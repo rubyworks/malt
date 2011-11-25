@@ -1,6 +1,6 @@
 == RagTag
 
-Lets say we have a Rtals document called 'test.rt' containing:
+Lets say we have a RagTag document called 'test.rt' containing:
 
   <html>
   <body>
@@ -11,9 +11,28 @@ Lets say we have a Rtals document called 'test.rt' containing:
 
 We can render Rtal documents via the +render+ method, as we can any format.
 
-  data = { :title=>"Document" }
+  data = {:title=>"Document"}
 
   html = Malt.render(:file=>'test.rt', :data=>data)
 
   html.assert.include?('<h1>Example Document</h1>')
+
+=== Content Blocks
+
+Lets say we have a RagTag document called 'test.rt' containing:
+
+  <html>
+  <body>
+    <h1>Example <span replace="title">DUMMY</span></h1>
+    <div content="content">DUMMY</div>
+  </body>
+  </html>
+
+Then
+
+  data = {:title=>"Document"}
+
+  html = Malt.render(:file=>'test.rt', :data=>data){ 'Content' }
+
+  html.assert.include?('<div>Content</div>')
 

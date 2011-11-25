@@ -19,7 +19,7 @@ into the liquid document.
 
 Liquid doesn't actually care what format the document is rendered as, since it
 is purely a template engine that can be applied to any other format.
-Lets say we have a Liquid document called 'test.liquid' containing ...
+Lets say we have a Liquid document called 'test.liquid' containing:
 
   <h1>Example {{ title }}</h1>
 

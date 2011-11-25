@@ -158,6 +158,7 @@ module Malt
     def engine(type, engine=nil)
       type = ext_to_type(type)
       #engine = engine || Malt.config.engine[type]  # FIXME
+
       case engine
       when Class
         #raise unless Engine.registry[type].include?(engine)

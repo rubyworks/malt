@@ -29,24 +29,26 @@ module Malt::Engine
 
       case into
       when :html, nil
-        intermediate(params).to_html
+        prepare_engine(params).to_html
       when :latex
-        intermediate(params).to_latex
+        prepare_engine(params).to_latex
       else
         super(params)
       end
     end
 
     # Convert Markdown text to intermediate object.
-    def intermediate(params={})
+    def create_engine(params={})
       text = parameters(params, :text)
-      ::Kramdown::Document.new(text)
+      cached(text) do
+        ::Kramdown::Document.new(text)
+      end
     end
 
     private
 
       # Load rdoc makup library if not already loaded.
-      def initialize_engine
+      def require_engine
         return if defined? ::Kramdown
         require_library 'kramdown'
       end

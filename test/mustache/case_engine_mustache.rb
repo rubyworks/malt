@@ -15,11 +15,11 @@ testcase Malt::Engine::Mustache do
 
   end
 
-  #method :intermediate do
+  #method :prepare_engine do
   #
   #  test "returns a Mustache instance" do
   #    e = Malt::Engine::Mustache.new
-  #    r = e.intermediate(:text=>"<h1>{{ title }}</h1>")
+  #    r = e.iprepare_engine(:text=>"<h1>{{ title }}</h1>")
   #    r.assert.is_a? ::Mustache
   #  end
   #

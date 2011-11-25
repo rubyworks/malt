@@ -9,18 +9,18 @@ module Format
   class AbstractTemplate < Abstract
 
     #
-    def to(type, data=nil, &yld)
+    def to(type, *data, &yld)
       new_class   = Malt::Format.registry[type.to_sym]  # TODO: Malt.machine.format?
-      new_text    = render(type, data, &yld)
+      new_text    = render(type, *data, &yld)
       new_file    = refile(type)
       new_options = options.merge(:text=>new_text, :file=>new_file, :type=>type)
       new_class.new(new_options)
     end
-     
+
     #
     def render(*type_and_data, &yld)
       type, data = parse_type_from_data(*type_and_data)
-      opts = options.merge(:format=>type, :text=>text, :file=>file, :data=>data)
+      opts = options.merge(:to=>type, :text=>text, :file=>file, :data=>data)
       render_engine.render(opts, &yld)
       #opts = options.merge(:format=>type, :text=>text, :file=>file, :data=>data, :engine=>engine)
       #Malt.render(opts, &yld)

@@ -17,11 +17,11 @@ testcase Malt::Engine::Nokogiri do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns a ::Nokogiri::XML::Builder instance" do
       e = Malt::Engine::Nokogiri.new
-      r = e.intermediate(:text=>%[h1 "Testing"])
+      r = e.prepare_engine(:text=>%[h1 "Testing"])
       r.assert.is_a? ::Nokogiri::XML::Builder
     end
 

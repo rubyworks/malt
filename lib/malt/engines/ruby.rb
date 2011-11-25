@@ -2,8 +2,10 @@ require 'malt/engines/abstract'
 
 module Malt::Engine
 
-  # Ruby strings as template engine.
+  # Ruby return reuslt as template engine.
   #
+  # @todo deprecate ?
+  # 
   # @see http://ruby-lang.org
   #
   class Ruby < Abstract
@@ -11,36 +13,22 @@ module Malt::Engine
     default :rb
 
     #
-    def render(params={}, &yld)
+    def render(params={}, &content)
       text, file, data = parameters(params, :text, :file, :data)
 
-      # @note If this supported yield, it would be all we need:
-      #   binding = make_binding(data, &yld)
-      #   eval(text, binding, file)
-
-      scope, data = make_scope_and_data(data)
-      vars, vals  = data.keys, data.values
-      ruby = <<-END
-        def ___erb(#{vars.join(',')})
-          #{text}
-        end
-        method(:___erb)
-      END
-
-      args = [ruby, scope.to_binding, file].compact
-
-      eval(*args).call(*vals, &yld)
+      bind = make_binding(data, &content)
+      eval(text, bind, file || 'eval')
     end
 
-    #
-    def compile(text, file)
-      text
+    # Ruby compiles to Ruby. How odd. ;)
+    def compile(params)
+      params[:text] #file
     end
 
   private
 
     #
-    def initialize_engine
+    def require_engine
     end
 
   end

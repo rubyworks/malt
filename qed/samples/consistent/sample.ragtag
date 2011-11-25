@@ -1,0 +1,5 @@
+<div>
+  <h1 content="name"></h1>
+  <div id="state" content="state"></div>
+  <div id="yield" content="content"></div>
+</div>

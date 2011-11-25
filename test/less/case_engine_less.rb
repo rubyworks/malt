@@ -17,12 +17,22 @@ testcase Malt::Engine::Less do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
-    test "returns an ::Less instance" do
+    test "returns an Less::Tree instance" do
       e = Malt::Engine::Less.new
-      r = e.intermediate(:text=>"#menu {\n  margin: 0; }")
-      r.assert.is_a? ::Less::Parser
+      r = e.prepare_engine(:text=>"#menu {\n  margin: 0; }")
+      r.assert.is_a? ::Less::Tree
+    end
+
+  end
+
+  method :create_engine do
+
+    test "returns an Less::Tree instance" do
+      e = Malt::Engine::Less.new
+      r = e.create_engine(:text=>"#menu {\n  margin: 0; }")
+      r.assert.is_a? ::Less::Tree
     end
 
   end

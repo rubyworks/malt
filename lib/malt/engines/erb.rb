@@ -40,61 +40,39 @@ module Malt::Engine
     #   Note that `yield` currently does work with non-compiled tempaltes.
     #
     # @return [String] Rendered output.
-    def render(params={}, &yld)
+    #
+    def render(params={}, &content)
       text, file, data = parameters(params, :text, :file, :data)
 
-      if settings[:precompile] == false
-        warn "non-compiled ERB does not support yield" if yld
-        binding = make_binding(data, &yld)  # Ruby needs to support lambda{ yield }
-        intermediate(params).result(binding)
-      else
-        scope, data = make_scope_and_data(data)
-        vars, vals  = data.keys, data.values
-        ruby = compile(params)
-        ruby = <<-END
-          def ___erb(#{vars.join(',')})
-            #{ruby}
-          end
-          method(:___erb)
-        END
-        if file
-          eval(ruby, scope.to_binding, file).call(*vals, &yld)
-        else
-          eval(ruby, scope.to_binding).call(*vals, &yld)
-        end
-      end
-    end
-
-    # Compile ERB template into Ruby source code.
-    #
-    # @return [String] Ruby source code.
-    def compile(params={})
-      if cache?
-        @source[params] ||= intermediate(params).src
-      else
-        intermediate(params).src
-      end
+      #if settings[:compile] == true
+      #else
+        bind = make_binding(data, &content)
+        prepare_engine(params).result(bind)
+      #end
     end
 
     # Returns instance of underlying ::ERB class.
-    def intermediate(params={})
-      text, file = parameters(params, :text, :file)
+    #def prepare_engine(params={})
+    #  create_engine(params)
+    #end
+
+    #
+    def create_engine(params={})
+      text = parameters(params, :text)
 
       opts = engine_options(params)
       safe = opts[:safe]
       trim = opts[:trim]
 
-      if cache?
-        @cache[file] ||= ::ERB.new(text, safe, trim)
-      else
+      cached(text,safe,trim) do
         ::ERB.new(text, safe, trim)
       end
     end
 
-    private
+  private
 
     # Load ERB library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::ERB
       require_library('erb')
     end
@@ -106,7 +84,19 @@ module Malt::Engine
       opts
     end
 
+    # Compile ERB template into Ruby source code.
+    #
+    # @return [String] Ruby source code.
+    #def compile(params={})
+    #  if cache?
+    #    @source[params] ||= (
+    #      intermediate(params).src
+    #    )
+    #  else
+    #    intermediate(params).src
+    #  end
+    #end
+
   end
 
 end
-

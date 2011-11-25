@@ -35,7 +35,7 @@ containing:
 
   This is an sample.
 
-Then it can be rendered will bulk with a `Malt::NoEngineError`.
+Then rendering to will bulk with a `Malt::NoEngineError`.
 
   expect Malt::NoEngineError do
     malt.render(:file=>'sample.markdown')

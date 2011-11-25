@@ -58,11 +58,16 @@ module Engine
       @cache  = {}
       @source = {}
 
-      initialize_engine
+      require_engine
     end
 
     # Access to the options given to the initializer.
     attr :settings
+
+    #
+    def cache?
+      !settings[:nocache]
+    end
 
     #
     def render(params, &block)
@@ -73,33 +78,42 @@ module Engine
       end
     end
 
+    # Prepare engine for rendering.
+    def prepare_engine(params={}, &content)
+      create_engine(params, &content)
+    end
+
+    # Instantiate engine class with engine options and template text,
+    # if possible.
+    #
+    # The initialization MUST never include template data and should
+    # support caching, if feasible.
+    #
+    def create_engine(params={})
+      raise NotImplementedError, "not implemented"
+    end
+
     # Convert a rendition to Ruby source code. Not all engines support compiling.
     #
-    def compile(*data, &yields)
-      raise NotImplementedError, "not implemented"
-    end
+    #def compile(*data, &content)
+    #  raise NotImplementedError, "not implemented"
+    #end
 
-    # The intermedate object of an engine is an instanceof the engine's
-    # rendering class with initial setup options and template text preset.
-    #
-    # The intermediate object should never include data.
-    #
-    # In the future, this will be used with a cache to apply different datasets
-    # over the same intermediate renderer.
-    def intermediate(*)
-      raise NotImplementedError, "not implemented"
-    end
+  private
 
+    # Cached yield reuslt with given key if cache mode is active.
     #
-    def cache?
-      !settings[:nocache]
+    def cached(*key)
+      if cache?
+        @cache[key] ||= yield
+      else
+        yield
+      end
     end
-
-    private
 
     # Override this to load template engine library and
     # prepare is for geeral usage.
-    def initialize_engine
+    def require_engine
     end
 
     # Require template library.
@@ -107,7 +121,22 @@ module Engine
       require(path)
     end
 
-    # Take a data source are return a scope object and data hash.
+    # - - -  D A T A  H A N D L I N G  - - -
+
+    # Unlike +#scope_and_locals+, this method returns +nil+ for missing
+    # scope or locals.
+    #
+    def split_data(data)
+      scope, locals = *[data].flatten
+      if scope.respond_to?(:to_hash)
+        locals ||= {}
+        locals = locals.merge(scope.to_hash)
+        scope  = nil
+      end
+      return scope, locals
+    end
+
+    # Take a data source are return a scope object and locals hash.
     #
     # @param [Object,Binding,Hash,Array] data 
     #   The data source used for evaluation.
@@ -116,25 +145,75 @@ module Engine
     #   entries hashes which will be merged into one hash.
     #
     # @return [Array<Object,Hash>] Two element array of scope object and data hash.
-    def scope_vs_data(data)
-      case data
-      when Array
-        if data.size > 1
-          scope, *data = *data
-          data = data.inject({}){ |h,d| h.update(d); h }
-          return scope, data
-        else
-          data = data.first || {}
-        end
+    def scope_and_locals(data, &content)
+      scope, locals = split_data(data) #*[data].flatten
+
+      locals ||= {}
+
+      case scope
+      when Binding
+        vars   = scope.eval("local_variables")
+        vals   = scope.eval("[#{vars.join(',')}]")
+        locals = locals.merge(Hash[*vars.zip(vals).flatten])
+        scope  = scope.eval("self")
       end
 
-      scope = nil
-      if !data.respond_to?(:to_hash)
-        scope = data
-        data  = {}
+      if scope.respond_to?(:to_struct)
+        locals = locals.merge(scope.to_struct.to_h)
+        scope  = Object.new
       end
 
-      return scope, data
+      if scope.respond_to?(:to_hash)
+        locals = locals.merge(scope.to_hash)
+        scope  = Object.new
+      end
+
+      scope ||= Object.new
+
+      locals[:content] = content.call if content
+
+      return scope, locals
+    end
+
+    # Take a data source are return a scope object and locals hash.
+    #
+    # @param [Object,Binding,Hash,Array] data 
+    #   The data source used for evaluation.
+    #   If the data is an Array with more than one entry, the first element
+    #   will be assumed to be an Object or Binding scope and the remaining
+    #   entries hashes which will be merged into one hash.
+    #
+    # @return [Array<Object,Hash>] Two element array of scope object and data hash.
+    def external_scope_and_locals(data, &content)
+      scope, locals = split_data(data) #*[data].flatten
+
+      locals ||= {}
+
+      case scope
+      when Binding
+        vars   = scope.eval("local_variables")
+        vals   = scope.eval("[#{vars.join(',')}]")
+        locals = locals.merge(Hash[*vars.zip(vals).flatten])
+        scope  = scope.eval("self")
+      end
+
+      if scope.respond_to?(:to_struct)
+        locals = locals.merge(scope.to_struct.to_h)
+        #scope  = Object.new
+      end
+
+      if scope.respond_to?(:to_hash)
+        locals = locals.merge(scope.to_hash)
+        scope  = Object.new
+      end
+
+      scope ||= Object.new
+      scope = make_object(scope || Object.new)
+
+      locals[:scope]   = scope
+      locals[:content] = content.call if content
+
+      return scope, locals
     end
 
     # Convert scope and data into a Binding.
@@ -142,46 +221,83 @@ module Engine
     # @param [Object,Binding,Hash,Array] data
     #   The data source used for evaluation.
     #
-    # @see #scope_vs_hash
+    # @see #split_data
     #
     # @return [Object] The data and yield block converted to a Binding.
-    def make_binding(data, &yields)
-      scope, data = scope_vs_data(data)
-      scope = Object.new unless scope
-      scope.to_binding.with(data, &yields)
+    def make_binding(data, &content)
+      scope, locals = scope_and_locals(data, &content)
+      scope.to_binding.with(locals)
     end
 
-    # Convert scope and data into a scope object.
+    # TODO: Simplify the #make_object method.
+
+    # Convert data into an object.
     #
     # @param [Object,Binding,Hash,Array] data
     #   The data source used for evaluation.
     #
-    # @see #scope_vs_hash
-    #
     # @return [Object] The data and yield block converted to an Object.
-    def make_object(data, &yields)
-      scope, data = scope_vs_data(data)
-      if scope  # TODO: this is the trickiest one
-        scope = scope.eval('self') if Binding === scope
-        adhoc = (class << scope; self; end)
+    def make_object(data)
+      scope, locals = split_data(data)
+      locals ||= {}
 
-        data.to_hash.each do |name,value|
-          adhoc.__send__(:define_method, name){ value }
-        end
-
-        if yields  # TODO: this won't work!!!
-          adhoc.__send__(:define_method, :yield, &yields)
-        end
-        scope
-      else
-        hash = data.to_hash.dup
+      case scope
+      when nil
+        hash = locals.to_hash.dup
         if hash.empty?
           Object.new
         else
-          # TODO: how to handle yield ?
-          hash[:yield] = yields.call if yields  # rescue nil ?
-          attrs = hash.keys.map{ |k| k.to_sym }
-          Struct.new(*attrs).new(*hash.values)
+          vars, vals = [], []
+          hash.each_pair do |k,v|
+            vars << k; vals << v
+          end
+          Struct.new(*vars).new(*vals)
+        end
+      when Binding
+        Class.new(BasicObject){
+          define_method(:method_missing) do |s, *a|
+            if locals.key?(s)
+              locals[s]
+            elsif locals.key?(s.to_s)
+              locals[s.to_s]
+            else
+              scope.eval(s.to_s)
+            end
+          end
+        }.new
+      when Struct
+        vars, vals = [], []
+        scope.each_pair do |k,v|
+          vars << k; vals << v
+        end
+        locals.each_pair do |k,v|
+          vars << k; vals << v
+        end
+        Struct.new(*vars).new(*vals)
+      else
+        if scope.respond_to?(:to_hash)
+          hash = scope.to_hash.merge(locals.to_hash)
+          if hash.empty?
+            Object.new
+          else
+            vars, vals = [], []
+            hash.each_pair do |k,v|
+              vars << k; vals << v
+            end
+            Struct.new(*vars).new(*vals)
+          end
+        else
+          Class.new(BasicObject){
+            define_method(:method_missing) do |s, *a, &b|
+              if locals.key?(s)
+                locals[s]
+              elsif locals.key?(s.to_s)
+                locals[s.to_s]
+              else
+                scope.__send__(s.to_s, *a, &b)
+              end
+            end
+          }.new
         end
       end
     end
@@ -194,40 +310,47 @@ module Engine
     # @see #scope_vs_hash
     #
     # @return [Hash] The data and yield block converted to a Hash.
-    def make_hash(data, &yields)
-      scope, data = scope_vs_data(data)
-      hash = if scope
-               scope = scope.eval('self') if Binding === scope
-               if scope.respond_to?(:to_hash)
-                 scope.to_hash
-               else # last resort
-                 Hash.new{ |h,k| h[k] = scope.__send__(k) }
-                 #scope.instance_variables.inject({}) do |h, i|
-                 #  k = i.sub('@','').to_sym
-                 #  v = instance_variable_get(i)
-                 #  h[k] = v
-                 #  h
-                 #end
-               end
-             else
-               {}
-             end
+    def make_hash(data, &content)
+      scope, locals = split_data(data)
 
-      hash = hash.merge(data)
+      case scope
+      when nil
+        hash = locals || {}
+      when Binding
+        #hash = Hash.new{ |h,k| p h,k; h[k] = data.key?(k) ? data[k] : scope.eval(k) }
+        hash = Hash.new{ |h,k| h[k] = scope.eval(k) }
+      else
+        if scope.respond_to?(:to_hash)
+          hash = scope.to_hash.merge(data)
+        else
+          #hash = Hash.new{ |h,k| data.key?(k) ? data[k] : h[k] = scope.__send__(k) }
+          hash = Hash.new{ |h,k| h[k] = scope.__send__(k) }
+        end
+      end
 
-      if yields
-        hash[:yield] = yields.call  # rescue nil ?
+      hash = hash.merge(locals || {})
+
+      if content
+        hash[:content] = content.call.to_s  # rescue nil ?
       end
 
       hash
     end
 
     #
-    def make_scope_and_data(data, &yields)
-      scope, data = scope_vs_data(data)
-      scope ||= Object.new
-      return scope, data
-    end
+    #def make_scope_and_data(data, &content)
+    #  scope, data = scope_vs_data(data)
+    #  case scope
+    #  when Binding
+    #    vars  = scope.eval("local_variables")
+    #    vals  = scope.eval("[#{vars.join(',')}]")
+    #    data  = data.merge(Hash[*vars.zip(vals).flatten])
+    #    scope = scope.eval("self")
+    #  else
+    #    scope ||= Object.new
+    #  end
+    #  return scope, data
+    #end
 
     #
     def engine_options(params)

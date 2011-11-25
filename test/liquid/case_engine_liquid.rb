@@ -15,11 +15,11 @@ testcase Malt::Engine::Liquid do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns a Liquid instance" do
       e = Malt::Engine::Liquid.new
-      r = e.intermediate(:text=>"<h1>{{ title }}</h1>")
+      r = e.prepare_engine(:text=>"<h1>{{ title }}</h1>")
       r.assert.is_a? ::Liquid::Template
     end
 

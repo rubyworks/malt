@@ -2,7 +2,7 @@ require 'malt/engines/abstract'
 
 module Malt::Engine
 
-  # RagTag
+  # RagTag XML/HTML templates.
   #
   # @see http://github.com/rubyworks/ragtag
   #
@@ -11,31 +11,43 @@ module Malt::Engine
     default :ragtag, :rt
 
     #
-    def render(params, &yld)
-      into, text, file, data = parameters(params, :to, :text, :file, :data)
+    def render(params, &content)
+      into = parameters(params, :to) || :html
 
       case into
-      when :html, nil
-        binding = make_binding(data, &yld)
-        intermediate(params).compile(binding).to_xhtml
+      when :html
+        prepare_engine(params,&content).to_html
+      when :xhtml
+        prepare_engine(params,&content).to_xhtml
       when :xml
-        binding = make_binding(data, &yld)
-        intermediate(params).compile(binding).to_xml
+        prepare_engine(params,&content).to_xml
       else
-        super(params, &yld)
+        super(params, &content)
       end
     end
 
+    # 
+    def prepare_engine(params={}, &content)
+      into, text, file, data = parameters(params, :to, :text, :file, :data)
+
+      binding = make_binding(data, &content)
+
+      create_engine(params).compile(binding)
+    end
+
     #
-    def intermediate(params)
+    def create_engine(params={})
       text = parameters(params, :text)
-      ::RagTag.new(text)
+
+      cached(text) do
+        ::RagTag.new(text)
+      end
     end
 
     private
 
     # Load Haml library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::RagTag
       require_library 'ragtag'
     end
@@ -43,4 +55,3 @@ module Malt::Engine
   end
 
 end
-

@@ -17,11 +17,11 @@ testcase Malt::Engine::Kramdown do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns an ::Kramdown instance" do
       e = Malt::Engine::Kramdown.new
-      r = e.intermediate(:text=>"# Testing")
+      r = e.prepare_engine(:text=>"# Testing")
       r.assert.is_a? ::Kramdown::Document
     end
 

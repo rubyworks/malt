@@ -12,30 +12,32 @@ module Malt::Engine
     default :wiki, :mediawiki, :mw
 
     #
-    def render(params={}, &yld)
+    def render(params={}, &content)
       data = parameters(params, :data)
 
-      data = make_hash(data, &yld)
+      data = make_hash(data, &content)
 
       case params[:to]
       when :html, nil
-        intermediate(params).to_html(:params => data)
+        prepare_engine(params).to_html(:params => data)
       else
         super(params)
       end
     end
 
     #
-    def intermediate(params={})
+    def create_engine(params={})
       text = parameters(params, :text)
 
-      ::WikiCloth::WikiCloth.new(:data => text)
+      cached(text) do
+        ::WikiCloth::WikiCloth.new(:data => text)
+      end
     end
 
     private
 
     # Load `wikicloth` library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::WikiCloth
       require_library 'wikicloth'
     end

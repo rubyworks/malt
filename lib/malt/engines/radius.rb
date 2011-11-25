@@ -11,85 +11,109 @@ module Malt::Engine
     default :radius
 
     #
-    def render(params, &yld)
+    def render(params, &content)
       into, text = parameters(params, :to, :text)
 
       case into
       when :html, :xml, nil
-        context = intermediate(params, &yld)
+        context = prepare_engine(params, &content)
         options = engine_options(params)
 
         parser = ::Radius::Parser.new(context, options)
-
         parser.parse(text)
       else
-        super(params, &yld)
+        super(params, &content)
       end
     end
 
     #
-    def intermediate(params={}, &yld)
+    def prepare_engine(params={}, &content)
       data = parameters(params, :data)
 
-      if Array === data 
-        if data.size > 1
-          data = make_hash(data)
-        else
-          data = data.first
-        end
+      scope, locals = split_data(data)
+
+      locals ||= {}
+
+      # convert string keys to symbols w/o rewriting the hash
+      string_keys = locals.keys.select{ |k| String === k }
+      string_keys.each do |k|
+        locals[k.to_sym] = data[k]
+        locals.delete(k)
       end
 
-      make_context(data, &yld)
+      make_context(scope, locals, &content)
     end
 
   private
 
     # Load Radius library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::Radius
       require_library 'radius'
     end
 
     # Radius templates have a very special data source.
-    def make_context(data, &yld)
-      case data
-      when Hash
-        context = make_context_from_hash(data, &yld)
+    def make_context(scope, data, &content)
+      case scope
+      when nil
+        context = make_context_from_hash(data, &content)
+      when Binding
+        context = make_context_from_binding(scope, data, &content)
       else
-        if data.respond_to?(:to_hash)
-          data = data.to_hash
-          context = make_context_from_hash(data, &yld)
-        else
-          context = make_context_from_object(data, &yld)
-        end
+        context = make_context_from_object(scope, data, &content)
       end
       context
     end
 
     #
-    def make_context_from_object(db, &yld)
-      context = Class.new(::Radius::Context).new
-      db = make_object(db)
-      (class << context; self; end).class_eval do
+    def make_context_from_binding(scope, data, &content)
+      context_class = Class.new(::Radius::Context)
+      context_class.class_eval do
         define_method :tag_missing do |tag, attr|
-          db.__send__(tag) # any way to support attr as args?
+          if data.key?(tag.to_sym)
+            data[tag.to_sym]
+          else
+            scope.eval(tag)
+          end
         end
       end
-      context.define_tag("yield") do
-        yld.call
+      context = context_class.new
+      context.define_tag("content") do
+        content ? content.call : ''
       end
       context
     end
 
     #
-    def make_context_from_hash(data, &yld)
-      context = Class.new(::Radius::Context).new
-      #data = make_hash(data)
-      data.each do |tag, value|
-        context.define_tag(tag){ value }
+    def make_context_from_object(scope, data, &content)
+      context_class = Class.new(::Radius::Context)
+      context_class.class_eval do
+        define_method :tag_missing do |tag, attr|
+          if data.key?(tag.to_sym)
+            data[tag.to_sym]
+          else
+            scope.__send__(tag) # any way to support attr as args?
+          end
+        end
       end
-      context.define_tag("yield") do
-        yld.call
+      context = context_class.new
+      context.define_tag("content") do
+        content ? content.call : ''
+      end
+      context
+    end
+
+    #
+    def make_context_from_hash(data, &content)
+      context_class = Class.new(::Radius::Context)
+      context_class.class_eval do
+        define_method :tag_missing do |tag, attr|
+          data[tag.to_sym]
+        end
+      end
+      context = context_class.new
+      context.define_tag("content") do
+        content ? content.call : ''
       end
       context
     end
@@ -97,7 +121,7 @@ module Malt::Engine
     #
     def engine_options(params)
       opts = {}
-      opts[:tag_prefix] = params[:tag_prefix] || settings[:tag_prefix]
+      opts[:tag_prefix] = params[:tag_prefix] || settings[:tag_prefix] #|| 'r'
       opts
     end
 

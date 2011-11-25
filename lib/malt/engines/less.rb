@@ -17,17 +17,18 @@ module Malt::Engine
 
       case into
       when :css, nil
-p text
-        intermediate(params).parse(text).to_css(:compress=>compress)
+        prepare_engine(params).to_css(:compress=>compress)
       else
         super(params)
       end
     end
 
     #
-    def intermediate(params={})
-      file = parameters(params, :file)
-      ::Less::Parser.new(:filename=>file)
+    def create_engine(params={})
+      text, file = parameters(params, :text, :file)
+      cached(text, file) do
+        ::Less::Parser.new(:filename=>file).parse(text)
+      end
     end
 
     #
@@ -38,7 +39,7 @@ p text
   private
 
     # Load Less library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::Less::Parser
       require_library 'less'
     end

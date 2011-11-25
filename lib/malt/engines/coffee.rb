@@ -9,26 +9,26 @@ module Malt::Engine
     default :coffee
 
     # Render coffee script to JavaScript.
-    def render(params={}, &yld)
+    def render(params={}, &content)
       into, text, file = parameters(params, :to, :text, :file)
 
       case into
       when :javascript, :js, nil
         ::CoffeeScript.compile(text, engine_options(params))
       else
-        super(params, &yld)
+        super(params, &content)
       end
     end
 
     # TODO: make a psuedo intermediate ?
-    # def intermediate(params)
+    # def prepare_engine(params)
     #   
     # end
 
   private
 
     # Load CoffeeScript library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::CoffeeScript
       require_library 'coffee_script'
     end

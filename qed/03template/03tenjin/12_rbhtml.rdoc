@@ -6,9 +6,9 @@ defines a document format with an extension of `.rbhtml`.
 
 Lets say we have a Tenjin document called 'test.rbhtml' containing:
 
-  Hello #{@name}!
+  Hello #{name}!
   <ul>
-  <?rb for item in @items ?>
+  <?rb for item in items ?>
    <li>${item}</li>
   <?rb end ?>
   </ul>

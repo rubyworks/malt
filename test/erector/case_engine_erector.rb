@@ -10,11 +10,24 @@ testcase Malt::Engine::Erector do
 
   end
 
-  method :intermediate do
+  # NOTE: truth is these will probably become private so there isn't 
+  # really necessary to test them directly.
 
-    test "returns a subclass of Erector::Widget instance" do
+  method :prepare_engine do
+
+    test "returns an instance of a subclass of Erector::Widget" do
       e = Malt::Engine::Erector.new
-      r = e.intermediate(:text=>"h1 'Testing'")
+      r = e.prepare_engine(:text=>"h1 'Testing'")
+      assert r.is_a?(::Erector::Widget)  # do it this way b/c of odd warning
+    end
+
+  end
+
+  method :create_engine do
+
+    test "returns a subclass of Erector::Widget" do
+      e = Malt::Engine::Erector.new
+      r = e.create_engine(:text=>"h1 'Testing'")
       r.assert < ::Erector::Widget
     end
 

@@ -2,9 +2,9 @@
 
 Lets say we have a Builder document called 'test.builder' containing:
 
-  html do |h|
-    h.h1 "Example #{@title}"
-    h.p "This is an example of a Maraby template."
+  html do
+    h1 "Example #{@title}"
+    p "This is an example of a Maraby template."
   end
 
 Notice the use of the instance variable. Builder templates must use instance
@@ -18,13 +18,13 @@ Builder document.
 
   data = { :title=>"Document" }
 
-  html = Malt.render(:file=>'test.builder', :data=>data)
+  html = Malt.render(:file=>'test.builder', :data=>data, :engine=>:builder)
 
   html.assert.include?('<h1>Example Document</h1>')
 
 We can get a hold of the Builder document via the Malt.file function.
 
-  builder = Malt.file('test.builder')
+  builder = Malt.file('test.builder', :engine=>:builder)
 
   builder.class.assert == Malt::Format::Builder
 

@@ -1,0 +1,74 @@
+== Nokogiri
+
+Lets say we have a Nokogiri document called 'test.nokogiri' containing:
+
+  html do
+    h1 "Example #{@title}"
+    p_ "This is an example of a Nokogiri template."
+  end
+
+Notice the use of the instance variable. Nokogiri templates must use instance
+variables for data rendering in order to avoid ambiguity with the markup
+syntax itself.
+
+=== Rendering
+
+We can render Nokogiri documents via the +render+ method, as we can any format.
+Since Nokogiri is a template format and not just a markup syntax, so we need
+to also provide the +render+ function with data for interpolation into the
+Nokogiri document. 
+
+  data = { :title=>"Document" }
+
+  html = Malt.render(:file=>'test.nokogiri', :data=>data, :engine=>:nokogiri)
+
+  html.assert.include?('<h1>Example Document</h1>')
+  html.assert.include?('<p>This is an example of a Nokogiri template.</p>')
+
+=== Format Object
+
+We can get a hold of the Nokogiri document via the Malt.file function.
+
+  nokogiri = Malt.file('test.nokogiri', :engine=>:nokogiri)
+
+  nokogiri.class.assert == Malt::Format::Builder
+
+We can convert Nokogiri documents to html very easily.
+
+  data = {:title => "Document"}
+
+  html = nokogiri.to_html(data)
+
+First we will notice that the output is an instance of Malt::Format::HTML.
+
+  html.class.assert == Malt::Format::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example Document</h1>')
+
+Or we can convert the Nokogiri document directly to HTML via the #html method.
+
+  out = nokogiri.html(data)
+
+  out.assert.include?('<h1>Example Document</h1>')
+
+=== Content Block
+
+Lets say we have a Nokogiri document called 'test.nokogiri' containing:
+
+  html do
+    h1 'Document'
+    div @content
+  end
+
+Then rendering,
+
+  out = Malt.render(:file=>'test.nokogiri', :engine=>:nokogiri){ 'Content' }
+
+  out.gsub!("\n",'')  # to remove newlines for ease of testing
+
+Should produce,
+
+  out.assert == "<html><h1>Document</h1><div>Content</div></html>"
+

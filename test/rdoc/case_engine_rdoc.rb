@@ -18,11 +18,11 @@ testcase Malt::Engine::RDoc do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
 
     test "returns an ::RDoc::Markup::ToHtml instance" do
       e = Malt::Engine::RDoc.new
-      r = e.intermediate(:text=>"= Testing")
+      r = e.prepare_engine(:text=>"= Testing")
       r.assert.is_a? ::RDoc::Markup::ToHtml
     end
 

@@ -2,7 +2,7 @@
 
 Lets say we have a Haml document called 'test.haml' containing:
 
-  %h1== Example #{title}
+  %h1 Example #{title}
   %p This is an example of a Haml template.
 
 We can render Haml documents via the +render+ method, as we can any format.

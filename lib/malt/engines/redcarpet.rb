@@ -26,9 +26,9 @@ module Malt::Engine
       case into
       when :html, nil  # :man, :manpage
         if ::Redcarpet::VERSION < '2'
-          intermediate(params).to_html
+          prepare_engine(params).to_html
         else
-          intermediate(params).render(text)
+          prepare_engine(params).render(text)
         end
       else
         super(params)
@@ -80,10 +80,12 @@ module Malt::Engine
     #   contiguous superscripts are nested together, and complex
     #   values can be enclosed in parenthesis, e.g. `this is the 2^(nd) time`
     #
-    def intermediate(params={})
-      return intermediate_old(params) if ::Redcarpet::VERSION < '2'
+    def create_engine(params={})
+      return create_engine_1x(params) if ::Redcarpet::VERSION < '2'
 
       into, toc = parameters(params, :to, :toc)
+
+      opts = engine_options(params)
 
       case into
       when :man, :manpage
@@ -95,13 +97,19 @@ module Malt::Engine
           renderer = ::Redcarpet::Render::HTML
         end
       end
-      ::Redcarpet::Markdown.new(renderer, engine_options(params))
+
+      cached(into, toc, opts) do
+        ::Redcarpet::Markdown.new(renderer,)
+      end
     end
 
     # For Recarpet v1.x.
-    def intermediate_old(params={})
+    def create_engine_1x(params={})
       text = parameters(params, :text)
-      ::Redcarpet.new(text) #, engine_options(params))
+
+      cached(text) do
+        ::Redcarpet.new(text) #, engine_options(params))
+      end
     end
 
   private
@@ -112,7 +120,7 @@ module Malt::Engine
     }
 
     # Load rdoc makup library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::Redcarpet
       require_library 'redcarpet'
     end

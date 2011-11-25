@@ -15,11 +15,11 @@ testcase Malt::Engine::String do
 
   end
 
-  #method :intermediate do
+  #method :prepare_engine do
   #
   #  test "returns an ::String instance" do
   #    e = Malt::Engine::String.new
-  #    r = e.intermediate(:text=>%q{"Hello #{title}")
+  #    r = e.prepare_engine(:text=>%q{"Hello #{title}")
   #    r.assert.is_a? ::String
   #  end
   #

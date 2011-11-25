@@ -17,11 +17,21 @@ testcase Malt::Engine::RagTag do
 
   end
 
-  method :intermediate do
+  method :prepare_engine do
+
+    test "returns an ::Nokogiri document" do
+      e = Malt::Engine::RagTag.new
+      r = e.prepare_engine(:text=>"<h1>Testing</h1>")
+      r.assert.is_a? ::Nokogiri::XML::Document
+    end
+
+  end
+
+  method :create_engine do
 
     test "returns an ::RagTag::Engine instance" do
       e = Malt::Engine::RagTag.new
-      r = e.intermediate(:text=>"<h1>Testing</h1>")
+      r = e.create_engine(:text=>"<h1>Testing</h1>")
       r.assert.is_a? ::RagTag
     end
 

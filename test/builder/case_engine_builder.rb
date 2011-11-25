@@ -17,11 +17,11 @@ testcase Malt::Engine::Builder do
 
   end
 
-  method :intermediate do
+  method :create_engine do
 
     test "returns an ::Builder::XmlMarkup instance" do
       e = Malt::Engine::Builder.new
-      r = e.intermediate(:text=>%[h1 "Testing"])
+      r = e.create_engine(:text=>%[h1 "Testing"])
       r.assert.is_a? ::Builder::XmlMarkup
     end
 

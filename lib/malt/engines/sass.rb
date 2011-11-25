@@ -9,32 +9,36 @@ module Malt::Engine
     default :sass, :scss
 
     #
-    def render(params, &yld)
+    def render(params, &content)
       into = parameters(params, :to)
 
       case into
       when :css, nil
-        engine = intermediate(params)
+        engine = prepare_engine(params)
         engine.render
       else
-        super(params, &yld)
+        super(params, &content)
       end
     end
 
     #
-    def intermediate(params)
+    def create_engine(params)
       text, file, type = parameters(params, :text, :file, :type)
 
-      params[:filename] = file
-      params[:syntax]   = type
+      opts = engine_options(params)
 
-      ::Sass::Engine.new(text, engine_options(params))
+      opts[:filename] = file
+      opts[:syntax]   = type
+
+      cached(text, file, type) do
+        ::Sass::Engine.new(text, opts)
+      end
     end
 
   private
 
     # Load Sass library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::Sass::Engine
       require_library 'sass'
     end

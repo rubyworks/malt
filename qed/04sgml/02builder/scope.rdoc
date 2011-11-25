@@ -1,0 +1,19 @@
+== Scope Mode
+
+Say we have the following @template:
+
+  html do
+    h1 "Example #{@title}"
+    p "This is an example of a Markaby template."
+  end
+
+Using a Struct object for the scope,
+
+  data = Struct.new(:title).new("Document")
+
+  html = Malt.render(:text=>@template, :type=>:builder, :data=>data, :engine=>:builder)
+
+  html.assert.include?('<h1>Example Document</h1>')
+  html.assert.include?('<p>This is an example of a Markaby template.</p>')
+
+

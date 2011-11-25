@@ -17,9 +17,9 @@ into the mustache document.
 
   html.assert.include?('<h1>Example Document</h1>')
 
-Mustache doesn't actually care what format the document is rendered as, since it
-is purely a template engine that can be applied to any other format.
-Lets say we have a Mustache document called 'test.mustache' containing ...
+Mustache doesn't actually care what format the document is rendered as,
+since it is purely a template engine that can be applied to any other format.
+Lets say we have a Mustache document called 'test.mustache' containing:
 
   <h1>Example {{ title }}</h1>
 

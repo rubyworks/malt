@@ -2,7 +2,7 @@
 
 Malt supports ERB via the ERB engine. 
 
-Lets say we have a ERB document called 'test.erb' containing ...
+Lets say we have a ERB document called 'test.erb' containing:
 
   <h1>Example <%= title %></h1>
 
@@ -25,11 +25,11 @@ ERB doesn't actually care what format the document is rendered as. The
 template could have been any text file what so ever, so using the `:format`
 option would have no effect here.
 
-=== Yield
+=== Content Block
 
 Lets say we have an ERB document called 'test.erb' containing:
 
-  Hello <%= yield %>!
+  Hello <%= content %>!
 
 Then
 
@@ -40,8 +40,4 @@ Then
 Then
 
   text.strip  #=> "Hello world!"
-
-
-
-
 

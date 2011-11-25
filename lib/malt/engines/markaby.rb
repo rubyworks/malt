@@ -6,43 +6,65 @@ module Malt::Engine
   #
   # @see http://markaby.rubyforge.org/
   #
+  # Markaby doesn't support template caching b/c the the initializer
+  # takes the local variable settings.
+  # 
   class Markaby < Abstract
 
-    default :markaby, :mab
+    default  :markaby, :mab
+    register :rbml, :builder
 
     #
-    def render(params, &yld)
-      into = parameters(params, :to)
+    def render(params, &content)
+      into = parameters(params, :to) || :html
 
       case into
-      when :html, nil
-        render_html(params, &yld)
+      when :html, :xml, :xhtml
+        prepare_engine(params, &content).to_s
       else
-        super(params, &yld)
+        super(params, &content)
       end
     end
 
+    # TODO: Prefix support ?
+
     #
-    def render_html(params={}, &yld)
-      text, file, data = parameters(params, :text, :file, :data)
+    def prepare_engine(params={}, &content)
+      text, file, data, prefix = parameters(params, :text, :file, :data, :prefix)
 
-      data = make_hash(data, &yld)
+      file = file || "(#{inspect})"
 
-      builder = ::Markaby::Builder.new(data)
+      if prefix
+        raise NotImplmentedError, "Markaby doesn't support prefix templates."
+        #scope, locals = scope_and_locals(data, &content)
 
-      builder.instance_eval(text).to_s
+        scope, locals = split_data(data)
+
+        scope  ||= Object.new
+        locals ||= {}
+
+        mab = ::Markaby::Builder.new(locals) #, scope)
+
+        code = %{
+          lambda do |#{prefix}|
+            #{text}
+          end
+        }
+
+        eval(code, scope.to_binding, file).call(mab)
+      else
+        scope, locals = external_scope_and_locals(data, &content)
+
+        mab = ::Markaby::Builder.new(locals, scope)
+        mab.instance_eval(text, file)
+        mab
+      end
     end
-
-    #
-    #def intermediate(params)
-    #  text = params[:text]
-    #  eval("lambda{ #{text} }")
-    #end
 
   private
 
     # Load Markaby library if not already loaded.
-    def initialize_engine
+    def require_engine
       return if defined? ::Markaby
       require_library 'markaby'
     end
@@ -50,4 +72,3 @@ module Malt::Engine
   end
 
 end
-

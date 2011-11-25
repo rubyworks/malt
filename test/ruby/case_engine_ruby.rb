@@ -15,11 +15,11 @@ testcase Malt::Engine::Ruby do
 
   end
 
-  #method :intermediate do
+  #method :prepare_engine do
   #
   #  test "returns an ::Ruby instance" do
   #    e = Malt::Engine::Ruby.new
-  #    r = e.intermediate(:text=>%q{"Hello #{title}")
+  #    r = e.prepare_engine(:text=>%q{"Hello #{title}")
   #    r.assert.is_a? ::Ruby
   #  end
   #

@@ -23,18 +23,20 @@ module Malt::Engine
     def render(params={})
       into, text, part = parameters(params, :to, :text, :partial)
 
+      engine = prepare_engine(params)
+
       case into
       when :html, nil
         if part
-          intermediate(params).to_html
+          engine.to_html
         else
-          intermediate(params).to_html_document
+          engine.to_html_document
         end
       when :latex #, :pdf
         if part
-          intermediate(params).to_latex
+          engine.to_latex
         else
-          intermediate(params).to_latex_document
+          engine.to_latex_document
         end
       else
         super(params)
@@ -50,9 +52,11 @@ module Malt::Engine
     # @option params [Symbol] :on_error
     #   If :raise, then raise error.
     #
-    def intermediate(params={})
+    def create_engine(params={})
       text = parameters(params, :text)
-      ::Maruku.new(text, engine_options(params))
+      opts = engine_options(params)
+
+      ::Maruku.new(text, opts)
     end
 
     private
@@ -68,7 +72,7 @@ module Malt::Engine
       }
 
       # Load rdoc makup library if not already loaded.
-      def initialize_engine
+      def require_engine
         return if defined? ::Maruku
         require_library 'maruku'
       end
