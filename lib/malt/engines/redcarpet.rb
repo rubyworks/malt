@@ -99,7 +99,7 @@ module Malt::Engine
       end
 
       cached(into, toc, opts) do
-        ::Redcarpet::Markdown.new(renderer,)
+        ::Redcarpet::Markdown.new(renderer)
       end
     end
 

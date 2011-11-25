@@ -12,7 +12,7 @@ We can convert the 'test.rdoc' document to html via +Malt.render+.
 
 And the result should be:
 
-  <h1>Example</h1>
+  <h1 id="label-Example">Example</h1>
 
   <p>This is an example of RDoc rendering.</p>
 
@@ -46,7 +46,7 @@ We can inform Malt as the actual type using the `:type` option.
 
 And here again the result will be:
 
-  <h1>Example</h1>
+  <h1 id="label-Example">Example</h1>
 
   <p>This is an example of RDoc rendering.</p>
 
@@ -94,11 +94,11 @@ First we will notice that the output is an instance of Malt::Format::HTML.
 
 And that by calling #to_s we can get the rendered HTML document.
 
-  html.to_s.assert.include?('Example</h1>')
+  html.to_s.assert.include?('Example')
 
 Or we can convert the RDoc document directly to HTML via the #html method.
 
   out = rdoc.html
 
-  out.assert.include?('Example</h1>')
+  out.assert.include?('Example')
 

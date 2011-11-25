@@ -40,9 +40,10 @@ module Malt::Engine
     def require_engine
       return if defined?(::RDoc::Markup)
       require 'rubygems' # hack
+      gem 'rdoc', '> 3'
       require_library 'rdoc'
-      require_library 'rdoc/markup'
-      require_library 'rdoc/markup/to_html'
+      #require_library 'rdoc/markup'
+      #require_library 'rdoc/markup/to_html'
     end
 
   end
