@@ -103,8 +103,11 @@ module Malt::Engine
       return if defined? ::Builder
       require_library 'builder'
 
+      # Inexplicably Ruby 1.8 acts like the p method is present
+      # if undef_method is not used, but acts like it isn't if
+      # undef_method is used (raising an error).
       ::Builder::XmlBase.class_eval do
-        undef_method :p if method_defined?(:p)
+        undef_method :p rescue nil
       end
     end
 
