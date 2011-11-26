@@ -104,7 +104,7 @@ module Malt::Engine
       require_library 'builder'
 
       ::Builder::XmlBase.class_eval do
-        undef_method :p
+        undef_method :p if method_defined?(:p)
       end
     end
 
