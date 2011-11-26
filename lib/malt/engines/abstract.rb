@@ -287,7 +287,7 @@ module Engine
             Struct.new(*vars).new(*vals)
           end
         else
-          Class.new(BasicObject){
+          Class.new(::BasicObject){
             define_method(:method_missing) do |s, *a, &b|
               if locals.key?(s)
                 locals[s]
