@@ -4,10 +4,10 @@ rvm:
   - 1.8.7
   - 1.9.2
   - 1.9.3
-  - rbx-2.0
-  - jruby
   - ree
+  #- rbx-2.0
+  #- jruby
 env:
   - testcmd="qed"
-  - testcmd="ruby-test -fpro -r./test/helper.rb test/"
+  - testcmd="ruby-test -r./test/helper.rb test/"
 
