@@ -1,17 +1,50 @@
 = Release History
 
+== 0.4.0 | 2011-11-26
+
+This release of Malt is a major improvement over the previous release.
+Where as before not all formats behaved consistently --for instance,
+not all template engines handled block yielding, this release has
+ensured consistent functionality across all engines. A couple of
+significant changes were made to do this.
+
+Most important to the end user, template formats can no longer
+use `yield` to insert block content, but rather must use
+the `content` method. This was done to avoid unnecessary
+implementation complexity due to Ruby's limitation on the use
+of yield within Proc objects. The code is much cleaner and
+subsequently more robust thanks to this change.
+
+The builder-style engines *Builder, Markaby, Erector and Nokogiri)
+have all been united under a single Builder format class. The
+common extension for such files is `.rbml`. These engines have been
+tweaked to all act uniformly, supporting explicit and implicit
+evaluation modes and using instance variables and externalized
+scope.
+
+Changes:
+
+* Add Creole, Maruku and WikiCloth markup engine/formats
+* Add CoffeeScript transpiler engine/formats.
+* Add Nokogiri Builder formats.
+* Support `scope, locals` style data, via array `:data` option.
+* Unified builder engines under one .rbml/.builder format.
+* Use #content instead of #yield for block content.
+* Add :multi option for multi-format rendering.
+* Overhaul internal engine API, for better overall design.
+
 
 == 0.3.0 | 2010-11-04
 
 New release adds a Malt::Machine class that encapsulates all
 Malt's class level functionality. This allow Malt to be 
-be more finaly controlled. For example an instance of 
+be more finally controlled. For example an instance of 
 Malt::Machine can be used to limit rendering to a select
 set of formats.
 
 Changes:
 
-* Add Machine class to ecapsulate toplevel functions.
+* Add Machine class to encapsulate toplevel functions.
 * Add feature via Machine options to select available formats.
 * Add `#to_default` to for converting to default format.
 * Add `Malt.engine?` to test for supported engine types.
@@ -24,7 +57,7 @@ Changes:
 Malt now support Erector, Markaby, Builder and Mustache templates.
 Erector, Markaby and Builder are Ruby-based formats --templates
 are simply Ruby code. This requires them to use instance variables
-in templates rather than local variables/methods. Somethinfg to keep
+in templates rather than local variables/methods. Something to keep
 in mind.
 
 Changes:
