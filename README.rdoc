@@ -44,11 +44,13 @@ Notice the #to_s. This is needed because #to_html returns an
 Malt::Format::HTML object.
 
 
-== COMING SOON
+== LIMITATIONS
 
-Malt can also "multi-render".
-
-  Malt.file('foo.rdoc.erb').to_html(data)   # ~> foo.html
+*JRuby* and *Rubinus* users: Not all template systems work with your Ruby.
+Consequently not all of Malt will work either. Thankfully Malt only
+requires template engines as they are needed, so it will work fine
+in most cases. But, you will need to avoid engines that depend on compiled
+code, such as +less+ and +coffee-script+.
 
 
 == INSTALATION
@@ -64,6 +66,7 @@ cd into it and run setup.rb, e.g.
   $ tar -xvzf malt-x.y.z.tgz
   $ cd malt-x.y.z.tgz
   $ sudo setup.rb
+
 
 
 == COPYRIGHTS
