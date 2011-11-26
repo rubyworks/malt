@@ -254,7 +254,7 @@ module Engine
           Struct.new(*vars).new(*vals)
         end
       when Binding
-        Class.new(BasicObject){
+        Class.new(::BasicObject){
           define_method(:method_missing) do |s, *a|
             if locals.key?(s)
               locals[s]
