@@ -4,7 +4,7 @@
 - test      (test)
 - lemon     (test)
 - ae        (test)
-- rdoc      (test)
+- rdoc 3+   (test)
 - RedCloth  (test)
 - bluecloth (test)
 - kramdown  (test)
