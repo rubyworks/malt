@@ -102,6 +102,10 @@ module Malt::Engine
     def require_engine
       return if defined? ::Builder
       require_library 'builder'
+
+      ::Builder::XmlBase.class_eval do
+        undef_method :p
+      end
     end
 
     #
