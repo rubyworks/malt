@@ -5,7 +5,7 @@ module Malt
   # which engines and formats are used for rendering.
   #--
   # TODO: Can we dynamically generate the MARKUP and TEMPLATE constants
-  # from the format classes? In anycase, the still need tweaking.
+  # from the format classes? In anycase, the still needs tweaking.
   #++
   class Machine
 
@@ -126,7 +126,40 @@ module Malt
     # parameters[:engine] - Force the use of a this specific engine.
     # parameters[:to]     - Format to convert to (usual default is `html`).
     #
-    def render(parameters={}, &body)
+    def render(parameters={}, &content)
+      multi = parameters[:multi]
+
+      if multi
+        multi_render(parameters, &content)
+      else
+        single_render(parameters, &content)
+      end
+    end
+
+  private
+
+    #
+    def multi_render(parameters={}, &content)
+      type = parameters[:type]
+      file = parameters[:file]
+      text = parameters[:text]
+
+      text = File.read(file) if !text
+
+      if type = parameters[:type]
+        types = [type].flatten
+      else
+        types = file.split('.')[1..-1]
+      end
+      types.reverse_each do |type|
+        parameters[:type] = type
+        parameters[:text] = single_render(parameters, &content)
+      end
+      parameters[:text]
+    end
+
+    #
+    def single_render(parameters={}, &content)
       type   = parameters[:type]
       file   = parameters[:file]
       text   = parameters[:text]
@@ -142,17 +175,15 @@ module Malt
         parameters[:text] = text
 
         engine = engine_class.new
-        engine.render(parameters, &body)
+        engine.render(parameters, &content)
       else
         if parameters[:pass]
           text
         else
           raise NoEngineError, "no engine to handle `#{type}' format"      
         end
-      end
+      end     
     end
-
-    private
 
     #
     def engine(type, engine=nil)
