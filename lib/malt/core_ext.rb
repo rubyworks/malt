@@ -102,3 +102,8 @@ class OpenStruct
   end unless method_defined?(:to_h)
 end
 
+unless defined?(::BasicObject)
+  require 'blankslate'
+  ::BasicObject = ::BlankSlate
+end
+
