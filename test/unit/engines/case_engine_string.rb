@@ -2,15 +2,15 @@ testcase Malt::Engine::String do
 
   method :render do
 
-    test "convert Ruby String text" do
+    test "render text" do
       e = Malt::Engine::String.new(:text=>%q{"Hello #{title}"})
-      h = e.render(:data=>{:title=>'World!'})
+      h = e.render(:locals=>{:title=>'World!'})
       h.assert.index "Hello World!"
     end
 
     test "String is converstion format agnostic" do
       e = Malt::Engine::String.new
-      e.render(:to=>:DNE, :text=>%q{"Hello #{title}"}, :data=>{:title=>'World!'})
+      e.render(:to=>:DNE, :text=>%q{"Hello #{title}"}, :locals=>{:title=>'World!'})
     end
 
   end

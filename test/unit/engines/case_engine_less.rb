@@ -3,8 +3,8 @@ testcase Malt::Engine::Less do
   method :render do
 
     test "convert LESS to CSS" do
-      e = Malt::Engine::Less.new
-      h = e.render(:text=>"#menu {\n  margin: 0; }")
+      e = Malt::Engine::Less.new(:text=>"#menu {\n  margin: 0; }")
+      h = e.render
       h.assert.index "#menu {\n  margin: 0;\n}\n"
     end
 

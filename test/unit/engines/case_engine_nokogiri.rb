@@ -3,8 +3,8 @@ testcase Malt::Engine::Nokogiri do
   method :render do
 
     test "convert Nokogiri DSL to XML by default" do
-      e = Malt::Engine::Nokogiri.new
-      h = e.render(:text=>%[h1 "Testing"])
+      e = Malt::Engine::Nokogiri.new(:text=>%[h1 "Testing"])
+      h = e.render
       h.assert.index "<h1>Testing</h1>"
     end
 

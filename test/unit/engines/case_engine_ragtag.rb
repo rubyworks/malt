@@ -3,8 +3,8 @@ testcase Malt::Engine::RagTag do
   method :render do
 
     test "convert RagTag DSL to XML by default" do
-      e = Malt::Engine::RagTag.new
-      h = e.render(:text=>"<h1>Testing</h1>")
+      e = Malt::Engine::RagTag.new(:text=>"<h1>Testing</h1>")
+      h = e.render
       h.assert.index "<h1>Testing</h1>"
     end
 

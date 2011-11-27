@@ -3,8 +3,8 @@ testcase Malt::Engine::Sass do
   method :render do
 
     test "convert SASS to CSS by default" do
-      e = Malt::Engine::Sass.new
-      h = e.render(:text=>"#menu\n  :margin 0")
+      e = Malt::Engine::Sass.new(:text=>"#menu\n  :margin 0")
+      h = e.render
       h.assert.index "#menu {\n  margin: 0; }\n"
     end
 

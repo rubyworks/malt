@@ -3,8 +3,8 @@ testcase Malt::Engine::Builder do
   method :render do
 
     test "convert Builder DSL to XML by default" do
-      e = Malt::Engine::Builder.new
-      h = e.render(:text=>%[h1 "Testing"])
+      e = Malt::Engine::Builder.new(:text=>%[h1 "Testing"])
+      h = e.render
       h.assert.index "<h1>Testing</h1>"
     end
 

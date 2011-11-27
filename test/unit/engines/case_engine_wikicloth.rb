@@ -2,7 +2,7 @@ testcase Malt::Engine::WikiCloth do
 
   method :render do
 
-    test "convert media wiki text to HTML by default" do
+    test "render media wiki text to HTML by default" do
       e = Malt::Engine::WikiCloth.new(:text=>"== Testing ==")
       h = e.render
       h.assert.index "<h2>"       # so complicated that we're lucky to find it ;)

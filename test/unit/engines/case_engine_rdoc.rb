@@ -2,7 +2,7 @@ testcase Malt::Engine::RDoc do
 
   method :render do
 
-    test "convert RDoc text" do
+    test "render text" do
       e = Malt::Engine::RDoc.new(:text=>"= Testing")
       h = e.render
       #h.assert.index '<h1 id="label-Testing">Testing</h1>'

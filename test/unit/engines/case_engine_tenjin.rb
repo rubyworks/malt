@@ -2,9 +2,9 @@ testcase Malt::Engine::Tenjin do
 
   method :render do
 
-    test "convert Tenjin format" do
+    test "render text" do
       e = Malt::Engine::Tenjin.new(:text=>'<h1>#{title}</h1>')
-      h = e.render(:data=>{:title=>'Testing'})
+      h = e.render(:locals=>{:title=>'Testing'})
       h.assert.index "<h1>Testing</h1>"
     end
 

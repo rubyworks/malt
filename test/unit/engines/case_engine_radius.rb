@@ -3,8 +3,8 @@ testcase Malt::Engine::Radius do
   method :render do
 
     test "convert Radius DSL to XML by default" do
-      e = Malt::Engine::Radius.new
-      h = e.render(:text=>"<h1>Testing</h1>")
+      e = Malt::Engine::Radius.new(:text=>"<h1>Testing</h1>")
+      h = e.render
       h.assert.index "<h1>Testing</h1>"
     end
 

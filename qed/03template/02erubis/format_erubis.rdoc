@@ -21,14 +21,14 @@ And data to supply the template.
 
 === Format
 
-  erb = Malt::Format::Erb.new(:text=>'<h1><%= title %></h1>')
+  erb = Malt::Format::Erb.new(:text=>'<h1><%= title %></h1>', :engine=>:erbuis)
 
 
 === Malt.file
 
 We can get an Erb instance via the Malt.file method.
 
-  erb = Malt.file('test.erb')
+  erb = Malt.file('test.erb', :engine=>:erubis)
 
   erb.assert.is_a?(Malt::Format::Erb)
 
@@ -56,7 +56,7 @@ Or we can convert the document directly to HTML via the #html method.
 When using `Malt.text` without supplying a `:file` setting, then we must supply
 the `:type`.
 
-  erb = Malt.text('<h1><%= title %></h1>', :type=>:erb)
+  erb = Malt.text('<h1><%= title %></h1>', :type=>:erb, :engine=>:erubis)
 
   erb.assert.is_a?(Malt::Format::Erb)
 
@@ -67,25 +67,12 @@ We can render via Erubis using the `Malt.render` method. Malt will
 automatically recognize the format and the engine to use by the file
 extensions.
 
-  html = Malt.render(:file=>'test.erb', :data=>data)
+  html = Malt.render(:file=>'test.erb', :data=>data, :engine=>:erubis)
 
 And as we can see the document rendered as expected.
 
   html.assert.include?('<h1>Example Document</h1>')
 
-If the file extension were otherwise we could explicitly select the
-the Erubis engine.
-
-Lets say we have a ERB document called 'test.erb' containing:
-
-  <h1>Example <%= title %></h1>
-  <p>This is an example of ERB template.</p>
-
-Then by specifying the :engine Erubis will be used instead of the default ERB.
-
-  html = Malt.render(:file=>'test.erb', :data=>data, :engine=>:erubis)
-
-  html.assert.include?('<h1>Example Document</h1>')
 
 ==== Content Block
 

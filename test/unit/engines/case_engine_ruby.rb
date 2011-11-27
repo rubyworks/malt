@@ -4,13 +4,13 @@ testcase Malt::Engine::Ruby do
 
     test "convert Ruby Ruby text" do
       e = Malt::Engine::Ruby.new(:text=>%q{"Hello " + title})
-      h = e.render(:data=>{:title=>'World!'})
+      h = e.render(:locals=>{:title=>'World!'})
       h.assert.index "Hello World!"
     end
 
     test "Ruby is converstion format agnostic" do
       e = Malt::Engine::Ruby.new
-      e.render(:to=>:DNE, :text=>%q{"Hello " + title}, :data=>{:title=>'World!'})
+      e.render(:to=>:DNE, :text=>%q{"Hello " + title}, :locals=>{:title=>'World!'})
     end
 
   end

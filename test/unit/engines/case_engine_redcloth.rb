@@ -2,7 +2,7 @@ testcase Malt::Engine::RedCloth do
 
   method :render do
 
-    test "convert RedCloth text" do
+    test "render text" do
       e = Malt::Engine::RedCloth.new(:text=>"h1. Testing")
       h = e.render
       h.assert.index "<h1>Testing</h1>"

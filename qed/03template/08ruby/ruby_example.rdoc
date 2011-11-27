@@ -1,0 +1,46 @@
+== Ruby
+
+Lets say we have a Ruby document called 'test.rb' containing:
+
+  "<h1>Example #{title}</h1>\n" +
+  "<p>This is an example of a Radius template.</p>"
+
+We can render such documents via the +render+ method, as we can any format.
+
+  data = {:title=>"Document"}
+
+  html = Malt.render(:file=>'test.rb', :data=>data)
+
+  html.assert.include?('<h1>Example Document</h1>')
+
+We can get a hold of the String document via the `Malt.file` function.
+
+  rb = Malt.file('test.rb')
+
+  rb.class.assert == Malt::Format::Ruby
+
+Now we can convert the String document to an HTML document via #to_html.
+
+  data = {:title => "Document"}
+
+  html = rb.to_html(data)
+
+First we will notice that the output is an instance of Malt::Format::HTML.
+
+  html.class.assert == Malt::Format::HTML
+
+And that by calling #to_s we can get the rendered HTML document.
+
+  html.to_s.assert.include?('<h1>Example Document</h1>')
+
+Or we can convert the String document directly to HTML via the #html method.
+
+  out = rb.html(data)
+
+  out.assert.include?('<h1>Example Document</h1>')
+
+Ruby templates are *polyglot*, so they can be converted to any format,
+and it is simply assumed the result is the format intended. In other words,
+it doesn't ensure the result is HTML just b/c it was asked to render the
+String document into HTML.
+

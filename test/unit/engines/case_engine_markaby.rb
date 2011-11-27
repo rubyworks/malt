@@ -3,8 +3,8 @@ testcase Malt::Engine::Markaby do
   method :render do
 
     test "convert Markaby DSL to XML by default" do
-      e = Malt::Engine::Markaby.new
-      h = e.render(:text=>%[h1 "Testing"])
+      e = Malt::Engine::Markaby.new(:text=>%[h1 "Testing"])
+      h = e.render
       h.assert.index "<h1>Testing</h1>"
     end
 
