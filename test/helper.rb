@@ -7,8 +7,9 @@ require 'ae/pry'
 require 'malt'
 
 # lets try this for now
-require 'rr'
+#require 'rr'
 
-class Lemon::World
-  include RR::Adapters::RRMethods
-end
+#class Lemon::World
+#  include RR::Adapters::RRMethods
+#end
+
