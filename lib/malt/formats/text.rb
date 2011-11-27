@@ -11,7 +11,7 @@ module Malt::Format
   #
   class Text < Abstract
 
-    register('txt')
+    file_extension 'txt'
 
     #
     def txt(*)

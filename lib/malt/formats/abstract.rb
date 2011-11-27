@@ -27,8 +27,8 @@ module Format
     include Malt::Kernel
 
     # Register the class to an extension type.
-    def self.register(*exts)
-      @extensions = exts
+    def self.file_extension(*exts)
+      @file_extensions = exts
       Malt::Format.register(self, *exts)
 
       #exts.each do |ext|
@@ -40,9 +40,14 @@ module Format
       #end
     end
 
+    # @deprecated
+    def self.register(*exts)
+      self.file_extension(*exts)
+    end
+
     #
     def self.extensions
-      @extensions
+      @file_extensions
     end
 
     #--
@@ -53,20 +58,18 @@ module Format
       @engine
     end
 
-    private
+   private
 
     #
     def initialize(options={})
       @options = options.rekey
-      @type    = @options[:type]
-      initialize_engine
+
+      @file = @options[:file]
+      @text = @options[:text] || file_read(@file)
+      @type = @options[:type] || file_type(@file)
     end
 
-    # Override this method to load rendering engine library.
-    def initialize_engine
-    end
-
-    public
+   public
 
     # Access to the options given to the initializer.
     attr :options
@@ -85,17 +88,17 @@ module Format
 
     # Document source text.
     def text
-      @text ||= options[:text] || File.read(file)
+      @text
     end
 
     # File name of document.
     def file
-      @file ||= options[:file].to_s
+      @file
     end
 
     # File extension (with prefixed dot).
     def type
-      @type ||= File.extname(file)
+      @type
     end
 
     # Specified engine to use for rendering.
@@ -114,7 +117,7 @@ module Format
     # Render to default or given format.
     #
     # If the first argument is a Symbol it is considered the format, otherwise
-    # it is taken to be the database for rendering template variables.
+    # it is taken to be the data for rendering template variables.
     def render(*type_and_data, &yld)
       type, data = parse_type_from_data(*type_and_data)
       meth = method(type || default)
@@ -123,9 +126,21 @@ module Format
     end
 
     #
-    #def render_to(format, db=nil, &yld)
-    #  render_engine.render(format, text, file, db, &yld)
-    #end
+    def render_into(into, *data, &content)
+      parameters = rendering_parameters(into, data)
+      Malt.render(parameters, &content)
+    end
+
+    #
+    def rendering_parameters(into, data)
+      opts = options.merge(
+        :to     => into,
+        :data   => data,
+        :text   => text,
+        :file   => file,
+        :engine => engine
+      )
+    end
 
     #
 #    def method_missing(s, *a, &b)
@@ -231,6 +246,20 @@ module Format
         end
       end
       return scope, data
+    end
+
+    #
+    def file_read(file)
+      File.read(file)
+    end
+
+    #
+    def file_type(file)
+      if file
+        File.extname(file)
+      else
+        nil
+      end
     end
 
   end

@@ -123,31 +123,15 @@ module Engine
 
     # - - -  D A T A  H A N D L I N G  - - -
 
-    # Unlike +#scope_and_locals+, this method returns +nil+ for missing
-    # scope or locals.
+    # Take `scope` and `locals` data sources are return them as object and
+    # locals hash.
     #
-    def split_data(data)
-      scope, locals = *[data].flatten
-      if scope.respond_to?(:to_hash)
-        locals ||= {}
-        locals = locals.merge(scope.to_hash)
-        scope  = nil
-      end
-      return scope, locals
-    end
-
-    # Take a data source are return a scope object and locals hash.
+    # @param [Object,Binding] scope
     #
-    # @param [Object,Binding,Hash,Array] data 
-    #   The data source used for evaluation.
-    #   If the data is an Array with more than one entry, the first element
-    #   will be assumed to be an Object or Binding scope and the remaining
-    #   entries hashes which will be merged into one hash.
+    # @param [Hash] locals
     #
     # @return [Array<Object,Hash>] Two element array of scope object and data hash.
-    def scope_and_locals(data, &content)
-      scope, locals = split_data(data) #*[data].flatten
-
+    def make_ready(scope, locals=nil, &content)
       locals ||= {}
 
       case scope
@@ -175,18 +159,12 @@ module Engine
       return scope, locals
     end
 
-    # Take a data source are return a scope object and locals hash.
+    # Take scope and locals are return the same reworked for use as externalized
+    # template variables.
     #
-    # @param [Object,Binding,Hash,Array] data 
-    #   The data source used for evaluation.
-    #   If the data is an Array with more than one entry, the first element
-    #   will be assumed to be an Object or Binding scope and the remaining
-    #   entries hashes which will be merged into one hash.
-    #
-    # @return [Array<Object,Hash>] Two element array of scope object and data hash.
-    def external_scope_and_locals(data, &content)
-      scope, locals = split_data(data) #*[data].flatten
-
+    # @return [Array<Object,Hash>]
+    #   Two element array of scope object and data hash.
+    def make_external(scope, locals=nil, &content)
       locals ||= {}
 
       case scope
@@ -224,9 +202,16 @@ module Engine
     # @see #split_data
     #
     # @return [Object] The data and yield block converted to a Binding.
-    def make_binding(data, &content)
-      scope, locals = scope_and_locals(data, &content)
-      scope.to_binding.with(locals)
+    def make_binding(scope, locals=nil, &content)
+      case scope
+      when Binding
+        locals ||= {}
+        locals[:content] = content.call if content
+        scope.with(locals)
+      else
+        scope, locals = make_ready(scope, locals, &content)
+        scope.to_binding.with(locals)
+      end
     end
 
     # TODO: Simplify the #make_object method.
@@ -237,8 +222,7 @@ module Engine
     #   The data source used for evaluation.
     #
     # @return [Object] The data and yield block converted to an Object.
-    def make_object(data)
-      scope, locals = split_data(data)
+    def make_object(scope, locals=nil)
       locals ||= {}
 
       case scope
@@ -310,9 +294,7 @@ module Engine
     # @see #scope_vs_hash
     #
     # @return [Hash] The data and yield block converted to a Hash.
-    def make_hash(data, &content)
-      scope, locals = split_data(data)
-
+    def make_hash(scope, locals=nil, &content)
       case scope
       when nil
         hash = locals || {}

@@ -7,7 +7,7 @@ module Malt::Format
   #
   class RDoc < Abstract
 
-    register('rdoc')
+    file_extension 'rdoc'
 
     #
     def rdoc(*)
@@ -20,8 +20,9 @@ module Malt::Format
     end
 
     #
-    def html(*)
-      render_engine.render(:format=>:html, :text=>text, :file=>file)
+    def html(*data, &content)
+      render_into(:html, *data, &content)
+      #render_engine.render(:format=>:html, :text=>text, :file=>file)
     end
 
     #

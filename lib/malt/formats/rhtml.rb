@@ -8,8 +8,9 @@ module Malt::Format
   # RHTML is a variant of Erb files which are limited to conversion to HTML.
   class RHTML < Abstract
 
-    register 'rhtml'
+    file_extension 'rhtml'
 
+=begin
     # RHTML templates can be "pre-compiled" into Ruby templates.
     def rb(*)
       render_engine.compile(:text=>text, :file=>file)
@@ -26,10 +27,12 @@ module Malt::Format
 
     #
     alias_method(:precompile, :to_rb)
+=end
 
     #
-    def html(*data, &yld)
-      render_engine.render(:text=>text, :file=>file, :data=>data, :to=>:html, &yld)
+    def html(*data, &content)
+      render_into(:html, *data, &content)
+      #render_engine.render(:text=>text, :file=>file, :data=>data, :to=>:html, &yld)
     end
 
     #
@@ -39,46 +42,19 @@ module Malt::Format
       HTML.new(opts)
     end
 
-    #
-    #def render(data, &yld)
-    #  if options[:recompile]
-    #    result = render_engine.render(db, &yld)
-    #  else
-    #    result = precompile.compile(db, &yld)
-    #  end
-    #
-    #  HTML.new(:text=>result, :file=>refile(:html))
+   #private
+
+    ##
+    #def render_engine
+    #  @render_engine ||= (
+    #    case engine
+    #    when :erubis
+    #      Malt::Engine::Erubis.new(options)
+    #    else
+    #      Malt::Engine::Erb.new(options)
+    #    end
+    #  )
     #end
-
-    #
-    #def to_html(db, &yld)
-    #  # unless pre-compilation is turned off, convert to ruby
-    #  return to_ruby.to_html(db, &yld) unless options[:recompile]
-    #  convert(:html, db, &yld)
-    #end
-
-    #
-    #def render_to(to, db, &yld)
-    #  #if options[:recompile]
-    #    render_engine.render(text, file, db, &yld)
-    #  #else
-    #  #  to_ruby.render(db, &yld)
-    #  #end
-    #end
-
-    private
-
-    #
-    def render_engine
-      @render_engine ||= (
-        case engine
-        when :erubis
-          Malt::Engine::Erubis.new(options)
-        else
-          Malt::Engine::Erb.new(options)
-        end
-      )
-    end
 
   end
 

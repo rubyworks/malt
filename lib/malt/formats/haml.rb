@@ -21,19 +21,13 @@ module Malt::Format
     end
 
     #
-    def html(*data, &yld)
-      render_engine.render(
-        :format => :html,
-        :text   => text,
-        :file   => file,
-        :data   => data,
-        &yld
-      )
+    def html(*data, &content)
+      render_into(:html, *data, &content)
     end
 
     #
-    def to_html(*data, &yld)
-      text = html(*data, &yld)
+    def to_html(*data, &content)
+      text = html(*data, &content)
       opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
@@ -46,12 +40,12 @@ module Malt::Format
     #  )
     #end
 
-    private
+    #private
 
       #
-      def render_engine
-        @render_engine ||= Malt::Engine::Haml.new(options)
-      end
+      #def render_engine
+      #  @render_engine ||= Malt::Engine::Haml.new(options)
+      #end
 
   end
 

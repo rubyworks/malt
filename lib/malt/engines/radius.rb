@@ -11,7 +11,7 @@ module Malt::Engine
     default :radius
 
     #
-    def render(params, &content)
+    def render(params={}, &content)
       into, text = parameters(params, :to, :text)
 
       case into
@@ -28,16 +28,14 @@ module Malt::Engine
 
     #
     def prepare_engine(params={}, &content)
-      data = parameters(params, :data)
-
-      scope, locals = split_data(data)
+      scope, locals = parameters(params, :scope, :locals)
 
       locals ||= {}
 
       # convert string keys to symbols w/o rewriting the hash
       string_keys = locals.keys.select{ |k| String === k }
       string_keys.each do |k|
-        locals[k.to_sym] = data[k]
+        locals[k.to_sym] = locals[k]
         locals.delete(k)
       end
 
@@ -53,25 +51,25 @@ module Malt::Engine
     end
 
     # Radius templates have a very special data source.
-    def make_context(scope, data, &content)
+    def make_context(scope, locals, &content)
       case scope
       when nil
-        context = make_context_from_hash(data, &content)
+        context = make_context_from_hash(locals, &content)
       when Binding
-        context = make_context_from_binding(scope, data, &content)
+        context = make_context_from_binding(scope, locals, &content)
       else
-        context = make_context_from_object(scope, data, &content)
+        context = make_context_from_object(scope, locals, &content)
       end
       context
     end
 
     #
-    def make_context_from_binding(scope, data, &content)
+    def make_context_from_binding(scope, locals, &content)
       context_class = Class.new(::Radius::Context)
       context_class.class_eval do
         define_method :tag_missing do |tag, attr|
-          if data.key?(tag.to_sym)
-            data[tag.to_sym]
+          if locals.key?(tag.to_sym)
+            locals[tag.to_sym]
           else
             scope.eval(tag)
           end
@@ -85,12 +83,12 @@ module Malt::Engine
     end
 
     #
-    def make_context_from_object(scope, data, &content)
+    def make_context_from_object(scope, locals, &content)
       context_class = Class.new(::Radius::Context)
       context_class.class_eval do
         define_method :tag_missing do |tag, attr|
-          if data.key?(tag.to_sym)
-            data[tag.to_sym]
+          if locals.key?(tag.to_sym)
+            locals[tag.to_sym]
           else
             scope.__send__(tag) # any way to support attr as args?
           end
@@ -104,11 +102,11 @@ module Malt::Engine
     end
 
     #
-    def make_context_from_hash(data, &content)
+    def make_context_from_hash(locals, &content)
       context_class = Class.new(::Radius::Context)
       context_class.class_eval do
         define_method :tag_missing do |tag, attr|
-          data[tag.to_sym]
+          locals[tag.to_sym]
         end
       end
       context = context_class.new

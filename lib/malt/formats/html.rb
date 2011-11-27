@@ -5,7 +5,7 @@ module Malt::Format
   #
   class HTML < Abstract
 
-    register 'html'
+    file_extension 'html'  #, 'xhtml' ?
 
     #
     def html(*)
@@ -15,12 +15,6 @@ module Malt::Format
     # HTML is HTML ;)
     def to_html(*)
       self
-    end
-
-    private
-
-    #
-    def render_engine
     end
 
   end

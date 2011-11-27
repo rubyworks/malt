@@ -5,7 +5,7 @@ module Malt::Format
   #
   class CSS < Abstract
 
-    register('css')
+    file_extension 'css'
 
     #
     def css(*)
@@ -20,8 +20,8 @@ module Malt::Format
     private
 
     #
-    def render_engine
-    end
+    #def render_engine
+    #end
 
     # CSS default output type is itself.
     def default

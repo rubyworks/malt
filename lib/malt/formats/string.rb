@@ -17,7 +17,7 @@ module Malt::Format
   #
   class String < AbstractTemplate
 
-    register '.str'
+    file_extension 'str'
 
     #
     def string(*) ; text ; end
@@ -25,6 +25,7 @@ module Malt::Format
     #
     def to_string(*) ; self ; end
 
+=begin
     #
     def to(type, *data, &yld)
       new_class   = Malt::Format.registry[type.to_sym]  # TODO: Malt.machine.format?
@@ -33,36 +34,27 @@ module Malt::Format
       new_options = options.merge(:text=>new_text, :file=>new_file)
       new_class.new(new_options)
     end
+=end
 
-    # Ruby templates can be any type.
-    def method_missing(sym, *args, &yld)
-      if Malt::Format.registry.key?(sym)
-        return to(sym, *args, &yld).to_s
-      elsif md = /^to_/.match(sym.to_s)
-        type = md.post_match.to_sym
-        if Malt::Format.registry.key?(type)  # TODO: Malt.machine.format?
-          return to(type, *args, &yld)
-        end
-      end
-      super(sym, *args, &yld)
-    end
+#    # Ruby templates can be any type.
+#    def method_missing(sym, *args, &yld)
+#      if Malt::Format.registry.key?(sym)
+#        return to(sym, *args, &yld).to_s
+#      elsif md = /^to_/.match(sym.to_s)
+#        type = md.post_match.to_sym
+#        if Malt::Format.registry.key?(type)  # TODO: Malt.machine.format?
+#          return to(type, *args, &yld)
+#        end
+#      end
+#      super(sym, *args, &yld)
+#    end
 
-    #
-    #def render_to(to, db, &yld)
-    #  malt_engine.render(text, file, db, &yld)
+    #private
+
+    ##
+    #def render_engine
+    #  @render_engine ||= Malt::Engine::String.new(options)
     #end
-
-    def render(*type_and_data, &yld)
-      type, data = parse_type_from_data(*type_and_data)
-      render_engine.render(:text=>text, :file=>file, :data=>data, &yld)
-    end
-
-    private
-
-    #
-    def render_engine
-      @render_engine ||= Malt::Engine::String.new(options)
-    end
 
   end
 

@@ -12,21 +12,21 @@ module Malt::Engine
 
     #
     def render(params={}, &content) #file, db, &content)
-      text, data = parameters(params, :text, :data)
+      text, scope, locals = parameters(params, :text, :scope, :locals)
 
-      data = make_hash(data, &content)
+      locals = make_hash(scope, locals, &content)
 
       # convert symbol keys to strings w/o rewriting the hash
-      symbol_keys = data.keys.select{ |k| Symbol === k }
+      symbol_keys = locals.keys.select{ |k| Symbol === k }
       symbol_keys.each do |k|
-        data[k.to_s] = data[k]
-        data.delete(k)
+        locals[k.to_s] = locals[k]
+        locals.delete(k)
       end
 
       #engine = intermediate(params)
       #engine.render(data)
 
-      ::Mustache.render(text, data)
+      ::Mustache.render(text, locals)
     end
 
     #

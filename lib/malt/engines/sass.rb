@@ -9,7 +9,7 @@ module Malt::Engine
     default :sass, :scss
 
     #
-    def render(params, &content)
+    def render(params={}, &content)
       into = parameters(params, :to)
 
       case into
@@ -22,7 +22,7 @@ module Malt::Engine
     end
 
     #
-    def create_engine(params)
+    def create_engine(params={})
       text, file, type = parameters(params, :text, :file, :type)
 
       opts = engine_options(params)

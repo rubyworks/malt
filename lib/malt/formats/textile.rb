@@ -6,7 +6,7 @@ module Malt::Format
   #
   class Textile < Abstract
 
-    register('textile', 'tt')
+    file_extension 'textile', 'tt'
 
     #
     def textile(*)
@@ -24,8 +24,8 @@ module Malt::Format
     alias_method :to_tt, :to_textile
 
     #
-    def html(*)
-      render_engine.render(:format=>:html, :text=>text, :file=>file)
+    def html(*data, &content)
+      render_into(:html, *data, &content)
     end
 
     #
@@ -34,24 +34,12 @@ module Malt::Format
       HTML.new(opts)
     end
 
+    #private
     #
-    #def render_to(to, *)
-    #  case to
-    #  when :textile, :tt
-    #    self
-    #  when :html
-    #    malt_engine.render_html(text, file)
-    #  else
-    #    raise "can't render textile to #{to} type" #?
-    #  end
+    ##
+    #def render_engine
+    #  @render_engine ||= Malt::Engine::RedCloth.new(options)
     #end
-
-    private
-
-      #
-      def render_engine
-        @render_engine ||= Malt::Engine::RedCloth.new(options)
-      end
 
   end
 

@@ -9,7 +9,7 @@ module Malt::Format
   # This uses the same engine as Sass.
   class SCSS < Abstract
 
-    register 'scss'
+    file_extension 'scss'
 
     #
     def scss(*)
@@ -22,34 +22,27 @@ module Malt::Format
     end
 
     #
-    def css(*data, &yld)
-      render_engine.render(:format=>:css, :text=>text, :file=>file, :data=>data, :type=>type, &yld)
+    def css(*data, &content)
+      render_into(:css, *data, &content)
     end
 
     #
-    def to_css(*data, &yld)
-      result = css(*data, &yld)
+    def to_css(*data, &content)
+      result = css(*data, &content)
       CSS.new(:text=>result, :file=>refile(:css), :type=>:css)
     end
 
-    #
-    #def compile(db, &yld)
-    #  result = render_engine.render(text, db, &yld)
-    #  opts = options.merge(:text=>result, file=>refile(:css))
-    #  CSS.new(opts)
+   private
+
+    ##
+    #def render_engine
+    #  @render_engine ||= Malt::Engine::Sass.new(options)
     #end
 
-    private
-
-      #
-      def render_engine
-        @render_engine ||= Malt::Engine::Sass.new(options)
-      end
-
-      # Sass default output type is CSS.
-      def default
-        :css
-      end
+    # Sass default output type is CSS.
+    def default
+      :css
+    end
 
   end
 

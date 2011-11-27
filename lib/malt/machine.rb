@@ -11,10 +11,10 @@ module Malt
 
     # List of markup types. These are formats that just allow markup transformations
     # and do not provide for data injection.
-    MARKUP = [:rdoc, :markdown, :textile, :scss, :sass, :less, :css, :html, :xml]
+    MARKUP = [:rdoc, :markdown, :textile, :scss, :sass, :less, :css, :html, :xml, :wikicloth]
 
     # List of template types. These are template formats that provide data injection.
-    TEMPLATE = [:ruby, :erb, :liquid, :mustache, :tenjin, :ragtag, :radius, :erector, :builder, :markaby]
+    TEMPLATE = [:erb, :liquid, :mustache, :tenjin, :ragtag, :radius, :erector, :builder, :ruby, :string]
 
     # Template types that prevent arbitrary Ruby code execution.
     TEMPLATE_SAFE = [:liquid, :mustache]
@@ -26,7 +26,7 @@ module Malt
     #
     def initialize(config={})
       if priority = config[:priority]
-        priority.map!{ |e| e.to_sym }
+        priority = priority.map{ |e| e.to_sym }
       else
         priority = []
       end
@@ -68,6 +68,7 @@ module Malt
       end
       @priority
     end
+    alias_method :prefer, :priority
 
     #
     def engine?(ext)
@@ -110,11 +111,14 @@ module Malt
     end
 
     # Open a URL as a Malt Format object.
+    #
+    # @return [Malt::Format]
     def open(url, options={})
       require 'open-uri'
       text = open(url).read
       file = File.basename(url) # parse better with URI.parse
-      text(text, :file=>file)
+      options[:file] = file
+      text(text, options)
     end
 
     # Render template directly.
@@ -127,9 +131,9 @@ module Malt
     # parameters[:to]     - Format to convert to (usual default is `html`).
     #
     def render(parameters={}, &content)
-      multi = parameters[:multi]
+      parameters = normalize_parameters(parameters)
 
-      if multi
+      if parameters[:multi]
         multi_render(parameters, &content)
       else
         single_render(parameters, &content)
@@ -138,23 +142,43 @@ module Malt
 
   private
 
+    # Normalize parameters.
+    def normalize_parameters(parameters)
+      params = parameters.rekey
+
+      if data = params.delete(:data)
+        scope, locals = split_data(data)
+        params[:scope]  ||= scope
+        params[:locals] ||= locals
+      end
+
+      file = params[:file]
+      text = params[:text]
+
+      unless text
+        params[:text] = file_read(file)
+      end
+
+      params
+    end
+
     #
     def multi_render(parameters={}, &content)
       type = parameters[:type]
-      file = parameters[:file]
+      #file = parameters[:file]
       text = parameters[:text]
-
-      text = File.read(file) if !text
 
       if type = parameters[:type]
         types = [type].flatten
       else
         types = file.split('.')[1..-1]
       end
-      types.reverse_each do |type|
-        parameters[:type] = type
+
+      types.reverse_each do |t|
+        parameters[:type] = t
         parameters[:text] = single_render(parameters, &content)
       end
+
       parameters[:text]
     end
 
@@ -166,7 +190,7 @@ module Malt
       engine = parameters[:engine]
 
       type   = file_type(file, type)
-      text   = file_read(file) unless text
+      #text   = file_read(file) unless text
 
       engine_class = engine(type, engine)
 
@@ -175,6 +199,7 @@ module Malt
         parameters[:text] = text
 
         engine = engine_class.new
+
         engine.render(parameters, &content)
       else
         if parameters[:pass]
@@ -248,6 +273,19 @@ module Malt
       else
         ext.to_sym
       end
+    end
+
+    # Unlike +#scope_and_locals+, this method returns +nil+ for missing
+    # scope or locals.
+    #
+    def split_data(data)
+      scope, locals = *[data].flatten
+      if scope.respond_to?(:to_hash)
+        locals ||= {}
+        locals = locals.merge(scope.to_hash)
+        scope  = nil
+      end
+      return scope, locals
     end
 
   end

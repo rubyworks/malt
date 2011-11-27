@@ -15,7 +15,7 @@ module Malt::Engine
     register :rbml, :builder
 
     #
-    def render(params, &content)
+    def render(params={}, &content)
       into = parameters(params, :to) || :html
 
       case into
@@ -30,15 +30,14 @@ module Malt::Engine
 
     #
     def prepare_engine(params={}, &content)
-      text, file, data, prefix = parameters(params, :text, :file, :data, :prefix)
+      prefix, text, file, scope, locals, prefix = parameters(params, :prefix, :text, :file, :scope, :locals)
 
-      file = file || "(#{inspect})"
+      file = file || "(markaby)"
 
       if prefix
         raise NotImplmentedError, "Markaby doesn't support prefix templates."
         #scope, locals = scope_and_locals(data, &content)
-
-        scope, locals = split_data(data)
+        #scope, locals = split_data(data)
 
         scope  ||= Object.new
         locals ||= {}
@@ -53,7 +52,7 @@ module Malt::Engine
 
         eval(code, scope.to_binding, file).call(mab)
       else
-        scope, locals = external_scope_and_locals(data, &content)
+        scope, locals = make_external(scope, locals, &content)
 
         mab = ::Markaby::Builder.new(locals, scope)
         mab.instance_eval(text, file)

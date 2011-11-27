@@ -9,7 +9,7 @@ module Malt::Format
   #
   class LESS < Abstract
 
-    register('less')
+    file_extension 'less'
 
     #
     def less(*)
@@ -22,24 +22,25 @@ module Malt::Format
     end
 
     #
-    def css(*)
-      opts = options.merge(:text=>text, :file=>file, :format=>:css)
-      render_engine.render(opts)
+    def css(*data, &content)
+      render_into(:css, *data, &content)
+      #opts = options.merge(:text=>text, :file=>file, :format=>:css)
+      #render_engine.render(opts)
     end
 
     #
-    def to_css(*)
-      text = css
+    def to_css(*data, &content)
+      text = css(*data, &content)
       opts = options.merge(:text=>text, :file=>refile(:css), :type=>:css)
       CSS.new(opts)
     end
 
-    private
-
-    #
-    def render_engine
-      @render_engine ||= Malt::Engine::Less.new(options)
-    end
+#  private
+#
+#    #
+#    def render_engine
+#      @render_engine ||= Malt::Engine::Less.new(options)
+#    end
 
     # LESS default output type is CSS.
     def default

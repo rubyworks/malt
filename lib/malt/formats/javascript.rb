@@ -5,25 +5,21 @@ module Malt::Format
   #
   class Javascript < Abstract
 
-    register 'javascript', 'js'
+    file_extension 'js'
 
     #
-    def javascript(*)
+    def js(*)
       text
     end
-    alias_method :js, :javascript
+
+    alias_method :javascript, :js
 
     #
-    def to_javascript(*)
+    def to_js(*)
       self
     end
-    alias_method :to_js, :to_javascript
 
-    private
-
-    #
-    def render_engine
-    end
+    alias_method :to_javascript, :to_js
 
   end
 

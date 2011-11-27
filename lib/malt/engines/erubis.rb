@@ -14,12 +14,13 @@ module Malt::Engine
 
     # Render template.
     def render(params, &content)
-      text, file, data = parameters(params, :text, :file, :data)
+      text, file, scope, locals = parameters(params, :text, :file, :scope, :locals)
 
       # NOTE: Erubis can handle hash data via result(:list=>data).
       # Would it be better to use that?
 
-      bind = make_binding(data, &content)
+      bind = make_binding(scope, locals, &content)
+
       prepare_engine(params).result(bind)
     end
 

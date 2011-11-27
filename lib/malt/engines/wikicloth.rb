@@ -13,9 +13,9 @@ module Malt::Engine
 
     #
     def render(params={}, &content)
-      data = parameters(params, :data)
+      scope, locals = parameters(params, :scope, :locals)
 
-      data = make_hash(data, &content)
+      data = make_hash(scope, locals, &content)
 
       case params[:to]
       when :html, nil

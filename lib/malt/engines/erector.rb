@@ -37,11 +37,9 @@ module Malt::Engine
 
     # Return Erector parser, ready to render results.
     def prepare_engine(params={}, &content)
-      file, data  = parameters(params, :file, :data)
+      file, scope, locals = parameters(params, :file, :scope, :locals)
 
-      scope, locals = external_scope_and_locals(data, &content)
-
-      #file = file || inspect
+      scope, locals = make_external(scope, locals, &content)
 
       unless scope.respond_to?(:to_struct)
         scope_locals = {}

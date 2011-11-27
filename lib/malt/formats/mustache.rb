@@ -9,7 +9,7 @@ module Malt::Format
   #
   class Mustache < AbstractTemplate
 
-    register('mustache')
+    file_extension 'mustache'
 
     #
     def mustache(*)
@@ -21,12 +21,12 @@ module Malt::Format
       self
     end
 
-    private
+    #private
 
     #
-    def render_engine
-      @render_engine ||= Malt::Engine::Mustache.new(options)
-    end
+    #def render_engine
+    #  @render_engine ||= Malt::Engine::Mustache.new(options)
+    #end
 
   end
 

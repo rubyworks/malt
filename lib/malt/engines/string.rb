@@ -12,10 +12,10 @@ module Malt::Engine
 
     #
     def render(params={}, &content)
-      text, file, data = parameters(params, :text, :file, :data)
+      text, file, scope, locals = parameters(params, :text, :file, :scope, :locals)
 
-      bind = make_binding(data, &content)
-      eval("%{#{text}}", bind, file || 'eval')
+      bind = make_binding(scope, locals, &content)
+      eval("%{#{text}}", bind, file || '(eval)')
     end
 
     # Ruby compiles to Ruby. How odd. ;)

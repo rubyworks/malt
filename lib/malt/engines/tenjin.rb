@@ -19,16 +19,17 @@ module Malt::Engine
     #   Defaults to 'CGI.escapeHTML'.
     #
     def render(params, &content)
-      into, text, file, data, type = parameters(params, :to, :text, :file, :data, :type)
+      into, text, file, type, scope, locals = parameters(params, :to, :text, :file, :type, :scope, :locals)
 
       into ||= :html
 
       if type == :rbhtml && into != :html
         super(params, &content) 
       else
-        scope, locals = scope_and_locals(data, &content)
+        scope, locals = make_ready(scope, locals, &content)
+
         engine = prepare_engine(params)
-   
+
         engine.call(scope, locals)
       end
     end

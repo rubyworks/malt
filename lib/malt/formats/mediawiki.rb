@@ -9,7 +9,7 @@ module Malt::Format
   #
   class MediaWiki < Abstract
 
-    register('mediawiki', 'mw')
+    file_extension 'mediawiki', 'mw'
 
     #
     def mediawiki(*)
@@ -25,8 +25,9 @@ module Malt::Format
     alias_method :to_mw, :to_mediawiki
 
     #
-    def html(*)
-      render_engine.render(:text=>text, :file=>file, :format=>:html)
+    def html(*data, &content)
+      #render_engine.render(:text=>text, :file=>file, :format=>:html)
+      render_into(:html, *data, &content)
     end
 
     # Convert to HTML.
@@ -46,6 +47,7 @@ module Malt::Format
     #  Latex.new(opts)
     #end
 
+=begin
    private
 
     # Select rendering engine.
@@ -61,6 +63,7 @@ module Malt::Format
         end
       )
     end
+=end
 
   end
 

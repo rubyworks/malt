@@ -11,17 +11,19 @@ module Format
     #
     def to(type, *data, &yld)
       new_class   = Malt::Format.registry[type.to_sym]  # TODO: Malt.machine.format?
-      new_text    = render(type, *data, &yld)
+      new_text    = render_into(type, *data, &yld)
       new_file    = refile(type)
       new_options = options.merge(:text=>new_text, :file=>new_file, :type=>type)
       new_class.new(new_options)
     end
 
     #
-    def render(*type_and_data, &yld)
+    def render(*type_and_data, &content)
       type, data = parse_type_from_data(*type_and_data)
-      opts = options.merge(:to=>type, :text=>text, :file=>file, :data=>data)
-      render_engine.render(opts, &yld)
+      #opts = options.merge(:to=>type, :text=>text, :file=>file, :data=>data)
+      render_into(type, *data, &content)
+
+      #render_engine.render(opts, &yld)
       #opts = options.merge(:format=>type, :text=>text, :file=>file, :data=>data, :engine=>engine)
       #Malt.render(opts, &yld)
     end
@@ -29,7 +31,7 @@ module Format
     # ERB templates can be any type.
     def method_missing(sym, *args, &yld)
       if Malt::Format.registry.key?(sym)  # TODO: Malt.machine.format?
-        return render(sym, *args, &yld).to_s
+        return render_into(sym, *args, &yld) #.to_s
       elsif md = /^to_/.match(sym.to_s)
         type = md.post_match.to_sym
         if Malt::Format.registry.key?(type)  # TODO: Malt.machine.format?

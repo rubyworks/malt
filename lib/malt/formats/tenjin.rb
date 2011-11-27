@@ -25,8 +25,8 @@ module Malt::Format
     alias_method(:to_ruby, :to_rb)
 
     #
-    def html(*data, &yld)
-      render(:html, *data, &yld)
+    def html(*data, &content)
+      render_into(:html, *data, &content)
     end
 
     #

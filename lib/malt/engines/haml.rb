@@ -10,9 +10,9 @@ module Malt::Engine
 
     #
     def render(params={}, &content)
-      into, data = parameters(params, :to, :data)
+      into, scope, locals = parameters(params, :to, :scope, :locals)
 
-      scope, locals = scope_and_locals(data, &content)
+      scope, locals = make_ready(scope, locals, &content)
 
       case into
       when :html, nil

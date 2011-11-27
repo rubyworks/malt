@@ -22,7 +22,7 @@ module Malt::Format
   # 
   class Builder < Abstract
 
-    register 'rbml', 'builder', 'nokogiri', 'mab', 'markaby', 'erector'
+    file_extension 'rbml', 'builder', 'nokogiri', 'mab', 'markaby', 'erector'
 
     #
     def builder(*)
@@ -37,13 +37,14 @@ module Malt::Format
     alias_method :to_rbml, :to_builder
 
     #
-    def html(*data, &yld)
-      render_engine.render(:to=>:html, :text=>text, :file=>file, :data=>data, &yld)
+    def html(*data, &content)
+      #render_engine.render(:to=>:html, :text=>text, :file=>file, :data=>data, &yld)
+      render_into(:html, *data, &content)
     end
 
     #
-    def to_html(*data, &yld)
-      text = html(*data, &yld)
+    def to_html(*data, &content)
+      text = html(*data, &content)
       opts = options.merge(:text=>text, :file=>refile(:html), :type=>:html)
       HTML.new(opts)
     end
@@ -60,20 +61,20 @@ module Malt::Format
 
     # TODO: allow the type to influence the engine selection
     #
-    def render_engine
-      @render_engine ||= (
-        case engine
-        when :erector
-          Malt::Engine::Erector.new(options)
-        when :builder
-          Malt::Engine::Builder.new(options)
-        when :markaby, :mab
-          Malt::Engine::Markaby.new(options)
-        else
-          Malt::Engine::Nokogiri.new(options)
-        end
-      )
-    end
+    #def render_engine
+    #  @render_engine ||= (
+    #    case engine
+    #    when :erector
+    #      Malt::Engine::Erector.new(options)
+    #    when :builder
+    #      Malt::Engine::Builder.new(options)
+    #    when :markaby, :mab
+    #      Malt::Engine::Markaby.new(options)
+    #    else
+    #      Malt::Engine::Nokogiri.new(options)
+    #    end
+    #  )
+    #end
 
   end
 

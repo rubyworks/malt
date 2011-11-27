@@ -11,7 +11,7 @@ module Malt::Engine
     default :builder, :rbml
 
     #
-    def render(params, &content)
+    def render(params={}, &content)
       into = parameters(params, :to) || :html
 
       case into
@@ -48,11 +48,9 @@ module Malt::Engine
 
     #
     def prepare_engine_prefix(params, &content)
-      text, file, data, prefix = parameters(params, :text, :file, :data, :prefix)
+      prefix, text, file, scope, locals = parameters(params, :prefix, :text, :file, :scope, :locals)
 
-      file ||= "(builder)"
-
-      bind = make_binding(data, &content)
+      bind = make_binding(scope, locals, &content)
 
       #scope, locals = split_data(data)
 
@@ -70,11 +68,14 @@ module Malt::Engine
       eval(code, bind, file || '(builder)').call(engine)
     end
 
+    # TODO: woud rather set instance variable via #instance_variable_set
+    # but it is not defined.
+
     #
     def prepare_engine_scope(params, &content)
-      text, file, data = parameters(params, :text, :file, :data)
+      text, file, scope, locals = parameters(params, :text, :file, :scope, :locals)
 
-      scope, locals = external_scope_and_locals(data, &content)
+      scope, locals = make_external(scope, locals, &content)
 
       engine = create_engine
 

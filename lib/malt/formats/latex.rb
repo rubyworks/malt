@@ -6,7 +6,7 @@ module Malt::Format
   #
   class Latex < Abstract
 
-    register 'latex'
+    file_extension 'latex'
 
     #
     def latex(*)

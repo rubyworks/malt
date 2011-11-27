@@ -18,13 +18,17 @@ module Malt::Engine
     # @param [Hash] params
     #
     # @option params [String] :text
-    #   Text of ERB document.
+    #   Text of document.
     #
     # @option params [String] :file
     #   The file name where text was read (or nil).
     #
-    # @option params [Hash,Binding,Object,Array] :data
-    #   Data source for template interpolation.
+    # @option params [Object,Binding] :scope
+    #   Scope from within which to render, serves as data source for
+    #   template interpolation.
+    #
+    # @option params [Object,Binding] :locals
+    #   Direct key/value data for template interpolation.
     #
     # @option params [Boolean] :safe
     #   Run in separate thread.
@@ -42,11 +46,11 @@ module Malt::Engine
     # @return [String] Rendered output.
     #
     def render(params={}, &content)
-      text, file, data = parameters(params, :text, :file, :data)
+      text, file, scope, locals = parameters(params, :text, :file, :scope, :locals)
 
       #if settings[:compile] == true
       #else
-        bind = make_binding(data, &content)
+        bind = make_binding(scope, locals, &content)
         prepare_engine(params).result(bind)
       #end
     end
@@ -77,12 +81,17 @@ module Malt::Engine
       require_library('erb')
     end
 
-    def engine_options(params)
-      opts = {}
-      opts[:safe] = params[:safe] || settings[:safe]
-      opts[:trim] = params[:trim] || settings[:trim]
-      opts
+    #
+    def engine_option_names
+      [:safe, :trim]
     end
+
+    #def engine_options(params)
+    #  opts = {}
+    #  opts[:safe] = params[:safe] || settings[:safe]
+    #  opts[:trim] = params[:trim] || settings[:trim]
+    #  opts
+    #end
 
     # Compile ERB template into Ruby source code.
     #

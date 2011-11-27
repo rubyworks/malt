@@ -11,11 +11,12 @@ module Malt::Format
   #
   class RagTag < Abstract
 
-    register('ragtag', 'rt')
+    file_extension 'ragtag', 'rt'
 
     #
-    def html(*data, &yld)
-      render_engine.render(:text=>text, :data=>data, &yld)
+    def html(*data, &content)
+      render_into(:html, *data, &content)
+      #render_engine.render(:text=>text, :data=>data, &yld)
     end
 
     #
@@ -27,7 +28,7 @@ module Malt::Format
 
     #
     def xml(*data, &yld)
-      render_engine.render(:text=>text, :data=>data, &yld)
+      render_into(:xml, *data, &content)
     end
 
     #
@@ -37,12 +38,12 @@ module Malt::Format
       XML.new(opts)
     end
 
-    private
+    #private
 
       #
-      def render_engine
-        @render_engine ||= Malt::Engine::RagTag.new(options)
-      end
+      #def render_engine
+      #  @render_engine ||= Malt::Engine::RagTag.new(options)
+      #end
 
   end
 

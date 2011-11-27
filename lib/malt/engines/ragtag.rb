@@ -11,7 +11,7 @@ module Malt::Engine
     default :ragtag, :rt
 
     #
-    def render(params, &content)
+    def render(params={}, &content)
       into = parameters(params, :to) || :html
 
       case into
@@ -28,9 +28,9 @@ module Malt::Engine
 
     # 
     def prepare_engine(params={}, &content)
-      into, text, file, data = parameters(params, :to, :text, :file, :data)
+      text, file, scope, locals = parameters(params, :text, :file, :scope, :locals)
 
-      binding = make_binding(data, &content)
+      binding = make_binding(scope, locals, &content)
 
       create_engine(params).compile(binding)
     end

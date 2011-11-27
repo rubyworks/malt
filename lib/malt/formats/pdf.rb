@@ -5,7 +5,7 @@ module Malt::Format
   #
   class PDF < Abstract
 
-    register 'pdf'
+    file_extension 'pdf'
 
     #
     def pdf(*)
@@ -16,12 +16,6 @@ module Malt::Format
     def to_pdf(*)
       self
     end
-
-    private
-
-      #
-      def render_engine
-      end
 
   end
 

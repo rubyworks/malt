@@ -12,9 +12,9 @@ module Malt::Engine
 
     #
     def render(params={}, &content) #file, db, &content)
-      text, data = parameters(params, :text, :data)
+      text, scope, locals = parameters(params, :text, :scope, :locals)
 
-      data = make_hash(data, &content)
+      data = make_hash(scope, locals, &content)
 
       # convert symbol keys to strings w/o rewriting the hash
       symbol_keys = data.keys.select{ |k| Symbol === k }

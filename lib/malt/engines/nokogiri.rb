@@ -18,7 +18,7 @@ module Malt::Engine
     DOCUMENT_HEADER_HTML = /^<\!DOCTYPE html PUBLIC \".*?\">/
 
     #
-    def render(params, &content)
+    def render(params={}, &content)
       into = parameters(params, :to) || :html
 
       case into.to_sym
@@ -33,9 +33,9 @@ module Malt::Engine
 
     #
     def prepare_engine(params={}, &content)
-      text, file, data = parameters(params, :text, :file, :data)
+      text, file, scope, locals = parameters(params, :text, :file, :scope, :locals)
 
-      scope, locals = external_scope_and_locals(data, &content)
+      scope, locals = make_external(scope, locals, &content)
 
       engine = create_engine(params)
 

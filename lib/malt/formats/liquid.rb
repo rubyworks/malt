@@ -9,7 +9,7 @@ module Malt::Format
   #
   class Liquid < AbstractTemplate
 
-    register('liquid')
+    file_extension 'liquid'
 
     #
     def liquid(*)
@@ -50,12 +50,12 @@ module Malt::Format
 #      super(sym, *args, &yld)
 #    end
 
-    private
-
-      #
-      def render_engine
-        @render_engine ||= Malt::Engine::Liquid.new(options)
-      end
+#    private
+#
+#      #
+#      def render_engine
+#        @render_engine ||= Malt::Engine::Liquid.new(options)
+#      end
 
   end
 
