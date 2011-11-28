@@ -70,6 +70,9 @@ lib/malt/tilted.rb
 lib/malt/version.rb
 lib/malt.rb
 lib/malt.yml
+test/benchmarks/malt_vs_tilt.rb
+test/fixtures/sample.erb
+test/fixtures/sample.rdoc
 test/helper.rb
 test/unit/engines/case_engine_bluecloth.rb
 test/unit/engines/case_engine_builder.rb
