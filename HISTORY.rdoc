@@ -1,37 +1,42 @@
 = Release History
 
-== 0.4.0 | 2011-11-26
+== 0.4.0 | 2011-11-27
 
 This release of Malt is a major improvement over the previous release.
 Where as before not all formats behaved consistently --for instance,
-not all template engines handled block yielding, this release has
+not all templating engines handled block yielding, this release has
 ensured consistent functionality across all engines. A couple of
 significant changes were made to do this.
 
-Most important to the end user, template formats can no longer
-use `yield` to insert block content, but rather must use
-the `content` method. This was done to avoid unnecessary
-implementation complexity due to Ruby's limitation on the use
-of yield within Proc objects. The code is much cleaner and
-subsequently more robust thanks to this change.
+Most important to the end user, templating formats can no longer
+use `yield` to insert block content, but rather must use `content`.
+This was done to avoid unnecessary implementation complexity due
+to Ruby's limitation on the use of yield within Proc objects.
+The code is much cleaner and subsequently more robust thanks to 
+this change.
 
-The builder-style engines *Builder, Markaby, Erector and Nokogiri)
-have all been united under a single Builder format class. The
+The builder-style engines (Builder, Markaby, Erector and Nokogiri)
+have all been united under a single `Builder` format class. The
 common extension for such files is `.rbml`. These engines have been
-tweaked to all act uniformly, supporting explicit and implicit
+tweaked to behave uniformly, supporting explicit and implicit
 evaluation modes and using instance variables and externalized
 scope.
 
+In addition to these changes, a few new formats/engines have been
+added, including Creole, Maruku, WikiCloth, CoffeeScript and
+Nokogiri Builder.
+
 Changes:
 
-* Add Creole, Maruku and WikiCloth markup engine/formats
+* Add Creole, Maruku and WikiCloth markup engine/formats.
 * Add CoffeeScript transpiler engine/formats.
-* Add Nokogiri Builder formats.
-* Support `scope, locals` style data, via array `:data` option.
+* Add Nokogiri Builder format.
+* Support `scope and `locals` style data, as well as `data` option.
 * Unified builder engines under one .rbml/.builder format.
-* Use #content instead of #yield for block content.
+* Use #content instead of #yield for block content!
 * Add :multi option for multi-format rendering.
 * Overhaul internal engine API, for better overall design.
+* Formats delegate to master Malt.render method.
 
 
 == 0.3.0 | 2010-11-04

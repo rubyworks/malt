@@ -9,5 +9,5 @@ rvm:
   #- jruby
 env:
   - testcmd="qed"
-  - testcmd="ruby-test -r./test/helper.rb test/"
+  - testcmd="ruby-test -r./test/helper.rb test/unit"
 
