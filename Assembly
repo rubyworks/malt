@@ -11,7 +11,7 @@ dnote:
 
 qedoc:
   title: Malt Demonstrandum
-  output: web/qed.html
+  output: web/demo.html
 
 email:
   mailto:
