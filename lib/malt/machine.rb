@@ -279,7 +279,7 @@ module Malt
     # scope or locals.
     #
     def split_data(data)
-      scope, locals = *[data].flatten
+      scope, locals = *(Array(data))
       if scope.respond_to?(:to_hash)
         locals ||= {}
         locals = locals.merge(scope.to_hash)

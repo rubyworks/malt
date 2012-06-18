@@ -4,9 +4,9 @@ require 'malt/formats/pdf'
 
 module Malt::Format
 
-  # Plain text format. Plain text documents are uniqu in that they can
+  # Plain text format. Plain text documents are unique in that they can
   # be transformed into any other type of document. For example, applying
-  # to_html in text doesn't actually transform the source text in any way.
+  # #to_html in text doesn't actually transform the source text in any way.
   # Rather it simply "informs" Malt to treat the text as HTML.
   #
   class Text < Abstract
