@@ -2,6 +2,7 @@
 
 {Homepage}[http://rubyworks.github.com/malt] |
 {Development}[http://github.com/rubyworks/malt] |
+{Report Issue}[http://github.com/rubyworks/malt/issues] |
 {Mailing List}[http://groups.google.com/group/rubyworks-mailinglist]
 
 {<img src="http://travis-ci.org/rubyworks/malt.png" />}[http://travis-ci.org/rubyworks/malt]

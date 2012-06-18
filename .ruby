@@ -8,8 +8,6 @@ copyrights:
 - holder: Rubyworks
   year: '2010'
   license: BSD-2-Clause
-replacements: []
-alternatives: []
 requirements:
 - name: blankslate
 - name: detroit
@@ -130,17 +128,29 @@ requirements:
   - test
   development: true
 dependencies: []
+alternatives: []
 conflicts: []
 repositories:
 - uri: git@github.com:rubyworks/malt.git
   scm: git
   name: upstream
 resources:
-  home: http://rubyworks.github.com/malt
-  code: http://github.com/rubyworks/malt
-  wiki: http://wiki.github.com/rubyworks/malt
-  docs: http://rubyworks.github.com/malt/docs/api
-  bugs: http://github.com/rubyworks/malt/issues
+- uri: http://rubyworks.github.com/malt
+  label: Website
+  type: home
+- uri: http://github.com/rubyworks/malt
+  label: Source Code
+  type: code
+- uri: http://wiki.github.com/rubyworks/malt
+  label: User Guide
+  type: wiki
+- uri: http://rubyworks.github.com/malt/docs/api
+  label: Documentation
+  type: docs
+- uri: http://github.com/rubyworks/malt/issues
+  label: Issue Tracker
+  type: bugs
+categories: []
 extra: {}
 load_path:
 - lib
@@ -148,9 +158,9 @@ revision: 0
 created: '2010-06-22'
 summary: Multi-template/multi-markup rendering engine
 title: Malt
-version: 0.4.0
+version: 0.4.1
 name: malt
 description: Malt provides a factory framework for rendering a variety of template
   and markup document formats.
 organization: rubyworks
-date: '2011-11-26'
+date: '2012-06-18'
