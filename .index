@@ -118,10 +118,6 @@ requirements:
 - groups:
   - test
   development: true
-  name: active_support
-- groups:
-  - test
-  development: true
   name: coffee-script
 conflicts: []
 alternatives: []

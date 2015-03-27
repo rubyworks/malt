@@ -43,7 +43,6 @@ requirements:
   - maruku    (test)
   - creole    (test)
   - erector        (test)
-  - active_support (test)  # erector needs it
   - coffee-script  (test)
 
 resources:
