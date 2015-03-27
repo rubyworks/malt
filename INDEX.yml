@@ -1,0 +1,70 @@
+---
+name:
+  malt
+
+version:
+  0.4.1
+
+title:
+  Malt
+
+summary:
+  Multi-template/multi-markup rendering engine.
+
+description:
+  Malt provides a factory framework for rendering a variety
+  of template and markup document formats.
+
+requirements:
+  - blankslate
+  - detroit   (build)
+  - qed       (test)
+  - test      (test)
+  - lemon     (test)
+  - ae        (test)
+  - rdoc 3+   (test)
+  - RedCloth  (test)
+  - bluecloth (test)
+  - kramdown  (test)
+  - rdiscount (test)
+  - haml      (test)
+  - sass      (test)
+  - less      (test)
+  - tenjin    (test)
+  - rtals     (test)
+  - liquid    (test)
+  - erubis    (test)
+  - mustache  (test)
+  - markaby   (test)
+  - builder   (test)
+  - radius    (test)
+  - ragtag    (test)
+  - redcarpet (test)
+  - wikicloth (test)
+  - maruku    (test)
+  - creole    (test)
+  - erector        (test)
+  - active_support (test)  # erector needs it
+  - coffee-script  (test)
+
+resources:
+  home: http://rubyworks.github.com/malt
+  code: http://github.com/rubyworks/malt
+  wiki: http://wiki.github.com/rubyworks/malt
+  docs: http://rubyworks.github.com/malt/docs/api
+  bugs: http://github.com/rubyworks/malt/issues
+
+respositories:
+  upstream: git@github.com:rubyworks/malt.git
+
+authors:
+  - trans <transfire@gmail.com>
+
+organizations:
+  - Rubyworks
+
+created:
+  2010-06-22
+
+copyrights:
+  - (c) 2010 Rubyworks (BSD-2-Clause)

@@ -1,0 +1,167 @@
+---
+revision: 2013
+type: ruby
+sources:
+- INDEX.yml
+authors:
+- name: trans
+  email: transfire@gmail.com
+organizations:
+- name: Rubyworks
+requirements:
+- name: blankslate
+- groups:
+  - build
+  development: true
+  name: detroit
+- groups:
+  - test
+  development: true
+  name: qed
+- groups:
+  - test
+  development: true
+  name: test
+- groups:
+  - test
+  development: true
+  name: lemon
+- groups:
+  - test
+  development: true
+  name: ae
+- groups:
+  - test
+  version: 3+
+  development: true
+  name: rdoc
+- groups:
+  - test
+  development: true
+  name: RedCloth
+- groups:
+  - test
+  development: true
+  name: bluecloth
+- groups:
+  - test
+  development: true
+  name: kramdown
+- groups:
+  - test
+  development: true
+  name: rdiscount
+- groups:
+  - test
+  development: true
+  name: haml
+- groups:
+  - test
+  development: true
+  name: sass
+- groups:
+  - test
+  development: true
+  name: less
+- groups:
+  - test
+  development: true
+  name: tenjin
+- groups:
+  - test
+  development: true
+  name: rtals
+- groups:
+  - test
+  development: true
+  name: liquid
+- groups:
+  - test
+  development: true
+  name: erubis
+- groups:
+  - test
+  development: true
+  name: mustache
+- groups:
+  - test
+  development: true
+  name: markaby
+- groups:
+  - test
+  development: true
+  name: builder
+- groups:
+  - test
+  development: true
+  name: radius
+- groups:
+  - test
+  development: true
+  name: ragtag
+- groups:
+  - test
+  development: true
+  name: redcarpet
+- groups:
+  - test
+  development: true
+  name: wikicloth
+- groups:
+  - test
+  development: true
+  name: maruku
+- groups:
+  - test
+  development: true
+  name: creole
+- groups:
+  - test
+  development: true
+  name: erector
+- groups:
+  - test
+  development: true
+  name: active_support
+- groups:
+  - test
+  development: true
+  name: coffee-script
+conflicts: []
+alternatives: []
+resources:
+- type: home
+  uri: http://rubyworks.github.com/malt
+  label: Homepage
+- type: code
+  uri: http://github.com/rubyworks/malt
+  label: Source Code
+- type: wiki
+  uri: http://wiki.github.com/rubyworks/malt
+  label: User Guide
+- type: docs
+  uri: http://rubyworks.github.com/malt/docs/api
+  label: Documentation
+- type: bugs
+  uri: http://github.com/rubyworks/malt/issues
+  label: Issue Tracker
+repositories: []
+categories: []
+copyrights:
+- holder: Rubyworks
+  year: '2010'
+  license: BSD-2-Clause
+customs: []
+paths:
+  lib:
+  - lib
+name: malt
+title: Malt
+version: 0.4.1
+summary: Multi-template/multi-markup rendering engine.
+description: Malt provides a factory framework for rendering a variety of template
+  and markup document formats.
+respositories:
+  upstream: git@github.com:rubyworks/malt.git
+created: '2010-06-22'
+date: '2015-03-27'

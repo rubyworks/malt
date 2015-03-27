@@ -1,6 +1,6 @@
-= Release History
+# RELEASE HISTORY
 
-== 0.4.0 | 2011-11-27
+## 0.4.0 | 2011-11-27
 
 This release of Malt is a major improvement over the previous release.
 Where as before not all formats behaved consistently --for instance,
@@ -39,7 +39,7 @@ Changes:
 * Formats delegate to master Malt.render method.
 
 
-== 0.3.0 | 2010-11-04
+## 0.3.0 | 2010-11-04
 
 New release adds a Malt::Machine class that encapsulates all
 Malt's class level functionality. This allow Malt to be 
@@ -57,7 +57,7 @@ Changes:
 * Rename `Malt.main` to `Malt.cli`.
 
 
-== 0.2.0 | 2010-10-22
+## 0.2.0 | 2010-10-22
 
 Malt now support Erector, Markaby, Builder and Mustache templates.
 Erector, Markaby and Builder are Ruby-based formats --templates
@@ -75,7 +75,7 @@ Changes:
 * Rename `:format` option to `:to` for render method.
 
 
-== 0.1.1 | 2010-09-21
+## 0.1.1 | 2010-09-21
 
 This release simple fixes two bugs. One to handle variant arity
 in format class #render methods. Currently the interface can vary
@@ -89,7 +89,7 @@ Changes:
 * Bug fix to underlying #render calls to handle variant arities. 
 
 
-== 0.1.0 | 2010-08-23
+## 0.1.0 | 2010-08-23
 
 This if the initial release of Malt. I have no doubt the code base
 still needs some fine-tuning --hence the 0.1 version, but I have put

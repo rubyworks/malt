@@ -1,4 +1,4 @@
-source :rubygems
+source "https://rubygems.org"
 gemspec
 
 ## JRuby can't compile libv8 which both less and coffee-script gems depend.
