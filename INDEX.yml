@@ -15,36 +15,6 @@ description:
   Malt provides a factory framework for rendering a variety
   of template and markup document formats.
 
-requirements:
-  - blankslate
-  - detroit   (build)
-  - qed       (test)
-  - test      (test)
-  - lemon     (test)
-  - ae        (test)
-  - rdoc 3+   (test)
-  - RedCloth  (test)
-  - bluecloth (test)
-  - kramdown  (test)
-  - rdiscount (test)
-  - haml      (test)
-  - sass      (test)
-  - less      (test)
-  - tenjin    (test)
-  - liquid    (test)
-  - erubis    (test)
-  - mustache  (test)
-  - markaby   (test)
-  - builder   (test)
-  - radius    (test)
-  - ragtag    (test)
-  - redcarpet (test)
-  - wikicloth (test)
-  - maruku    (test)
-  - creole    (test)
-  - erector        (test)
-  - coffee-script  (test)
-
 resources:
   home: http://rubyworks.github.com/malt
   code: http://github.com/rubyworks/malt

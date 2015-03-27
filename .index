@@ -3,121 +3,154 @@ revision: 2013
 type: ruby
 sources:
 - INDEX.yml
+- Gemfile
 authors:
 - name: trans
   email: transfire@gmail.com
 organizations:
 - name: Rubyworks
 requirements:
-- name: blankslate
+- version: '>= 0'
+  name: blankslate
 - groups:
   - build
-  development: true
+  - development
+  version: '>= 0'
   name: detroit
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: qed
 - groups:
   - test
-  development: true
-  name: test
+  - development
+  version: '>= 0'
+  name: rubytest
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
+  name: rubytest-cli
+- groups:
+  - test
+  - development
+  version: '>= 0'
   name: lemon
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: ae
 - groups:
   - test
-  version: 3+
-  development: true
+  - development
+  version: '>= 3'
   name: rdoc
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: RedCloth
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: bluecloth
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: kramdown
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: rdiscount
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: haml
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: sass
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: less
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: tenjin
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: liquid
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: erubis
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: mustache
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: markaby
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: builder
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: radius
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: ragtag
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: redcarpet
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: wikicloth
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: maruku
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: creole
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: erector
 - groups:
   - test
-  development: true
+  - development
+  version: '>= 0'
   name: coffee-script
 conflicts: []
 alternatives: []
