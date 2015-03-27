@@ -1,6 +1,6 @@
 require 'ostruct'
 require 'facets/module/basename'
-require 'facets/to_hash'
+#require 'facets/to_hash'
 require 'facets/hash/rekey'
 
 =begin
