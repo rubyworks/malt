@@ -70,10 +70,6 @@ requirements:
 - groups:
   - test
   development: true
-  name: rtals
-- groups:
-  - test
-  development: true
   name: liquid
 - groups:
   - test

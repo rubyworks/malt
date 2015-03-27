@@ -31,7 +31,6 @@ requirements:
   - sass      (test)
   - less      (test)
   - tenjin    (test)
-  - rtals     (test)
   - liquid    (test)
   - erubis    (test)
   - mustache  (test)
