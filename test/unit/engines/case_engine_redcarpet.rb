@@ -22,7 +22,7 @@ testcase Malt::Engine::Redcarpet do
     test "returns an ::Redcarpet instance" do
       e = Malt::Engine::Redcarpet.new
       r = e.prepare_engine(:text=>"# Testing")
-      r.assert.is_a? ::Redcarpet
+      r.assert.is_a? ::Redcarpet::Markdown
     end
 
   end
