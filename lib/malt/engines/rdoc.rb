@@ -29,8 +29,16 @@ module Malt::Engine
     def create_engine(params={})
       into = parameters(params, :to)
 
+      opts = engine_options(params)
+      opts['rdoc_include'] = []
+      opts['static_path']  = []
+
+      rdoc_opts = ::RDoc::Options.new
+      rdoc_opts.init_with(opts)
+
+      # TODO: Do we need to cache on options too (if there ever are any)?
       cached(into) do
-        ::RDoc::Markup::ToHtml.new
+        ::RDoc::Markup::ToHtml.new(rdoc_opts)
       end
     end
 
@@ -44,6 +52,44 @@ module Malt::Engine
       require_library 'rdoc'
       #require_library 'rdoc/markup'
       #require_library 'rdoc/markup/to_html'
+    end
+
+    # TODO: Which of these options are actually useful for convert RDoc to HTML?
+    #
+    #  charset
+    #  exclude
+    #  generator_name
+    #  hyperlink_all
+    #  line_numbers
+    #  locale_name
+    #  locale_dir
+    #  main_page
+    #  markup
+    #  op_dir
+    #  show_hash
+    #  tab_width
+    #  template_dir
+    #  title
+    #  visibility
+    #  webcvs
+    #
+    ENGINE_OPTION_NAMES = %w{
+      charset
+      generator_name
+      hyperlink_all
+      line_numbers
+      locale_name
+      locale_dir
+      markup
+      tab_width
+      title
+      visibility
+      webcvs
+    }
+
+    #
+    def engine_option_names
+      ENGINE_OPTION_NAMES
     end
 
   end
