@@ -5,7 +5,7 @@ testcase Malt::Engine::Maruku do
     test "convert Maruku text" do
       e = Malt::Engine::Maruku.new(:text=>"# Testing")
       h = e.render
-      h.assert.index "<h1 id='testing'>Testing</h1>"
+      h.assert.index '<h1 id="testing">Testing</h1>'
     end
 
     test "raises NotImplementedError if converstion format not supported" do
