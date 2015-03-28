@@ -43,7 +43,7 @@ class Binding
   # The yield code was neccessary b/c Ruby does not respect the use
   # of yield in a lambda (boo hiss). 
   def with(_hash, &_yield)
-    _hash = (_hash || {}).to_hash
+    _hash = (_hash || {}).to_h #ash
 
     if _yield
       vars = eval('local_variables')
@@ -90,6 +90,17 @@ class Struct
   #  Hash[members.zip(values)]
   #end
 end
+
+#class Array
+  #def to_struct
+  #  h = to_h
+  #  Struct.new(h.keys)
+  #end
+
+  #def to_h
+  #  Hash[*self]
+  #end unless method_defined?(:to_h)
+#end
 
 class OpenStruct
   def to_struct

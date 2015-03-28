@@ -3,10 +3,13 @@ module Malt
   # The Machine class encapsulates Malt's main methods
   # along with configuratable settings to control
   # which engines and formats are used for rendering.
-  #--
+  #
+  # TODO: Handling of data (scope, local) seems a bit wonky. Can it be
+  #       improved and simplified?
+  #
   # TODO: Can we dynamically generate the MARKUP and TEMPLATE constants
-  # from the format classes? In anycase, the still needs tweaking.
-  #++
+  #       from the format classes? In anycase, the still needs tweaking.
+  #
   class Machine
 
     # List of markup types. These are formats that just allow markup transformations
@@ -279,11 +282,17 @@ module Malt
     # scope or locals.
     #
     def split_data(data)
-      scope, locals = *(Array(data))
-      if scope.respond_to?(:to_hash)
+      if data.respond_to?(:to_hash)
         locals ||= {}
-        locals = locals.merge(scope.to_hash)
+        locals = locals.merge(data.to_hash)
         scope  = nil
+      else
+        scope, locals = *(Array(data))
+        if scope.respond_to?(:to_hash)
+          locals ||= {}
+          locals = locals.merge(scope.to_hash)
+          scope  = nil
+        end
       end
       return scope, locals
     end

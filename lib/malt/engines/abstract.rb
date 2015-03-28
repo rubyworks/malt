@@ -142,13 +142,14 @@ module Engine
         scope  = scope.eval("self")
       end
 
-      if scope.respond_to?(:to_struct)
-        locals = locals.merge(scope.to_struct.to_h)
+      if Array === scope
+        locals = locals.merge(Hash[*scope])
         scope  = Object.new
-      end
-
-      if scope.respond_to?(:to_hash)
+      elsif scope.respond_to?(:to_hash)
         locals = locals.merge(scope.to_hash)
+        scope  = Object.new
+      elsif scope.respond_to?(:to_struct)
+        locals = locals.merge(scope.to_struct.to_h)
         scope  = Object.new
       end
 
