@@ -4,31 +4,31 @@ The Malt Machine class can also be used to prioritize engines.
 For instance, by default markdown documents are handled by
 the RDiscount library. 
 
-  malt = Malt::Machine.new
+    malt = Malt::Machine.new
 
-  engine = malt.pry.engine(:markdown)
-  engine.assert == Malt::Engine::RDiscount
+    engine = malt.pry.engine(:markdown)
+    engine.assert == Malt::Engine::RDiscount
 
 To use Kramdown instead, we can specify
 it as a priority when initilizeing a new Machine.
 
-  malt = Malt::Machine.new(:priority=>[:kramdown])
-
+    malt = Malt::Machine.new(:priority=>[:kramdown])
+ 
 Lets check to make sure.
 
-  engine = malt.pry.engine(:markdown)
-  engine.assert == Malt::Engine::Kramdown
+    engine = malt.pry.engine(:markdown)
+    engine.assert == Malt::Engine::Kramdown
 
 To change the engine priorities of the master Malt Machine, provide 
 the #priority method with the type and it will put it at the top of
 the priority list.
 
-  Malt.machine.priority :kramdown
+    Malt.machine.priority :kramdown
 
 Lets check to make sure.
 
-  engine = Malt.machine.pry.engine(:markdown)
-  engine.assert == Malt::Engine::Kramdown
+    engine = Malt.machine.pry.engine(:markdown)
+    engine.assert == Malt::Engine::Kramdown
 
 (If you are wondering, #pry is simply used to call a private method.)
 

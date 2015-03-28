@@ -2,25 +2,25 @@
 
 === to_binding
 
-  b = binding
+    b = binding
 
-  b.to_binding  #=> b
+    b.to_binding  #=> b
 
 === itself
 
-  b = binding
+    b = binding
 
-  b.itself  #=> self
+    b.itself  #=> self
 
 === with
 
-  b1 = binding
+    b1 = binding
 
-  b2 = b1.with(:a=>1,:b=>2)
+    b2 = b1.with(:a=>1,:b=>2)
 
-  b2.eval('a')  #=> 1
-  b2.eval('b')  #=> 2
+    b2.eval('a')  #=> 1
+    b2.eval('b')  #=> 2
 
-  Kernel.eval('a', b2)  #=> 1
-  Kernel.eval('b', b2)  #=> 2
+    Kernel.eval('a', b2)  #=> 1
+    Kernel.eval('b', b2)  #=> 2
 

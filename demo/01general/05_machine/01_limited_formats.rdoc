@@ -6,38 +6,38 @@ are available for rendering.
 For example, let's make a Machine that only support RDoc format
 and no others.
 
-  malt = Malt::Machine.new(:types=>[:rdoc])
+    malt = Malt::Machine.new(:types=>[:rdoc])
 
 Now we use the `malt` machine object to handle rendering. First let's
 make sure that the machine is in fact setup to limit formats to just RDoc.
 
-  malt.formats.keys.assert = [:rdoc]
+    malt.formats.keys.assert = [:rdoc]
 
-  malt.assert.format?('.rdoc')
-  malt.refute.format?('.markdown')
+    malt.assert.format?('.rdoc')
+    malt.refute.format?('.markdown')
 
 This being the case we should be able to render an RDoc file without issue.
 So, lets say we have a Ruby document called 'sample.rdoc' containing:
 
-  = Sample
-
-  This is an sample.
+    = Sample
+    
+    This is an sample.
 
 Then it can be rendered as follows.
 
-  malt.render(:file=>'sample.rdoc')
+    malt.render(:file=>'sample.rdoc')
 
 Where as another format type, though usually supported, but excluded in this
 case, will fail. Lets say we have a Ruby document called 'sample.markdown'
 containing:
 
-  # Sample
+    # Sample
 
-  This is an sample.
+    This is an sample.
 
 Then rendering to will bulk with a `Malt::NoEngineError`.
 
-  expect Malt::NoEngineError do
-    malt.render(:file=>'sample.markdown')
-  end
+    expect Malt::NoEngineError do
+      malt.render(:file=>'sample.markdown')
+    end
 

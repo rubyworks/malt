@@ -1,8 +1,10 @@
 require 'malt'
+
+require 'ae'
 require 'ae/pry'
 
 def sample(file)
-  s = File.join(File.dirname(__FILE__), '..', '..', 'qed', 'samples', file)
+  s = File.join(File.dirname(__FILE__), '..', '..', 'demo', 'samples', file)
   File.expand_path(s)
 end
 

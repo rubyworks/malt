@@ -2,9 +2,9 @@
 
 === to_binding
 
-  o = Object.new
+    o = Object.new
 
-  b = o.to_binding
+    b = o.to_binding
 
-  b.eval('self')  #=> o
+    b.eval('self')  #=> o
 
